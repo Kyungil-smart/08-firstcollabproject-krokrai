@@ -7,23 +7,22 @@ using System.Collections;
 public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
     public int currentLevel = 1;
-    public int MaxLevel = 5;
     public int fishingCount = 1;
-    private int currentCount;
+    private int _currentCount;
     public Sprite fishingImage;
-    private Sprite watingImage;
-    private SpriteRenderer spriteRenderer;
+    private Sprite _watingImage;
+    private SpriteRenderer _spriteRenderer;
     public FishingUI uiManager;
 
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        watingImage = spriteRenderer.sprite;
-        currentCount = fishingCount;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _watingImage = _spriteRenderer.sprite;
+        _currentCount = fishingCount;
 
         if (uiManager != null)
         {
-            uiManager.UpdateCountText(currentCount, fishingCount);
+            uiManager.UpdateCountText(_currentCount, fishingCount);
         }
     }
 
@@ -34,7 +33,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         if (uiManager != null)
         {
-            uiManager.UpdateCountText(currentCount, fishingCount);
+            uiManager.UpdateCountText(_currentCount, fishingCount);
         }
     }
 
@@ -52,13 +51,13 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (currentCount > 0)
+        if (_currentCount > 0)
         {
-            currentCount--;
+            _currentCount--;
 
             if (uiManager != null)
             {
-                uiManager.UpdateCountText(currentCount, fishingCount);
+                uiManager.UpdateCountText(_currentCount, fishingCount);
             }
 
             StartCoroutine(ChangeImage());
@@ -69,12 +68,12 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     {
         if (fishingImage != null)
         {
-            spriteRenderer.sprite = fishingImage;
+            _spriteRenderer.sprite = fishingImage;
         }
 
         yield return new WaitForSeconds(0.1f);
 
-        spriteRenderer.sprite = watingImage;
+        _spriteRenderer.sprite = _watingImage;
     }
 
 }
