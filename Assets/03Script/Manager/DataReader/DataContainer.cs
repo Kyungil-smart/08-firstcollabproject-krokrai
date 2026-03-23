@@ -13,8 +13,12 @@ public class DataContainer : ScriptableObject
     [Tooltip("해당 시트의 실제 값 형태로 저장된 행의 갯수만큼 넣어주세요.")]
     public ScriptableObject[] objs;
 
+    [HideInInspector] public bool isDataLoaded { get; private set; } = false;
+
     public void SetDatas(char splitSymbol, string[] lines)
     {
+        isDataLoaded = false;
+
         if (lines == null)
         {
             Debug.LogError("Data 입력 없음.");
@@ -39,8 +43,8 @@ public class DataContainer : ScriptableObject
             {
                 Debug.LogWarning($"{objs[i - 5].name}에 <color = red>IDataSeter</color>가 포함되어 있지 않습니다.");
             }
-            
-
         }
+
+        isDataLoaded = true;
     }
 }
