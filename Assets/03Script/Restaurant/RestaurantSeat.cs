@@ -14,8 +14,10 @@ public class RestaurantSeat : MonoBehaviour
         IsOccupied = true;
         CurrentCustomer = customer;
     }
-    public void ClearSeat()
+    public void ClearSeat(CustomerController customer)
     {
+        if (CurrentCustomer != customer) return;
+
         IsOccupied = false;
         CurrentCustomer = null;
     }
