@@ -574,16 +574,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4521138394461565786, guid: a679fd30ae54bd04ebbc0f598dcec51d, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 5364965984054434880}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a679fd30ae54bd04ebbc0f598dcec51d, type: 3}
+--- !u!224 &1606076715477993313 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4521138394461565786, guid: a679fd30ae54bd04ebbc0f598dcec51d, type: 3}
+  m_PrefabInstance: {fileID: 1606076715477993312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5364965984054434879
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1606076715477993313}
     m_Modifications:
     - target: {fileID: 1391069761647594282, guid: 4999bfc105d49e347aff31736f5c42d4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -659,11 +667,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6407281016244403365, guid: 4999bfc105d49e347aff31736f5c42d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 410
+      value: -550
       objectReference: {fileID: 0}
     - target: {fileID: 6407281016244403365, guid: 4999bfc105d49e347aff31736f5c42d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6407281016244403365, guid: 4999bfc105d49e347aff31736f5c42d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -690,6 +698,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4999bfc105d49e347aff31736f5c42d4, type: 3}
+--- !u!224 &5364965984054434880 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6407281016244403365, guid: 4999bfc105d49e347aff31736f5c42d4, type: 3}
+  m_PrefabInstance: {fileID: 5364965984054434879}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5779182391108873567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -760,4 +773,3 @@ SceneRoots:
   - {fileID: 1588804935}
   - {fileID: 1606076715477993312}
   - {fileID: 189634329}
-  - {fileID: 5364965984054434879}
