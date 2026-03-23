@@ -67,7 +67,11 @@ public class RestaurantManager : MonoBehaviour
     }
 
     public bool HasSushi() => _sushiCount > 0;
-
+    /// <summary>
+    /// 초밥 갯수를 체크하고 초밥이 있으면 갯수를 하나 줄이고 초밥 가격을 자산에 추가한다.
+    /// </summary>
+    /// <param name="price"></param>
+    /// <returns></returns>
     public bool TryCounsumeSushiAndEarnMoney(int price)
     {
         if (_sushiCount <= 0) return false;
@@ -76,6 +80,10 @@ public class RestaurantManager : MonoBehaviour
         _money += price;
         return true;
     }
-
+    /// <summary>
+    /// 초밥의 갯수를 추가하는 함수
+    /// 요리가 끝났을 때 추가하면 된다.
+    /// </summary>
+    /// <param name="amount"></param>
     public void AddSushi(int amount) => _sushiCount += amount;
 }
