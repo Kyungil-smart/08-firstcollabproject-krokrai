@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
+  m_Name: CustomerDataContainer
+  m_EditorClassIdentifier: Assembly-CSharp::DataContainer
+  mainLine: 4
+  URL: https://docs.google.com/spreadsheets/d/1c9Qz_UvtXjnOP3vOQSSUby3qG8_kZWX-lOJzz8cAjM4/edit?gid=0#gid=0
+  objs:
+  - {fileID: 11400000, guid: fbb281ec03a12614483bc71737c1382e, type: 2}
+  - {fileID: 11400000, guid: 01fcf549028a3774d9e67691acc26fc7, type: 2}
+  - {fileID: 11400000, guid: 6a778f6bbccb8264085eb70a6156cce8, type: 2}
