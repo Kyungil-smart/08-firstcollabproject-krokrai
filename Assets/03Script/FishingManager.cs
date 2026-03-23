@@ -6,7 +6,9 @@ using System.Collections;
 
 public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] public int fishingCount;
+    public int currentLevel = 1;
+    public int MaxLevel = 5;
+    public int fishingCount = 1;
     private int currentCount;
     public Sprite fishingImage;
     private Sprite watingImage;
@@ -22,6 +24,29 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         if (uiManager != null)
         {
             uiManager.UpdateCountText(currentCount, fishingCount);
+        }
+    }
+
+    public void UpgradeFishingRod()
+    {
+        currentLevel++;
+        UpgradeMaxCount();
+
+        if (uiManager != null)
+        {
+            uiManager.UpdateCountText(currentCount, fishingCount);
+        }
+    }
+
+    private void UpgradeMaxCount()
+    {
+        switch (currentLevel)
+        {
+            case 1: fishingCount = 1; break;
+            case 2: fishingCount = 2; break;
+            case 3: fishingCount = 3; break;
+            case 4: fishingCount = 4; break;
+            case 5: fishingCount = 5; break;
         }
     }
 
