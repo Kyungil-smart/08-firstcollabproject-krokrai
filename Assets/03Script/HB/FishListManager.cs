@@ -55,6 +55,7 @@ public class FishListManager : MonoBehaviour
     // 테스트용 코드
     public void ChangeFishData(FishData newData)
     {
+        Debug.Log("버튼 눌림");
         if (newData == null) return;
 
         currentFish = newData;
