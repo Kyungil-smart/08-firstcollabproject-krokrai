@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class RestaurantManager : MonoBehaviour
@@ -10,10 +9,9 @@ public class RestaurantManager : MonoBehaviour
     [SerializeField] private float _money = 10000f;
 
     [Header("Spawn")]
-    [SerializeField] private CustomerController _customerPrefab;
-    [SerializeField] private Transform _spwnPointRight;
+    [SerializeField] private CustomerController[] _customerPrefab;
+    [SerializeField] private Transform _spawnPointRight;
     [SerializeField] private Transform _exitPointLeft;
-    [SerializeField] private float _spawnInterval = 3f;
 
     [Header("Seats")]
     [SerializeField] private List<RestaurantSeat> _seats = new List<RestaurantSeat>();
@@ -29,19 +27,23 @@ public class RestaurantManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(_spawnInterval);
+            CustomerController randomPrefab = GetRandomCustomerPrefab();
+            if (randomPrefab == null)
+                yield break;
+
+            yield return new WaitForSeconds(randomPrefab.SpawnDelay());
 
             if (_sushiCount <= 0) continue;
 
             RestaurantSeat emptySeat = GetEmptySeat();
             if (emptySeat == null) continue;
 
-            SpawnCustomer(emptySeat);
+            SpawnCustomer(emptySeat, randomPrefab);
         }
     }
-    private void SpawnCustomer(RestaurantSeat seat)
+    private void SpawnCustomer(RestaurantSeat seat, CustomerController prefab)
     {
-        CustomerController customer = Instantiate(_customerPrefab, _spwnPointRight.position, Quaternion.identity);
+        CustomerController customer = Instantiate(prefab, _spawnPointRight.position, Quaternion.identity);
         customer.SetInfo(this, seat, _exitPointLeft);
         seat.SetOccupied(customer);
     }
@@ -54,6 +56,14 @@ public class RestaurantManager : MonoBehaviour
                 return _seats[i];
         }
         return null;
+    }
+    private CustomerController GetRandomCustomerPrefab()
+    {
+        if (_customerPrefab == null || _customerPrefab.Length == 0)
+            return null;
+
+        int randIndex = Random.Range(0, _customerPrefab.Length);
+        return _customerPrefab[randIndex];
     }
 
     public bool HasSushi() => _sushiCount > 0;
