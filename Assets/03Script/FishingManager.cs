@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,17 +8,21 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] public int fishingCount;
     private int currentCount;
-    public TMP_Text countText;
     public Sprite fishingImage;
     private Sprite watingImage;
     private SpriteRenderer spriteRenderer;
+    public FishingUI uiManager;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         watingImage = spriteRenderer.sprite;
         currentCount = fishingCount;
-        UpdateUI();
+
+        if (uiManager != null)
+        {
+            uiManager.UpdateCountText(currentCount, fishingCount);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -27,18 +30,16 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         if (currentCount > 0)
         {
             currentCount--;
-            UpdateUI();
+
+            if (uiManager != null)
+            {
+                uiManager.UpdateCountText(currentCount, fishingCount);
+            }
+
             StartCoroutine(ChangeImage());
         }
     }
 
-    private void UpdateUI()
-    {
-        if (countText != null)
-        {
-            countText.text = $"{currentCount} / {fishingCount}";
-        }
-    }
     IEnumerator ChangeImage()
     {
         if (fishingImage != null)
