@@ -81,7 +81,7 @@ public class CustomerController : MonoBehaviour
                     _state = CustomerState.Exit;
                     break;
                 case CustomerState.Exit:
-                    _seat.ClearSeat();
+                    _seat.ClearSeat(this);
                     _sr.sortingOrder = -2;
                     _anim.Play("Walk");
                     yield return StartCoroutine(CoMoveTo(_exitPoint.position));

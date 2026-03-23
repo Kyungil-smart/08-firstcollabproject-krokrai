@@ -44,8 +44,8 @@ public class RestaurantManager : MonoBehaviour
     private void SpawnCustomer(RestaurantSeat seat, CustomerController prefab)
     {
         CustomerController customer = Instantiate(prefab, _spawnPointRight.position, Quaternion.identity);
-        customer.SetInfo(this, seat, _exitPointLeft);
         seat.SetOccupied(customer);
+        customer.SetInfo(this, seat, _exitPointLeft);
     }
 
     private RestaurantSeat GetEmptySeat()
