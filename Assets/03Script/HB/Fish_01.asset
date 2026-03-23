@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_01
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  fishNum: NO.01
+  fishName: Mackerel
+  fishRate: B
+  fishSprite: {fileID: -4037606085047182175, guid: 84947aa533b657f4c8cf95c3b777fd38, type: 3}
+  groupName: Fish
+  length: 0.5m
+  weight: 500g
+  infoButton: I'm Mackerel
+  effectButton: RawFish
