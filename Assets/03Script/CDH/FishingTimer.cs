@@ -1,16 +1,42 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
+using System.Threading;
 
 public class FishingTimer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Range(0f, 1800f)]
+    [SerializeField] public float fishingTime; // sumarry : 낚시 가능 횟수 충전까지 남은 시간
+    public TMP_Text timerText; // sumarry : 시간을 화면에 표시할 UI 텍스트 컴포넌트
+    private FishingManager _manager; // sumarry : 낚시 횟수 증가를 위한 FishingManager.cs 참조
+
+    private void Start()
     {
-        
+        _manager = Object.FindFirstObjectByType<FishingManager>();
+        StartCoroutine(StratCountdown());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator StratCountdown()
     {
-        
+        while (true)
+        {
+            timerText.text = fishingTime.ToString();
+            yield return new WaitForSeconds(1f);
+            fishingTime--;
+            TimeCycle();
+        }
+    }
+
+    private void TimeCycle()
+    {
+        if (fishingTime <= 0)
+        {
+            fishingTime = 1800f;
+
+            if (_manager != null)
+            {
+                _manager.FishingChance();
+            }
+        }
     }
 }
