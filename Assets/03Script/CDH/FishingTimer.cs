@@ -14,18 +14,22 @@ public class FishingTimer : MonoBehaviour
     private void Start()
     {
         _manager = Object.FindFirstObjectByType<FishingManager>();
-        StartCoroutine(StratCountdown());
+        StartCoroutine(StartCountdown());
     }
 
-    IEnumerator StratCountdown()
+    IEnumerator StartCountdown()
     {
         while (true)
         {
+            
+
             int minutes = Mathf.FloorToInt(fishingTime / 60);
             int seconds = Mathf.FloorToInt(fishingTime % 60);
+
             timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
             yield return new WaitForSeconds(1f);
             fishingTime--;
+            yield return new WaitUntil(CheckingFull);
             TimeCycle();
         }
     }
@@ -41,5 +45,10 @@ public class FishingTimer : MonoBehaviour
                 _manager.FishingChance();
             }
         }
+    }
+
+    private bool CheckingFull()
+    { 
+     return _manager.GetCurrentCount() < _manager.fishingCount;
     }
 }
