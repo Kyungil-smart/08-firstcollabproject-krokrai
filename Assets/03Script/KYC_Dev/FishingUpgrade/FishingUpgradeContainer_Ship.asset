@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
+  m_Name: FishingUpgradeContainer_Ship
+  m_EditorClassIdentifier: Assembly-CSharp::DataContainer
+  mainLine: 23
+  URL: https://docs.google.com/spreadsheets/d/1hRIRi-KPGhrhNpjivmk3fK_2HeK9YeP1eK5ygCh837w/edit?gid=0#gid=0
+  objs:
+  - {fileID: 11400000, guid: 0a208141db94e1b4683dcf6a8d1fe130, type: 2}
+  - {fileID: 11400000, guid: 331369486cf47f341908f2fe3a89950d, type: 2}
+  - {fileID: 11400000, guid: a663bd93db8ebc74397deb6c3dcdae57, type: 2}
+  - {fileID: 11400000, guid: 55e342c210d56a34d8d85346f5bcb49e, type: 2}
+  - {fileID: 11400000, guid: f706c7f83cd809a43ac14200dce7c1b6, type: 2}
