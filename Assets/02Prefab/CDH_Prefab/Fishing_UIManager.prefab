@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4768009220385532772}
   - component: {fileID: 2050856745614473414}
+  - component: {fileID: 2938955796691207335}
   m_Layer: 0
   m_Name: Fishing_UIManager
   m_TagString: Untagged
@@ -45,3 +46,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingUI
   countText: {fileID: 0}
+--- !u!114 &2938955796691207335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664686165094907141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1231ea4d11bdc429ee1e48f8914a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishingTimer
+  fishingTime: 1800
+  maxFishingTime: 1800
+  timerText: {fileID: 0}
