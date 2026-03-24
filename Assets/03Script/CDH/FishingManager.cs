@@ -6,13 +6,18 @@ using System.Collections;
 
 public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
-    public int currentLevel = 1;
-    public int fishingCount = 1;
-    private int _currentCount;
-    public Sprite fishingImage;
-    private Sprite _watingImage;
-    private SpriteRenderer _spriteRenderer;
-    public FishingUI uiManager;
+    public int currentLevel = 1; // sumarry :
+    public int fishingCount = 1; // sumarry : 최대 낚시 가능한 횟수
+    private int _currentCount; // sumarry : 현재 낚시 가능한 횟수
+    public Sprite fishingImage; // sumarry : 클릭 시 변경되는 스프라이트 이미지
+    private Sprite _watingImage; // sumarry : 대기 상태일 때의 스프라이트 이미지
+    private SpriteRenderer _spriteRenderer; // sumarry : 이미지 교체를 위해 오브젝트의 SpriteRenderer 컴포넌트를 참조
+    public FishingUI uiManager; // sumarry : 낚시 횟수를 갱신할 FishingUI.cs 참조
+
+    public int GetCurrentCount()
+    {
+        return _currentCount;
+    }
 
     private void Start()
     {
@@ -37,7 +42,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void UpgradeMaxCount()
+    public void UpgradeMaxCount()
     {
         switch (currentLevel)
         {
@@ -49,7 +54,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData) // sumarry : 오브젝트 클릭 시 낚시 횟수 차감 및 낚시 연출 실행 메서드
     {
         if (_currentCount > 0)
         {
@@ -76,4 +81,16 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         _spriteRenderer.sprite = _watingImage;
     }
 
+    public void FishingChance() // sumarry :외부에서 호출 시 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
+    {
+        if (_currentCount < fishingCount)
+        {
+            _currentCount++;
+
+            if (uiManager != null)
+            {
+                uiManager.UpdateCountText(_currentCount, fishingCount);
+            }
+        }
+    }
 }
