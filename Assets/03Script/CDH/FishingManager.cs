@@ -8,10 +8,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
     public int currentLevel = 1; // sumarry :
     public int fishingCount = 1; // sumarry :
-    private int _currentCount;
+    private int _currentCount; // sumarry : 현재 낚시 가능한 횟수
     public Sprite fishingImage; // sumarry : 클릭 시 변경되는 스프라이트 이미지
-    private Sprite _watingImage;
-    private SpriteRenderer _spriteRenderer;
+    private Sprite _watingImage; // sumarry : 대기 상태일 때의 스프라이트 이미지
+    private SpriteRenderer _spriteRenderer; // sumarry : 이미지 교체를 위해 오브젝트의 SpriteRenderer 컴포넌트를 참조
     public FishingUI uiManager; // sumarry : 낚시 횟수를 갱신할 FishingUI.cs 참조
 
     private void Start()
