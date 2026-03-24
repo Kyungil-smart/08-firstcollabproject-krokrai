@@ -1,13 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TempWidgetMask : MonoBehaviour
 {
-    [SerializeField] GameObject[] mask;
+    [Header("실제 표시 방식 설정")]
+    [Tooltip("Sprite Mask 입력")][SerializeField] GameObject[] mask;
     [SerializeField] GameObject _backgroundSprite;
     [SerializeField] GameObject _fishingBote;
 
-    GameObject currentmask;
+    [SerializeField] Image _image;
+
+    GameObject _currentmask;
 
     bool t;
 
@@ -21,17 +25,23 @@ public class TempWidgetMask : MonoBehaviour
     // 프로파일링으로 성능 검사가 필요할 거 같으나, 현재 생각으로는 큰 문제가 없을 거라고 예상함.
     // 현재 평가 : 가장 합리적임.
 
+    // 수평은 배, 수직은 배경과 배로 움직일 수 있게, 작업 필요
+    // 이동 방식은 UI에 이미지(아무거나 상관없)를 드래그 형태로 하며,
+    // 화면 또는 특정 범위 밖으로 나가지 않게 작업 필수.
+
+
+
     private void Start()
     {
         t = true;
-        currentmask = mask[0];
+        _currentmask = mask[0];
     }
 
     public void changeMask()
     {
         t = !t;
-        currentmask?.SetActive(false);
-        currentmask = t ? mask[0] : mask[1];
-        currentmask?.SetActive(true);
+        _currentmask?.SetActive(false);
+        _currentmask = t ? mask[0] : mask[1];
+        _currentmask?.SetActive(true);
     }
 }

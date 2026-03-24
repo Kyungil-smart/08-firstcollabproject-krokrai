@@ -6,45 +6,97 @@ public class RestaurantManager : MonoBehaviour
 {
     [Header("Resources")]
     [SerializeField] private int _sushiCount;
-    [SerializeField] private float _money = 10000f;
+    [SerializeField] private ulong _money = 10000;
 
     [Header("Spawn")]
-    [SerializeField] private CustomerController[] _customerPrefab;
+    [SerializeField] private GameObject[] _customerPrefab;
     [SerializeField] private Transform _spawnPointRight;
     [SerializeField] private Transform _exitPointLeft;
 
     [Header("Seats")]
     [SerializeField] private List<RestaurantSeat> _seats = new List<RestaurantSeat>();
 
+    private DataTower _dataTower;
+
+    private Queue<GameObject> _customerPool; // 오브젝트 풀 패턴 기반 작동 예정
+    private GameObject _randomPrefab;
+    RestaurantSeat emptySeat;
+
     private Coroutine _spawnCo;
+
+    private WaitForSeconds[] _seconds;
+    private WaitForSeconds _baseDelay;
 
     private void Start()
     {
+        _baseDelay = new WaitForSeconds(5);
+        _seconds = new WaitForSeconds[10];
+        for (int i = 1; i < 11; i++)
+        {
+            _seconds[i] = new WaitForSeconds(i);
+        }
+        _customerPool = new Queue<GameObject>(8);
         _spawnCo = StartCoroutine(CoTrySpawnCustomer());
+    }
+
+    /// <summary>
+    /// 데이터 관리자에게 연결하기 위한 함수
+    /// RestaurantCompositionRoot.cs 를 제외하고 호출하는 스크립트가 없어야합니다.
+    /// </summary>
+    /// <param name="tower"></param>
+    public void ConnectDataTower(DataTower tower)
+    {
+        _dataTower = tower;
     }
 
     private IEnumerator CoTrySpawnCustomer()
     {
+
+        // 설거지? 시간 => 대기시간 => 스폰
         while (true)
         {
-            CustomerController randomPrefab = GetRandomCustomerPrefab();
-            if (randomPrefab == null)
+            // 손님 성향 및 이미지 랜덤 생성
+            GetRandomCustomerPrefab();
+            // 예외처리.
+            if (_randomPrefab == null)
                 yield break;
 
-            yield return new WaitForSeconds(randomPrefab.SpawnDelay());
+            // 스폰 대기 시간.
+            yield return _baseDelay ;
 
+            // 초밥이 없는 겨우 예외처리
             if (_sushiCount <= 0) continue;
 
-            RestaurantSeat emptySeat = GetEmptySeat();
+            // 빈자리 탐색 및 반환 받음.
+            emptySeat = GetEmptySeat();
+
+            // 자리가 없는 경우 예외처리
             if (emptySeat == null) continue;
 
-            SpawnCustomer(emptySeat, randomPrefab);
+            // 최종적으로 빈자리와 손님을 소환
+            SpawnCustomer(emptySeat);
         }
     }
+
+    // 받아온 정보를 기반으로 손님 생성
+    /*
     private void SpawnCustomer(RestaurantSeat seat, CustomerController prefab)
     {
+        // 이 방식은 object pool로 교체 필요.
         CustomerController customer = Instantiate(prefab, _spawnPointRight.position, Quaternion.identity);
+        
+        // 자리에 앉음 상태로 전환
         seat.SetOccupied(customer);
+        // 손님 설정 초기화
+        customer.SetInfo(this, seat, _exitPointLeft);
+    }
+    */
+    private void SpawnCustomer(RestaurantSeat seat)
+    {
+        // 자리에 앉음 상태로 전환
+        seat.SetOccupied();
+        
+        // 손님 설정 초기화
         customer.SetInfo(this, seat, _exitPointLeft);
     }
 
@@ -52,11 +104,15 @@ public class RestaurantManager : MonoBehaviour
     {
         for (int i = 0; i < _seats.Count; i++)
         {
+            // 반복 문으로 모든 자리 탐색
             if (_seats[i].IsOccupied == false)
                 return _seats[i];
         }
         return null;
     }
+
+    // 입력된 손님 무작위  출력
+    /*
     private CustomerController GetRandomCustomerPrefab()
     {
         if (_customerPrefab == null || _customerPrefab.Length == 0)
@@ -64,9 +120,24 @@ public class RestaurantManager : MonoBehaviour
 
         int randIndex = Random.Range(0, _customerPrefab.Length);
         return _customerPrefab[randIndex];
+    }*/
+
+    private void GetRandomCustomerPrefab()
+    {
+        if (_customerPrefab == null || _customerPrefab.Length == 0)
+        {
+            Debug.LogWarning("프리팹이 등록되지 않았거나, 없습니다.");
+            return;
+        }
+        int randIndex = Random.Range(0, _customerPrefab.Length);
+        if (_customerPool.Count == 0)
+            _customerPool.Enqueue(_customerPrefab[randIndex]);
+        else
+            _randomPrefab = _customerPool.Dequeue();
     }
 
     public bool HasSushi() => _sushiCount > 0;
+
     /// <summary>
     /// 초밥 갯수를 체크하고 초밥이 있으면 갯수를 하나 줄이고 초밥 가격을 자산에 추가한다.
     /// </summary>
@@ -77,9 +148,10 @@ public class RestaurantManager : MonoBehaviour
         if (_sushiCount <= 0) return false;
 
         _sushiCount--;
-        _money += price;
+        _money += (ulong)price;
         return true;
     }
+
     /// <summary>
     /// 초밥의 갯수를 추가하는 함수
     /// 요리가 끝났을 때 추가하면 된다.

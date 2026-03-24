@@ -2,23 +2,16 @@ using UnityEngine;
 
 public class RestaurantSeat : MonoBehaviour
 {
-    [SerializeField] private Transform _sitPoint;
-
     public bool IsOccupied { get; private set; }
-    public CustomerController CurrentCustomer { get; private set; }
 
-    public Vector3 SitPosition => _sitPoint.position;
+    public Vector3 SitPosition => this.transform.position;
 
-    public void SetOccupied(CustomerController customer)
+    public void SetOccupied()
     {
         IsOccupied = true;
-        CurrentCustomer = customer;
     }
-    public void ClearSeat(CustomerController customer)
+    public void ClearSeat()
     {
-        if (CurrentCustomer != customer) return;
-
         IsOccupied = false;
-        CurrentCustomer = null;
     }
 }
