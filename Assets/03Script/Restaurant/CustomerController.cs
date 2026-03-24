@@ -32,20 +32,31 @@ public class CustomerController : MonoBehaviour
         _anim = GetComponentInChildren<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
     }
+
     /// <summary>
     /// 손님 스폰 시간 값
     /// </summary>
     /// <returns></returns>
     public float SpawnDelay() => _data.SpawnDelay;
+
+    /// <summary>
+    /// RestaurangtManager와 연결.
+    /// RestaurantCompositionRoot.cs 외 호출 금지.
+    /// </summary>
+    /// <param name="restaurant"></param>
+    public void ConnectRestaurant(RestaurantManager restaurant)
+    {
+        _restaurant = restaurant;
+    }
+
     /// <summary>
     /// 손님의 기본 설정을 초기화 해주는 함수
     /// </summary>
     /// <param name="restaurant"></param>
     /// <param name="seat"></param>
     /// <param name="exitPoint"></param>
-    public void SetInfo(RestaurantManager restaurant, RestaurantSeat seat, Transform exitPoint)
+    public void SetInfo(RestaurantSeat seat, Transform exitPoint)
     {
-        _restaurant = restaurant;
         _seat = seat;
         _exitPoint = exitPoint;
 
@@ -60,31 +71,46 @@ public class CustomerController : MonoBehaviour
             switch (_state)
             {
                 case CustomerState.MoveToSeat:
+                    // 레이어 뒤로 미루기
                     _sr.sortingOrder = -2;
+                    // 애니메이션 출력
                     _anim.Play("Walk");
+                    // 자리에 이동할때까지 대기
                     yield return StartCoroutine(CoMoveTo(_seat.SitPosition));
+                    //앉은 상태가 되면 먹기 실행
                     _state = CustomerState.Eat;
                     break;
+
                 case CustomerState.Eat:
+                    // 앉기로 전환
                     _anim.Play("Sit");
+                    // 레이어 위치 변경
                     _sr.sortingOrder = -1;
+                    // 식사 대기시간.
                     yield return new WaitForSeconds(_eatDuration);
 
+                    // 이부분 추가 수정 필요 TryCounsumSushiAndEarnMoney(price) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     if (_restaurant.TryCounsumeSushiAndEarnMoney(_priceFactor * 200))
                     {
-                        bool canSecondEat = Random.Range(0, 101) < _data.SecondEatChance;
-                        if (canSecondEat)
+                        // 추가로 먹을 확률 계산
+                        if (Random.Range(0, 101) < _data.SecondEatChance)
                         {
-                            yield return new WaitForSeconds(_eatDuration);
+                            yield return new WaitForSeconds(_eatDuration); // WaitForSeconds 너무 많은 호출 후에 개선 필요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         }
                     }
                     _state = CustomerState.Exit;
                     break;
+                    // 손님 퇴장
                 case CustomerState.Exit:
-                    _seat.ClearSeat(this);
+                    // 현재 자리 비우기
+                    _seat.ClearSeat();
+                    // 레이어 뒤로 밀기
                     _sr.sortingOrder = -2;
+                    // 애니메이션 출력
                     _anim.Play("Walk");
+                    // 탈출 포인트까지 대기
                     yield return StartCoroutine(CoMoveTo(_exitPoint.position));
+                    // 파괴 Instantiate를 교체하면서 반드시 교체 필수  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     Destroy(gameObject);
                     break;
 
@@ -92,8 +118,10 @@ public class CustomerController : MonoBehaviour
             yield return null;
         }
     }
+
     private IEnumerator CoMoveTo(Vector3 targetPos)
     {
+        // 지정 좌석까지 이동하는 것을 구현.
         while ((transform.position - targetPos).sqrMagnitude > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, _moveSpeed * Time.deltaTime);
