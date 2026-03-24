@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
+  m_Name: FishingUpgradeContainer_Grade
+  m_EditorClassIdentifier: Assembly-CSharp::DataContainer
+  mainLine: 13
+  URL: https://docs.google.com/spreadsheets/d/1hRIRi-KPGhrhNpjivmk3fK_2HeK9YeP1eK5ygCh837w/edit?gid=0#gid=0
+  objs:
+  - {fileID: 11400000, guid: 3db6ef52bf84c4747920b5816282777c, type: 2}
+  - {fileID: 11400000, guid: 2182f2dfde8382d4488f978d314869c4, type: 2}
+  - {fileID: 11400000, guid: 01b4e440a95ea0145b08f1f241680e85, type: 2}
+  - {fileID: 11400000, guid: 8a96eb3d4c2edb7458dff424881f8e09, type: 2}
+  - {fileID: 11400000, guid: 2485354729f3f234cb433db03b6be701, type: 2}
+  - {fileID: 11400000, guid: 98911843e2d8e0449866b15d20970081, type: 2}
+  - {fileID: 11400000, guid: 7acf664a32b282045929810f6d2bc12c, type: 2}
+  - {fileID: 11400000, guid: eb8588be2843ee34fa06cdd24b969665, type: 2}
+  - {fileID: 11400000, guid: 69047a26b9a89cd4289ba8ea71239f63, type: 2}
+  - {fileID: 11400000, guid: dc441509e177b344786bc175df4ed033, type: 2}
