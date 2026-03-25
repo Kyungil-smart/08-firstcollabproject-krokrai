@@ -14,4 +14,5 @@ public enum FishRate
 public class FishRarity : MonoBehaviour
 {
     public FishRate fishRate;
+    public int price;
 }
