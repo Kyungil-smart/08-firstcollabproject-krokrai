@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using UnityEngine;
 
 public class DataTower : MonoBehaviour
@@ -40,8 +39,9 @@ public class DataTower : MonoBehaviour
             BGMVolume = 0;
             SFXVolume = 0;
             fishingCount = 0;
-            currentCount = 0;
-            rechargeBaitTimer = 0;
+            currentFishingCount = 0;
+            fishingTime = 30;
+            maxFishingTime = 18000;
         }
         else
         {

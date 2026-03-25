@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
+  m_Name: RecipeContainer
+  m_EditorClassIdentifier: Assembly-CSharp::DataContainer
+  mainLine: 3
+  URL: https://docs.google.com/spreadsheets/d/1iJgw7DdrnDBxqxrpiy8QH0hCfX3CR_MbIl6RgIpvS7s/edit?gid=1659260811#gid=1659260811
+  objs:
+  - {fileID: 11400000, guid: 7ada26063120c8d428853ac7a407bf18, type: 2}
+  - {fileID: 11400000, guid: 3b3632eb88d026340aa616da8e4db770, type: 2}
+  - {fileID: 11400000, guid: 91f1c800769838b4d8e15c66b59b6ff6, type: 2}
+  - {fileID: 11400000, guid: eeae60a2d7098f6409ad9da5838dbab7, type: 2}
+  - {fileID: 11400000, guid: 7d2b5ae133702f8498bc79849811e297, type: 2}
+  - {fileID: 11400000, guid: db27f4fe87518a64aad6c07abf82b950, type: 2}
+  - {fileID: 11400000, guid: 62490671974970846a28ccae68367b21, type: 2}
+  - {fileID: 11400000, guid: c226f5979e13e5f4680364abb58fe199, type: 2}

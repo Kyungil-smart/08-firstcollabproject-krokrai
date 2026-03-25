@@ -62,6 +62,11 @@ public class RestaurantManager : MonoBehaviour
     /// <param name="tower"></param>
     public void ConnectDataTower(DataTower tower)
     {
+        if (_dataTower != null)
+        {
+            Debug.Log($"초기화된 변수에 접근 시도가 있습니다. {gameObject.name}");
+            return;
+        }
         _dataTower = tower;
     }
 
