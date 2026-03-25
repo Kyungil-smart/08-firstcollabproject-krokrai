@@ -553,6 +553,10 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 1991747223}
+    - target: {fileID: 6538025667334557649, guid: 4ef05231e82c99b4582db425816763e6, type: 3}
+      propertyPath: fishDatabase.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

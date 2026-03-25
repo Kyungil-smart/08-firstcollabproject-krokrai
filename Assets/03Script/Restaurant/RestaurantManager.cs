@@ -97,7 +97,7 @@ public class RestaurantManager : MonoBehaviour
         seat.SetOccupied();
         
         // 손님 설정 초기화
-        customer.SetInfo(this, seat, _exitPointLeft);
+        //customer.SetInfo(this, seat, _exitPointLeft);
     }
 
     private RestaurantSeat GetEmptySeat()

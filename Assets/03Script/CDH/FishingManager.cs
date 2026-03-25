@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections;
 
 public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
@@ -15,12 +17,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     public FishingUI uiManager; // sumarry : 낚시 횟수를 갱신할 FishingUI.cs 참조
     private FishingUpgradeManager _upgradeManager; // 업그레이드 매니저 불러옴
     private FishingTimer _timer;
-
-    // sumarry : 외부에서 현재 남은 낚시 횟수를 참조할 수 있게 반환
-    public int GetCurrentCount() 
-    {
-        return _currentCount;
-    }
+    public List<FishData> fishDatabase = new List<FishData>();
 
     private void Start()
     {
@@ -117,6 +114,8 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(0.1f);
 
         _spriteRenderer.sprite = _watingImage;
+
+        GetRandomFish();
     }
 
     // sumarry :외부에서 신호를 받아 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
@@ -131,5 +130,25 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
                 uiManager.UpdateCountText(_currentCount, fishingCount);
             }
         }
+    }
+
+    // sumarry : 외부에서 현재 남은 낚시 횟수를 참조할 수 있게 반환
+    public int GetCurrentCount()
+    {
+        return _currentCount;
+    }
+
+    // sumarry : fishDatabase의 Count 범위 내에서 무작위 FishData 반환
+    public void GetRandomFish()
+    {
+        if (fishDatabase.Count == 0)
+        {
+            Debug.Log("등록된 물고기가 없습니다.");
+            return;
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, fishDatabase.Count);
+        FishData selectedFish = fishDatabase[randomIndex];
+        Debug.Log("낚시 성공!");
     }
 }
