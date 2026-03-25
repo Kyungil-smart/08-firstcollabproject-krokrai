@@ -13,28 +13,50 @@ public class FishingTimer : MonoBehaviour
 
     private void Start()
     {
-        _manager = Object.FindFirstObjectByType<FishingManager>();
+        _manager = FindFirstObjectByType<FishingManager>();
         StartCoroutine(StartCountdown());
+    }
+
+    // sumarry : 미끼 레벨업 시 최대 쿨타임을 갱신하고, 횟수가 가득 찬 경우 UI를 즉시 업데이트
+    public void UpdateMaxTime(float newTime)
+    {
+        maxFishingTime = newTime;
+
+        if (!CheckingFull())
+        {
+            fishingTime = maxFishingTime;
+            TimerUI(fishingTime);
+        }
     }
 
     IEnumerator StartCountdown()
     {
         while (true)
         {
-            
+            if (!CheckingFull())
+            {
+                fishingTime = maxFishingTime;
+                TimerUI(fishingTime);
 
-            int minutes = Mathf.FloorToInt(fishingTime / 60);
-            int seconds = Mathf.FloorToInt(fishingTime % 60);
+                yield return new WaitUntil(CheckingFull);
+            }
 
-            timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
             yield return new WaitForSeconds(1f);
             fishingTime--;
-            yield return new WaitUntil(CheckingFull);
+
+            TimerUI(fishingTime);
             TimeCycle();
         }
     }
 
-    private void TimeCycle()
+    private void TimerUI(float time)
+    {
+        int minutes = Mathf.FloorToInt(fishingTime / 60);
+        int seconds = Mathf.FloorToInt(fishingTime % 60);
+        timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+    }
+
+    private void TimeCycle() 
     {
         if (fishingTime <= 0)
         {
@@ -48,7 +70,7 @@ public class FishingTimer : MonoBehaviour
     }
 
     private bool CheckingFull()
-    { 
-     return _manager.GetCurrentCount() < _manager.fishingCount;
+    {
+        return _manager.GetCurrentCount() < _manager.fishingCount;
     }
 }
