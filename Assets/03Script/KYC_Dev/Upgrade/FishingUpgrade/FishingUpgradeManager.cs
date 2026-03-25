@@ -44,6 +44,11 @@ public class FishingUpgradeManager : MonoBehaviour
     /// ToDo:DataTower로 차후 이관
     /// </summary>
     public int ShipLevel;
+    
+    public event Action OnFishingUpgrade;
+    public event Action OnBaitUpgrade;
+    public event Action OnRodUpgrade;
+    public event Action OnShipUpgrade;
 
     /// <summary>
     /// ToDo:DataTower로 변수 이관 되면 사용 안함
@@ -57,6 +62,16 @@ public class FishingUpgradeManager : MonoBehaviour
         BaitLevel = 1;
         RodLevel = 1;
         ShipLevel = 1;
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
     }
 
     /// <summary>
@@ -85,6 +100,7 @@ public class FishingUpgradeManager : MonoBehaviour
         {
             FishingGrade++;
             Temp_Gold -= gold;
+            OnFishingUpgrade?.Invoke();
         }
         
     }
@@ -99,6 +115,7 @@ public class FishingUpgradeManager : MonoBehaviour
         {
             BaitLevel++;
             Temp_Gold -= gold;
+            OnBaitUpgrade?.Invoke();
         }
         
     }
@@ -113,6 +130,7 @@ public class FishingUpgradeManager : MonoBehaviour
         {
             RodLevel++;
             Temp_Gold -= gold;
+            OnRodUpgrade?.Invoke();
         }
         
     }
@@ -127,6 +145,7 @@ public class FishingUpgradeManager : MonoBehaviour
         {
             ShipLevel++;
             Temp_Gold -= gold;
+            OnShipUpgrade?.Invoke();
         }
         
     }

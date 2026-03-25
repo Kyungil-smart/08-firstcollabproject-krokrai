@@ -2,5 +2,5 @@ using UnityEngine;
 
 public enum EFishingUpgradeType
 {
-    BaitMaking, FishingRod, PlayerGrade, Ship
+    PlayerGrade, BaitMaking, FishingRod, Ship
 }
