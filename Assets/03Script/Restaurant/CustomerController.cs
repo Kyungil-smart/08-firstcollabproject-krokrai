@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using static Define;
 
@@ -10,6 +10,8 @@ public class CustomerController : MonoBehaviour
     [Header("Data")]
     [SerializeField] private CustomerDataSO _data;
 
+
+    // ë°ì´í„° ë‚˜ì¤‘ì— DataTowerì—ì„œ ë°›ì•„ì˜¤ê¸°.
     [Header("Runtime Data")]
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _eatDuration = 3f;
@@ -26,7 +28,7 @@ public class CustomerController : MonoBehaviour
     {
         _moveSpeed = _data.MoveSpeed;
         _eatDuration = _data.EatDuration;
-        _priceFactor = _data.PriceScaleFactor;
+        _priceFactor = _data.PriceScaleFactor; 
         _spawnDelay = _data.SpawnDelay;
 
         _anim = GetComponentInChildren<Animator>();
@@ -34,14 +36,13 @@ public class CustomerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼Õ´Ô ½ºÆù ½Ã°£ °ª
+    /// ì†ë‹˜ ìŠ¤í° ì‹œê°„ ê°’
     /// </summary>
     /// <returns></returns>
     public float SpawnDelay() => _data.SpawnDelay;
 
     /// <summary>
-    /// RestaurangtManager¿Í ¿¬°á.
-    /// RestaurantCompositionRoot.cs ¿Ü È£Ãâ ±İÁö.
+    /// RestaurangtManagerì™€ ì—°ê²°.
     /// </summary>
     /// <param name="restaurant"></param>
     public void ConnectRestaurant(RestaurantManager restaurant)
@@ -50,7 +51,7 @@ public class CustomerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼Õ´ÔÀÇ ±âº» ¼³Á¤À» ÃÊ±âÈ­ ÇØÁÖ´Â ÇÔ¼ö
+    /// ì†ë‹˜ì˜ ê¸°ë³¸ ì„¤ì •ì„ ì´ˆê¸°í™” í•´ì£¼ëŠ” í•¨ìˆ˜
     /// </summary>
     /// <param name="restaurant"></param>
     /// <param name="seat"></param>
@@ -71,49 +72,51 @@ public class CustomerController : MonoBehaviour
             switch (_state)
             {
                 case CustomerState.MoveToSeat:
-                    // ·¹ÀÌ¾î µÚ·Î ¹Ì·ç±â
+                    // ë ˆì´ì–´ ë’¤ë¡œ ë¯¸ë£¨ê¸°
                     _sr.sortingOrder = -2;
-                    // ¾Ö´Ï¸ŞÀÌ¼Ç Ãâ·Â
+                    // ì• ë‹ˆë©”ì´ì…˜ ì¶œë ¥
                     _anim.Play("Walk");
-                    // ÀÚ¸®¿¡ ÀÌµ¿ÇÒ¶§±îÁö ´ë±â
+                    // ìë¦¬ì— ì´ë™í• ë•Œê¹Œì§€ ëŒ€ê¸°
                     yield return StartCoroutine(CoMoveTo(_seat.SitPosition));
-                    //¾ÉÀº »óÅÂ°¡ µÇ¸é ¸Ô±â ½ÇÇà
+                    //ì•‰ì€ ìƒíƒœê°€ ë˜ë©´ ë¨¹ê¸° ì‹¤í–‰
                     _state = CustomerState.Eat;
                     break;
 
                 case CustomerState.Eat:
-                    // ¾É±â·Î ÀüÈ¯
+                    // ì•‰ê¸°ë¡œ ì „í™˜
                     _anim.Play("Sit");
-                    // ·¹ÀÌ¾î À§Ä¡ º¯°æ
+                    // ë ˆì´ì–´ ìœ„ì¹˜ ë³€ê²½
                     _sr.sortingOrder = -1;
-                    // ½Ä»ç ´ë±â½Ã°£.
+                    // ì‹ì‚¬ ëŒ€ê¸°ì‹œê°„.
                     yield return new WaitForSeconds(_eatDuration);
 
-                    // ÀÌºÎºĞ Ãß°¡ ¼öÁ¤ ÇÊ¿ä TryCounsumSushiAndEarnMoney(price) @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    // ì´ë¶€ë¶„ ì¶”ê°€ ìˆ˜ì • í•„ìš” TryCounsumSushiAndEarnMoney(price) ì†ë‹˜ í–‰ë™ í…Œì´ë¸” ì—…ë°ì´íŠ¸ì— ë§ê²Œ ìˆ˜ì •í•´ì•¼ í•˜ë‹ˆ í›„ìˆœìœ„ë¡œ ì‘ì—… @@@@@@@@@@@@@@@@@@
                     if (_restaurant.TryCounsumeSushiAndEarnMoney(_priceFactor * 200))
                     {
-                        // Ãß°¡·Î ¸ÔÀ» È®·ü °è»ê
+                        // ì¶”ê°€ë¡œ ë¨¹ì„ í™•ë¥  ê³„ì‚°
                         if (Random.Range(0, 101) < _data.SecondEatChance)
                         {
-                            yield return new WaitForSeconds(_eatDuration); // WaitForSeconds ³Ê¹« ¸¹Àº È£Ãâ ÈÄ¿¡ °³¼± ÇÊ¿ä @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                            yield return new WaitForSeconds(_eatDuration); // WaitForSeconds ë„ˆë¬´ ë§ì€ í˜¸ì¶œ í›„ì— ê°œì„  í•„ìš” @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         }
                     }
                     _state = CustomerState.Exit;
                     break;
-                    // ¼Õ´Ô ÅğÀå
+                    // ì†ë‹˜ í‡´ì¥
                 case CustomerState.Exit:
-                    // ÇöÀç ÀÚ¸® ºñ¿ì±â
+                    // í˜„ì¬ ìë¦¬ ë¹„ìš°ê¸°
                     _seat.ClearSeat();
-                    // ·¹ÀÌ¾î µÚ·Î ¹Ğ±â
+                    // ë ˆì´ì–´ ë’¤ë¡œ ë°€ê¸°
                     _sr.sortingOrder = -2;
-                    // ¾Ö´Ï¸ŞÀÌ¼Ç Ãâ·Â
+                    // ì• ë‹ˆë©”ì´ì…˜ ì¶œë ¥
                     _anim.Play("Walk");
-                    // Å»Ãâ Æ÷ÀÎÆ®±îÁö ´ë±â
+                    // íƒˆì¶œ í¬ì¸íŠ¸ê¹Œì§€ ëŒ€ê¸°
                     yield return StartCoroutine(CoMoveTo(_exitPoint.position));
-                    // ÆÄ±« Instantiate¸¦ ±³Ã¼ÇÏ¸é¼­ ¹İµå½Ã ±³Ã¼ ÇÊ¼ö  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                    Destroy(gameObject);
-                    break;
-
+                    // íŒŒê´´ Instantiateë¥¼ êµì²´í•˜ë©´ì„œ ë°˜ë“œì‹œ êµì²´ í•„ìˆ˜  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    //Destroy(gameObject);
+                    Debug.Log($"{gameObject.name} ë„ì°©");
+                    _seat.ClearSeat();
+                    _restaurant.DeSpawnCustomer(gameObject);
+                    yield break;
             }
             yield return null;
         }
@@ -121,7 +124,7 @@ public class CustomerController : MonoBehaviour
 
     private IEnumerator CoMoveTo(Vector3 targetPos)
     {
-        // ÁöÁ¤ ÁÂ¼®±îÁö ÀÌµ¿ÇÏ´Â °ÍÀ» ±¸Çö.
+        // ì§€ì • ì¢Œì„ê¹Œì§€ ì´ë™í•˜ëŠ” ê²ƒì„ êµ¬í˜„.
         while ((transform.position - targetPos).sqrMagnitude > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, _moveSpeed * Time.deltaTime);

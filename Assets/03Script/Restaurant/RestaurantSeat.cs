@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RestaurantSeat : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class RestaurantSeat : MonoBehaviour
     {
         IsOccupied = true;
     }
-    public void ClearSeat()
+    public void ClearSeat() 
     {
         IsOccupied = false;
     }
