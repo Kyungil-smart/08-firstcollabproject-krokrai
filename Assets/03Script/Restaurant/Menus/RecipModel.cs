@@ -1,0 +1,61 @@
+﻿using UnityEngine;
+
+public class RecipModel : MonoBehaviour
+{
+    public int recipID {  get; private set; }
+
+    bool _canMake;
+    bool _isUnlocked;
+    bool _canUnlock;
+    bool _isInitiated;
+    bool _isSelected;
+
+
+    private void Awake()
+    {
+        _canUnlock = false;
+        _canMake = false;
+        _isUnlocked = false;
+        _isInitiated = false;
+        _isSelected = false;
+    }
+
+    public void InitRecip(int RecipID)
+    {
+        if (_isInitiated)
+        {
+            Debug.Log("레피시에 대한 추가적인 초기화가 시도가 있습니다.");
+            return;
+        }
+
+        _isInitiated = true;
+        recipID = RecipID;
+        // 추가적인 의존성 관련 필요한 경우 추가.
+    }
+
+    /// <summary>
+    /// 특정 물고기를 잡아 레시피 해금 가능할 경우 호출
+    /// </summary>
+    public void UnlockConditionsMet(int n)
+    {
+        // 스위치 대신 아마 if문 으로 작업하지 않을까 생각 중.
+        switch(n)
+        {
+            case 10 : // 현재 임시 값으로 대입 후에 물고기 ID와 대응 필요.
+                break;
+        }
+        // Action으로 특정 물고기 숫자가 1 이상인 경우에만 호출 되게 설계 예정.
+        _canUnlock = true;
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="canUnlock"></param>
+    public void CanMakeDish(bool canMake)
+    {
+        // Action으로 특정 물고기 숫자가 1 이상인 경우에만 호출 되게 설계 예정.
+        _canMake = canMake;
+    }
+
+}

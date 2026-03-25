@@ -28,7 +28,7 @@ public class CustomerController : MonoBehaviour
     {
         _moveSpeed = _data.MoveSpeed;
         _eatDuration = _data.EatDuration;
-        _priceFactor = _data.PriceScaleFactor;
+        _priceFactor = _data.PriceScaleFactor; 
         _spawnDelay = _data.SpawnDelay;
 
         _anim = GetComponentInChildren<Animator>();

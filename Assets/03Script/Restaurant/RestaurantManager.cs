@@ -30,7 +30,7 @@ public class RestaurantManager : MonoBehaviour
 
     private WaitForSeconds[] _seconds;
     private WaitForSeconds _baseDelay;
-
+     
     private void Start()
     {
         /*
