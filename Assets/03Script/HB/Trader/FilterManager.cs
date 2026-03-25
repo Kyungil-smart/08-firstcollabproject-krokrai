@@ -61,13 +61,33 @@ public class FilterManager : MonoBehaviour
         _isUpdating = false;
     }
 
-    public List<int> SelectedGrade()
+    public List<FishRate> SelectedRates()
     {
-        List<int> selected = new List<int>();
-        for (int i = 0; i < gradeToggles.Length; i++)
+        List<FishRate> selected = new List<FishRate>();
+        
+        // 맨 위에 있는 A(전체) 버튼은 1부터 매칭해서 모든 등급을 다 반환
+        if (gradeToggles[0].isOn)
         {
-            if (gradeToggles[i].isOn) selected.Add(i + 1);
+            selected.Add(FishRate.Trash);
+            selected.Add(FishRate.Normal);
+            selected.Add(FishRate.Fine);
+            selected.Add(FishRate.Superior);
+            selected.Add(FishRate.Rare);
+            selected.Add(FishRate.Elite);
+            selected.Add(FishRate.Fantastic);
+            selected.Add(FishRate.Legendary);
+            return selected;
         }
+
+        // A버튼이 아니라면 선택된 것만 반환
+        for (int i = 1; i < gradeToggles.Length; i++)
+        {
+            if (gradeToggles[i].isOn)
+            {
+                selected.Add((FishRate)(i-1));
+            }
+        }
+        
         return selected;
     }
 }

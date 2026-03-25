@@ -1,15 +1,94 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class TraderUI : MonoBehaviour
 {
-    [Header("Filter UI Settings")]
+    [Header("필터 UI")]
     public GameObject filterPanel;              // 필터 등급 창
     public FilterManager filterManager;
     public TextMeshProUGUI filterButtonText;    // 필터 버튼의 텍스트
 
+    [Header("물고기 선택")]
+    public Transform content;                   // 물고기 종류가 들어있는 content 오브젝트 담기
+    public Toggle selectAllButton;              // 전체 선택 버튼
+
+    private List<Toggle> fishToggles = new List<Toggle>();  // 물고기 슬롯을 담는 List
     private bool isFilterMode = false;          // 현재 필터창이 열려 있는지
+    private bool _isUpdatingAll = false;        // 무한 루프 방지
+    
+
+    private void Awake()
+    {
+        // Content오브젝트 하위의 물고기를 리스트에 저장
+        if(content != null)
+        {
+            // 중복방지 리스트 초기화
+            fishToggles.Clear();
+            // Content하위 오브젝트의 Toggle 컴포넌트를 배열로 가져옴
+            Toggle[] findToggles = content.GetComponentsInChildren<Toggle>(true);
+            // 배열 데이터를 fishToggles 리스트에 담음
+            fishToggles.AddRange(findToggles);
+
+            // 개별의 물고기 토글에 리스너 등록
+            foreach (Toggle ft in fishToggles)
+            {
+                ft.onValueChanged.AddListener((isOn) => OnFishToggleChanged(isOn));
+            }
+        }
+
+        // Select All 버튼 리스트너 등록
+        if (selectAllButton != null)
+        {
+            selectAllButton.onValueChanged.AddListener(OnSelectAllButtonClicked);
+        }
+    }
+
+    public void OnSelectAllButtonClicked(bool isOn)
+    {
+        if (_isUpdatingAll || fishToggles.Count == 0) return;
+
+        _isUpdatingAll = true;
+
+        foreach (Toggle fishToggle in fishToggles)
+        {
+            if (fishToggle != null)
+            {
+                // 물고기 이미지의 그래픽 설정에 의해 하이라이트가 켜짐/꺼짐
+                fishToggle.isOn = isOn;
+            }
+        }
+        _isUpdatingAll = false;
+
+        Debug.Log($"전체 선택 체크: {isOn} / 하이라이트 효과 적용");
+    }
+
+    private void OnFishToggleChanged(bool isOn)
+    {
+        // 전체 선택 시 하단 로직 스킵
+        if(_isUpdatingAll) return;
+        
+        // 모든 물고기가 선택됐는지
+        bool allSelected = true;
+        
+        // 리스트에 담긴 물고기 확인
+        foreach (Toggle ft in fishToggles)
+        {
+            // 물고기가 있고 선택이 되지 않은 오브젝트가 있다면 전체 선택이 아님
+            if (ft != null && !ft.isOn)
+            {
+                allSelected = false;
+                break;
+            }
+        }
+
+        // 체크 결과에 따라 전체 선택 여부 체크, 다시 로직이 실행되지 않도록 끔
+        _isUpdatingAll = true;
+        selectAllButton.isOn = allSelected;
+        _isUpdatingAll = false;
+    }
 
     public void OnFilterButtonClicked()
     {
@@ -37,8 +116,35 @@ public class TraderUI : MonoBehaviour
 
     private void ApplyFilter()
     {
-        var SelectedGrade = filterManager.SelectedGrade();
-        Debug.Log($"선택된 등급 개수: {SelectedGrade.Count}개");
+        // FilterManager 에서 선택된 등급 Enum리스트 받기
+        List<FishRate> selectedRates = filterManager.SelectedRates();
+
+        // Content 하위 오브젝트 체크
+        foreach (Transform child in content)
+        {
+            FishRarity fishRarity = child.GetComponent<FishRarity>();
+
+            if (fishRarity != null)
+            {
+                // 물고기 등급이 선택된 리스트에 포함되어 있는지
+                // 포함됐다면 true(활성화),아니면 false(비활성화)
+                bool showFish = selectedRates.Contains(fishRarity.fishRate);
+                child.gameObject.SetActive(showFish);
+            }
+        }
+
+        // 전체 선택 상태가 꼬이지 않게 리스트를 다시 갱신
+        RefreshFishImages();
+        
+    }
+
+    private void RefreshFishImages()
+    {
+        fishToggles.Clear();
+        Toggle[] activeToggles = content.GetComponentsInChildren<Toggle>(false);
+        fishToggles.AddRange(activeToggles);
+
+        OnFishToggleChanged(true);
     }
 
     public void CloseTrader()
