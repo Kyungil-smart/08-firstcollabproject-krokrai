@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,9 @@ public class DataTower : MonoBehaviour
     public static DataTower instance;
 
     private InventorySystem _inventorySystem; // 참조 걸어줄 방식 지정 필요.
-    private Dictionary<string, FishData> FishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
+    private Dictionary<string, FishData> _fishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
+
+    public event Action<string> OnFisingNewFish;
 
     public Language languageSetting { get; private set; } /// <summary> 현재 설정된 언어, 기본 값 : 영어 </summary>
 
@@ -32,16 +34,25 @@ public class DataTower : MonoBehaviour
         {
             if (ForcedInitialized)
                 Debug.Log("강제 초기화 실행");
-            FishDatas = new Dictionary<string, FishData>(50); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
-            money = 0;
+            _fishDatas = new Dictionary<string, FishData>(50); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
+            
+            money = 1000;
             customerVisitCounter = 0;
-            masterVolume = 0;
-            BGMVolume = 0;
-            SFXVolume = 0;
-            fishingCount = 0;
-            currentFishingCount = 0;
+            
+            masterVolume = 0.5f;
+            BGMVolume = 0.5f;
+            SFXVolume = 0.5f;
+
+            fishingGrade = 1;
+            baitLevel = 1;
+            rodLevel = 1;
+            shipLevel = 1;
+
+            fishingCount = 1;
+            currentFishingCount = 1;
+            
             fishingTime = 30;
-            maxFishingTime = 18000;
+            maxFishingTime = 1800;
         }
         else
         {
@@ -147,7 +158,22 @@ public class DataTower : MonoBehaviour
 
     #region 낚시 변수
 
-
+    /// <summary>
+    /// 플레이어 등급 낚시 관련 레벨에 대해서 해당 부분에서 예외 처리가 없으므로, UI 작업자가 예외처리 열심히 해주셔야합니다.
+    /// </summary>
+    public int fishingGrade;
+    /// <summary>
+    /// 미끼 레벨
+    /// </summary>
+    public int baitLevel;
+    /// <summary>
+    /// 낚시대 레벨
+    /// </summary>
+    public int rodLevel;
+    /// <summary>
+    /// shipLevel;
+    /// </summary>
+    public int shipLevel;
 
     /// <summary>
     /// 최대로 저장할 수 있는 미끼 수
@@ -180,11 +206,24 @@ public class DataTower : MonoBehaviour
     /// <summary>
     /// 물고기를 잡은 경우 호출.
     /// </summary>
-    public void takeFish() // takeFish(FishData fish)
+    public void takeFish(FishData fish)
     {
         //_inventorySystem.Insert(); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
-        // if ( _fishDatas.[fish.fishID].isfirst )
-        // 
+        if ( !_fishDatas.ContainsKey(fish.fishNum)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
+        {
+            fish.isCaught = true;
+            _fishDatas.Add(fish.fishNum, fish);
+
+            OnFisingNewFish?.Invoke(fish.fishNum);
+        }
+        else if (_fishDatas[fish.fishNum].isCaught == false)
+        {
+            fish.isCaught = true;
+            _fishDatas[fish.fishNum].isCaught = true;
+            OnFisingNewFish?.Invoke(fish.fishNum);
+        }
+
+        // 인벤토리에 추가
     }
     #endregion
 

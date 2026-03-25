@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class RecipModel : MonoBehaviour
 {
-    public int recipID {  get; private set; }
+    //public int RecipID {  get; private set; }
+    private RecipeContainer _recipe;
 
     bool _canMake;
     bool _isUnlocked;
@@ -20,7 +21,7 @@ public class RecipModel : MonoBehaviour
         _isSelected = false;
     }
 
-    public void InitRecip(int RecipID)
+    public void InitRecip(RecipeContainer rcp)
     {
         if (_isInitiated)
         {
@@ -29,7 +30,7 @@ public class RecipModel : MonoBehaviour
         }
 
         _isInitiated = true;
-        recipID = RecipID;
+        _recipe = rcp;
         // 추가적인 의존성 관련 필요한 경우 추가.
     }
 
