@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e198ddd3b1b3a4483986b1b3173704, type: 3}
+  m_Name: Restaurant_Fixed_valueSO
+  m_EditorClassIdentifier: Assembly-CSharp::Restaurant_Fixed_value
+  dishWashTime: 0
+  minSpawnDelay: 0
+  maxSpawnDelay: 0

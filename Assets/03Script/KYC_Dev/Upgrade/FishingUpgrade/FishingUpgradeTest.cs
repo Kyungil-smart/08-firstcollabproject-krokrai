@@ -9,12 +9,19 @@ public class FishingUpgradeTest : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _baitLevelText;
     [SerializeField] private TextMeshProUGUI _rodLevelText;
     [SerializeField] private TextMeshProUGUI _shipLevelText;
+
+    DataTower _dataTower;
+    FishingUpgradeManager _upgradeManager;
     
-    [SerializeField] FishingUpgradeManager _upgradeManager;
+    private void Awake()
+    {
+        _dataTower = FindFirstObjectByType<DataTower>();
+        _upgradeManager = FindFirstObjectByType<FishingUpgradeManager>();
+    }
 
     private void Update()
     {
-        _goldText.text = _upgradeManager.Temp_Gold.ToString();
+        _goldText.text = _dataTower.money.ToString();
         _fishingGradeText.text = _upgradeManager.FishingGrade.ToString();
         _baitLevelText.text = _upgradeManager.BaitLevel.ToString();
         _rodLevelText.text = _upgradeManager.RodLevel.ToString();
@@ -23,7 +30,7 @@ public class FishingUpgradeTest : MonoBehaviour
 
     public void OnGoldPlusClick()
     {
-        _upgradeManager.Temp_Gold += 1000;
+        
     }
     
     public void OnFishingGradePlusClick()

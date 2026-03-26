@@ -6,10 +6,10 @@ using System.Threading;
 public class FishingTimer : MonoBehaviour
 {
     [Range(0f, 1800f)]
-    [SerializeField] public float fishingTime; // sumarry : 낚시 가능 횟수 충전까지 남은 시간
-    [SerializeField] public float maxFishingTime = 1800f; // sumarry : 낚시 가능 횟수 최대 쿨타임
-    public TMP_Text timerText; // sumarry : 시간을 화면에 표시할 UI 텍스트 컴포넌트
-    private FishingManager _manager; // sumarry : 낚시 횟수 증가를 위한 FishingManager.cs 참조
+    [SerializeField] public float fishingTime; // 낚시 가능 횟수 충전까지 남은 시간
+    [SerializeField] public float maxFishingTime = 3600f; // 낚시 가능 횟수 최대 쿨타임
+    public TMP_Text timerText; // 시간을 화면에 표시할 UI 텍스트 컴포넌트
+    private FishingManager _manager; // 낚시 횟수 증가를 위한 FishingManager.cs 참조
 
     private void Start()
     {
@@ -17,7 +17,9 @@ public class FishingTimer : MonoBehaviour
         StartCoroutine(StartCountdown());
     }
 
-    // sumarry : 미끼 레벨업 시 최대 쿨타임을 갱신하고, 횟수가 가득 찬 경우 UI를 즉시 업데이트
+    /// <sumarry> 
+    /// 미끼 레벨업 시 최대 쿨타임을 갱신하고, 횟수가 가득 찬 경우 UI를 즉시 업데이트
+    /// </sumarry>
     public void UpdateMaxTime(float newTime)
     {
         maxFishingTime = newTime;

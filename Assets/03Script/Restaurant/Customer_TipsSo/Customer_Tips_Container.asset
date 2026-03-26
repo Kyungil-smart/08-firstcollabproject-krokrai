@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
+  m_Name: Customer_Tips_Container
+  m_EditorClassIdentifier: Assembly-CSharp::DataContainer
+  _mainLine: 4
+  URL: https://docs.google.com/spreadsheets/d/1sS54fdN2yw-rtl24L7xjGuufwEtqKRVBO6rQiyyEHD8/edit?gid=757994602#gid=757994602
+  objs:
+  - {fileID: 11400000, guid: 2e3c369768df2ae4ebfed24353666106, type: 2}
+  - {fileID: 11400000, guid: 19be9373151d75a47a81055fac7c2c5f, type: 2}
+  - {fileID: 11400000, guid: ee680ccfe4f4100458a4cf870d04118c, type: 2}

@@ -554,6 +554,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1991747223}
     - target: {fileID: 6538025667334557649, guid: 4ef05231e82c99b4582db425816763e6, type: 3}
+      propertyPath: fishCurrentRate
+      value: 
+      objectReference: {fileID: 11400000, guid: f27b9810b03d37d4581daab63c2c9aaf, type: 2}
+    - target: {fileID: 6538025667334557649, guid: 4ef05231e82c99b4582db425816763e6, type: 3}
       propertyPath: fishDatabase.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -782,7 +786,7 @@ PrefabInstance:
       propertyPath: countText
       value: 
       objectReference: {fileID: 2023709628}
-    - target: {fileID: 2938955796691207335, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
+    - target: {fileID: 4183886587059565716, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
       propertyPath: timerText
       value: 
       objectReference: {fileID: 1107243872}

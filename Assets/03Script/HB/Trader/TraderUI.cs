@@ -130,10 +130,10 @@ public class TraderUI : MonoBehaviour
                 isFishSelected = true;
                 
                 // 선택된 물고기 FishRarity스크립트에서 가격을 가져와 더함
-                FishRarity fishRarity = ft.GetComponentInParent<FishRarity>();
-                if(fishRarity != null)
+                FishData data = ft.GetComponentInParent<FishSlot>().fishData;
+                if(data != null)
                 {
-                    total += fishRarity.price;
+                    total += data.price;
                 }
             }
         }
@@ -207,18 +207,18 @@ public class TraderUI : MonoBehaviour
     private void ApplyFilter()
     {
         // FilterManager 에서 선택된 등급 Enum리스트 받기
-        List<FishRate> selectedRates = filterManager.SelectedRates();
+        List<EFish_Rarity> selectedRates = filterManager.SelectedRates();
 
         // Content 하위 오브젝트 체크
         foreach (Transform child in content)
         {
-            FishRarity fishRarity = child.GetComponent<FishRarity>();
+            FishData data = child.GetComponent<FishSlot>().fishData;
 
-            if (fishRarity != null)
+            if (data != null)
             {
                 // 물고기 등급이 선택된 리스트에 포함되어 있는지
                 // 포함됐다면 true(활성화),아니면 false(비활성화)
-                bool showFish = selectedRates.Contains(fishRarity.fishRate);
+                bool showFish = selectedRates.Contains(data.fishRarity);
                 child.gameObject.SetActive(showFish);
             }
         }

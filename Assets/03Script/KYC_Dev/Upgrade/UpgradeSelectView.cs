@@ -13,58 +13,38 @@ public class UpgradeSelectView : MonoBehaviour
     [SerializeField] Image _upgradeIconSprite;
     [SerializeField] Button _upgradeButton;
     
-    [Header("Localization Data")]
-    [SerializeField] ScriptableObject _upgradeTargetLanguage;
-    [SerializeField] ScriptableObject _upgradeDescriptionLanguage;
+    [Header("TranslationData / Auto Setting / 차후 수정")]
+    //ToDo:ScriptableObject형식을 나중에 번역SO형식으로 교체해야됨
+    public ScriptableObject UpgradeTargetLanguage;
+    public ScriptableObject UpgradeDescriptionLanguage;
     
-    [Header("Don`t Touch")]
-    public EFishingUpgradeType FishingUpgradeType;
-    public EDiningUpgradeType DiningUpgradeType;
+    public event Action OnTryUpgrade;
 
-    private UpgradeSelectPresenter _presenter;
-
-    private void Awake()
-    {
-        _presenter = GetComponentInParent<UpgradeSelectPresenter>();
-    }
-
-    private void OnEnable()
-    {
-        // 이벤트 구독
-    }
-
-    private void OnDisable()
-    {
-        // 구독 해제
-    }
-    
     /// <summary>
-    /// 번역
-    /// ToDo:DataTower 작업 끝나면 변수 변경할것
+    /// UI 텍스트 번역 설정
     /// ToDo:번역SO 추가되면 언어 연결 작업 필수
     /// </summary>
-    public void TranslationText()
+    /// <param name="language">영어 / 한국어</param>
+    public void TranslationText(Language language)
     {
-        switch (_presenter.Language)
+        switch (language)
         {
-            case ETestLanguage.EN:
+            case Language.ENG:
                 _upgradeTargetText.text = "";
                 _upgradeDescriptionText.text = "";
                 break;
-            case ETestLanguage.KOR:
+            case Language.KOR:
                 _upgradeTargetText.text = "";
                 _upgradeDescriptionText.text = "";
-                break;
-            default:
                 break;
         }
     }
     
     /// <summary>
-    /// 
+    /// UI의 업그레이드 레벨 현황 출력 명령
     /// </summary>
-    /// <param name="currentLevel"></param>
-    /// <param name="maxLevel"></param>
+    /// <param name="currentLevel">현재 레벨</param>
+    /// <param name="maxLevel">최대 레벨</param>
     public void RenewalLevelText(int currentLevel, int maxLevel)
     {
         if (currentLevel != maxLevel)
@@ -77,16 +57,28 @@ public class UpgradeSelectView : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// UI의 다음 업그레이드에 필요한 골드 출력 명령
+    /// </summary>
+    /// <param name="requiredGold"></param>
     public void RenewalReqGoldText(int requiredGold)
     {
         _upgradeReqGoldText.text = requiredGold.ToString();
     }
 
-    public void SetUpgradeIconSprite()
+    /// <summary>
+    /// UI의 아이콘 스프라이트 출력 명령
+    /// ToDo:스프라이트 설정 넘어오면 작성
+    /// </summary>
+    public void SetUpgradeIconSprite(Image sprite)
     {
-        
+        _upgradeIconSprite = sprite;
     }
 
+    /// <summary>
+    /// 업그레이드 버튼의 활성화 상태 조절
+    /// </summary>
+    /// <param name="state">활성화 / 비활성화</param>
     public void ToggleButtenState(bool state)
     {
         switch (state)
@@ -100,6 +92,11 @@ public class UpgradeSelectView : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 업그레이드 버튼의 텍스트 색 수정
+    /// ToDo:에셋 적용 후 배경색에 따라 수정 필요
+    /// </summary>
+    /// <param name="state">normal / red</param>
     public void ToggleReqGoldTextColor(bool state)
     {
         switch (state)
@@ -118,6 +115,6 @@ public class UpgradeSelectView : MonoBehaviour
     /// </summary>
     public void OnClickUpgradeButton()
     {
-        _presenter.UpgradeSelectAndRun();
+        OnTryUpgrade?.Invoke();
     }
 }

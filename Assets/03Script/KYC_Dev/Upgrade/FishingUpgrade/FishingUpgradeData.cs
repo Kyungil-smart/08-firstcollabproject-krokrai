@@ -9,7 +9,6 @@ public class FishingUpgradeData : ScriptableObject, IDataSeter
     [field: SerializeField] public int Req_Gold { get; private set; }
     [field: SerializeField] public int Apply_Value { get; private set; }
     [field: SerializeField] public string Rate_ID { get; private set; }
-    [field: SerializeField] public string Sprite { get; private set; }
 
 
     public void SetData(string[] datas)
@@ -24,6 +23,5 @@ public class FishingUpgradeData : ScriptableObject, IDataSeter
         Req_Gold = req_Gold;
         Apply_Value = apply_Value;
         Rate_ID = datas[4];
-        Sprite = datas[5];
     }
 }
