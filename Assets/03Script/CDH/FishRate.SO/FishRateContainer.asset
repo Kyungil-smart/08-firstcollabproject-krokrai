@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
   m_Name: FishRateContainer
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
-  mainLine: 4
-  URL: https://docs.google.com/spreadsheets/d/e/2PACX-1vRKYtKN0_XOy43-6mxb8aK2nsZOHvH7CmRXF5tKofpHWkJToZYivPRNC0caqXjRiDKAMdHqjo28VmYE/pub?gid=1861109465&single=true&output=tsv
+  mainLine: 3
+  URL: https://docs.google.com/spreadsheets/d/1ECiDweNf4ghy1wlQ9fKA470ThPJxurLs/edit?gid=119111717#gid=119111717
   objs:
   - {fileID: 11400000, guid: f27b9810b03d37d4581daab63c2c9aaf, type: 2}
   - {fileID: 11400000, guid: 0846f5f4157cd1a4ebbc80e7d825c18e, type: 2}

@@ -384,52 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5637a320b81313c40b1ac49f94b7eb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingUI
---- !u!1 &2019121255
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2019121257}
-  - component: {fileID: 2019121256}
-  m_Layer: 0
-  m_Name: FishRateManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2019121256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019121255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830aebc51153d464485c315667cfcdfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DataManager
-  container:
-  - {fileID: 11400000, guid: 462aaaa146c28ce4598615194fa02a34, type: 2}
---- !u!4 &2019121257
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019121255}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 983.38257, y: 617.75305, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2023709628 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 810423767863488514, guid: 38065f19b49391947857541932046932, type: 3}
@@ -602,7 +556,7 @@ PrefabInstance:
     - target: {fileID: 6538025667334557649, guid: 4ef05231e82c99b4582db425816763e6, type: 3}
       propertyPath: fishCurrentRate
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: f27b9810b03d37d4581daab63c2c9aaf, type: 2}
     - target: {fileID: 6538025667334557649, guid: 4ef05231e82c99b4582db425816763e6, type: 3}
       propertyPath: fishDatabase.Array.size
       value: 5
@@ -960,4 +914,3 @@ SceneRoots:
   - {fileID: 1606076715477993312}
   - {fileID: 1039937042408093683}
   - {fileID: 3567732414947967516}
-  - {fileID: 2019121257}

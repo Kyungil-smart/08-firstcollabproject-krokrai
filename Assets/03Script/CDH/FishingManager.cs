@@ -191,6 +191,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         if (fishCurrentRate == null)
         {
             Debug.Log("데이터가 연결되지 않습니다.");
+            return "Normal";
         }
 
         if (rarityRate <= (baseValue += fishCurrentRate.trash))
