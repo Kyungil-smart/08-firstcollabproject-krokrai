@@ -1,11 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Container", menuName = "DataReader/Container")]
 public class DataContainer : ScriptableObject
 {
     public URLReader reader;
-    [SerializeField] byte mainLine = 5;
+    [Tooltip("데이터 테이블의 데이터 시작 위치 지정")][SerializeField] byte _mainLine = 4;
 
     [Tooltip("해당 시트 주소를 전체를 복사해서 넣어주세요.")]
     public string URL;
@@ -17,7 +16,7 @@ public class DataContainer : ScriptableObject
 
     public void SetDatas(char splitSymbol, string[] lines)
     {
-        mainLine--;
+        int mainLine = _mainLine - 1;
         isDataLoaded = false;
 
         if (lines == null)
@@ -29,7 +28,7 @@ public class DataContainer : ScriptableObject
         // 줄 단위로 들어온 데이터 가공
         for (int i = mainLine; i < lines.Length; i++)
         {
-            if (i >= objs.Length + mainLine)
+            if (i > objs.Length + mainLine)
             {
                 Debug.LogWarning($"<color=yellow>경고, {this.name}에 저장된 SO가 입력된 값보다 적습니다. SO를 추가하시거나 데이터 테이블을 점검해주세요.</color>");
                 return;
