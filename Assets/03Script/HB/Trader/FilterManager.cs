@@ -61,21 +61,21 @@ public class FilterManager : MonoBehaviour
         _isUpdating = false;
     }
 
-    public List<FishRate> SelectedRates()
+    public List<EFish_Rarity> SelectedRates()
     {
-        List<FishRate> selected = new List<FishRate>();
+        List<EFish_Rarity> selected = new List<EFish_Rarity>();
         
         // 맨 위에 있는 A(전체) 버튼은 1부터 매칭해서 모든 등급을 다 반환
         if (gradeToggles[0].isOn)
         {
-            selected.Add(FishRate.Trash);
-            selected.Add(FishRate.Normal);
-            selected.Add(FishRate.Fine);
-            selected.Add(FishRate.Superior);
-            selected.Add(FishRate.Rare);
-            selected.Add(FishRate.Elite);
-            selected.Add(FishRate.Fantastic);
-            selected.Add(FishRate.Legendary);
+            selected.Add(EFish_Rarity.Trash);
+            selected.Add(EFish_Rarity.Normal);
+            selected.Add(EFish_Rarity.Fine);
+            selected.Add(EFish_Rarity.Superior);
+            selected.Add(EFish_Rarity.Rare);
+            selected.Add(EFish_Rarity.Elite);
+            selected.Add(EFish_Rarity.Fantastic);
+            selected.Add(EFish_Rarity.Legendary);
             return selected;
         }
 
@@ -84,7 +84,7 @@ public class FilterManager : MonoBehaviour
         {
             if (gradeToggles[i].isOn)
             {
-                selected.Add((FishRate)(i-1));
+                selected.Add((EFish_Rarity)(i-1));
             }
         }
         
