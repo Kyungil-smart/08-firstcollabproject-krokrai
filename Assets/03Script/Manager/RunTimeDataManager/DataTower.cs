@@ -260,18 +260,18 @@ public class DataTower : MonoBehaviour
     public void takeFish(FishData fish)
     {
         //_inventorySystem.Insert(); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
-        if ( !_fishDatas.ContainsKey(fish.fishNum)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
+        if ( !_fishDatas.ContainsKey(fish.fishID)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
         {
             fish.isCaught = true;
-            _fishDatas.Add(fish.fishNum, fish);
+            _fishDatas.Add(fish.fishID, fish);
 
-            OnFisingNewFish?.Invoke(fish.fishNum);
+            OnFisingNewFish?.Invoke(fish.fishID);
         }
-        else if (_fishDatas[fish.fishNum].isCaught == false)
+        else if (_fishDatas[fish.fishID].isCaught == false)
         {
             fish.isCaught = true;
-            _fishDatas[fish.fishNum].isCaught = true;
-            OnFisingNewFish?.Invoke(fish.fishNum);
+            _fishDatas[fish.fishID].isCaught = true;
+            OnFisingNewFish?.Invoke(fish.fishID);
         }
 
         CatchFishCounter(in fish);
@@ -282,7 +282,7 @@ public class DataTower : MonoBehaviour
     // FishData 재작업 후 진행
     void CatchFishCounter(in FishData fish)
     {
-        switch(fish.fishRate)
+        switch(fish.fishRarity)
         {
             /*
             case "":
