@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,6 +7,7 @@ public class RestaurantManager : MonoBehaviour
 {
     // 후에 아래 리소스는 정리 및 DataTower로 인계
     [Header("Resources")]
+    // 후에 메뉴판이랑 연동해서 관리할 것이기 때문에 메뉴판 완성 시 함수 안에 포함된 모든 _sushiCount 수정 해야함 @@@@@@@@@@@@@@@@@@@@@@@
     [SerializeField] private int _sushiCount = 50;
     [SerializeField] private ulong _money = 1000;
     
@@ -119,7 +120,7 @@ public class RestaurantManager : MonoBehaviour
         seat.SetOccupied();
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
-        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft);
+        //_randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft);
     }
 
     /// <summary>
@@ -177,8 +178,6 @@ public class RestaurantManager : MonoBehaviour
         else
             _randomPrefab = _customerPool.Dequeue();
     }
-
-    public bool HasSushi() => _sushiCount > 0;
 
     /// <summary>
     /// 초밥 갯수를 체크하고 초밥이 있으면 갯수를 하나 줄이고 초밥 가격을 자산에 추가한다.

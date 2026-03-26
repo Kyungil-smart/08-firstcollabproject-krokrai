@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
-  m_Name: CustomerDataContainer
+  m_Name: Customer_Tips_Container
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
-  mainLine: 2
-  URL: https://docs.google.com/spreadsheets/d/1zQtHZjglXdsg_wcOHtSa2vK1kP7METlj/edit?gid=715730208#gid=715730208
+  _mainLine: 4
+  URL: https://docs.google.com/spreadsheets/d/1sS54fdN2yw-rtl24L7xjGuufwEtqKRVBO6rQiyyEHD8/edit?gid=757994602#gid=757994602
   objs:
-  - {fileID: 11400000, guid: fbb281ec03a12614483bc71737c1382e, type: 2}
-  - {fileID: 11400000, guid: 01fcf549028a3774d9e67691acc26fc7, type: 2}
-  - {fileID: 11400000, guid: 6a778f6bbccb8264085eb70a6156cce8, type: 2}
+  - {fileID: 11400000, guid: 2e3c369768df2ae4ebfed24353666106, type: 2}
+  - {fileID: 11400000, guid: 19be9373151d75a47a81055fac7c2c5f, type: 2}
+  - {fileID: 11400000, guid: ee680ccfe4f4100458a4cf870d04118c, type: 2}
