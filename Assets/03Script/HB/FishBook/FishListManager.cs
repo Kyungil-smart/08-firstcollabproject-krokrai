@@ -39,33 +39,35 @@ public class FishListManager : MonoBehaviour
         if (currentFish.isCaught)
         {
             // 물고기 번호, 이름, 등급 정보 전달
-            fishNumText.text = currentFish.fishNum;
-            fishNameText.text = currentFish.fishName;
-            fishRateText.text = currentFish.fishRate;
+            fishNumText.text = currentFish.fishID;
+            fishNameText.text = currentFish.korName;
+            fishRateText.text = currentFish.fishRarity.ToString();
 
             // 물고기 이미지 정보 전달
             fishDisplayImage.sprite = currentFish.fishSprite;
             fishDisplayImage.color = Color.white;   // 원래 이미지로 표시
 
             // 물고기 종류, 길이, 무게 정보 전달
-            groupText.text = currentFish.groupName;
-            lengthText.text = currentFish.length;
-            weightText.text = currentFish.weight;
+            groupText.text = currentFish.fishType.ToString();
+            lengthText.text = $"{currentFish.length} cm";
+            weightText.text = $"{currentFish.weight} kg";
 
             // 상세 설명 부분 '설명(information)'버튼의 내용으로 초기화
-            detailsText.text = currentFish.infoButton;
+            detailsText.text = currentFish.korDescription;
         }
         // 못 잡은 경우 정보가 공개되지 않음
         else
         {
             // 물고기 번호, 이름, 등급 정보
-            fishNumText.text = currentFish.fishNum;
+            fishNumText.text = currentFish.fishID;
             fishNameText.text = "???";              // 이름 숨김
             fishRateText.text = "???";              // 등급 숨김
 
             // 물고기 이미지 정보
-            fishDisplayImage.sprite = currentFish.fishSprite;
-            fishDisplayImage.color = Color.black;   // 물고기 실루엣으로 표시
+            if (currentFish.silhouetteSprite != null)
+            {
+                fishDisplayImage.sprite = currentFish.silhouetteSprite;
+            }
 
             groupText.text = "???";
             lengthText.text = "???";
@@ -82,15 +84,16 @@ public class FishListManager : MonoBehaviour
 
         currentFish = newData;
         UpdateFishUI();
-        Debug.Log($"{newData.fishName}으로 교체");
+        Debug.Log($"{newData.korName}으로 교체");
     }
 
+    /* 기획에서 사라진 버튼
     // Information 버튼 클릭 이벤트
     public void OnClickInformation()
     {
         if(currentFish != null)
         {
-            detailsText.text = currentFish.infoButton;
+            detailsText.text = currentFish.korDescription;
         }
     }
 
@@ -102,4 +105,5 @@ public class FishListManager : MonoBehaviour
             detailsText.text = currentFish.effectButton;
         }
     }
+    */
 }
