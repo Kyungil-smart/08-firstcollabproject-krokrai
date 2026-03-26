@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class UpgradeSelectPresenter : MonoBehaviour
 {
+    [SerializeField] private UpgradeUIView _upgradeUIView;
+    
     [Header("Children Upgrade Select Views")]
     [SerializeField] UpgradeSelectView[] _views;
     [SerializeField] Image[] _upgradeSprites;
@@ -14,10 +17,28 @@ public class UpgradeSelectPresenter : MonoBehaviour
     [field: SerializeField]
     public EMainUpgradeType MainUpgradeType { get; private set; }
     
-    [Header("TranslationData / 차후 수정")]
-    //ToDo:ScriptableObject형식을 나중에 번역SO형식으로 교체해야됨
-    [SerializeField] ScriptableObject _targetlanguage;
-    [SerializeField] ScriptableObject _discriptionLanguage;
+    [Header("TranslationData")]
+    #region TranslationData
+
+    [SerializeField] FishingTranslationData _id_UPG_Bait;
+    [SerializeField] FishingTranslationData _id_UPG_Fishing;
+    [SerializeField] FishingTranslationData _id_UPG_Player;
+    [SerializeField] FishingTranslationData _id_UPG_Ship;
+    [SerializeField] FishingTranslationData _id_UPG_Bait_Desc;
+    [SerializeField] FishingTranslationData _id_UPG_Fishing_Desc;
+    [SerializeField] FishingTranslationData _id_UPG_Player_Desc;
+    [SerializeField] FishingTranslationData _id_UPG_Ship_Desc;
+    [SerializeField] FishingTranslationData _id_UPG_Bait_ToolTip;
+    [SerializeField] FishingTranslationData _id_UPG_Bait_ToolTip_Max;
+    [SerializeField] FishingTranslationData _id_UPG_FishingRod_ToolTip;
+    [SerializeField] FishingTranslationData _id_UPG_FishingRod_ToolTip_Max;
+    [SerializeField] FishingTranslationData _id_UPG_Player_ToolTip;
+    [SerializeField] FishingTranslationData _id_UPG_Player_ToolTip_Max;
+    [SerializeField] FishingTranslationData _id_UPG_Ship_ToolTip;
+    [SerializeField] FishingTranslationData _id_UPG_Ship_ToolTip_Max;
+    
+    #endregion
+    
     
     private FishingUpgradeManager _fishingUpgradeManager;
     private FishingUpgradeDataReader _fishingDataReader;
@@ -25,10 +46,23 @@ public class UpgradeSelectPresenter : MonoBehaviour
     //ToDo:Dining업그레이드 완료되면 하단 수정
     private FishingUpgradeManager _diningUpgradeManager;
     private FishingUpgradeDataReader _diningDataReader;
-    
-    
 
     private void Awake()
+    {
+        Init();
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(LoadingOnEnableRoutine());
+    }
+
+    private void OnDisable()
+    {
+        DisableEvents();
+    }
+
+    private void Init()
     {
         _fishingUpgradeManager = FindFirstObjectByType<FishingUpgradeManager>();
         _fishingDataReader = FindFirstObjectByType<FishingUpgradeDataReader>();
@@ -36,8 +70,30 @@ public class UpgradeSelectPresenter : MonoBehaviour
         //_diningDataReader = FindFirstObjectByType<FishingUpgradeDataReader>();
     }
 
-    private void OnEnable()
+    private void RunSettings()
     {
+        switch (MainUpgradeType)
+        {
+            case EMainUpgradeType.Fishing:
+                SetViewPlayerGrade();
+                SetViewBaitLevel();
+                SetViewRodLevel();
+                SetViewShipLevel();
+                break;
+            case EMainUpgradeType.Dining:
+                
+                break;
+        }
+    }
+
+    #region 이벤트 구독/해제
+
+    private void EnableEvents()
+    {
+        for (int i = 0; i < _views.Length; i++)
+        {
+            DataTower.instance.OnLanguageSettingChanged += _views[i].TranslationText;
+        }
         switch (MainUpgradeType)
         {
             case EMainUpgradeType.Fishing:
@@ -85,12 +141,14 @@ public class UpgradeSelectPresenter : MonoBehaviour
             default:
                 break;
         }
-        
-        
     }
 
-    private void OnDisable()
+    private void DisableEvents()
     {
+        for (int i = 0; i < _views.Length; i++)
+        {
+            DataTower.instance.OnLanguageSettingChanged -= _views[i].TranslationText;
+        }
         switch (MainUpgradeType)
         {
             case EMainUpgradeType.Fishing:
@@ -134,13 +192,18 @@ public class UpgradeSelectPresenter : MonoBehaviour
         }
     }
 
-    private void Start()
+    private IEnumerator LoadingOnEnableRoutine()
     {
-        SetViewPlayerGrade();
-        SetViewBaitLevel();
-        SetViewRodLevel();
-        SetViewShipLevel();
+        while (DataTower.instance == null)
+        {
+            yield return _upgradeUIView.LoadingDelayWait;
+        }
+
+        EnableEvents();
+        RunSettings();
     }
+
+    #endregion
 
     #region 낚시 부분
 
@@ -148,6 +211,10 @@ public class UpgradeSelectPresenter : MonoBehaviour
     {
         int level = _fishingUpgradeManager.FishingGrade;
         int reqGold;
+        _views[0].UpgradeTargetData = _id_UPG_Player;
+        _views[0].UpgradeDescriptionData = _id_UPG_Player_Desc;
+        _views[0].UpgradeToolTipData = _id_UPG_Player_ToolTip;
+        _views[0].UpgradeToolTipMaxData = _id_UPG_Player_ToolTip_Max;
         _fishingUpgradeManager.ChackEnoughGoldFishingGradeUpgrade(DataTower.instance.money);
         _fishingDataReader.GetFishingGradeReqGoldData(level, out reqGold);
         _fishingUpgradeManager.CheakCanBaitLevelUpgrade(_fishingUpgradeManager.FishingGrade, _fishingUpgradeManager.BaitLevel);
@@ -158,8 +225,12 @@ public class UpgradeSelectPresenter : MonoBehaviour
 
     private void SetViewBaitLevel()
     {
-        int level = _fishingUpgradeManager.FishingGrade;
+        int level = _fishingUpgradeManager.BaitLevel;
         int reqGold;
+        _views[1].UpgradeTargetData = _id_UPG_Bait;
+        _views[1].UpgradeDescriptionData = _id_UPG_Bait_Desc;
+        _views[1].UpgradeToolTipData = _id_UPG_Bait_ToolTip;
+        _views[1].UpgradeToolTipMaxData = _id_UPG_Bait_ToolTip_Max;
         _fishingUpgradeManager.ChackEnoughGoldBaitLevelUpgrade(DataTower.instance.money);
         _fishingDataReader.GetBaitLevelReqGoldData(level, out reqGold);
         _views[1].TranslationText(DataTower.instance.languageSetting);
@@ -169,8 +240,12 @@ public class UpgradeSelectPresenter : MonoBehaviour
 
     private void SetViewRodLevel()
     {
-        int level = _fishingUpgradeManager.FishingGrade;
+        int level = _fishingUpgradeManager.RodLevel;
         int reqGold;
+        _views[2].UpgradeTargetData = _id_UPG_Fishing;
+        _views[2].UpgradeDescriptionData = _id_UPG_Fishing_Desc;
+        _views[2].UpgradeToolTipData = _id_UPG_FishingRod_ToolTip;
+        _views[2].UpgradeToolTipMaxData = _id_UPG_FishingRod_ToolTip_Max;
         _fishingUpgradeManager.ChackEnoughGoldRodLevelUpgrade(DataTower.instance.money);
         _fishingUpgradeManager.CheakCanRodLevelUpgrade(_fishingUpgradeManager.FishingGrade, _fishingUpgradeManager.RodLevel);
         _fishingDataReader.GetRodLevelReqGoldData(level, out reqGold);
@@ -181,8 +256,12 @@ public class UpgradeSelectPresenter : MonoBehaviour
 
     private void SetViewShipLevel()
     {
-        int level = _fishingUpgradeManager.FishingGrade;
+        int level = _fishingUpgradeManager.ShipLevel;
         int reqGold;
+        _views[3].UpgradeTargetData = _id_UPG_Ship;
+        _views[3].UpgradeDescriptionData = _id_UPG_Ship_Desc;
+        _views[3].UpgradeToolTipData = _id_UPG_Ship_ToolTip;
+        _views[3].UpgradeToolTipMaxData = _id_UPG_Ship_ToolTip_Max;
         _fishingUpgradeManager.ChackEnoughGoldShipLevelUpgrade(DataTower.instance.money);
         _fishingUpgradeManager.CheakCanShipLevelUpgrade(_fishingUpgradeManager.FishingGrade, _fishingUpgradeManager.ShipLevel);
         _fishingDataReader.GetShipLevelReqGoldData(level, out reqGold);
@@ -195,7 +274,6 @@ public class UpgradeSelectPresenter : MonoBehaviour
     {
         int reqGold;
         _fishingDataReader.GetFishingGradeReqGoldData(level, out reqGold);
-        _views[0].TranslationText(DataTower.instance.languageSetting);
         _views[0].RenewalLevelText(level,_fishingDataReader.Grades.Length);
         _views[0].RenewalReqGoldText(reqGold);
     }
@@ -204,8 +282,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     {
         int reqGold;
         _fishingDataReader.GetBaitLevelReqGoldData(level, out reqGold);
-        _views[1].TranslationText(DataTower.instance.languageSetting);
-        _views[1].RenewalLevelText(level,_fishingDataReader.Grades.Length);
+        _views[1].RenewalLevelText(level,_fishingDataReader.Baits.Length);
         _views[1].RenewalReqGoldText(reqGold);
     }
     
@@ -213,8 +290,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     {
         int reqGold;
         _fishingDataReader.GetRodLevelReqGoldData(level, out reqGold);
-        _views[2].TranslationText(DataTower.instance.languageSetting);
-        _views[2].RenewalLevelText(level,_fishingDataReader.Grades.Length);
+        _views[2].RenewalLevelText(level,_fishingDataReader.Rods.Length);
         _views[2].RenewalReqGoldText(reqGold);
     }
     
@@ -222,8 +298,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     {
         int reqGold;
         _fishingDataReader.GetShipLevelReqGoldData(level, out reqGold);
-        _views[3].TranslationText(DataTower.instance.languageSetting);
-        _views[3].RenewalLevelText(level,_fishingDataReader.Grades.Length);
+        _views[3].RenewalLevelText(level,_fishingDataReader.Ships.Length);
         _views[3].RenewalReqGoldText(reqGold);
     }
 

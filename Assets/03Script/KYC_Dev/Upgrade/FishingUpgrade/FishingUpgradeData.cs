@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FishingUpgradeData", menuName = "UpgradeData/FishingUpgradeData")]
+[CreateAssetMenu(fileName = "FishingUpgradeData", menuName = "UpgradeDataSO/FishingUpgradeData")]
 public class FishingUpgradeData : ScriptableObject, IDataSeter
 {
     [field: SerializeField] public EFishingUpgradeType FishingUpgradeType { get; private set; }

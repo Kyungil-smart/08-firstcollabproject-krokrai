@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UpgradeSelectView : MonoBehaviour
@@ -13,16 +14,16 @@ public class UpgradeSelectView : MonoBehaviour
     [SerializeField] Image _upgradeIconSprite;
     [SerializeField] Button _upgradeButton;
     
-    [Header("TranslationData / Auto Setting / 차후 수정")]
-    //ToDo:ScriptableObject형식을 나중에 번역SO형식으로 교체해야됨
-    public ScriptableObject UpgradeTargetLanguage;
-    public ScriptableObject UpgradeDescriptionLanguage;
+    [Header("TranslationData / Auto Setting")]
+    public FishingTranslationData UpgradeTargetData;
+    public FishingTranslationData UpgradeDescriptionData;
+    public FishingTranslationData UpgradeToolTipData;
+    public FishingTranslationData UpgradeToolTipMaxData;
     
     public event Action OnTryUpgrade;
 
     /// <summary>
     /// UI 텍스트 번역 설정
-    /// ToDo:번역SO 추가되면 언어 연결 작업 필수
     /// </summary>
     /// <param name="language">영어 / 한국어</param>
     public void TranslationText(Language language)
@@ -30,12 +31,12 @@ public class UpgradeSelectView : MonoBehaviour
         switch (language)
         {
             case Language.ENG:
-                _upgradeTargetText.text = "";
-                _upgradeDescriptionText.text = "";
+                _upgradeTargetText.text = UpgradeTargetData.En;
+                _upgradeDescriptionText.text = UpgradeDescriptionData.En;
                 break;
             case Language.KOR:
-                _upgradeTargetText.text = "";
-                _upgradeDescriptionText.text = "";
+                _upgradeTargetText.text = UpgradeTargetData.Kor;
+                _upgradeDescriptionText.text = UpgradeDescriptionData.Kor;
                 break;
         }
     }
