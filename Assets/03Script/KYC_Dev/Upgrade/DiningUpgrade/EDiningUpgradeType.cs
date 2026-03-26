@@ -2,17 +2,17 @@ using UnityEngine;
 
 public enum EDiningUpgradeType
 {
-    Master, 
-    MaxCustomerLimit, 
-    MaxManuLimit, 
-    MaxSpawnLimit01, 
-    MaxSpawnLimit02, 
+    Master_Lv, 
+    Max_Customer_Limit, 
+    Max_Manu_Limit, 
+    Max_Spawn_Limit01, 
+    Max_Spawn_Limit02, 
     Weight, 
-    BonusTipsMulti, 
-    BonusDishPrice01,
-    BonusDishPrice02,
-    BonusFood01,
-    BonusFood02,
-    UnlockGramophone,
-    UnlockCatObject
+    Bonus_Tips_Multi, 
+    Bonus_Dish_Price01,
+    Bonus_Dish_Price02,
+    Bonus_Food01,
+    Bonus_Food02,
+    Unlock_Gramophone,
+    Unlock_Cat_Object
 }

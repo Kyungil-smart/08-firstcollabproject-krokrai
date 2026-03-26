@@ -17,16 +17,18 @@ public class UpgradeUIView : MonoBehaviour
     [SerializeField] Button _toggleFishingUpgradeButton;
     [SerializeField] Button _toggleDiningUpgradeButton;
     
-    [Header("TranslationData")]
+    [Header("TranslationData / AutoSetting")]
     [SerializeField] FishingTranslationData _id_Money;
     [SerializeField] FishingTranslationData _id_Fishhook;
     [SerializeField] FishingTranslationData _id_Restaurant;
     
+    private TranslationDataReader _translationDataReader;
     public WaitForEndOfFrame LoadingDelayWait {get; private set;}
 
     private void Awake()
     {
         LoadingDelayWait = new WaitForEndOfFrame();
+        _translationDataReader = FindFirstObjectByType<TranslationDataReader>();
     }
 
     private void OnEnable()
@@ -64,9 +66,10 @@ public class UpgradeUIView : MonoBehaviour
         {
             yield return LoadingDelayWait;
         }
-        EventEnable();
+        
         SetGoldText();
         SetTranslationText();
+        EventEnable();
     }
 
     #endregion
@@ -75,6 +78,9 @@ public class UpgradeUIView : MonoBehaviour
 
     private void SetTranslationText()
     {
+        _translationDataReader.GetFTranslationData("Money", out _id_Money);
+        _translationDataReader.GetFTranslationData("Fishhook", out _id_Fishhook);
+        _translationDataReader.GetFTranslationData("Restaurant", out _id_Restaurant);
         TranslationText(DataTower.instance.languageSetting);
     }
     

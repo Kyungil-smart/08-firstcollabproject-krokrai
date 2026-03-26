@@ -372,22 +372,6 @@ MonoBehaviour:
   - {fileID: 5829737236885706689}
   _upgradeSprites: []
   <MainUpgradeType>k__BackingField: 0
-  _id_UPG_Bait: {fileID: 11400000, guid: 419862b75afff73499b4ade4b119c3b6, type: 2}
-  _id_UPG_Fishing: {fileID: 11400000, guid: 621ed9543c48a434ca51ed37cdea096a, type: 2}
-  _id_UPG_Player: {fileID: 11400000, guid: b734e9aac254acf4bb89555da8e6419c, type: 2}
-  _id_UPG_Ship: {fileID: 11400000, guid: b50879f09d546404d8ae872b39f58bf6, type: 2}
-  _id_UPG_Bait_Desc: {fileID: 11400000, guid: 89cd8915df3333842ab3a6231ded5b16, type: 2}
-  _id_UPG_Fishing_Desc: {fileID: 11400000, guid: 163b8a483a99ca74c85d5d9e2e403a52, type: 2}
-  _id_UPG_Player_Desc: {fileID: 11400000, guid: b786e7c1d84c85d40bdba1548071bfc3, type: 2}
-  _id_UPG_Ship_Desc: {fileID: 11400000, guid: dcce40b75b8c220458d25d75ae0769b1, type: 2}
-  _id_UPG_Bait_ToolTip: {fileID: 11400000, guid: 8eec2d509d2b511408114bd08a77022e, type: 2}
-  _id_UPG_Bait_ToolTip_Max: {fileID: 11400000, guid: efa6c630afbd736479f5777f95a032a8, type: 2}
-  _id_UPG_FishingRod_ToolTip: {fileID: 11400000, guid: 84bbc51b6ff4a66499e575c41272ab6d, type: 2}
-  _id_UPG_FishingRod_ToolTip_Max: {fileID: 11400000, guid: 8e36a52f7297c904a9ec62b699cbd7a4, type: 2}
-  _id_UPG_Player_ToolTip: {fileID: 11400000, guid: 4bdc4fe1c2db58d4f80bd67611e6eba9, type: 2}
-  _id_UPG_Player_ToolTip_Max: {fileID: 11400000, guid: 9e08f2ce7dcff6842ac11884005df10c, type: 2}
-  _id_UPG_Ship_ToolTip: {fileID: 11400000, guid: 106d3b71ec4792d4f956993a5018ff11, type: 2}
-  _id_UPG_Ship_ToolTip_Max: {fileID: 11400000, guid: e263cf23cd9e45a448164746ff9ef9bf, type: 2}
 --- !u!1 &2687730890783095273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,7 +1049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a841130ec54f8e488cdaffc9a09f3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingUpgradeUIController
-  _loadingDelay: 3
   _moneyText: {fileID: 7708508928454393991}
   _currentGoldText: {fileID: 5293074568912367616}
   _toggleFishingUpgradeText: {fileID: 9137341662391495401}
@@ -1074,9 +1057,9 @@ MonoBehaviour:
   _diningUpgradePanel: {fileID: 6744224849087691174}
   _toggleFishingUpgradeButton: {fileID: 2849825205746785032}
   _toggleDiningUpgradeButton: {fileID: 1234771202559281257}
-  _id_Money: {fileID: 11400000, guid: bc2e8083d3eb78946826bdc836d0067c, type: 2}
-  _id_Fishhook: {fileID: 11400000, guid: f9b82684107e3334cb8f889f2254d2d0, type: 2}
-  _id_Restaurant: {fileID: 11400000, guid: 1047c671373f4584b8d41c3129da1360, type: 2}
+  _id_Money: {fileID: 0}
+  _id_Fishhook: {fileID: 0}
+  _id_Restaurant: {fileID: 0}
 --- !u!1 &5038142644206316742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,22 +1969,6 @@ MonoBehaviour:
   - {fileID: 4108814285021362404}
   _upgradeSprites: []
   <MainUpgradeType>k__BackingField: 1
-  _id_UPG_Bait: {fileID: 0}
-  _id_UPG_Fishing: {fileID: 0}
-  _id_UPG_Player: {fileID: 0}
-  _id_UPG_Ship: {fileID: 0}
-  _id_UPG_Bait_Desc: {fileID: 0}
-  _id_UPG_Fishing_Desc: {fileID: 0}
-  _id_UPG_Player_Desc: {fileID: 0}
-  _id_UPG_Ship_Desc: {fileID: 0}
-  _id_UPG_Bait_ToolTip: {fileID: 0}
-  _id_UPG_Bait_ToolTip_Max: {fileID: 0}
-  _id_UPG_FishingRod_ToolTip: {fileID: 0}
-  _id_UPG_FishingRod_ToolTip_Max: {fileID: 0}
-  _id_UPG_Player_ToolTip: {fileID: 0}
-  _id_UPG_Player_ToolTip_Max: {fileID: 0}
-  _id_UPG_Ship_ToolTip: {fileID: 0}
-  _id_UPG_Ship_ToolTip_Max: {fileID: 0}
 --- !u!1 &7132954414084342271
 GameObject:
   m_ObjectHideFlags: 0
