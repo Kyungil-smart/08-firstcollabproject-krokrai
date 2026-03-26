@@ -39,7 +39,6 @@ public class RecipManager : MonoBehaviour
             obj.transform.SetParent(_scrollViewContent.transform, false);
             obj.name = _rcps[i].name;
             _recipes.Add(_rcps[i].recipe_ID, obj);
-            Debug.Log($"{i}번째 생성 됌");
         }
     }
 
@@ -61,7 +60,7 @@ public class RecipManager : MonoBehaviour
     /// <returns></returns> 
     public uint CheckHaveFish(uint fishID)
     {
-        //return _dataTower.; // 해당 물고기 갯수를 타워에서 검색 
+
         return 10; // 임시 작업
     }
 
@@ -71,7 +70,7 @@ public class RecipManager : MonoBehaviour
     /// <param name="n"></param>
     public void FirstFishingFish(string fishID)
     {
-        //_recipes[fishID].UnlockConditionsMet();
+        _recipes[fishID].GetComponent<RecipModel>().UnlockConditionsMet();
     }
     // Data Tower에서 3가지 Action을 만들어서 1번 : 들어오거나 나가는 경우, 2번 : 갯수가 0이 된경우, 3번 : 갯수가 0이 아닌경우. 4번 : 도감용 첫 획득인 경우.
 }
