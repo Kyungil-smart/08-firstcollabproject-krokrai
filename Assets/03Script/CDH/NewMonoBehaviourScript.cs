@@ -1,14 +1,14 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FishRate", menuName = "Scriptable Objects/FishRate")]
-public class FishRateData : ScriptableObject, IDataSeter
+public class BaitData : ScriptableObject, IDataSeter
 {
     public string gachaGroupID; // 유저 레벨
-    
+
     public float trash, normal, fine, superior, rare, elite, fantastic, legendary; // 물고기 레어리티
 
     public void SetData(string[] datas)
-    { 
+    {
         gachaGroupID = datas[0];
         trash = float.Parse(datas[1]);
         normal = float.Parse(datas[2]);

@@ -9,15 +9,16 @@ using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
-    public int fishingCount = 1; // sumarry : 최대 낚시 가능한 횟수
-    private int _currentCount; // sumarry : 현재 낚시 가능한 횟수
-    public Sprite fishingImage; // sumarry : 클릭 시 변경되는 스프라이트 이미지
-    private Sprite _watingImage; // sumarry : 대기 상태일 때의 스프라이트 이미지
-    private SpriteRenderer _spriteRenderer; // sumarry : 이미지 교체를 위해 오브젝트의 SpriteRenderer 컴포넌트를 참조
-    public FishingUI uiManager; // sumarry : 낚시 횟수를 갱신할 FishingUI.cs 참조
+    public int fishingCount = 1; // 최대 낚시 가능한 횟수
+    private int _currentCount; // 현재 낚시 가능한 횟수
+    public Sprite fishingImage; // 클릭 시 변경되는 스프라이트 이미지
+    private Sprite _watingImage; // 대기 상태일 때의 스프라이트 이미지
+    private SpriteRenderer _spriteRenderer; // 이미지 교체를 위해 오브젝트의 SpriteRenderer 컴포넌트를 참조
+    public FishingUI uiManager; // 낚시 횟수를 갱신할 FishingUI.cs 참조
     private FishingUpgradeManager _upgradeManager; // 업그레이드 매니저 불러옴
-    private FishingTimer _timer;
-    public List<FishData> fishDatabase = new List<FishData>();
+    private FishingTimer _timer; // 낚시 횟수 자동 충전 시간을 관리하는 타이머
+    public List<FishData> fishDatabase = new List<FishData>(); // 게임에 존재하는 모든 물고기 데이터 리스트
+    public FishRateData fishCurrentRate; // 구글 시트에서 받아온 등급별 확률 데이터
 
     private void Start()
     {
@@ -33,8 +34,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // sumarry : 낚시대를 강화하여 최대 낚시 횟수를 늘리고 변경된 횟수를 UI에 반영
-    public void UpgradeFishingRod() 
+    /// <summary>
+    ///  낚시대를 강화하여 최대 낚시 횟수를 늘리고 변경된 횟수를 UI에 반영
+    /// </summary>
+    public void UpgradeFishingRod()
     {
         _upgradeManager.RodUpgrade();
         RodgradeMaxCount();
@@ -45,8 +48,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // sumarry : 낚시대 강화 레벨에 따라 낚시 가능한 최대 횟수 값을 결정
-    public void RodgradeMaxCount() 
+    /// <summary>
+    /// 낚시대 강화 레벨에 따라 낚시 가능한 최대 횟수 값을 결정
+    /// </summary>
+    public void RodgradeMaxCount()
     {
         switch (_upgradeManager.RodLevel)
         {
@@ -58,28 +63,32 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // sumarry : 미끼를 강화하여 낚시 횟수 충전 시간을 단축시키는 로직 실행
-    public void UpgradeFishingBait() 
+    /// <summary>
+    /// 미끼를 강화하여 낚시 횟수 충전 시간을 단축시키는 로직 실행
+    /// </summary>
+    public void UpgradeFishingBait()
     {
         _upgradeManager.BaitUpgrade();
         BaitgradeMaxCount();
     }
 
-    // sumarry : 미끼 강화 레벨에 따라 다음 충전까지 걸리는 최대 시간을 계산하여 타이머에 전달
+    /// <summary>
+    /// 미끼 강화 레벨에 따라 다음 충전까지 걸리는 최대 시간을 계산하여 타이머에 전달
+    /// </summary>
     public void BaitgradeMaxCount()
     {
         float newTimer = 1800f;
 
         switch (_upgradeManager.BaitLevel)
         {
-            case 1: newTimer = 1800f; break;
-            case 2: newTimer = 1500f; break;
-            case 3: newTimer = 1200f; break;
-            case 4: newTimer = 900f; break;
-            case 5: newTimer = 600f; break;
+            case 1: newTimer = 3600f; break;
+            case 2: newTimer = 3300f; break;
+            case 3: newTimer = 3000f; break;
+            case 4: newTimer = 2400f; break;
+            case 5: newTimer = 1800f; break;
             default:
                 if (_upgradeManager.BaitLevel >= 5)
-                    newTimer = 600f; break;
+                    newTimer = 1800f; break;
         }
 
         if (_timer != null)
@@ -88,8 +97,11 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // sumarry : 오브젝트 클릭 시 낚시 횟수 차감 및 낚시 연출 실행 메서드
-    public void OnPointerClick(PointerEventData eventData) 
+    /// <summary>
+    /// 오브젝트 클릭 시 낚시 횟수 차감 및 낚시 연출 실행 메서드
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerClick(PointerEventData eventData)
     {
         if (_currentCount > 0)
         {
@@ -104,6 +116,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// 클릭 시 짧은 시간 동안 낚시 이미지를 보여준 후 다시 대기 이미지로 복구하고, 실제 물고기를 뽑기
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FishingImage()
     {
         if (fishingImage != null)
@@ -118,8 +134,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         GetRandomFish();
     }
 
-    // sumarry :외부에서 신호를 받아 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
-    public void FishingChance() 
+    /// <summary>
+    ///  외부에서 신호를 받아 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
+    /// </summary>
+    public void FishingChance()
     {
         if (_currentCount < fishingCount)
         {
@@ -132,13 +150,18 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // sumarry : 외부에서 현재 남은 낚시 횟수를 참조할 수 있게 반환
+    /// <summary>
+    /// 외부에서 현재 남은 낚시 횟수를 참조할 수 있게 반환
+    /// </summary>
+    /// <returns></returns>
     public int GetCurrentCount()
     {
         return _currentCount;
     }
 
-    // sumarry : fishDatabase의 Count 범위 내에서 무작위 FishData 반환
+    /// <summary>
+    /// fishDatabase의 Count 범위 내에서 무작위 FishData 반환
+    /// </summary>
     public void GetRandomFish()
     {
         if (fishDatabase.Count == 0)
@@ -147,8 +170,70 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        int randomIndex = UnityEngine.Random.Range(0, fishDatabase.Count);
-        FishData selectedFish = fishDatabase[randomIndex];
-        Debug.Log("낚시 성공!");
+        string currentRarity = GetFishRarity();
+        FishData selectedFish = GetRandomRarityFish(currentRarity);
+
+        if (selectedFish != null)
+        {
+            Debug.Log($"{currentRarity}, {selectedFish.fishName}");
+        }
+    }
+
+    /// <summary>
+    /// 확률을 바탕으로 주사위를 굴려 당첨된 등급 문자열을 반환
+    /// </summary>
+    /// <returns></returns>
+    private string GetFishRarity()
+    {
+        float rarityRate = UnityEngine.Random.Range(0f, 100f);
+        float baseValue = 0;
+
+        if (fishCurrentRate == null)
+        {
+            Debug.Log("데이터가 연결되지 않습니다.");
+        }
+
+        if (rarityRate <= (baseValue += fishCurrentRate.trash))
+        { return "Trash"; }
+        if (rarityRate <= (baseValue += fishCurrentRate.normal))
+        { return "Normal"; }
+        if (rarityRate <= (baseValue += fishCurrentRate.fine))
+        { return "Fine"; }
+        if (rarityRate <= (baseValue += fishCurrentRate.superior))
+        { return "Superior"; }
+        if (rarityRate <= (baseValue += fishCurrentRate.rare))
+        { return "Rare"; }
+        if (rarityRate <= (baseValue += fishCurrentRate.elite))
+        { return "Elite"; }
+        if (rarityRate <= (baseValue += fishCurrentRate.fantastic))
+        { return "Fantastic"; }
+        return "Legendary";
+    }
+
+    /// <summary>
+    /// 특정 등급을 매개변수로 받아, 해당 등급에 속하는 물고기들 중 한 마리를 무작위로 선택하여 반환
+    /// </summary>
+    /// <param name="rarity"></param>
+    /// <returns></returns>
+    public FishData GetRandomRarityFish(string rarity)
+    {
+        List<FishData> filteredFish = new List<FishData>();
+
+        foreach (FishData randomFish in fishDatabase)
+        {
+            if (randomFish.fishRate == rarity)
+            {
+                filteredFish.Add(randomFish);
+            }
+        }
+
+        if (filteredFish.Count == 0)
+        {
+            Debug.Log($"물고기가 없습니다");
+            return null;
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, filteredFish.Count);
+        return filteredFish[randomIndex];
     }
 }
