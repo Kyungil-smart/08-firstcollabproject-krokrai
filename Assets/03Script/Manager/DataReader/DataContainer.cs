@@ -1,4 +1,4 @@
-﻿using Unity.VisualScripting;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Container", menuName = "DataReader/Container")]
@@ -17,6 +17,7 @@ public class DataContainer : ScriptableObject
 
     public void SetDatas(char splitSymbol, string[] lines)
     {
+        mainLine--;
         isDataLoaded = false;
 
         if (lines == null)
@@ -41,7 +42,7 @@ public class DataContainer : ScriptableObject
             }
             else
             {
-                Debug.LogWarning($"{objs[i - 5].name}에 <color = red>IDataSeter</color>가 포함되어 있지 않습니다.");
+                Debug.LogWarning($"{objs[i - mainLine].name}에 <color = red>IDataSeter</color>가 포함되어 있지 않습니다.");
             }
         }
 

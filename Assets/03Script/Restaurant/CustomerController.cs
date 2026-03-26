@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using static Define;
 
@@ -26,11 +26,12 @@ public class CustomerController : MonoBehaviour
 
     private void Awake()
     {
+        /*
         _moveSpeed = _data.MoveSpeed;
         _eatDuration = _data.EatDuration;
         _priceFactor = _data.PriceScaleFactor; 
         _spawnDelay = _data.SpawnDelay;
-
+        */
         _anim = GetComponentInChildren<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
     }
@@ -39,7 +40,7 @@ public class CustomerController : MonoBehaviour
     /// 손님 스폰 시간 값
     /// </summary>
     /// <returns></returns>
-    public float SpawnDelay() => _data.SpawnDelay;
+    //public float SpawnDelay() => _data.SpawnDelay;
 
     /// <summary>
     /// RestaurangtManager와 연결.
@@ -93,11 +94,13 @@ public class CustomerController : MonoBehaviour
                     // 이부분 추가 수정 필요 TryCounsumSushiAndEarnMoney(price) 손님 행동 테이블 업데이트에 맞게 수정해야 하니 후순위로 작업 @@@@@@@@@@@@@@@@@@
                     if (_restaurant.TryCounsumeSushiAndEarnMoney(_priceFactor * 200))
                     {
+                        /*
                         // 추가로 먹을 확률 계산
                         if (Random.Range(0, 101) < _data.SecondEatChance)
                         {
                             yield return new WaitForSeconds(_eatDuration); // WaitForSeconds 너무 많은 호출 후에 개선 필요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         }
+                        */
                     }
                     _state = CustomerState.Exit;
                     break;

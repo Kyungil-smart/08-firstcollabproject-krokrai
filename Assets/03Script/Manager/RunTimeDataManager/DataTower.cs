@@ -11,6 +11,7 @@ public class DataTower : MonoBehaviour
     private Dictionary<string, FishData> _fishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
 
     public event Action<string> OnFisingNewFish;
+    public event Action<Language> OnLanguageSettingChanged;
 
     public Language languageSetting { get; private set; } /// <summary> 현재 설정된 언어, 기본 값 : 영어 </summary>
 
@@ -37,6 +38,7 @@ public class DataTower : MonoBehaviour
             _fishDatas = new Dictionary<string, FishData>(50); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
             
             money = 1000;
+
             customerVisitCounter = 0;
             
             masterVolume = 0.5f;
@@ -50,6 +52,8 @@ public class DataTower : MonoBehaviour
 
             fishingCount = 1;
             currentFishingCount = 1;
+
+            
             
             fishingTime = 30;
             maxFishingTime = 1800;
@@ -75,6 +79,7 @@ public class DataTower : MonoBehaviour
     public void ChangeLanguage(Language lan)
     {
         languageSetting = lan;
+        OnLanguageSettingChanged?.Invoke(languageSetting);
     }
 
     // 돈
@@ -186,6 +191,52 @@ public class DataTower : MonoBehaviour
     public int currentFishingCount;
 
     /// <summary>
+    /// 현재까지 잡은 총 물고기 수
+    /// </summary>
+    public ulong catchFishs;
+
+    /// <summary>
+    /// 희귀도가 쓰레기인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishTrash;
+
+    /// <summary>
+    /// 희귀도가 일반인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishNormal;
+
+    /// <summary>
+    /// 희귀도가 우수인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishFine;
+
+    /// <summary>
+    /// 희귀도가 고급인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishSuperior;
+
+    /// <summary>
+    /// 희귀도가 희귀인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishRare;
+
+    /// <summary>
+    /// 희귀도가 명품인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishElite;
+
+    /// <summary>
+    /// 희귀도가 환상인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishFantastic;
+
+    /// <summary>
+    /// 희귀도가 전설인 물고기를 잡은 횟수
+    /// </summary>
+    public ulong catchFishLegendary;
+
+
+    /// <summary>
     /// 현재 미끼 충전 타이머.
     /// </summary>
     public float fishingTime;
@@ -223,9 +274,21 @@ public class DataTower : MonoBehaviour
             OnFisingNewFish?.Invoke(fish.fishNum);
         }
 
+        CatchFishCounter(in fish);
         // 인벤토리에 추가
     }
     #endregion
 
-
+    // FishData 재작업 후 진행
+    void CatchFishCounter(in FishData fish)
+    {
+        switch(fish.fishRate)
+        {
+            /*
+            case "":
+                catchFishTrash++;
+                break;
+            */
+        }
+    }
 }

@@ -1,7 +1,9 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Recipe", menuName = "Scriptable Objects/RecipeContainer")]
+[CreateAssetMenu(fileName = "Recipe 0", menuName = "Scriptable Objects/RecipeContainer")]
+[Serializable]
 public class RecipeContainer : ScriptableObject, IDataSeter
 {
     public string recipe_ID;

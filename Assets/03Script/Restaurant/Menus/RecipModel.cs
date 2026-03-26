@@ -37,14 +37,8 @@ public class RecipModel : MonoBehaviour
     /// <summary>
     /// 특정 물고기를 잡아 레시피 해금 가능할 경우 호출
     /// </summary>
-    public void UnlockConditionsMet(int n)
+    public void UnlockConditionsMet()
     {
-        // 스위치 대신 아마 if문 으로 작업하지 않을까 생각 중.
-        switch(n)
-        {
-            case 10 : // 현재 임시 값으로 대입 후에 물고기 ID와 대응 필요.
-                break;
-        }
         // Action으로 특정 물고기 숫자가 1 이상인 경우에만 호출 되게 설계 예정.
         _canUnlock = true;
     }
