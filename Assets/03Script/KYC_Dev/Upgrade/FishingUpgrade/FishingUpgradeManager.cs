@@ -8,18 +8,8 @@ public class FishingUpgradeManager : MonoBehaviour
     // 싱글톤 여부는 협의해서 결정
     // 업그레이드 조건 확인, 수행
     // 업그레이드 효과는 다른 컴포넌트에서 수행
-
-    /// <summary>
-    /// 업그레이드 SO를 읽는 컴포넌트
-    /// 프리팹 상 자식으로 들어가 있음
-    /// </summary>
+    
     private FishingUpgradeDataReader _dataReader;
-
-    /// <summary>
-    /// 테스트를 위한 수치
-    /// ToDo:DataTower로 차후 이관
-    /// </summary>
-    public int Temp_Gold;
     
     /// <summary>
     /// 낚시 등급 : 모든 낚시 업그레이드의 기본
@@ -45,10 +35,70 @@ public class FishingUpgradeManager : MonoBehaviour
     /// </summary>
     public int ShipLevel;
     
-    public event Action OnFishingUpgrade;
-    public event Action OnBaitUpgrade;
-    public event Action OnRodUpgrade;
-    public event Action OnShipUpgrade;
+    private int _fishingGradeReqGold;
+    private int _baitLevelReqGold;
+    private int _rodLevelReqGold;
+    private int _shipLevelReqGold;
+    
+    #region Events
+    
+    /// <summary>
+    /// 낚시 등급 상승 시 효과 발동을 위한 이벤트
+    /// </summary>
+    public event Action<int> OnFishingUpgrade;
+    
+    /// <summary>
+    /// 미끼 레벨 상승 시 효과 발동을 위한 이벤트
+    /// </summary>
+    public event Action<int> OnBaitUpgrade;
+    
+    /// <summary>
+    /// 낚시대 레벨 상승 시 효과 발동을 위한 이벤트
+    /// </summary>
+    public event Action<int> OnRodUpgrade;
+    
+    /// <summary>
+    /// 배 레벨 상승 시 효과 발동을 위한 이벤트
+    /// </summary>
+    public event Action<int> OnShipUpgrade;
+    
+    /// <summary>
+    /// 업그레이드가 불가능하면 버튼을 사용 불가로 만드는 이벤트
+    /// </summary>
+    public event Action<bool> CanBaitLevelUpgrade;
+    
+    /// <summary>
+    /// 업그레이드가 불가능하면 버튼을 사용 불가로 만드는 이벤트
+    /// </summary>
+    public event Action<bool> CanRodLevelUpgrade;
+    
+    /// <summary>
+    /// 업그레이드가 불가능하면 버튼을 사용 불가로 만드는 이벤트
+    /// </summary>
+    public event Action<bool> CanShipLevelUpgrade;
+    
+    
+    /// <summary>
+    /// 골드가 부족하면 버튼의 색을 변화하는 이벤트
+    /// </summary>
+    public event Action<bool> EnoughGoldFishingGradeUpgrade;
+    
+    /// <summary>
+    /// 골드가 부족하면 버튼의 색을 변화하는 이벤트
+    /// </summary>
+    public event Action<bool> EnoughGoldBaitLevelUpgrade;
+    
+    /// <summary>
+    /// 골드가 부족하면 버튼의 색을 변화하는 이벤트
+    /// </summary>
+    public event Action<bool> EnoughGoldRodLevelUpgrade;
+    
+    /// <summary>
+    /// 골드가 부족하면 버튼의 색을 변화하는 이벤트
+    /// </summary>
+    public event Action<bool> EnoughGoldShipLevelUpgrade;
+
+    #endregion
 
     /// <summary>
     /// ToDo:DataTower로 변수 이관 되면 사용 안함
@@ -66,12 +116,23 @@ public class FishingUpgradeManager : MonoBehaviour
 
     private void OnEnable()
     {
+        _dataReader.GetFishingGradeReqGoldData(FishingGrade ,out _fishingGradeReqGold);
+        _dataReader.GetBaitLevelReqGoldData(BaitLevel ,out _baitLevelReqGold);
+        _dataReader.GetRodLevelReqGoldData(RodLevel ,out _rodLevelReqGold);
+        _dataReader.GetShipLevelReqGoldData(ShipLevel ,out _shipLevelReqGold);
         
+        DataTower.instance.OnChangedMoney += ChackEnoughGoldFishingGradeUpgrade;
+        DataTower.instance.OnChangedMoney += ChackEnoughGoldBaitLevelUpgrade;
+        DataTower.instance.OnChangedMoney += ChackEnoughGoldRodLevelUpgrade;
+        DataTower.instance.OnChangedMoney += ChackEnoughGoldShipLevelUpgrade;
     }
 
     private void OnDisable()
     {
-        
+        DataTower.instance.OnChangedMoney -= ChackEnoughGoldFishingGradeUpgrade;
+        DataTower.instance.OnChangedMoney -= ChackEnoughGoldBaitLevelUpgrade;
+        DataTower.instance.OnChangedMoney -= ChackEnoughGoldRodLevelUpgrade;
+        DataTower.instance.OnChangedMoney -= ChackEnoughGoldShipLevelUpgrade;
     }
 
     /// <summary>
@@ -90,17 +151,21 @@ public class FishingUpgradeManager : MonoBehaviour
         ShipLevel = shipLevel;
     }
 
+    #region 업그레이드 실행
+
     /// <summary>
     /// 낚시 레벨 증가
     /// </summary>
     public void FishingUpgrade()
     {
-        int gold;
-        if (CanFishingGradeUp(out gold))
+        if (CanFishingGradeUp(DataTower.instance.money))
         {
             FishingGrade++;
-            Temp_Gold -= gold;
-            OnFishingUpgrade?.Invoke();
+            DataTower.instance.TryMoenyChanged((ulong)_fishingGradeReqGold);
+            OnFishingUpgrade?.Invoke(FishingGrade);
+            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
+            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
         }
         
     }
@@ -110,12 +175,14 @@ public class FishingUpgradeManager : MonoBehaviour
     /// </summary>
     public void BaitUpgrade()
     {
-        int gold;
-        if (CanBaitLevelUp(out gold))
+        if (CanBaitLevelUp(DataTower.instance.money))
         {
             BaitLevel++;
-            Temp_Gold -= gold;
-            OnBaitUpgrade?.Invoke();
+            DataTower.instance.TryMoenyChanged((ulong)_baitLevelReqGold);
+            OnBaitUpgrade?.Invoke(BaitLevel);
+            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
+            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
         }
         
     }
@@ -125,12 +192,14 @@ public class FishingUpgradeManager : MonoBehaviour
     /// </summary>
     public void RodUpgrade()
     {
-        int gold;
-        if (CanRodLevelUp(out gold))
+        if (CanRodLevelUp(DataTower.instance.money))
         {
             RodLevel++;
-            Temp_Gold -= gold;
-            OnRodUpgrade?.Invoke();
+            DataTower.instance.TryMoenyChanged((ulong)_rodLevelReqGold);
+            OnRodUpgrade?.Invoke(RodLevel);
+            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
+            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
         }
         
     }
@@ -140,69 +209,146 @@ public class FishingUpgradeManager : MonoBehaviour
     /// </summary>
     public void ShipUpgrade()
     {
-        int gold;
-        if (CanShipLevelUp(out gold))
+        if (CanShipLevelUp(DataTower.instance.money))
         {
             ShipLevel++;
-            Temp_Gold -= gold;
-            OnShipUpgrade?.Invoke();
+            DataTower.instance.TryMoenyChanged((ulong)_shipLevelReqGold);
+            OnShipUpgrade?.Invoke(ShipLevel);
+            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
+            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
         }
         
     }
-    
-    private bool CanFishingGradeUp(out int gold)
+
+    #endregion
+
+    #region 업그레이드 관련 메서드
+
+    private bool CanFishingGradeUp(ulong curGold)
     {
-        int level;
-        int req_Gold;
-        _dataReader.GetFishingGradeData(FishingGrade, out level ,out req_Gold);
+        bool chackLevel = _dataReader.Grades.Length > FishingGrade;
+        bool chackGold = curGold >= (ulong)_fishingGradeReqGold;
         
-        bool chackLevel = _dataReader.Grades.Length > level;
-        bool chackGold = Temp_Gold >= req_Gold;
-        
-        gold = req_Gold;
         return chackGold && chackLevel;
     }
+
+    /// <summary>
+    /// 골드 업그레이드 가능한지 체크해서 UI 필요 골드의 색상 변화
+    /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
+    /// </summary>
+    /// <param name="curGold"></param>
+    public void ChackEnoughGoldFishingGradeUpgrade(ulong curGold)
+    {
+        bool result = curGold >= (ulong)_fishingGradeReqGold;
+        EnoughGoldFishingGradeUpgrade?.Invoke(result);
+    }
     
-    private bool CanBaitLevelUp(out int gold)
+    private bool CanBaitLevelUp(ulong curGold)
     {
-        int level;
-        int req_Gold;
-        _dataReader.GetBaitLevelData(BaitLevel, out level ,out req_Gold);
+        bool chackLevel = _dataReader.Grades.Length > BaitLevel;
+        bool chackGold = curGold >= (ulong)_baitLevelReqGold;
+        bool chackGrade = CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
         
-        bool chackLevel = _dataReader.Grades.Length > level;
-        bool chackGold = Temp_Gold >= req_Gold;
-        bool chackGrade = FishingGrade/2f > BaitLevel;
         
-        gold = req_Gold;
         return chackGold && chackLevel && chackGrade;
     }
-
-    private bool CanRodLevelUp(out int gold)
+    
+    /// <summary>
+    /// 골드 업그레이드 가능한지 체크해서 UI 필요 골드의 색상 변화
+    /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
+    /// </summary>
+    /// <param name="curGold"></param>
+    public void ChackEnoughGoldBaitLevelUpgrade(ulong curGold)
     {
-        int level;
-        int req_Gold;
-        _dataReader.GetRodLevelData(RodLevel, out level ,out req_Gold);
-        
-        bool chackLevel = _dataReader.Grades.Length > level;
-        bool chackGold = Temp_Gold >= req_Gold;
-        bool chackGrade = FishingGrade/2f > RodLevel;
-        
-        gold = req_Gold;
-        return chackGold && chackLevel && chackGrade;
+        bool result = curGold >= (ulong)_baitLevelReqGold;
+        EnoughGoldBaitLevelUpgrade?.Invoke(result);
     }
 
-    private bool CanShipLevelUp(out int gold)
+    /// <summary>
+    /// 버튼 활성화 가능한지 체크해서 버튼 활성화 세팅
+    /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
+    /// </summary>
+    /// <param name="fishingGrade"></param>
+    /// <param name="baitLevel"></param>
+    /// <returns></returns>
+    public bool CheakCanBaitLevelUpgrade(int fishingGrade, int baitLevel)
     {
-        int level;
-        int req_Gold;
-        _dataReader.GetShipLevelData(ShipLevel, out level ,out req_Gold);
-        
-        bool chackLevel = _dataReader.Grades.Length > level;
-        bool chackGold = Temp_Gold >= req_Gold;
-        bool chackGrade = FishingGrade/2f > ShipLevel;
-        
-        gold = req_Gold;
-        return chackGold && chackLevel && chackGrade;
+        bool result = fishingGrade/2f > baitLevel;
+        CanBaitLevelUpgrade?.Invoke(result);
+
+        return result;
     }
 
+    private bool CanRodLevelUp(ulong curGold)
+    {
+        bool chackLevel = _dataReader.Grades.Length > RodLevel;
+        bool chackGold = curGold >= (ulong)_rodLevelReqGold;
+        bool chackGrade = CheakCanRodLevelUpgrade(FishingGrade,RodLevel);
+        
+        return chackGold && chackLevel && chackGrade;
+    }
+    
+    /// <summary>
+    /// 골드 업그레이드 가능한지 체크해서 UI 필요 골드의 색상 변화
+    /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
+    /// </summary>
+    /// <param name="curGold"></param>
+    public void ChackEnoughGoldRodLevelUpgrade(ulong curGold)
+    {
+        bool result = curGold >= (ulong)_rodLevelReqGold;
+        EnoughGoldRodLevelUpgrade?.Invoke(result);
+    }
+    
+    /// <summary>
+    /// 버튼 활성화 가능한지 체크해서 버튼 활성화 세팅
+    /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
+    /// </summary>
+    /// <param name="fishingGrade"></param>
+    /// <param name="rodLevel"></param>
+    /// <returns></returns>
+    public bool CheakCanRodLevelUpgrade(int fishingGrade, int rodLevel)
+    {
+        bool result = fishingGrade/2f > rodLevel;
+        CanRodLevelUpgrade?.Invoke(result);
+
+        return result;
+    }
+
+    private bool CanShipLevelUp(ulong curGold)
+    {
+        bool chackLevel = _dataReader.Grades.Length > ShipLevel;
+        bool chackGold = curGold >= (ulong)_shipLevelReqGold;
+        bool chackGrade = CheakCanShipLevelUpgrade(FishingGrade,ShipLevel);
+        
+        return chackGold && chackLevel && chackGrade;
+    }
+    
+    /// <summary>
+    /// 골드 업그레이드 가능한지 체크해서 UI 필요 골드의 색상 변화
+    /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
+    /// </summary>
+    /// <param name="curGold"></param>
+    public void ChackEnoughGoldShipLevelUpgrade(ulong curGold)
+    {
+        bool result = curGold >= (ulong)_shipLevelReqGold;
+        EnoughGoldShipLevelUpgrade?.Invoke(result);
+    }
+    
+    /// <summary>
+    /// 버튼 활성화 가능한지 체크해서 버튼 활성화 세팅
+    /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
+    /// </summary>
+    /// <param name="fishingGrade"></param>
+    /// <param name="shipLevel"></param>
+    /// <returns></returns>
+    public bool CheakCanShipLevelUpgrade(int fishingGrade, int shipLevel)
+    {
+        bool result = fishingGrade/2f > shipLevel;
+        CanShipLevelUpgrade?.Invoke(result);
+
+        return result;
+    }
+
+    #endregion
 }
