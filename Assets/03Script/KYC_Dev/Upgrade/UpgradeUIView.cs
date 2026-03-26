@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
@@ -16,20 +17,28 @@ public class UpgradeUIView : MonoBehaviour
     [SerializeField] Button _toggleFishingUpgradeButton;
     [SerializeField] Button _toggleDiningUpgradeButton;
     
-    [Header("TranslationData / 차후 수정")]
-    //ToDo:ScriptableObject형식을 나중에 번역SO형식으로 교체해야됨
-    [SerializeField] ScriptableObject _goldLanguageSO;
+    [Header("TranslationData / AutoSetting")]
+    [SerializeField] FishingTranslationData _id_Money;
+    [SerializeField] FishingTranslationData _id_Fishhook;
+    [SerializeField] FishingTranslationData _id_Restaurant;
+    
+    private TranslationDataReader _translationDataReader;
+    public WaitForEndOfFrame LoadingDelayWait {get; private set;}
+
+    private void Awake()
+    {
+        LoadingDelayWait = new WaitForEndOfFrame();
+        _translationDataReader = FindFirstObjectByType<TranslationDataReader>();
+    }
 
     private void OnEnable()
     {
-        SetTranslationText();
-        SetGoldText();
-        DataTower.instance.OnChangedMoney += RenewalGoldText;
+        StartCoroutine(LoadingOnEnableRoutine());
     }
 
     private void OnDisable()
     {
-        DataTower.instance.OnChangedMoney -= RenewalGoldText;
+        EventDisable();
     }
 
     private void Start()
@@ -37,32 +46,57 @@ public class UpgradeUIView : MonoBehaviour
         OnClickToggleFishingUpgrade();
     }
 
-    private void Update()
+    #region 이벤트 등록/해제
+
+    public void EventEnable()
     {
-        
+        DataTower.instance.OnChangedMoney += RenewalGoldText;
+        DataTower.instance.OnLanguageSettingChanged += TranslationText;
     }
+
+    public void EventDisable()
+    {
+        DataTower.instance.OnChangedMoney -= RenewalGoldText;
+        DataTower.instance.OnLanguageSettingChanged -= TranslationText;
+    }
+    
+    private IEnumerator LoadingOnEnableRoutine()
+    {
+        while (DataTower.instance == null)
+        {
+            yield return LoadingDelayWait;
+        }
+        
+        SetGoldText();
+        SetTranslationText();
+        EventEnable();
+    }
+
+    #endregion
+    
+    
 
     private void SetTranslationText()
     {
+        _translationDataReader.GetFTranslationData("Money", out _id_Money);
+        _translationDataReader.GetFTranslationData("Fishhook", out _id_Fishhook);
+        _translationDataReader.GetFTranslationData("Restaurant", out _id_Restaurant);
         TranslationText(DataTower.instance.languageSetting);
     }
     
-    /// <summary>
-    /// ToDo:번역SO 추가되면 언어 연결 작업 필수
-    /// </summary>
     private void TranslationText(Language language)
     {
         switch (language)
         {
             case Language.ENG:
-                _moneyText.text = "_moneyText(EN)";
-                _toggleFishingUpgradeText.text = "_fishingUpgradeText(EN)";
-                _toggleDiningUpgradeText.text = "_diningUpgradeText(EN)";
+                _moneyText.text = _id_Money.En;
+                _toggleFishingUpgradeText.text = _id_Fishhook.En;
+                _toggleDiningUpgradeText.text = _id_Restaurant.En;
                 break;
             case Language.KOR:
-                _moneyText.text = "_moneyText(KOR)";
-                _toggleFishingUpgradeText.text = "_fishingUpgradeText(KOR)";
-                _toggleDiningUpgradeText.text = "_diningUpgradeText(KOR)";
+                _moneyText.text = _id_Money.Kor;
+                _toggleFishingUpgradeText.text = _id_Fishhook.Kor;
+                _toggleDiningUpgradeText.text = _id_Restaurant.Kor;
                 break;
         }
     }
@@ -73,8 +107,7 @@ public class UpgradeUIView : MonoBehaviour
     }
     
     /// <summary>
-    /// 현재 골드가 변화 할 때, 골드 Test를 변화 시킴
-    /// ToDo:DataTower 완성 되면 Tower의 Gold가 변화 할 때, 이벤트 체인으로 발동시킬 것
+    /// 현재 골드가 변화 할 때, 골드 Text를 변화 시킴
     /// </summary>
     private void RenewalGoldText(ulong amount)
     {

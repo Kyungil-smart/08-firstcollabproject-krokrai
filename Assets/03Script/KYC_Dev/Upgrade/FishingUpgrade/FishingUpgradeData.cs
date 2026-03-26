@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FishingUpgradeData", menuName = "UpgradeData/FishingUpgradeData")]
+[CreateAssetMenu(fileName = "FishingUpgradeData", menuName = "UpgradeDataSO/FishingUpgradeData")]
 public class FishingUpgradeData : ScriptableObject, IDataSeter
 {
     [field: SerializeField] public EFishingUpgradeType FishingUpgradeType { get; private set; }
@@ -13,15 +13,15 @@ public class FishingUpgradeData : ScriptableObject, IDataSeter
 
     public void SetData(string[] datas)
     {
-        Enum.TryParse(datas[0], out EFishingUpgradeType e);
-        int.TryParse(datas[1], out int level);
-        int.TryParse(datas[2], out int req_Gold);
-        int.TryParse(datas[3], out int apply_Value);
+        Enum.TryParse(datas[0], out EFishingUpgradeType d0);
+        int.TryParse(datas[1], out int d1);
+        int.TryParse(datas[2], out int d2);
+        int.TryParse(datas[3], out int d3);
         
-        FishingUpgradeType = e;
-        Level = level;
-        Req_Gold = req_Gold;
-        Apply_Value = apply_Value;
+        FishingUpgradeType = d0;
+        Level = d1;
+        Req_Gold = d2;
+        Apply_Value = d3;
         Rate_ID = datas[4];
     }
 }

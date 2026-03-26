@@ -309,7 +309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0009833751}
+  m_AnchoredPosition: {x: 0, y: -0.00076677586}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &931961297769388977
@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cb30b4ca2197c4aa9ebd0ab36f46ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectPresenter
+  _upgradeUIView: {fileID: 7558810456811637906}
   _views:
   - {fileID: 4017076938310411092}
   - {fileID: 3076796688483717578}
@@ -371,8 +372,6 @@ MonoBehaviour:
   - {fileID: 5829737236885706689}
   _upgradeSprites: []
   <MainUpgradeType>k__BackingField: 0
-  _targetlanguage: {fileID: 0}
-  _discriptionLanguage: {fileID: 0}
 --- !u!1 &2687730890783095273
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,9 +407,9 @@ RectTransform:
   m_Father: {fileID: 810385974071656922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5605533708145312852
 CanvasRenderer:
@@ -766,7 +765,7 @@ RectTransform:
   m_Father: {fileID: 1609890864932575870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -928,7 +927,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2644705106067001243}
   m_HandleRect: {fileID: 6466615047864959}
   m_Direction: 2
-  m_Value: 1.0000066
+  m_Value: 1.0000049
   m_Size: 0.75
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1058,7 +1057,9 @@ MonoBehaviour:
   _diningUpgradePanel: {fileID: 6744224849087691174}
   _toggleFishingUpgradeButton: {fileID: 2849825205746785032}
   _toggleDiningUpgradeButton: {fileID: 1234771202559281257}
-  _goldLanguageSO: {fileID: 0}
+  _id_Money: {fileID: 0}
+  _id_Fishhook: {fileID: 0}
+  _id_Restaurant: {fileID: 0}
 --- !u!1 &5038142644206316742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,7 +1694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
-  m_Content: {fileID: 0}
+  m_Content: {fileID: 2968226591182792473}
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
@@ -1897,7 +1898,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -13, y: 1950}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5151683002599693594
 MonoBehaviour:
@@ -1951,11 +1952,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cb30b4ca2197c4aa9ebd0ab36f46ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectPresenter
-  _views: []
+  _upgradeUIView: {fileID: 7558810456811637906}
+  _views:
+  - {fileID: 7630295703578262793}
+  - {fileID: 1971451449318498625}
+  - {fileID: 3568830101230544042}
+  - {fileID: 4367015607068844010}
+  - {fileID: 7448204628694031580}
+  - {fileID: 5731130461416811730}
+  - {fileID: 9124381506517681438}
+  - {fileID: 6248295830897478009}
+  - {fileID: 6579264374823367832}
+  - {fileID: 2704193224117670611}
+  - {fileID: 3142833982912641137}
+  - {fileID: 1455200945914977365}
+  - {fileID: 4108814285021362404}
   _upgradeSprites: []
-  <MainUpgradeType>k__BackingField: 0
-  _targetlanguage: {fileID: 0}
-  _discriptionLanguage: {fileID: 0}
+  <MainUpgradeType>k__BackingField: 1
 --- !u!1 &7132954414084342271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,7 +2691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2686,7 +2699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2726,11 +2739,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -525
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2758,6 +2771,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 189614313704990628}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4367015607068844010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 189614313704990628}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &521877055372279978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2780,7 +2804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2788,7 +2812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2828,11 +2852,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2860,6 +2884,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 521877055372279978}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4108814285021362404 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 521877055372279978}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &685922122114800410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2950,7 +2985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997481063431609368, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_Name
-      value: PlayerGrade
+      value: UpgradeSelectArea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2995,7 +3030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3003,7 +3038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3043,11 +3078,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3075,6 +3110,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 1133900681859210468}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3568830101230544042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 1133900681859210468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &1479888711707552132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3165,7 +3211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997481063431609368, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_Name
-      value: BaitMaking
+      value: UpgradeSelectArea (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3210,7 +3256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3218,7 +3264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3258,11 +3304,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1575
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3285,6 +3331,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+--- !u!114 &3142833982912641137 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 1560200828832399423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!224 &4378121441716343407 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
@@ -3312,7 +3369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3320,7 +3377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3360,11 +3417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1425
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3387,6 +3444,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+--- !u!114 &2704193224117670611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 1998575486755056285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!224 &3663847563825772749 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
@@ -3414,7 +3482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3422,7 +3490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3462,11 +3530,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -225
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3494,6 +3562,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 2695232981879298319}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1971451449318498625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 2695232981879298319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &3029388957953090587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3516,7 +3595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3524,7 +3603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3564,11 +3643,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1725
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3596,6 +3675,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 3029388957953090587}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1455200945914977365 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 3029388957953090587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &4655371930595671376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3618,7 +3708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3626,7 +3716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3666,11 +3756,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3698,6 +3788,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 4655371930595671376}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9124381506517681438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 4655371930595671376}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &6331820540627731783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3720,7 +3821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3728,7 +3829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3768,11 +3869,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3795,6 +3896,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+--- !u!114 &7630295703578262793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 6331820540627731783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!224 &9132140169203685143 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
@@ -3822,7 +3934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3830,7 +3942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3870,11 +3982,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -675
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3897,6 +4009,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+--- !u!114 &7448204628694031580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 6441891420707071122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!224 &8071284235416434370 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
@@ -3924,7 +4047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3932,7 +4055,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3972,11 +4095,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4004,6 +4127,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 7310849278843374806}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6579264374823367832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 7310849278843374806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &7407958122036885921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4094,7 +4228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997481063431609368, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_Name
-      value: FishingRod
+      value: UpgradeSelectArea (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4139,7 +4273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4147,7 +4281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4187,11 +4321,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4219,6 +4353,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
   m_PrefabInstance: {fileID: 7533681377072984375}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6248295830897478009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 7533681377072984375}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!1001 &7988268193383411599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4309,7 +4454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997481063431609368, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_Name
-      value: Ship
+      value: UpgradeSelectArea (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4354,7 +4499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4362,7 +4507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4402,11 +4547,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 375
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -825
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4429,6 +4574,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+--- !u!114 &5731130461416811730 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4484288595806124110, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
+  m_PrefabInstance: {fileID: 8192738705743582364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0811d8eefcd31442936380c842bb74a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeSelectController
 --- !u!224 &6401497779417761484 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2982724505443848784, guid: bf929e7bd28d55449b63a207ea114a62, type: 3}
