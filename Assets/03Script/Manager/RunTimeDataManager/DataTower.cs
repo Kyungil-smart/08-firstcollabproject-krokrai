@@ -13,6 +13,8 @@ public class DataTower : MonoBehaviour
     public event Action<string> OnFisingNewFish;
     public event Action<Language> OnLanguageSettingChanged;
 
+    public event Action OnDataTowerLoaded;
+
     public Language languageSetting { get; private set; } /// <summary> 현재 설정된 언어, 기본 값 : 영어 </summary>
 
     private void Awake()
@@ -27,6 +29,8 @@ public class DataTower : MonoBehaviour
             Destroy(this);
         }
         languageSetting = Language.ENG; // 기본 값 영어로 출력 되게 설정 되었습니다. 
+        InitializedData();
+        OnDataTowerLoaded?.Invoke();
     }
 
     public void InitializedData(bool ForcedInitialized = false)
@@ -35,7 +39,7 @@ public class DataTower : MonoBehaviour
         {
             if (ForcedInitialized)
                 Debug.Log("강제 초기화 실행");
-            _fishDatas = new Dictionary<string, FishData>(50); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
+            _fishDatas = new Dictionary<string, FishData>(20); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
             
             money = 1000;
 
@@ -279,16 +283,35 @@ public class DataTower : MonoBehaviour
     }
     #endregion
 
-    // FishData 재작업 후 진행
+    
     void CatchFishCounter(in FishData fish)
     {
         switch(fish.fishRarity)
         {
-            /*
-            case "":
+            case EFish_Rarity.Trash:
                 catchFishTrash++;
                 break;
-            */
+            case EFish_Rarity.Normal:
+                catchFishNormal++;
+                break;
+            case EFish_Rarity.Fine:
+                catchFishFine++;
+                break;
+            case EFish_Rarity.Superior:
+                catchFishSuperior++;
+                break;
+            case EFish_Rarity.Rare:
+                catchFishRare++;
+                break;
+            case EFish_Rarity.Elite:
+                catchFishElite++;
+                break;
+            case EFish_Rarity.Fantastic:
+                catchFishFantastic++;
+                break;
+            case EFish_Rarity.Legendary:
+                catchFishLegendary++;
+                break;
         }
     }
 }
