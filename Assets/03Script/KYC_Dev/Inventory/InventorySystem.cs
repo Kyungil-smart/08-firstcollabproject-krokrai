@@ -10,10 +10,11 @@ public class InventorySystem : MonoBehaviour
 
     // 테스트용 아이템
     // 주의 : 구현 한계 상 빈 아이템이 존재 해야됨 (_empty)
-    [SerializeField] private Temp_Item _empty;
-    [SerializeField] private Temp_Item _item01;
-    [SerializeField] private Temp_Item _item02;
-    [SerializeField] private Temp_Item _item03;
+    [Header("FishData")]
+    [SerializeField] private FishData _empty;
+    [SerializeField] private FishData[] _datas;
+    
+    private Dictionary<string, FishData> _fishDatas = new ();
     
     /// <summary>
     /// 인벤토리 최대 슬롯 > 업그레이드 단계에서 변화 하지만 일단 임의 값 입력
@@ -23,7 +24,7 @@ public class InventorySystem : MonoBehaviour
     /// <summary>
     /// 아이템 관리 리스트
     /// </summary>
-    public List<Temp_Item> Items = new();
+    public List<FishData> Items = new();
     
     /// <summary>
     /// 인벤토리에 변화가 있을 때 구독한 View에서 받기 위함
@@ -40,12 +41,16 @@ public class InventorySystem : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("InventorySystem Start");
         OnInventorySet?.Invoke();
     }
 
     private void InventoryInit()
     {
+        foreach (FishData data in _datas)
+        {
+            _fishDatas.TryAdd(data.fishID, data);
+        }
+        
         for (int i = 0; i < InventorySlotMax; i++)
         {
             Items.Add(_empty);
@@ -53,15 +58,14 @@ public class InventorySystem : MonoBehaviour
     }
 
     /// <summary>
-    /// 인벤토리에 아이템 삽입 코드
-    /// ToDo:Temp_Item을 나중에 정식 아이템 SO로 변경 할 것
+    /// 인벤토리에 아이템 삽입하는 코드
     /// </summary>
-    /// <param name="item"></param>
-    public void Insert(Temp_Item item)
+    /// <param name="fishID">해당 되는 FishID를 **오타없이** 입력</param>
+    public void Insert(string fishID)
     {
         if(!Items.Contains(_empty)) return;
         Items.Remove(_empty);
-        Items.Insert(0, item);
+        Items.Insert(0, _fishDatas[fishID]);
         OnInventoryChanged?.Invoke();
     }
 
@@ -73,24 +77,22 @@ public class InventorySystem : MonoBehaviour
     {
         int lagacySlotMax = InventorySlotMax;
         InventorySlotMax += slot;
-        Debug.Log(InventorySlotMax);
         for (int i = 0; i < slot; i++)
         {
             Items.Add(_empty);
         }
-        Debug.Log(Items.Count);
         OnInventoryExtended?.Invoke(lagacySlotMax, slot);
     }
 
+    
     /// <summary>
-    /// 지정된 아이템 제거
-    /// ToDo:Temp_Item을 나중에 정식 아이템 SO로 변경 할 것
+    /// 인벤토리에서 아이템 삭제
     /// </summary>
-    /// <param name="item"></param>
-    public void Erase(Temp_Item item)
+    /// <param name="fishID">해당 되는 FishID를 **오타없이** 입력</param>
+    public void Erase(string fishID)
     {
-        if(!Items.Contains(item)) return;
-        Items.Remove(item);
+        if(!Items.Contains(_fishDatas[fishID])) return;
+        Items.Remove(_fishDatas[fishID]);
         Items.Add(_empty);
         OnInventoryChanged?.Invoke();
     }
@@ -114,61 +116,29 @@ public class InventorySystem : MonoBehaviour
         switch (sortBy)
         {
             case 1:
-                Items.Sort((a, b) => a.Name.CompareTo(b.Name));
+                switch (DataTower.instance.languageSetting)
+                {
+                    case Language.ENG:
+                        Items.Sort((a, b) => a.engName.CompareTo(b.engName));
+                        break;
+                    case Language.KOR:
+                        Items.Sort((a, b) => a.korName.CompareTo(b.korName));
+                        break;
+                    default:
+                        break;
+                }
                 OnInventoryChanged?.Invoke();
                 break;
             case 2:
-                Items.Sort((a, b) => a.ItemType.CompareTo(b.ItemType));
+                Items.Sort((a, b) => a.fishType.CompareTo(b.fishType));
                 OnInventoryChanged?.Invoke();
                 break;
             case 3:
-                Items.Sort((a, b) => a.Rarity.CompareTo(b.Rarity));
+                Items.Sort((a, b) => a.fishRarity.CompareTo(b.fishRarity));
                 OnInventoryChanged?.Invoke();
                 break;
             default:
                 break;
         }
-    }
-    
-    
-    /// <summary>
-    /// Inventory Test 코드 : 1번 아이템 삭제
-    /// </summary>
-    public void OnClickErase01()
-    {
-        Erase(_item01);
-    }
-    /// <summary>
-    /// Inventory Test 코드 : 전체 삭제
-    /// </summary>
-    public void OnClickEraseAll()
-    {
-        EraseAll();
-    }
-    /// <summary>
-    /// Inventory Test 코드 : 1번 아이템 추가
-    /// </summary>
-    public void OnClickInsert01()
-    {
-        Insert(_item01);
-    }
-    /// <summary>
-    /// Inventory Test 코드 : 2번 아이템 추가
-    /// </summary>
-    public void OnClickInsert02()
-    {
-        Insert(_item02);
-    }
-    /// <summary>
-    /// Inventory Test 코드 : 3번 아이템추가
-    /// </summary>
-    public void OnClickInsert03()
-    {
-        Insert(_item03);
-    }
-
-    public void OnClickExtend05()
-    {
-        InventoryExtend(5);
     }
 }

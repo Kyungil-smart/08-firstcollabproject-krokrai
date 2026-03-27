@@ -16,11 +16,11 @@ public class TranslationDataReader : MonoBehaviour
     {
         foreach (FishingTranslationData data in _fishingTranslationDatas)
         {
-            _fishingTranslationDictionary.Add(data.Id, data);
+            _fishingTranslationDictionary.TryAdd(data.Id, data);
         }
         foreach (DiningTranslationData data in _diningTranslationDatas)
         {
-            _diningTranslationDictionary.Add(data.Id, data);
+            _diningTranslationDictionary.TryAdd(data.Id, data);
         }
     }
 

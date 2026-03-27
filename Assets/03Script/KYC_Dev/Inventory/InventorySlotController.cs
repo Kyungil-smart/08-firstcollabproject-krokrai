@@ -10,7 +10,7 @@ public class InventorySlotController : MonoBehaviour
     /// 적용되는 아이템 SO
     /// ToDo:Temp_Item을 나중에 정식 아이템 SO로 변경 할 것
     /// </summary>
-    public Temp_Item ItemInfo;
+    public FishData ItemInfo;
     
     private Image _image;
 
@@ -24,7 +24,7 @@ public class InventorySlotController : MonoBehaviour
     /// ToDo:Temp_Item을 나중에 정식 아이템 SO로 변경 할 것
     /// </summary>
     /// <param name="itemInfo"></param>
-    public void SetInfo(Temp_Item itemInfo)
+    public void SetInfo(FishData itemInfo)
     {
         ItemInfo = itemInfo;
         SetImage();
@@ -35,7 +35,7 @@ public class InventorySlotController : MonoBehaviour
     /// </summary>
     private void SetImage()
     {
-        _image.sprite = ItemInfo.ItemIcon;
+        _image.sprite = ItemInfo.fishSprite;
     }
     
     
