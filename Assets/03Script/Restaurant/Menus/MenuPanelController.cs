@@ -7,9 +7,8 @@ public class MenuPanelController : MonoBehaviour
     [SerializeField] FishData tempFishData;
     [SerializeField] RecipeContainer _recipe;
     [SerializeField] RecipeInfoUI _recipeInfoUI;
-    [SerializeField] Button _dishButton;
-
-    [SerializeField] DishUI _dishUI;
+    [SerializeField] Button _btn;
+    [SerializeField] MenuCtrl _menuCtrl;
 
     bool isUnlocked;
 
@@ -29,18 +28,27 @@ public class MenuPanelController : MonoBehaviour
     {
         //_recipe = rcp;
         _recipeInfoUI.SelectedRecipe(_recipe, tempFishData);
+
+        CanMakeDish();
     }
     
     // 선택된 레시피가 요리하기를 눌렀다면, 해당 함수에서 메뉴 crtl에 넣겨주기 현재 대기열 max인 경우 요리하기 못하게 하기..
     public void MakeDish() // (RecipeContainer rcp)
     {
-        //if () // 현재 열려 있는 메뉴 칸 보다 더 넣을려고 할때 예외처리. 버튼 자체가 작동 안하게 해야됌
-        _dishUI.DishOnDish(_recipe);
+        // 현재 열려 있는 메뉴 칸 보다 더 넣을려고 할때 예외처리. 버튼 자체가 작동 안하게 해야됌
+        _menuCtrl.InsertDish(_recipe);
+        CanMakeDish();
     }
 
-    // 임시 함수 테스트 완료 및 손님과 결합 후 삭제 필요.
-    public void tempEatMenu()
+    public void CanMakeDish()
     {
-        _dishUI.EatMenu();
+        if (_menuCtrl.InsertedDish >= _menuCtrl.maxDsih) // 임시로만 처리.
+        {
+            _btn.GetComponent<Button>().interactable = false;
+        }
+        else
+        {
+            _btn.GetComponent<Button>().interactable = true;
+        }
     }
 }
