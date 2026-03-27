@@ -212,13 +212,13 @@ public class TraderUI : MonoBehaviour
         // Content 하위 오브젝트 체크
         foreach (Transform child in content)
         {
-            FishData data = child.GetComponent<FishSlot>().fishData;
+            FishSlot slot = child.GetComponentInChildren<FishSlot>();
 
-            if (data != null)
+            if (slot != null && slot.fishData != null)
             {
                 // 물고기 등급이 선택된 리스트에 포함되어 있는지
                 // 포함됐다면 true(활성화),아니면 false(비활성화)
-                bool showFish = selectedRates.Contains(data.fishRarity);
+                bool showFish = selectedRates.Contains(slot.fishData.fishRarity);
                 child.gameObject.SetActive(showFish);
             }
         }
