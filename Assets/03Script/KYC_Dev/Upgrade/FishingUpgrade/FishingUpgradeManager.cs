@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,6 +11,7 @@ public class FishingUpgradeManager : MonoBehaviour
     // 업그레이드 효과는 다른 컴포넌트에서 수행
     
     private FishingUpgradeDataReader _dataReader;
+    private WaitForEndOfFrame _waitForEndOfFrame = new();
     
     /// <summary>
     /// 낚시 등급 : 모든 낚시 업그레이드의 기본
@@ -121,13 +123,25 @@ public class FishingUpgradeManager : MonoBehaviour
         _dataReader.GetRodLevelReqGoldData(RodLevel ,out _rodLevelReqGold);
         _dataReader.GetShipLevelReqGoldData(ShipLevel ,out _shipLevelReqGold);
         
+        StartCoroutine(LoadingOnEnableRoutine());
+    }
+
+    private void OnDisable()
+    {
+        EventDisable();
+    }
+
+    #region 이벤트 구독/해제
+
+    private void EventEnable()
+    {
         DataTower.instance.OnChangedMoney += ChackEnoughGoldFishingGradeUpgrade;
         DataTower.instance.OnChangedMoney += ChackEnoughGoldBaitLevelUpgrade;
         DataTower.instance.OnChangedMoney += ChackEnoughGoldRodLevelUpgrade;
         DataTower.instance.OnChangedMoney += ChackEnoughGoldShipLevelUpgrade;
     }
 
-    private void OnDisable()
+    private void EventDisable()
     {
         DataTower.instance.OnChangedMoney -= ChackEnoughGoldFishingGradeUpgrade;
         DataTower.instance.OnChangedMoney -= ChackEnoughGoldBaitLevelUpgrade;
@@ -135,6 +149,22 @@ public class FishingUpgradeManager : MonoBehaviour
         DataTower.instance.OnChangedMoney -= ChackEnoughGoldShipLevelUpgrade;
     }
 
+    private IEnumerator LoadingOnEnableRoutine()
+    {
+        while (DataTower.instance == null)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
+        EventEnable();
+    }
+
+    #endregion
+    
+    
+    
+    
+    
     /// <summary>
     /// 레벨을 불러오는 함수
     /// ToDo:DataTower로 변수 이관 되면 사용 안함

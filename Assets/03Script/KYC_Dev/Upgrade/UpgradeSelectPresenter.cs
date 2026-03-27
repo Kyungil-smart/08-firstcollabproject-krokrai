@@ -25,6 +25,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     private FishingUpgradeDataReader _diningDataReader;
     
     private TranslationDataReader _translationDataReader;
+    private WaitForEndOfFrame _waitForEndOfFrame;
 
     private void Awake()
     {
@@ -176,11 +177,11 @@ public class UpgradeSelectPresenter : MonoBehaviour
     {
         while (DataTower.instance == null)
         {
-            yield return _upgradeUIView.LoadingDelayWait;
+            yield return _waitForEndOfFrame;
         }
         
-        RunSettings();
         EnableEvents();
+        RunSettings();
     }
 
     #endregion
@@ -197,7 +198,6 @@ public class UpgradeSelectPresenter : MonoBehaviour
         _translationDataReader.GetFTranslationData("UPG_Player_ToolTip_Max", out _views[0].UpgradeToolTipMaxData);
         _fishingUpgradeManager.ChackEnoughGoldFishingGradeUpgrade(DataTower.instance.money);
         _fishingDataReader.GetFishingGradeReqGoldData(level, out reqGold);
-        _fishingUpgradeManager.CheakCanBaitLevelUpgrade(_fishingUpgradeManager.FishingGrade, _fishingUpgradeManager.BaitLevel);
         _views[0].TranslationText(DataTower.instance.languageSetting);
         _views[0].RenewalLevelText(level,_fishingDataReader.Grades.Length);
         _views[0].RenewalReqGoldText(reqGold);
@@ -212,6 +212,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
         _translationDataReader.GetFTranslationData("UPG_Bait_ToolTip", out _views[1].UpgradeToolTipData);
         _translationDataReader.GetFTranslationData("UPG_Bait_ToolTip_Max", out _views[1].UpgradeToolTipMaxData);
         _fishingUpgradeManager.ChackEnoughGoldBaitLevelUpgrade(DataTower.instance.money);
+        _fishingUpgradeManager.CheakCanBaitLevelUpgrade(_fishingUpgradeManager.FishingGrade, _fishingUpgradeManager.BaitLevel);
         _fishingDataReader.GetBaitLevelReqGoldData(level, out reqGold);
         _views[1].TranslationText(DataTower.instance.languageSetting);
         _views[1].RenewalLevelText(level,_fishingDataReader.Baits.Length);
