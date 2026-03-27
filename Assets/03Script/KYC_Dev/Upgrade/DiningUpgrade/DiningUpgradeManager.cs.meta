@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 7a3892385b5c557469dbd46eacb4f384
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _grade1: {fileID: 11400000, guid: 3db6ef52bf84c4747920b5816282777c, type: 2}
+  - _grade2: {fileID: 11400000, guid: 2182f2dfde8382d4488f978d314869c4, type: 2}
+  - _grade3: {fileID: 11400000, guid: 01b4e440a95ea0145b08f1f241680e85, type: 2}
+  - _grade4: {fileID: 11400000, guid: 8a96eb3d4c2edb7458dff424881f8e09, type: 2}
+  - _grade5: {fileID: 11400000, guid: 2485354729f3f234cb433db03b6be701, type: 2}
+  - _grade6: {fileID: 11400000, guid: 98911843e2d8e0449866b15d20970081, type: 2}
+  - _grade7: {fileID: 11400000, guid: 7acf664a32b282045929810f6d2bc12c, type: 2}
+  - _grade8: {fileID: 11400000, guid: eb8588be2843ee34fa06cdd24b969665, type: 2}
+  - _grade9: {fileID: 11400000, guid: 69047a26b9a89cd4289ba8ea71239f63, type: 2}
+  - _grade10: {fileID: 11400000, guid: dc441509e177b344786bc175df4ed033, type: 2}
+  - _bait1: {fileID: 11400000, guid: 2ee0ca32e9d166645bbb0179e11da67a, type: 2}
+  - _bait2: {fileID: 11400000, guid: 1a9ef5d3e88fc974fb1bb58e3a3564b5, type: 2}
+  - _bait3: {fileID: 11400000, guid: 72b00690b729d494e9eacdd5ccf761ba, type: 2}
+  - _bait4: {fileID: 11400000, guid: e44419720f3db814c98c3f7f8c61440b, type: 2}
+  - _bait5: {fileID: 11400000, guid: 48a0a1ceb02d14946b8a4db0793b5733, type: 2}
+  - _rod1: {fileID: 11400000, guid: c330206e69f070049bcb19b1bb937284, type: 2}
+  - _rod2: {fileID: 11400000, guid: 64c5d18c7a885e64e97bf67a038d5b3f, type: 2}
+  - _rod3: {fileID: 11400000, guid: 60e6a4d280bbec84686674a2837e1770, type: 2}
+  - _rod4: {fileID: 11400000, guid: e3d69aa0d4547134e882227b793064be, type: 2}
+  - _rod5: {fileID: 11400000, guid: d8a556429d012e443ba08ae3dc980b6d, type: 2}
+  - _ship1: {instanceID: 0}
+  - _ship2: {instanceID: 0}
+  - _ship3: {instanceID: 0}
+  - _ship4: {instanceID: 0}
+  - _ship5: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

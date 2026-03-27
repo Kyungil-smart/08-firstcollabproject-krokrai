@@ -118,11 +118,7 @@ public class FishingUpgradeManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _dataReader.GetFishingGradeReqGoldData(FishingGrade ,out _fishingGradeReqGold);
-        _dataReader.GetBaitLevelReqGoldData(BaitLevel ,out _baitLevelReqGold);
-        _dataReader.GetRodLevelReqGoldData(RodLevel ,out _rodLevelReqGold);
-        _dataReader.GetShipLevelReqGoldData(ShipLevel ,out _shipLevelReqGold);
-        
+        OnEnableReqGoldCheck();
         StartCoroutine(LoadingOnEnableRoutine());
     }
 
@@ -131,22 +127,30 @@ public class FishingUpgradeManager : MonoBehaviour
         EventDisable();
     }
 
+    private void OnEnableReqGoldCheck()
+    {
+        _dataReader.GetFishingGradeReqGoldData(FishingGrade ,out _fishingGradeReqGold);
+        _dataReader.GetBaitLevelReqGoldData(BaitLevel ,out _baitLevelReqGold);
+        _dataReader.GetRodLevelReqGoldData(RodLevel ,out _rodLevelReqGold);
+        _dataReader.GetShipLevelReqGoldData(ShipLevel ,out _shipLevelReqGold);
+    }
+
     #region 이벤트 구독/해제
 
     private void EventEnable()
     {
-        DataTower.instance.OnChangedMoney += ChackEnoughGoldFishingGradeUpgrade;
-        DataTower.instance.OnChangedMoney += ChackEnoughGoldBaitLevelUpgrade;
-        DataTower.instance.OnChangedMoney += ChackEnoughGoldRodLevelUpgrade;
-        DataTower.instance.OnChangedMoney += ChackEnoughGoldShipLevelUpgrade;
+        DataTower.instance.OnChangedMoney += CheckEnoughGoldFishingGradeUpgrade;
+        DataTower.instance.OnChangedMoney += CheckEnoughGoldBaitLevelUpgrade;
+        DataTower.instance.OnChangedMoney += CheckEnoughGoldRodLevelUpgrade;
+        DataTower.instance.OnChangedMoney += CheckEnoughGoldShipLevelUpgrade;
     }
 
     private void EventDisable()
     {
-        DataTower.instance.OnChangedMoney -= ChackEnoughGoldFishingGradeUpgrade;
-        DataTower.instance.OnChangedMoney -= ChackEnoughGoldBaitLevelUpgrade;
-        DataTower.instance.OnChangedMoney -= ChackEnoughGoldRodLevelUpgrade;
-        DataTower.instance.OnChangedMoney -= ChackEnoughGoldShipLevelUpgrade;
+        DataTower.instance.OnChangedMoney -= CheckEnoughGoldFishingGradeUpgrade;
+        DataTower.instance.OnChangedMoney -= CheckEnoughGoldBaitLevelUpgrade;
+        DataTower.instance.OnChangedMoney -= CheckEnoughGoldRodLevelUpgrade;
+        DataTower.instance.OnChangedMoney -= CheckEnoughGoldShipLevelUpgrade;
     }
 
     private IEnumerator LoadingOnEnableRoutine()
@@ -160,26 +164,6 @@ public class FishingUpgradeManager : MonoBehaviour
     }
 
     #endregion
-    
-    
-    
-    
-    
-    /// <summary>
-    /// 레벨을 불러오는 함수
-    /// ToDo:DataTower로 변수 이관 되면 사용 안함
-    /// </summary>
-    /// <param name="fishingGrade">낚시 등급</param>
-    /// <param name="baitLevel">미끼 레벨</param>
-    /// <param name="rodLevel">낚시대 레벨</param>
-    /// <param name="shipLevel">배 레벨</param>
-    public void LoadLevel(int fishingGrade, int baitLevel, int rodLevel, int shipLevel)
-    {
-        FishingGrade = fishingGrade;
-        BaitLevel = baitLevel;
-        RodLevel = rodLevel;
-        ShipLevel = shipLevel;
-    }
 
     #region 업그레이드 실행
 
@@ -193,9 +177,7 @@ public class FishingUpgradeManager : MonoBehaviour
             FishingGrade++;
             DataTower.instance.TryMoenyChanged((ulong)_fishingGradeReqGold);
             OnFishingUpgrade?.Invoke(FishingGrade);
-            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
-            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
-            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
+            CheckCanUpgrades();
         }
         
     }
@@ -210,9 +192,7 @@ public class FishingUpgradeManager : MonoBehaviour
             BaitLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_baitLevelReqGold);
             OnBaitUpgrade?.Invoke(BaitLevel);
-            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
-            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
-            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
+            CheckCanUpgrades();
         }
         
     }
@@ -227,9 +207,7 @@ public class FishingUpgradeManager : MonoBehaviour
             RodLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_rodLevelReqGold);
             OnRodUpgrade?.Invoke(RodLevel);
-            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
-            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
-            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
+            CheckCanUpgrades();
         }
         
     }
@@ -244,11 +222,16 @@ public class FishingUpgradeManager : MonoBehaviour
             ShipLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_shipLevelReqGold);
             OnShipUpgrade?.Invoke(ShipLevel);
-            CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
-            CheakCanRodLevelUpgrade(FishingGrade, RodLevel);
-            CheakCanShipLevelUpgrade(FishingGrade, ShipLevel);
+            CheckCanUpgrades();
         }
         
+    }
+
+    private void CheckCanUpgrades()
+    {
+        CheckCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+        CheckCanRodLevelUpgrade(FishingGrade, RodLevel);
+        CheckCanShipLevelUpgrade(FishingGrade, ShipLevel);
     }
 
     #endregion
@@ -268,7 +251,7 @@ public class FishingUpgradeManager : MonoBehaviour
     /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
     /// </summary>
     /// <param name="curGold"></param>
-    public void ChackEnoughGoldFishingGradeUpgrade(ulong curGold)
+    public void CheckEnoughGoldFishingGradeUpgrade(ulong curGold)
     {
         bool result = curGold >= (ulong)_fishingGradeReqGold;
         EnoughGoldFishingGradeUpgrade?.Invoke(result);
@@ -278,7 +261,7 @@ public class FishingUpgradeManager : MonoBehaviour
     {
         bool chackLevel = _dataReader.Grades.Length > BaitLevel;
         bool chackGold = curGold >= (ulong)_baitLevelReqGold;
-        bool chackGrade = CheakCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+        bool chackGrade = CheckCanBaitLevelUpgrade(FishingGrade,BaitLevel);
         
         
         return chackGold && chackLevel && chackGrade;
@@ -289,7 +272,7 @@ public class FishingUpgradeManager : MonoBehaviour
     /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
     /// </summary>
     /// <param name="curGold"></param>
-    public void ChackEnoughGoldBaitLevelUpgrade(ulong curGold)
+    public void CheckEnoughGoldBaitLevelUpgrade(ulong curGold)
     {
         bool result = curGold >= (ulong)_baitLevelReqGold;
         EnoughGoldBaitLevelUpgrade?.Invoke(result);
@@ -302,7 +285,7 @@ public class FishingUpgradeManager : MonoBehaviour
     /// <param name="fishingGrade"></param>
     /// <param name="baitLevel"></param>
     /// <returns></returns>
-    public bool CheakCanBaitLevelUpgrade(int fishingGrade, int baitLevel)
+    public bool CheckCanBaitLevelUpgrade(int fishingGrade, int baitLevel)
     {
         bool result = fishingGrade/2f > baitLevel;
         CanBaitLevelUpgrade?.Invoke(result);
@@ -314,7 +297,7 @@ public class FishingUpgradeManager : MonoBehaviour
     {
         bool chackLevel = _dataReader.Grades.Length > RodLevel;
         bool chackGold = curGold >= (ulong)_rodLevelReqGold;
-        bool chackGrade = CheakCanRodLevelUpgrade(FishingGrade,RodLevel);
+        bool chackGrade = CheckCanRodLevelUpgrade(FishingGrade,RodLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -324,7 +307,7 @@ public class FishingUpgradeManager : MonoBehaviour
     /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
     /// </summary>
     /// <param name="curGold"></param>
-    public void ChackEnoughGoldRodLevelUpgrade(ulong curGold)
+    public void CheckEnoughGoldRodLevelUpgrade(ulong curGold)
     {
         bool result = curGold >= (ulong)_rodLevelReqGold;
         EnoughGoldRodLevelUpgrade?.Invoke(result);
@@ -337,7 +320,7 @@ public class FishingUpgradeManager : MonoBehaviour
     /// <param name="fishingGrade"></param>
     /// <param name="rodLevel"></param>
     /// <returns></returns>
-    public bool CheakCanRodLevelUpgrade(int fishingGrade, int rodLevel)
+    public bool CheckCanRodLevelUpgrade(int fishingGrade, int rodLevel)
     {
         bool result = fishingGrade/2f > rodLevel;
         CanRodLevelUpgrade?.Invoke(result);
@@ -349,7 +332,7 @@ public class FishingUpgradeManager : MonoBehaviour
     {
         bool chackLevel = _dataReader.Grades.Length > ShipLevel;
         bool chackGold = curGold >= (ulong)_shipLevelReqGold;
-        bool chackGrade = CheakCanShipLevelUpgrade(FishingGrade,ShipLevel);
+        bool chackGrade = CheckCanShipLevelUpgrade(FishingGrade,ShipLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -359,7 +342,7 @@ public class FishingUpgradeManager : MonoBehaviour
     /// 이벤트도 연결 되어있지만 UI Enable시 마다 실행 해줘야되서 public임
     /// </summary>
     /// <param name="curGold"></param>
-    public void ChackEnoughGoldShipLevelUpgrade(ulong curGold)
+    public void CheckEnoughGoldShipLevelUpgrade(ulong curGold)
     {
         bool result = curGold >= (ulong)_shipLevelReqGold;
         EnoughGoldShipLevelUpgrade?.Invoke(result);
@@ -372,7 +355,7 @@ public class FishingUpgradeManager : MonoBehaviour
     /// <param name="fishingGrade"></param>
     /// <param name="shipLevel"></param>
     /// <returns></returns>
-    public bool CheakCanShipLevelUpgrade(int fishingGrade, int shipLevel)
+    public bool CheckCanShipLevelUpgrade(int fishingGrade, int shipLevel)
     {
         bool result = fishingGrade/2f > shipLevel;
         CanShipLevelUpgrade?.Invoke(result);
