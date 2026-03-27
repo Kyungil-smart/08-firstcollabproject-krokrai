@@ -23,11 +23,10 @@ public class UpgradeUIView : MonoBehaviour
     [SerializeField] FishingTranslationData _id_Restaurant;
     
     private TranslationDataReader _translationDataReader;
-    public WaitForEndOfFrame LoadingDelayWait {get; private set;}
+    private WaitForEndOfFrame _waitForEndOfFrame = new();
 
     private void Awake()
     {
-        LoadingDelayWait = new WaitForEndOfFrame();
         _translationDataReader = FindFirstObjectByType<TranslationDataReader>();
     }
 
@@ -64,12 +63,12 @@ public class UpgradeUIView : MonoBehaviour
     {
         while (DataTower.instance == null)
         {
-            yield return LoadingDelayWait;
+            yield return _waitForEndOfFrame;
         }
         
+        EventEnable();
         SetGoldText();
         SetTranslationText();
-        EventEnable();
     }
 
     #endregion
