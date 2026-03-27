@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1768688845153569780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1437608210606598957}
+  - component: {fileID: 4216252528958526297}
+  m_Layer: 0
+  m_Name: DiningUpgradeDataReader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1437608210606598957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768688845153569780}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4216252528958526297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768688845153569780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a6057b8216de942b9fa964f7cef75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DiningUpgradeDataReader
+  Master_Lv:
+  - {fileID: 11400000, guid: 679be169622356d4eae41dc364f65fa6, type: 2}
+  - {fileID: 11400000, guid: cd3f429354b46c74b8f702facb10f7e7, type: 2}
+  - {fileID: 11400000, guid: c3b3bdea8bbb55e47acb5730c6b6e950, type: 2}
+  - {fileID: 11400000, guid: b0a01969a1e98fd4bbeea39682ca7455, type: 2}
+  - {fileID: 11400000, guid: 2b1e9717dba5db84a8022c5f89709258, type: 2}
+  - {fileID: 11400000, guid: 564b0c8c32acab548953cc617dfd8f92, type: 2}
+  Max_Customer_Limit:
+  - {fileID: 11400000, guid: f6082a973b2b8124c88fe1c2c9fd9836, type: 2}
+  - {fileID: 11400000, guid: a880614619798b64fb63d7c5dd17583f, type: 2}
+  - {fileID: 11400000, guid: 040ce5d129317d54c8912dc72ed9c6d2, type: 2}
+  - {fileID: 11400000, guid: 658ad388c584a0e43b4fb589a7302743, type: 2}
+  - {fileID: 11400000, guid: 923a2fc3655a78241890e3d27fa60526, type: 2}
+  Max_Spawn_Limit_1:
+  - {fileID: 11400000, guid: dcf57aaa8fad472419c6cdc45c40d4af, type: 2}
+  - {fileID: 11400000, guid: 8bdc5c85628966747bba4a56fcd623a4, type: 2}
+  - {fileID: 11400000, guid: 05abb06a96476344ab046a3727b16873, type: 2}
+  - {fileID: 11400000, guid: 0fe9c1f70f81f794fbf3f12d71bca694, type: 2}
+  Max_Spawn_Limit_2:
+  - {fileID: 11400000, guid: 935d190e8f84d904b9944d334ceba0b6, type: 2}
+  - {fileID: 11400000, guid: bddb696f944c98e41814d7c849798494, type: 2}
+  Weight:
+  - {fileID: 11400000, guid: e4742d456530839468dec4699f76caab, type: 2}
+  - {fileID: 11400000, guid: a05dac9e32bede74db34b8f464ade1d2, type: 2}
+  - {fileID: 11400000, guid: 5e34c7c34356eb341ab68dcefc78261c, type: 2}
+  - {fileID: 11400000, guid: bc7a68656bfed7648adccb29d422fffa, type: 2}
+  Bonus_Tips_Multi:
+  - {fileID: 11400000, guid: cd744592d5748b64fa451b159a9213c7, type: 2}
+  - {fileID: 11400000, guid: b10e7df406b51ff4592661353a334d1a, type: 2}
+  - {fileID: 11400000, guid: 77b8179f385b5074b934b110972b9c15, type: 2}
+  - {fileID: 11400000, guid: bc6f889e62f9334419cb37ae91039f58, type: 2}
+  - {fileID: 11400000, guid: cb98ba841a99d3c43896818d5a7c5b36, type: 2}
+  - {fileID: 11400000, guid: a784e2dd5c25b7f429bb7ab45d326b63, type: 2}
+  Bonus_Dish_Price_1:
+  - {fileID: 11400000, guid: e2720aa65b86a68428ff4c6b998a6916, type: 2}
+  - {fileID: 11400000, guid: 3a19699f3e8052d45a5d713a502e3fd8, type: 2}
+  - {fileID: 11400000, guid: 6fac003009eff384d9de51848b30b315, type: 2}
+  - {fileID: 11400000, guid: 1db45924a60a23d4885a025302d0a547, type: 2}
+  - {fileID: 11400000, guid: ea4a04be9bb5ccc46a9e6d2ca7a66af3, type: 2}
+  - {fileID: 11400000, guid: ae19ad1a42a140640ac52f642dda2f01, type: 2}
+  Bonus_Dish_Price_2:
+  - {fileID: 11400000, guid: eccea1bbb308a4a4d8dda7057a7fcd94, type: 2}
+  - {fileID: 11400000, guid: e6a16ac04f73e3844bbb6c6470fd4e37, type: 2}
+  - {fileID: 11400000, guid: ba75d6cbf168e8345b65430ad9e41e77, type: 2}
+  - {fileID: 11400000, guid: a638a81ad7893dd42be2019d18b22eda, type: 2}
+  - {fileID: 11400000, guid: a89dffac388f7da4e801fa77de30b97d, type: 2}
+  - {fileID: 11400000, guid: 357de2dc883c7414ba9589d68c011755, type: 2}
+  Bonus_Food_1:
+  - {fileID: 11400000, guid: 5ff081830ed1cd54087f2f20e5fc06fa, type: 2}
+  - {fileID: 11400000, guid: acba7c633d6ea194bbbe78ff9da51ae7, type: 2}
+  - {fileID: 11400000, guid: 929d61e4a0f4447418ead6beac90b403, type: 2}
+  - {fileID: 11400000, guid: ba470837d5a431d4a811f96916170de5, type: 2}
+  - {fileID: 11400000, guid: 6809efc94a865ea47afcae970388402a, type: 2}
+  - {fileID: 11400000, guid: 83b77fa674786c048960083368d38244, type: 2}
+  Bonus_Food_2:
+  - {fileID: 11400000, guid: dd6913b9c7761d847aea4e827123b885, type: 2}
+  - {fileID: 11400000, guid: dce32f307339f4147b33d73757b45ece, type: 2}
+  - {fileID: 11400000, guid: c4ed73a9fadee564da013a8f1cd755f3, type: 2}
+  - {fileID: 11400000, guid: 47666bad679861740bdeb7eededf7157, type: 2}
+  - {fileID: 11400000, guid: a2fc69b28be928546b31d4efc4807c56, type: 2}
+  - {fileID: 11400000, guid: 82ae15a610d62344fbf12507153a3985, type: 2}
+  Unlock_Cat_Object:
+  - {fileID: 11400000, guid: f90e88b91fa67d64792c83909e667356, type: 2}
+  - {fileID: 11400000, guid: ce85095f14a727743859fde85138a5e7, type: 2}
