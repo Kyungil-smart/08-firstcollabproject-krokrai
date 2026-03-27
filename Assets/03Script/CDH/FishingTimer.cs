@@ -5,7 +5,7 @@ using System.Threading;
 
 public class FishingTimer : MonoBehaviour
 {
-    [Range(0f, 1800f)]
+    [Range(0f, 3600f)]
     [SerializeField] public float fishingTime; // 낚시 가능 횟수 충전까지 남은 시간
     [SerializeField] public float maxFishingTime = 3600f; // 낚시 가능 횟수 최대 쿨타임
     public TMP_Text timerText; // 시간을 화면에 표시할 UI 텍스트 컴포넌트
@@ -43,7 +43,7 @@ public class FishingTimer : MonoBehaviour
                 yield return new WaitUntil(CheckingFull);
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
             fishingTime--;
 
             TimerUI(fishingTime);

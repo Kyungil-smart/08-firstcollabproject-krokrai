@@ -176,6 +176,8 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         if (selectedFish != null)
         {
             Debug.Log($"{currentRarity}, {selectedFish.korName}");
+
+            DataTower.instance.takeFish(selectedFish);
         }
     }
 
