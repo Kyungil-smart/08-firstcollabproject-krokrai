@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
-  m_Name: FishData
+  m_Name: FishData 2
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
   fishID: 
   korName: 
   engName: 
   fishRarity: 0
-  fishType: 3
+  fishType: 0
   length: 0
   weight: 0
   fishSprite: {fileID: 0}

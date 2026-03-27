@@ -378,7 +378,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1882934430496106664, guid: eb5a1bc1f0422104e9a6cff101086306, type: 3}
       propertyPath: m_Name
-      value: FishRateDataManager
+      value: Fish's DataManager
       objectReference: {fileID: 0}
     - target: {fileID: 5160629355137244487, guid: eb5a1bc1f0422104e9a6cff101086306, type: 3}
       propertyPath: m_LocalPosition.x
@@ -419,6 +419,14 @@ PrefabInstance:
     - target: {fileID: 5160629355137244487, guid: eb5a1bc1f0422104e9a6cff101086306, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000470754684549290, guid: eb5a1bc1f0422104e9a6cff101086306, type: 3}
+      propertyPath: container.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9000470754684549290, guid: eb5a1bc1f0422104e9a6cff101086306, type: 3}
+      propertyPath: 'container.Array.data[1]'
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
