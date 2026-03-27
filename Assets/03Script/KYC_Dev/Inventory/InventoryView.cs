@@ -20,7 +20,6 @@ public class InventoryView : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("InventorySystem OnEnable");
         _inventorySystem.OnInventorySet += SetView;
         _inventorySystem.OnInventoryChanged += ChangeView;
         _inventorySystem.OnInventoryExtended += ExtendView;
@@ -31,12 +30,11 @@ public class InventoryView : MonoBehaviour
         _inventorySystem.OnInventorySet -= SetView;
         _inventorySystem.OnInventoryChanged -= ChangeView;
         _inventorySystem.OnInventoryExtended -= ExtendView;
-        Debug.Log("InventorySystem OnDisable");
     }
     
     private void SetView()
     {
-        foreach (Temp_Item item in _inventorySystem.Items)
+        foreach (FishData item in _inventorySystem.Items)
         {
             GameObject newItemSlot = Instantiate(_inventorySlotPrefab, transform);
             InventorySlotController slotController = newItemSlot.GetComponent<InventorySlotController>();
