@@ -1,101 +1,15 @@
+/*
+Data Tower : 중앙 데이터 관리자. / 대부분의 데이터에 대하여, 중앙에서 관리 및 저장에 용의성을 높이기 위해 제작되었습니다.
+
+나중에 해야할 일 TODO : 해당 데이터들 전부다 SO로 빼서 관리 필요(예상보다 더 많은 변수들이 필요해져서 로드 과정 중에 병목이 발생한 거 같다는 예상.)
+
+*/
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DataTower : MonoBehaviour
 {
-    public bool isDataInitiated = false;
-    public static DataTower instance;
-
-    private InventorySystem _inventorySystem; // 참조 걸어줄 방식 지정 필요.
-    private Dictionary<string, FishData> _fishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
-
-    public event Action<string> OnFisingNewFish;
-    public event Action<Language> OnLanguageSettingChanged;
-
-    public event Action OnDataTowerLoaded;
-
-    public Language languageSetting { get; private set; } /// <summary> 현재 설정된 언어, 기본 값 : 영어 </summary>
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(this);
-        }
-        languageSetting = Language.ENG; // 기본 값 영어로 출력 되게 설정 되었습니다. 
-        InitializedData();
-        OnDataTowerLoaded?.Invoke();
-    }
-
-    public void InitializedData(bool ForcedInitialized = false)
-    {
-        if (!isDataInitiated || !ForcedInitialized)
-        {
-            if (ForcedInitialized)
-                Debug.Log("강제 초기화 실행");
-            _fishDatas = new Dictionary<string, FishData>(20); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
-            
-            money = 1000;
-
-            customerVisitCounter = 0;
-            
-            masterVolume = 0.5f;
-            BGMVolume = 0.5f;
-            SFXVolume = 0.5f;
-
-            fishingGrade = 1;
-            baitLevel = 1;
-            rodLevel = 1;
-            shipLevel = 1;
-
-            fishingCount = 1;
-            currentFishingCount = 1;
-
-            
-            
-            fishingTime = 30;
-            maxFishingTime = 1800;
-        }
-        else
-        {
-            Debug.LogWarning("강제 되지 않은 초기화 선언 감지됌");
-        }
-    }
-
-    /// <summary>
-    /// 저장을 위해서 데이터를 호출 할 수 있는 부분.
-    /// </summary>
-    public void PullData()
-    {
-        
-    }
-
-    /// <summary>
-    /// 언어 설정을 위한 함수. 설정에서만 호출 할 것.
-    /// </summary>
-    /// <param name="lan">KOR : 한글 , ENG : 영어.</param>
-    public void ChangeLanguage(Language lan)
-    {
-        languageSetting = lan;
-        OnLanguageSettingChanged?.Invoke(languageSetting);
-    }
-
-    // 돈
-    // 인벤토리, 생선
-    // 도감????
-    // 손님 방문 횟수. 잠수 중 지나간 손님 수
-    // 업그레이드, 어떤 걸 얼만큼 업그레이드 되어 있는 지.
-    // 초밥 수
-    // 언어 등 개인 설정
-    // 미끼 갯수
-    // 타이머
-
     #region 기본 변수
 
     /// <summary>
@@ -123,7 +37,7 @@ public class DataTower : MonoBehaviour
         OnChangedMoney?.Invoke(money);
         return true;
     }
-    
+
 
 
     //List<Temp_Item> Items; // Item SO 작업 후 추가 작업 예정 @@@@@@@@@@@@@@@@@@@@
@@ -131,12 +45,27 @@ public class DataTower : MonoBehaviour
 
     #endregion
 
-    #region 식당
+    #region 식당 변수
 
     /// <summary>
     /// 손님 방문 횟수 카운터용
     /// </summary>
-    public ulong customerVisitCounter;
+    public ulong customerVisitCount { get; private set; }
+
+    /// <summary>
+    /// 일반 손님 방문 횟수.
+    /// </summary>
+    public uint normalCustomerVisitCount { get; private set; }
+
+    /// <summary>
+    /// 특별 손님 방문 횟수
+    /// </summary>
+    public uint SpecialCustomerVisitCount { get; private set; }
+
+    /// <summary>
+    /// 우대 손님 방문 횟수
+    /// </summary>
+    public uint VIPCustomerVisitCount { get; private set; }
 
     #endregion
 
@@ -146,12 +75,12 @@ public class DataTower : MonoBehaviour
     /// 마스터 볼륨 조절용
     /// </summary>
     public float masterVolume; // 실제 표기는 0~100 정수 값. 실제 slider에 들어가는 값은 0~1의 실수 값.
-    
+
     /// <summary>
     /// BGM 볼륨
     /// </summary>
     public float BGMVolume;
-    
+
     /// <summary>
     /// SFX 볼륨
     /// </summary>
@@ -251,6 +180,117 @@ public class DataTower : MonoBehaviour
     public float maxFishingTime;
 
     #endregion
+
+    /// <summary>
+    /// 데이터 초기화 되었는지 확인 함수
+    /// </summary>
+    public bool isDataInitiated = false;
+
+    /// <summary>
+    /// DataTower 싱글톤 패턴
+    /// </summary>
+    public static DataTower instance;
+    /// <summary>
+    /// 인벤토리용 리스트
+    /// </summary>
+    public List<FishData> Items = new List<FishData>();
+    /// <summary>
+    /// 인벤토리 슬롯 최댓값.
+    /// </summary>
+    public int InventorySlotMax;
+    
+    public event Action<string> OnFisingNewFish;
+    public event Action<Language> OnLanguageSettingChanged;
+
+    public event Action OnDataTowerLoaded;
+
+    private InventorySystem _inventorySystem; // 참조 걸어줄 방식 지정 필요.
+    private Dictionary<string, FishData> _fishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
+
+    public Language languageSetting { get; private set; } /// <summary> 현재 설정된 언어, 기본 값 : 영어 </summary>
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+        languageSetting = Language.ENG; // 기본 값 영어로 출력 되게 설정 되었습니다. 
+        InitializedData();
+        OnDataTowerLoaded?.Invoke();
+    }
+
+    public void InitializedData(bool ForcedInitialized = false)
+    {
+        if (!isDataInitiated || !ForcedInitialized)
+        {
+            if (ForcedInitialized)
+                Debug.Log("강제 초기화 실행");
+            _fishDatas = new Dictionary<string, FishData>(20); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
+            
+            money = 1000;
+
+            InventorySlotMax = 10;
+
+            customerVisitCount = 0;
+            
+            masterVolume = 0.5f;
+            BGMVolume = 0.5f;
+            SFXVolume = 0.5f;
+
+            fishingGrade = 1;
+            baitLevel = 1;
+            rodLevel = 1;
+            shipLevel = 1;
+
+            fishingCount = 1;
+            currentFishingCount = 1;
+
+            
+            
+            fishingTime = 30;
+            maxFishingTime = 1800;
+        }
+        else
+        {
+            Debug.LogWarning("강제 되지 않은 초기화 선언 감지됌");
+        }
+    }
+
+    /// <summary>
+    /// 저장을 위해서 데이터를 호출 할 수 있는 부분.
+    /// </summary>
+    public void PullData()
+    {
+        
+    }
+
+    /// <summary>
+    /// 언어 설정을 위한 함수. 설정에서만 호출 할 것.
+    /// </summary>
+    /// <param name="lan">KOR : 한글 , ENG : 영어.</param>
+    public void ChangeLanguage(Language lan)
+    {
+        languageSetting = lan;
+        OnLanguageSettingChanged?.Invoke(languageSetting);
+    }
+
+    // 돈
+    // 인벤토리, 생선
+    // 도감????
+    // 손님 방문 횟수. 잠수 중 지나간 손님 수
+    // 업그레이드, 어떤 걸 얼만큼 업그레이드 되어 있는 지.
+    // 초밥 수
+    // 언어 등 개인 설정
+    // 미끼 갯수
+    // 타이머
+
+   
 
     #region 식당 관련 함수들
 
