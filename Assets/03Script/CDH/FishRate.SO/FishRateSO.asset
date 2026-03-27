@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
+  m_Name: FishRateSO
+  m_EditorClassIdentifier: Assembly-CSharp::DataContainer
+  _mainLine: 4
+  URL: https://docs.google.com/spreadsheets/d/1ECiDweNf4ghy1wlQ9fKA470ThPJxurLs/edit?gid=119111717#gid=119111717
+  objs:
+  - {fileID: 11400000, guid: f27b9810b03d37d4581daab63c2c9aaf, type: 2}
+  - {fileID: 11400000, guid: 0846f5f4157cd1a4ebbc80e7d825c18e, type: 2}
+  - {fileID: 11400000, guid: a7cdec77907be7e4a87a06d83e282418, type: 2}
+  - {fileID: 11400000, guid: cde2b67e6f5d1b9418fc54c36015f533, type: 2}
+  - {fileID: 11400000, guid: 5f52356fee3f8e14dbbb7e88bfdd5381, type: 2}
+  - {fileID: 11400000, guid: 26420aa277e8b114d993e119f6a8ad85, type: 2}
+  - {fileID: 11400000, guid: ad6fc0ef554b4d4408381c12db94df8c, type: 2}
+  - {fileID: 11400000, guid: 349b08844c2d9f544adc5fc0dd317a90, type: 2}
+  - {fileID: 11400000, guid: 7edd4e6c3f6dad24cb1d0d1543ef3a83, type: 2}
+  - {fileID: 11400000, guid: eab5253f03e6b17448ecb6e4fa96af28, type: 2}

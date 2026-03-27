@@ -77,7 +77,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     /// </summary>
     public void BaitgradeMaxCount()
     {
-        float newTimer = 1800f;
+        float newTimer = 3600f;
 
         switch (_upgradeManager.BaitLevel)
         {
@@ -175,7 +175,9 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         if (selectedFish != null)
         {
-            Debug.Log($"{currentRarity}, {selectedFish.fishName}");
+            Debug.Log($"{currentRarity}, {selectedFish.korName}");
+
+            DataTower.instance.takeFish(selectedFish);
         }
     }
 
@@ -222,7 +224,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         foreach (FishData randomFish in fishDatabase)
         {
-            if (randomFish.fishRate == rarity)
+            if (randomFish.fishRarity.ToString() == rarity) 
             {
                 filteredFish.Add(randomFish);
             }

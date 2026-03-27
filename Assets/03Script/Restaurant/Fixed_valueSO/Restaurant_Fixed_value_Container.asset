@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7576c17431fb47d4d858d51840057914, type: 3}
   m_Name: Restaurant_Fixed_value_Container
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
-  _mainLine: 2
+  _mainLine: 3
   URL: https://docs.google.com/spreadsheets/d/1sS54fdN2yw-rtl24L7xjGuufwEtqKRVBO6rQiyyEHD8/edit?gid=2085573820#gid=2085573820
   objs:
   - {fileID: 11400000, guid: 6301e9a650f04b446a270797b2be7dd3, type: 2}

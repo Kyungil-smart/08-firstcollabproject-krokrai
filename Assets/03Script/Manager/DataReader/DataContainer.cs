@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Container", menuName = "DataReader/Container")]
@@ -12,6 +13,11 @@ public class DataContainer : ScriptableObject
     [Tooltip("해당 시트의 실제 값 형태로 저장된 행의 갯수만큼 넣어주세요.")]
     public ScriptableObject[] objs;
 
+    /// <summary>
+    /// 현재 SO가 정보 저장 및 읽기 가능 상태인지 확인용
+    /// false = 읽기 불가
+    /// true = 읽기 가능
+    /// </summary>
     [HideInInspector] public bool isDataLoaded { get; private set; } = false;
 
     public void SetDatas(char splitSymbol, string[] lines)
@@ -35,13 +41,19 @@ public class DataContainer : ScriptableObject
             }
             string[] cols = lines[i].Split(splitSymbol);
 
+            if ( i - mainLine >= objs.Length )
+            {
+                Debug.LogError($"입력된 SO의 갯수가 읽어 드린 시트의 행수보다 적습니다. 위치 : {this.name} 혹은 {objs[0].name}");
+                return;
+            }
+
             if (objs[i - mainLine] is IDataSeter )
             {
                 (objs[i - mainLine] as IDataSeter).SetData(cols);
             }
             else
             {
-                Debug.LogWarning($"{objs[i - mainLine].name}에 <color = red>IDataSeter</color>가 포함되어 있지 않습니다.");
+                Debug.LogWarning($"{objs[i - mainLine].name}에 <color=red>IDataSeter</color>가 포함되어 있지 않습니다.");
             }
         }
 

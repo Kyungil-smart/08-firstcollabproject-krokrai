@@ -35,6 +35,24 @@ public class FishListManager : MonoBehaviour
             return;
         }
 
+        // 이미지 연결여부 체크
+        if (fishDisplayImage == null)
+        {
+            return;
+        }
+
+        if (string.IsNullOrEmpty(currentFish.fishID))
+        {
+            Debug.Log($"{this.name}: 시트 데이터가 없습니다.");
+            return;
+        }
+
+        if(fishNumText == null)
+        {
+            Debug.Log("인스펙터에서 FishNumText를 연결하세요");
+            return;
+        }
+
         // 물고기를 잡은 경우 도감에 정보가 공개
         if (currentFish.isCaught)
         {

@@ -44,7 +44,7 @@ public class RecipModel : MonoBehaviour
     }
 
     /// <summary>
-    ///
+    /// 해당 물고기가 있어 만들 수 있는 지 판단.
     /// </summary>
     /// <param name="canUnlock"></param>
     public void CanMakeDish(bool canMake)
