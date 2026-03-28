@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FishDataSO
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
   _mainLine: 4
-  URL: https://docs.google.com/spreadsheets/d/1dHXAyPUFog1jobErjLGzVv9B0kvEP2eLKdm1clTT4WE/edit?gid=1285596700#gid=1285596700
+  URL: https://docs.google.com/spreadsheets/d/1hRIRi-KPGhrhNpjivmk3fK_2HeK9YeP1eK5ygCh837w/edit?gid=1444521053#gid=1444521053
   objs:
   - {fileID: 11400000, guid: 2f6617075e044b349ba0985eaeb9ff2d, type: 2}
   - {fileID: 11400000, guid: c3b48134c3eaa754e87e99fc4f89ac2c, type: 2}
@@ -60,19 +60,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b93174cc185fe6459a8f8ea4f39d81f, type: 2}
   - {fileID: 11400000, guid: 40bd6497f68791b42811fe9637c79916, type: 2}
   - {fileID: 11400000, guid: eb94cc9ff99ebe244848267fb730ab05, type: 2}
-  - {fileID: 11400000, guid: d1e7c0322276f2244b8411ae6870c744, type: 2}
-  - {fileID: 11400000, guid: b5858bad9fcace248b8a4bd3bc3c9dbd, type: 2}
-  - {fileID: 11400000, guid: bae24d5773b75044884115177f47db20, type: 2}
-  - {fileID: 11400000, guid: 906b38423b30b4d429222cd628eb5101, type: 2}
-  - {fileID: 11400000, guid: 169f290b2a9d75a469775401e70e7b1a, type: 2}
-  - {fileID: 11400000, guid: f4b2ed98b1d0238469433fc666e5ee45, type: 2}
-  - {fileID: 11400000, guid: e007fc4ff422953429ed8642bbc88612, type: 2}
-  - {fileID: 11400000, guid: 21b075de265fcec48910ae301bdd43f2, type: 2}
-  - {fileID: 11400000, guid: a624a09fcca3cfc419863a52f7973000, type: 2}
-  - {fileID: 11400000, guid: 67261c3a406550543a382692980fcec2, type: 2}
-  - {fileID: 11400000, guid: 37d80531615cf714e8ed9918b1359f99, type: 2}
-  - {fileID: 11400000, guid: 5f45ea1c8b3060b4cbe05b68647b2e3b, type: 2}
-  - {fileID: 11400000, guid: d50bb94a9a652d34d8f5f57a43571691, type: 2}
-  - {fileID: 11400000, guid: 42692486fd6649a448bbc44ed9e68a7d, type: 2}
-  - {fileID: 11400000, guid: 17020dbd28eeede41ad0d045538b8fea, type: 2}
-  - {fileID: 11400000, guid: f4a87b4b5c1c93348b4c839bcb7f9f13, type: 2}

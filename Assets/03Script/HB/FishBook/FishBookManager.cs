@@ -61,7 +61,7 @@ public class FishBookManager : MonoBehaviour
             if (_containers.TryGetValue(fishData.fishRarity, out Transform targetParent))
             {
                 GameObject go = Instantiate(fishSlot, targetParent);
-                go.GetComponent<FishSlot>()?.Setup(fishData, fishListManager);
+                go.GetComponent<FishSlot>()?.SetupFishBook(fishData, fishListManager);
             }
         }
     }

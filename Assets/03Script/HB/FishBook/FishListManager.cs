@@ -35,15 +35,15 @@ public class FishListManager : MonoBehaviour
             return;
         }
 
-        // 이미지 연결여부 체크
-        if (fishDisplayImage == null)
-        {
-            return;
-        }
-
         if (string.IsNullOrEmpty(currentFish.fishID))
         {
             Debug.Log($"{this.name}: 시트 데이터가 없습니다.");
+            return;
+        }
+
+        // 이미지 연결여부 체크
+        if (fishDisplayImage == null)
+        {
             return;
         }
 

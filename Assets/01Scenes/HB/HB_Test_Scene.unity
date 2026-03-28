@@ -938,6 +938,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 271770491794643506, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+      propertyPath: m_CellSize.y
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 305461058498415661, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1206,6 +1210,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7826232319920026816, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+      propertyPath: fishSlot
+      value: 
+      objectReference: {fileID: 9144010664940869420, guid: dc57a5b26daa68e428fafafa22fb020f, type: 3}
+    - target: {fileID: 7826232319920026816, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+      propertyPath: fishSlotPrefab
+      value: 
+      objectReference: {fileID: 7117152015522792800, guid: 6f1f8947830768b42a705643f4faf3d1, type: 3}
     - target: {fileID: 8208972100466138968, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1231,8 +1243,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6060554061192649259, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 7620313190040571955, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 5636064398762798484, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 475887889013999393, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 7051985182613169109, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 6108745198742043363, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 8476013590144432338, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 5913182412996241895, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    - {fileID: 1961848348816650290, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6239824138721453289, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1769369050}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
 --- !u!1 &475914209
@@ -2947,6 +2971,87 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1769369049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1769369050}
+  - component: {fileID: 1769369051}
+  m_Layer: 5
+  m_Name: DataTower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1769369050
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769369049}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1338881155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 435, y: 84}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1769369051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769369049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71589b6d60dbf94caf230398b4eb580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DataTower
+  masterVolume: 0
+  BGMVolume: 0
+  SFXVolume: 0
+  transparentLevel: 0
+  fishingGrade: 0
+  baitLevel: 0
+  rodLevel: 0
+  shipLevel: 0
+  fishingCount: 0
+  currentFishingCount: 0
+  catchFishs: 0
+  catchFishTrash: 0
+  catchFishNormal: 0
+  catchFishFine: 0
+  catchFishSuperior: 0
+  catchFishRare: 0
+  catchFishElite: 0
+  catchFishFantastic: 0
+  catchFishLegendary: 0
+  fishingTime: 0
+  maxFishingTime: 0
+  isDataInitiated: 0
+  Items:
+  - {fileID: 11400000, guid: 2f6617075e044b349ba0985eaeb9ff2d, type: 2}
+  - {fileID: 11400000, guid: 6185acb9f884ad0459a33bed3f0a6c78, type: 2}
+  - {fileID: 11400000, guid: 149bcb8e7df0ab8488b1c15393327455, type: 2}
+  - {fileID: 11400000, guid: 717d03fad19411847b8bac5833923be0, type: 2}
+  - {fileID: 11400000, guid: 95eb326bb60f1454f905b1ada77ea2c4, type: 2}
+  - {fileID: 11400000, guid: 5f10c4346b70a7d45998aa1d447285fa, type: 2}
+  - {fileID: 11400000, guid: ef3e21c676b36a44eb097d71ec643094, type: 2}
+  - {fileID: 11400000, guid: 5b93174cc185fe6459a8f8ea4f39d81f, type: 2}
+  - {fileID: 11400000, guid: c3b48134c3eaa754e87e99fc4f89ac2c, type: 2}
+  InventorySlotMax: 0
 --- !u!1 &2029233294
 GameObject:
   m_ObjectHideFlags: 0
