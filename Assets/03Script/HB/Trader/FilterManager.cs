@@ -12,7 +12,7 @@ public class FilterManager : MonoBehaviour
 
     private void Awake()
     {
-        // 각 토글에 리스너를 등록하여 실시간 상호작용 구현
+        // 각 토글에 리스너를 등록하여 실시간 상호작용
         for (int i = 0; i < gradeToggles.Length; i++)
         {
             int index = i;
@@ -21,6 +21,8 @@ public class FilterManager : MonoBehaviour
                 gradeToggles[i].onValueChanged.AddListener((isOn) => OnToggleValueChanged(index, isOn));
             }
         }
+
+        ResetFilter();
     }
 
 

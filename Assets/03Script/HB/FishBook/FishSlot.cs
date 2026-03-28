@@ -71,7 +71,7 @@ public class FishSlot : MonoBehaviour
 
         if(_traderUI != null)
         {
-            _traderUI.SellButtonState();
+            _traderUI.OnSlotChanged();
         }
     }
 
