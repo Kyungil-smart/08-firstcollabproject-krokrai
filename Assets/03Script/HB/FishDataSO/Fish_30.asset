@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Fish_30
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_30
+  korName: "\uD574\uD30C\uB9AC"
+  engName: Jellyfish
+  fishRarity: 5
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 200
+  weight: 200
+  fishSprite: {fileID: 4966732595609684114, guid: 657149715d50440418fcd4f26b01f4c5, type: 3}
+  silhouetteSprite: {fileID: 4457835537561387818, guid: a657a0d48935d5740935648d017c31c0, type: 3}
+  price: 1000
+  korDescription: "\uC124\uBA85 \uCC44\uC6B0\uC790"
+  engDescription: "Dummy Description\r"

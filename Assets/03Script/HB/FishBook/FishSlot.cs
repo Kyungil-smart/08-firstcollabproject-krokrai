@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class FishSlot : MonoBehaviour
 {
     [Header("원본 프리팹")]
     public Image fishImage;     // 물고기 이미지
+    public FishListManager fishListManager; // 도감 매니저 참조용
 
     [Header("상점 전용 프리팹(도감용에선 비워둠)")]
     public TextMeshProUGUI priceText;
@@ -14,7 +16,6 @@ public class FishSlot : MonoBehaviour
 
     private FishData _currentFishData;
     private TraderUI _traderUI;
-    private FishListManager _fishListManager; // 도감 매니저 참조용
 
     // 상점용 셋업 함수
     public void SetupTrader(FishData data, TraderUI trader)
@@ -45,21 +46,55 @@ public class FishSlot : MonoBehaviour
         }
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // 도감용 FishSlot일 때만 동작
+        if(fishListManager != null && _currentFishData != null)
+        {
+            // FishList 오브젝트에 데이터 전달, UI갱신
+            fishListManager.ChangeFishData(_currentFishData);
+
+            // FishList 오브젝트 활성화
+            fishListManager.gameObject.SetActive(true);
+        }
+    }
+
     // 도감용 셋업 함수
     public void SetupFishBook(FishData data, FishListManager fishListManager)
     {
         _currentFishData = data;
-        _fishListManager = fishListManager;
+        this.fishListManager = fishListManager;
 
         if (fishImage != null)
         {
-            fishImage.sprite = data.fishSprite;
+            if (data.isCaught)
+            {
+                fishImage.sprite = data.fishSprite;
+            }
+            else
+            {
+                fishImage.sprite = data.silhouetteSprite;
+            }
         }
+
 
         // 도감용에서는 상점 UI 비활성화
         if (priceText != null) priceText.gameObject.SetActive(false);
         if (slotToggle != null) slotToggle.gameObject.SetActive(false);
         if (highlightUI != null) highlightUI.SetActive(false);
+    }
+
+    public void OnSlotClick()
+    {
+        if (fishListManager == null) Debug.LogError($"{gameObject.name}: 매니저가 연결되지 않았습니다");
+        if (_currentFishData == null) Debug.LogError($"{gameObject.name}: 물고기 데이터가 없습니다");
+
+        if (fishListManager != null && _currentFishData != null)
+        {
+            Debug.Log($"{_currentFishData.korName} 클릭됨, 상세창을 엽니다");
+            fishListManager.ChangeFishData(_currentFishData);
+            fishListManager.gameObject.SetActive(true);
+        }
     }
 
     private void OnToggleChanged(bool isOn)

@@ -21,6 +21,8 @@ public class FishData : ScriptableObject, IDataSeter
     public string korDescription;       // 물고기 설명(한국어)
     public string engDescription;       // 물고기 설명(영어)
 
+    public string caughtDat;            // 물고기 잡은 날짜
+
     public void SetData(string[] datas)
     {
         if (datas == null)

@@ -15,7 +15,7 @@ public class FishListManager : MonoBehaviour
     public Image fishDisplayImage;          // FishImage Image 연결
 
     [Header("Details 텍스트 오브젝트 연결")]
-    public TextMeshProUGUI detailsText;     // Details TMP 연결
+    public TextMeshProUGUI descriptionText;     // Details TMP 연결
 
     [Header("분류, 길이, 무게 연결")]
     public TextMeshProUGUI groupText;       // Group TMP 연결
@@ -30,71 +30,42 @@ public class FishListManager : MonoBehaviour
 
     public void UpdateFishUI()
     {
-        if(currentFish == null)
+        if(currentFish == null) return;
+
+        bool isCaught = currentFish.isCaught;
+        
+        // 삼항 연산자 잡았으면 물고기 정보 띄우고 아니면 ???
+        SafeLink(fishNumText, currentFish.fishID);
+        SafeLink(fishNameText, isCaught ? currentFish.korName : "???");
+        SafeLink(fishRateText, isCaught ? currentFish.fishRarity.ToString() : "???");
+        SafeLink(groupText, isCaught ? currentFish.fishType.ToString() : "???");
+        SafeLink(lengthText, isCaught ? $"{currentFish.length} cm" : "???");
+        SafeLink(weightText, isCaught ? $"{currentFish.weight} kg" : "???");
+        SafeLink(descriptionText, isCaught ? currentFish.korDescription : "아직 발견되지 않음");
+
+        // 이미지 업데이트
+        if (fishDisplayImage != null)
         {
-            return;
-        }
+            // 잡았다면 물고기 이미지, 못 잡았다면 실루엣
+            Sprite displaySprite = isCaught ? currentFish.fishSprite : currentFish.silhouetteSprite;
 
-        if (string.IsNullOrEmpty(currentFish.fishID))
-        {
-            Debug.Log($"{this.name}: 시트 데이터가 없습니다.");
-            return;
-        }
-
-        // 이미지 연결여부 체크
-        if (fishDisplayImage == null)
-        {
-            return;
-        }
-
-        if(fishNumText == null)
-        {
-            Debug.Log("인스펙터에서 FishNumText를 연결하세요");
-            return;
-        }
-
-        // 물고기를 잡은 경우 도감에 정보가 공개
-        if (currentFish.isCaught)
-        {
-            // 물고기 번호, 이름, 등급 정보 전달
-            fishNumText.text = currentFish.fishID;
-            fishNameText.text = currentFish.korName;
-            fishRateText.text = currentFish.fishRarity.ToString();
-
-            // 물고기 이미지 정보 전달
-            fishDisplayImage.sprite = currentFish.fishSprite;
-            fishDisplayImage.color = Color.white;   // 원래 이미지로 표시
-
-            // 물고기 종류, 길이, 무게 정보 전달
-            groupText.text = currentFish.fishType.ToString();
-            lengthText.text = $"{currentFish.length} cm";
-            weightText.text = $"{currentFish.weight} kg";
-
-            // 상세 설명 부분 '설명(information)'버튼의 내용으로 초기화
-            detailsText.text = currentFish.korDescription;
-        }
-        // 못 잡은 경우 정보가 공개되지 않음
-        else
-        {
-            // 물고기 번호, 이름, 등급 정보
-            fishNumText.text = currentFish.fishID;
-            fishNameText.text = "???";              // 이름 숨김
-            fishRateText.text = "???";              // 등급 숨김
-
-            // 물고기 이미지 정보
-            if (currentFish.silhouetteSprite != null)
+            if (displaySprite != null)
             {
-                fishDisplayImage.sprite = currentFish.silhouetteSprite;
+                fishDisplayImage.sprite = displaySprite;
+                fishDisplayImage.color = Color.white;
             }
-
-            groupText.text = "???";
-            lengthText.text = "???";
-            weightText.text = "???";
-            detailsText.text = "아직 발견되지 않은 물고기입니다.";
         }
     }
 
-    // 테스트용 코드
+    private void SafeLink(TextMeshProUGUI tmp, string content)
+    {
+        if (tmp != null)
+        {
+            tmp.text = content;
+        }
+    }
+
+    
     public void ChangeFishData(FishData newData)
     {
         Debug.Log("버튼 눌림");
@@ -102,7 +73,11 @@ public class FishListManager : MonoBehaviour
 
         currentFish = newData;
         UpdateFishUI();
-        Debug.Log($"{newData.korName}으로 교체");
+        
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     /* 기획에서 사라진 버튼
