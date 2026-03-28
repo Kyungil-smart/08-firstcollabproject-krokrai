@@ -45,11 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddafeccfe9ec2514e86183e22480fa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerController
-  _data: {fileID: 11400000, guid: fbb281ec03a12614483bc71737c1382e, type: 2}
-  _moveSpeed: 1
-  _eatDuration: 3
-  _priceFactor: 1
-  _spawnDelay: 0
+  _data: {fileID: 11400000, guid: 01fcf549028a3774d9e67691acc26fc7, type: 2}
+  _fixedValue: {fileID: 0}
 --- !u!1 &4590847529964708730
 GameObject:
   m_ObjectHideFlags: 0

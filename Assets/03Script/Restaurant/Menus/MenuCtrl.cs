@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class MenuCtrl : MonoBehaviour
     [SerializeField] DishUI[] dishUIs;
     List<DishUI> _inDishUList = new List<DishUI>(10);
 
+    public event Action<bool> OnMaxMenu;
 
 
     // 아래 2개의 값은 데이터 타워에서 받아오기
@@ -29,6 +31,7 @@ public class MenuCtrl : MonoBehaviour
         if (InsertedDish >= maxDsih)
         {
             Debug.Log("더 이상 메뉴를 추가할 수 없습니다."); // TODO : 임시용 코드 후에 재작업 필요 @@@@@
+            OnMaxMenu?.Invoke(true);
             return;
         }
             
@@ -50,14 +53,15 @@ public class MenuCtrl : MonoBehaviour
         { 
             return 0;
         }
-        return _inDishUList[Random.Range(0, _inDishUList.Count)].EatMenu();
+        return _inDishUList[UnityEngine.Random.Range(0, _inDishUList.Count)].EatMenu();
     }
 
 #if UNITY_EDITOR
     public void RandomEting()
     {
+        
         if (_inDishUList.Count <= 0) return;
-        _inDishUList[Random.Range(0, _inDishUList.Count)].EatMenu();
+        _inDishUList[UnityEngine.Random.Range(0, _inDishUList.Count)].EatMenu();
     }
 #endif
 

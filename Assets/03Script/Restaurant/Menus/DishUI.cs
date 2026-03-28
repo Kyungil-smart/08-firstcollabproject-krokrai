@@ -54,10 +54,6 @@ public class DishUI : MonoBehaviour
     /// </summary>
     public int EatMenu()
     {
-        if ( _sushi <= 0 )
-        {
-            return 0;
-        }
         _sushi--;
         _tmpUGUI[1].text = _sushi.ToString();
 

@@ -7,7 +7,6 @@ public class MenuPanelController : MonoBehaviour
     [SerializeField] FishData tempFishData;
     [SerializeField] RecipeContainer _recipe;
     [SerializeField] RecipeInfoUI _recipeInfoUI;
-    [SerializeField] Button _btn;
     [SerializeField] MenuCtrl _menuCtrl;
 
     bool isUnlocked;
@@ -27,9 +26,9 @@ public class MenuPanelController : MonoBehaviour
     public void SelectedRecipe() //(RecipeContainer rcp)
     {
         //_recipe = rcp;
-        _recipeInfoUI.SelectedRecipe(_recipe, tempFishData);
+        _recipeInfoUI.SelectedRecipe(_recipe, isUnlocked);
 
-        CanMakeDish();
+        //CanMakeDish();
     }
     
     // 선택된 레시피가 요리하기를 눌렀다면, 해당 함수에서 메뉴 crtl에 넣겨주기 현재 대기열 max인 경우 요리하기 못하게 하기..
@@ -37,18 +36,5 @@ public class MenuPanelController : MonoBehaviour
     {
         // 현재 열려 있는 메뉴 칸 보다 더 넣을려고 할때 예외처리. 버튼 자체가 작동 안하게 해야됌
         _menuCtrl.InsertDish(_recipe);
-        CanMakeDish();
-    }
-
-    public void CanMakeDish()
-    {
-        if (_menuCtrl.InsertedDish >= _menuCtrl.maxDsih) // 임시로만 처리.
-        {
-            _btn.GetComponent<Button>().interactable = false;
-        }
-        else
-        {
-            _btn.GetComponent<Button>().interactable = true;
-        }
     }
 }

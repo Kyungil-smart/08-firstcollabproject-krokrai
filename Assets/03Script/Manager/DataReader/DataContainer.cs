@@ -18,12 +18,16 @@ public class DataContainer : ScriptableObject
     /// false = 읽기 불가
     /// true = 읽기 가능
     /// </summary>
-    [HideInInspector] public bool isDataLoaded { get; private set; } = false;
+    public bool isDataLoaded { get; private set; } = false;
+
+    private void Awake()
+    {
+        isDataLoaded = false;
+    }
 
     public void SetDatas(char splitSymbol, string[] lines)
     {
         int mainLine = _mainLine - 1;
-        isDataLoaded = false;
 
         if (lines == null)
         {

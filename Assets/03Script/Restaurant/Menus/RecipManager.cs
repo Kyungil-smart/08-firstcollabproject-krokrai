@@ -9,20 +9,19 @@ Action으로 만들 수 있는 지 없는지만, 넘겨주기.
 overload를 통해 최대 4개까지 받고 넘겨주기.
 
  */
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RecipManager : MonoBehaviour
 {
-    [SerializeField]
-    RecipeContainer[] _rcps;
-
+    
     [SerializeField] GameObject _scrollViewContent;
+    [SerializeField] DataContainer _dataCon;
+    [SerializeField] GameObject tempRecipeObj;
+    [SerializeField] RecipeInfoUI _riu;
 
-    [SerializeField]
-    GameObject tempRecipeObj;
-
+    RecipeContainer _rcps;
     GameObject obj;
 
     Dictionary<string,GameObject> _recipes; // 매니저가 SO에 대한 접근 및 지정 필요
@@ -30,17 +29,39 @@ public class RecipManager : MonoBehaviour
 
     // 기존 데이터는 약 30개의 레시피가 있으면 모두 호출 될 수 있기 때문에 삭제 처리
 
-    private void Awake()
+    private void Start()
     {
-        _recipes = new Dictionary<string, GameObject>(_rcps.Length);
-        for(int i = 0; i < _rcps.Length; i++)
+        StartCoroutine(DataRead());
+    }
+
+    IEnumerator DataRead()
+    {
+        while ( !_dataCon.isDataLoaded )
         {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        if ( _dataCon.objs[0] is not RecipeContainer )
+        {
+            Debug.LogError($"{gameObject.name}에 저장된 DataContainer가 RecipeContainer가 들어있지 않는 컨테이너입니다.");
+            yield break;
+        }
+        
+        
+        _recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
+        for (int i = 0; i < _dataCon.objs.Length; i++)
+        {
+            _rcps = _dataCon.objs[i] as RecipeContainer;
             obj = Instantiate(tempRecipeObj, transform.position, Quaternion.identity);
             obj.transform.SetParent(_scrollViewContent.transform, false);
-            obj.name = _rcps[i].name;
-            _recipes.Add(_rcps[i].recipe_ID, obj);
+            obj.GetComponent<RecipModel>().InitRecip(_rcps, _riu);
+            obj.name = _rcps.name;
+
+            _recipes.Add(_rcps.recipe_ID, obj);
         }
+        yield break;
     }
+
 
     private void OnEnable()
     {
@@ -70,7 +91,7 @@ public class RecipManager : MonoBehaviour
     /// <param name="n"></param>
     public void FirstFishingFish(string fishID)
     {
-        _recipes[fishID].GetComponent<RecipModel>().UnlockConditionsMet();
+        _recipes[fishID].GetComponent<RecipModel>().CanUnlockConditionsMet();
     }
     // Data Tower에서 3가지 Action을 만들어서 1번 : 들어오거나 나가는 경우, 2번 : 갯수가 0이 된경우, 3번 : 갯수가 0이 아닌경우. 4번 : 도감용 첫 획득인 경우.
 }

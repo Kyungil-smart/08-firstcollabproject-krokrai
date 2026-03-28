@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3114da32e2482f64f8c155c0534b1c43, type: 3}
   m_Name: Recipe 6
   m_EditorClassIdentifier: Assembly-CSharp::RecipeContainer
-  recipe_ID: 
-  recipe_Type: 0
-  recipe_KName: 
-  recipe_EName: 
-  prices: 0
-  yield: 0
-  ingredient: 
-  count: 0
-  dish_Sprite: 
-  silhouette_Sprite: 
-  KDescription: 
-  EDescription: 
+  recipe_ID: Recipe_7
+  recipeRarity: 1
+  recipe_KName: "\uB178\uB974\uC6E8\uC774 \uCC38\uACE0\uB4F1\uC5B4 \uAD6C\uC774"
+  recipe_EName: Grilled Norwegian Mackerel
+  prices: 20
+  yield: 25
+  ingredient: Fish_7
+  dish_Sprite: NullException
+  silhouette_Sprite: NullException
+  KDescription: "\uD3C9\uBC94\uD55C \uB178\uB974\uC6E8\uC774 \uCC38 \uACE0\uB4F1\uC5B4
+    \uAD6C\uC774\uB2E4."
+  EDescription: "This is a simple grilled Norwegian mackerel.\r"

@@ -12,6 +12,8 @@ public class CustomerController : MonoBehaviour
     private Customer_Tips _tips;
     [SerializeField] private Restaurant_Fixed_value _fixedValue;
 
+    string col;
+
     /*
     // 데이터 나중에 DataTower에서 받아오기.
     [Header("Runtime Data")]
@@ -57,10 +59,12 @@ public class CustomerController : MonoBehaviour
     /// <param name="restaurant"></param>
     /// <param name="seat"></param>
     /// <param name="exitPoint"></param>
-    public void SetInfo(RestaurantSeat seat, Transform exitPoint, Customer_Tips tip)
+    public void SetInfo(RestaurantSeat seat, Transform exitPoint, Customer_Tips tip, in string s)
     {
         _seat = seat;
         _exitPoint = exitPoint;
+
+        col = s;
 
         _tips = tip;
         _eatCounte = 0;
@@ -92,7 +96,11 @@ public class CustomerController : MonoBehaviour
                     _anim.Play("Sit");
                     // 레이어 위치 변경
                     _sr.sortingOrder = -1;
+
+                    yield return new WaitForEndOfFrame();
+
                     // 식사 대기시간.
+                    /*
                     for (int i = 0; i < _maxEatCount; i++)
                     {
                         if (_data.orderChans[i] == 0 || _data.orderChans[i] == -1)
@@ -102,10 +110,11 @@ public class CustomerController : MonoBehaviour
                         else if (Random.Range(0, 1f) <= _data.orderChans[_eatCounte])
                         {
                             yield return new WaitForSeconds(_data.orderTime[i]);
-                            _restaurant.TryCounsumeSushiAndEarnMoney((int)(1000 * _tips.tipsMulti));
+                            _restaurant.TryCounsumeSushiAndEarnMoney((int)(1000)); //*  _tips.tipsMulti));
                             yield return new WaitForSeconds(_data.eatDuration[i]); // WaitForSeconds 너무 많은 호출 후에 개선 필요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         }
                     }
+                    */
 
                     _state = CustomerState.Exit;
                     break;
@@ -119,7 +128,6 @@ public class CustomerController : MonoBehaviour
                     _anim.Play("Walk");
                     // 탈출 포인트까지 대기
                     yield return StartCoroutine(CoMoveTo(_exitPoint.position));
-                    Debug.Log($"{gameObject.name} 도착");
                     _seat.ClearSeat();
                     _restaurant.DeSpawnCustomer(gameObject);
                     yield break;
@@ -128,14 +136,20 @@ public class CustomerController : MonoBehaviour
         }
     }
 
+    float d;
+
     private IEnumerator CoMoveTo(Vector3 targetPos)
     {
+        d = 0;
         // 지정 좌석까지 이동하는 것을 구현.
         while ((transform.position - targetPos).sqrMagnitude > 0.01f)
         {
+            d += Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, targetPos, _data.flow_Velocity * Time.deltaTime);
             yield return null;
         }
         transform.position = targetPos;
+        Debug.Log($"<color={col}>{this.name} 이동 완료까지 걸린 시간 : {d}</color>");
+        yield break;
     }
 }

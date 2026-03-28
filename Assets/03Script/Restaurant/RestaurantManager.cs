@@ -49,6 +49,7 @@ public class RestaurantManager : MonoBehaviour
         {
             GameObject obj = Instantiate(_customerPrefab[0]);
             obj.GetComponent<CustomerController>().ConnectRestaurant(this);
+            obj.name = $"customer {i}";
             obj.SetActive(false);
             _customerPool.Enqueue( obj );
         }
@@ -84,7 +85,8 @@ public class RestaurantManager : MonoBehaviour
                 yield break;
 
             // 스폰 대기 시간.
-            yield return _baseDelay ;
+            //yield return _baseDelay ;
+            yield return new WaitForSeconds(1);
             // 후에 추가 딜레이 필요
 
             // 초밥이 없는 겨우 예외처리
@@ -120,7 +122,33 @@ public class RestaurantManager : MonoBehaviour
         seat.SetOccupied();
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
-        //_randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft);
+        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft,null, RndColor());
+    }
+    
+    // 임시 함수
+    private string RndColor()
+    {
+        switch (UnityEngine.Random.Range(0, 8))
+        {
+            case 0:
+                return "white";
+            case 1:
+                return "black";
+            case 2:
+                return "red";
+            case 3:
+                return "green";
+            case 4:
+                return "blu";
+            case 5:
+                return "yellow";
+            case 6:
+                return "cyan";
+            case 7:
+                return "brown";
+            default:
+                return "$fc8a1f";
+        }
     }
 
     /// <summary>
