@@ -17,10 +17,11 @@ public class FishListManager : MonoBehaviour
     [Header("Details 텍스트 오브젝트 연결")]
     public TextMeshProUGUI descriptionText;     // Details TMP 연결
 
-    [Header("분류, 길이, 무게 연결")]
+    [Header("분류, 길이, 무게, 잡은 날짜 연결")]
     public TextMeshProUGUI groupText;       // Group TMP 연결
     public TextMeshProUGUI lengthText;      // Length TMP 연결
     public TextMeshProUGUI weightText;      // Weight TMP 연결
+    public TextMeshProUGUI caughtDateText;  // CaughtData TMP 연결
 
     private void Start()
     {
@@ -42,6 +43,7 @@ public class FishListManager : MonoBehaviour
         SafeLink(lengthText, isCaught ? $"{currentFish.length} cm" : "???");
         SafeLink(weightText, isCaught ? $"{currentFish.weight} kg" : "???");
         SafeLink(descriptionText, isCaught ? currentFish.korDescription : "???");
+        SafeLink(caughtDateText, isCaught ? currentFish.caughtDate : "???");
 
         // 이미지 업데이트
         if (fishDisplayImage != null)
@@ -79,24 +81,4 @@ public class FishListManager : MonoBehaviour
             gameObject.SetActive(true);
         }
     }
-
-    /* 기획에서 사라진 버튼
-    // Information 버튼 클릭 이벤트
-    public void OnClickInformation()
-    {
-        if(currentFish != null)
-        {
-            detailsText.text = currentFish.korDescription;
-        }
-    }
-
-    // Effect 버튼 클릭 이벤트
-    public void OnClickEffect()
-    {
-        if(currentFish != null)
-        {
-            detailsText.text = currentFish.effectButton;
-        }
-    }
-    */
 }

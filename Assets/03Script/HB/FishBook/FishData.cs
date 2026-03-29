@@ -21,7 +21,7 @@ public class FishData : ScriptableObject, IDataSeter
     public string korDescription;       // 물고기 설명(한국어)
     public string engDescription;       // 물고기 설명(영어)
 
-    public string caughtDat;            // 물고기 잡은 날짜
+    public string caughtDate;            // 물고기 잡은 날짜
 
     public void SetData(string[] datas)
     {
@@ -92,6 +92,20 @@ public class FishData : ScriptableObject, IDataSeter
                 return EFish_Type.Garbage;
             default: 
                 return EFish_Type.Null;
+        }
+    }
+
+    // 인스펙터 테스트용
+    [ContextMenu("TestCatch")]
+
+    public void CatchFishDate()
+    {
+        // 처음 잡았을 때만 실행
+        if (!isCaught)
+        {
+            isCaught = true;
+            caughtDate = System.DateTime.Now.ToString("yyyy.MM.dd");
+            Debug.Log($"{korName} 포획, 잡은 날짜: {caughtDate}");
         }
     }
 }

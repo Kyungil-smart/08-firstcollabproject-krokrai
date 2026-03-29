@@ -17,7 +17,7 @@ MonoBehaviour:
   korName: "\uD3D0\uD0C0\uC774\uC5B4"
   engName: Tire
   fishRarity: 0
-  fishType: 3
+  fishType: -1
   length: 1
   weight: 1
   fishSprite: {fileID: 4966732595609684114, guid: 657149715d50440418fcd4f26b01f4c5, type: 3}
@@ -25,3 +25,4 @@ MonoBehaviour:
   price: 1
   korDescription: "\uBA39\uC73C\uBA74 \uC9C4\uC9DC \uC8FD\uC2B5\uB2C8\uB2E4"
   engDescription: "You would die if you eat this trash.\r"
+  caughtDate: 2026.03.29

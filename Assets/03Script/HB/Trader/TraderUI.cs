@@ -178,6 +178,6 @@ public class TraderUI : MonoBehaviour
     private void UpdateGoldUI(ulong money)
     {
         // "N0"로 세자리 당 ',' 찍어주기 
-        if (goldText != null) goldText.text = $"보유 금액: {money.ToString("N0")} Gold";
+        if (goldText != null) goldText.text = $"Money: {money.ToString("N0")} Gold";
     }
 }
