@@ -118,21 +118,13 @@ public class FishingUpgradeManager : MonoBehaviour
 
     private void OnEnable()
     {
-        OnEnableReqGoldCheck();
+        CheckReqGolds();
         StartCoroutine(LoadingOnEnableRoutine());
     }
 
     private void OnDisable()
     {
         EventDisable();
-    }
-
-    private void OnEnableReqGoldCheck()
-    {
-        _dataReader.GetFishingGradeReqGoldData(FishingGrade ,out _fishingGradeReqGold);
-        _dataReader.GetBaitLevelReqGoldData(BaitLevel ,out _baitLevelReqGold);
-        _dataReader.GetRodLevelReqGoldData(RodLevel ,out _rodLevelReqGold);
-        _dataReader.GetShipLevelReqGoldData(ShipLevel ,out _shipLevelReqGold);
     }
 
     #region 이벤트 구독/해제
@@ -178,6 +170,7 @@ public class FishingUpgradeManager : MonoBehaviour
             DataTower.instance.TryMoenyChanged((ulong)_fishingGradeReqGold);
             OnFishingUpgrade?.Invoke(FishingGrade);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
     }
@@ -193,6 +186,7 @@ public class FishingUpgradeManager : MonoBehaviour
             DataTower.instance.TryMoenyChanged((ulong)_baitLevelReqGold);
             OnBaitUpgrade?.Invoke(BaitLevel);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
     }
@@ -208,6 +202,7 @@ public class FishingUpgradeManager : MonoBehaviour
             DataTower.instance.TryMoenyChanged((ulong)_rodLevelReqGold);
             OnRodUpgrade?.Invoke(RodLevel);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
     }
@@ -223,15 +218,9 @@ public class FishingUpgradeManager : MonoBehaviour
             DataTower.instance.TryMoenyChanged((ulong)_shipLevelReqGold);
             OnShipUpgrade?.Invoke(ShipLevel);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
-    }
-
-    private void CheckCanUpgrades()
-    {
-        CheckCanBaitLevelUpgrade(FishingGrade,BaitLevel);
-        CheckCanRodLevelUpgrade(FishingGrade, RodLevel);
-        CheckCanShipLevelUpgrade(FishingGrade, ShipLevel);
     }
 
     #endregion
@@ -361,6 +350,24 @@ public class FishingUpgradeManager : MonoBehaviour
         CanShipLevelUpgrade?.Invoke(result);
 
         return result;
+    }
+    
+    /// <summary>
+    /// 업그레이드 가능한지 체크
+    /// </summary>
+    public void CheckCanUpgrades()
+    {
+        CheckCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+        CheckCanRodLevelUpgrade(FishingGrade, RodLevel);
+        CheckCanShipLevelUpgrade(FishingGrade, ShipLevel);
+    }
+    
+    private void CheckReqGolds()
+    {
+        _dataReader.GetFishingGradeReqGoldData(FishingGrade ,out _fishingGradeReqGold);
+        _dataReader.GetBaitLevelReqGoldData(BaitLevel ,out _baitLevelReqGold);
+        _dataReader.GetRodLevelReqGoldData(RodLevel ,out _rodLevelReqGold);
+        _dataReader.GetShipLevelReqGoldData(ShipLevel ,out _shipLevelReqGold);
     }
 
     #endregion
