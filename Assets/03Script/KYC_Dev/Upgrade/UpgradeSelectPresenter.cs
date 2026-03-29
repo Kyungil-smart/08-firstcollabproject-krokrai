@@ -360,7 +360,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 낚시 등급
     private void SetViewPlayerGrade()
     {
-        int level = _fUpgrade.FishingGrade;
+        int level = DataTower.instance.fishingGrade;
         _fUpgrade.CheckEnoughGoldFishingGradeUpgrade(DataTower.instance.money);
         _fDataReader.GetFishingGradeReqGoldData(level, out int reqGold);
         _views[0].RenewalLevelText(level,_fDataReader.Grades.Length);
@@ -377,10 +377,10 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 미끼 레벨
     private void SetViewBaitLevel()
     {
-        int level = _fUpgrade.BaitLevel;
+        int level = DataTower.instance.baitLevel;
         
         _fUpgrade.CheckEnoughGoldBaitLevelUpgrade(DataTower.instance.money);
-        _fUpgrade.CheckCanBaitLevelUpgrade(_fUpgrade.FishingGrade, _fUpgrade.BaitLevel);
+        _fUpgrade.CheckCanBaitLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.baitLevel);
         _fDataReader.GetBaitLevelReqGoldData(level, out int reqGold);
         _views[1].RenewalLevelText(level,_fDataReader.Baits.Length);
         _views[1].RenewalReqGoldText(reqGold);
@@ -396,10 +396,10 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 낚시대 레벨
     private void SetViewRodLevel()
     {
-        int level = _fUpgrade.RodLevel;
+        int level = DataTower.instance.rodLevel;
         
         _fUpgrade.CheckEnoughGoldRodLevelUpgrade(DataTower.instance.money);
-        _fUpgrade.CheckCanRodLevelUpgrade(_fUpgrade.FishingGrade, _fUpgrade.RodLevel);
+        _fUpgrade.CheckCanRodLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.rodLevel);
         _fDataReader.GetRodLevelReqGoldData(level, out int reqGold);
         _views[2].RenewalLevelText(level,_fDataReader.Rods.Length);
         _views[2].RenewalReqGoldText(reqGold);
@@ -415,10 +415,10 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 배 레벨
     private void SetViewShipLevel()
     {
-        int level = _fUpgrade.ShipLevel;
+        int level = DataTower.instance.shipLevel;
         
         _fUpgrade.CheckEnoughGoldShipLevelUpgrade(DataTower.instance.money);
-        _fUpgrade.CheckCanShipLevelUpgrade(_fUpgrade.FishingGrade, _fUpgrade.ShipLevel);
+        _fUpgrade.CheckCanShipLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.shipLevel);
         _fDataReader.GetShipLevelReqGoldData(level, out int reqGold);
         _views[3].RenewalLevelText(level,_fDataReader.Ships.Length);
         _views[3].RenewalReqGoldText(reqGold);

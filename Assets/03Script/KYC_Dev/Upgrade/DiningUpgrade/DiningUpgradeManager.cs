@@ -266,7 +266,6 @@ public class DiningUpgradeManager : MonoBehaviour
 
     private void OnEnable()
     {
-        CheckCosts();
         StartCoroutine(LoadingOnEnableRoutine());
     }
 
@@ -315,6 +314,8 @@ public class DiningUpgradeManager : MonoBehaviour
         }
         
         EventEnable();
+        CheckCanUpgrades();
+        CheckCosts();
     }
 
     #endregion

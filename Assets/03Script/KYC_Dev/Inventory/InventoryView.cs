@@ -7,7 +7,6 @@ using Object = UnityEngine.Object;
 
 public class InventoryView : MonoBehaviour
 {
-    //ToDo:인벤토리를 싱글톤으로 하게 된다면 InventorySystem 지정과 Awake는 없어도 됨
     private InventorySystem _inventorySystem;
     
     [SerializeField] GameObject _inventorySlotPrefab;
@@ -34,7 +33,7 @@ public class InventoryView : MonoBehaviour
     
     private void SetView()
     {
-        foreach (FishData item in _inventorySystem.Items)
+        foreach (FishData item in DataTower.instance.Items)
         {
             GameObject newItemSlot = Instantiate(_inventorySlotPrefab, transform);
             InventorySlotController slotController = newItemSlot.GetComponent<InventorySlotController>();
@@ -47,7 +46,7 @@ public class InventoryView : MonoBehaviour
     {
         for (int i = 0; i < _slotLists.Count; i++)
         {
-            _slotLists[i].SetInfo(_inventorySystem.Items[i]);
+            _slotLists[i].SetInfo(DataTower.instance.Items[i]);
         }
     }
     
@@ -58,7 +57,7 @@ public class InventoryView : MonoBehaviour
             GameObject newItemSlot = Instantiate(_inventorySlotPrefab, transform);
             InventorySlotController slotController = newItemSlot.GetComponent<InventorySlotController>();
             _slotLists.Add(slotController);
-            slotController.SetInfo(_inventorySystem.Items[lagacySlotMax + i - 1]);
+            slotController.SetInfo(DataTower.instance.Items[lagacySlotMax + i - 1]);
         }
     }
 }
