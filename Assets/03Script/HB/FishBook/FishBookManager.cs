@@ -1,5 +1,7 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class FishBookManager : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class FishBookManager : MonoBehaviour
     public FishListManager fishListManager;     // 물고기 도감 상세정보창
     public GameObject fishSlot;                 // 도감용 물고기 창
     public DataContainer dataContainer;         // FishDataContainer 연결
+    public ScrollRect scrollRect;               // 스크롤바
 
     [System.Serializable]
     public struct RarityContainer
@@ -33,6 +36,16 @@ public class FishBookManager : MonoBehaviour
         }
 
     }
+    
+    // 도감 창을 닫았다가 다시 열었을 때 첫 페이지로 초기화
+    private void OnEnable()
+    {
+        if(scrollRect != null)
+        {
+            scrollRect.verticalNormalizedPosition = 1f;
+        }
+    }
+
 
     public void GenerateBook()
     {

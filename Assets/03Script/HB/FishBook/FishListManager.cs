@@ -41,7 +41,7 @@ public class FishListManager : MonoBehaviour
         SafeLink(groupText, isCaught ? currentFish.fishType.ToString() : "???");
         SafeLink(lengthText, isCaught ? $"{currentFish.length} cm" : "???");
         SafeLink(weightText, isCaught ? $"{currentFish.weight} kg" : "???");
-        SafeLink(descriptionText, isCaught ? currentFish.korDescription : "아직 발견되지 않음");
+        SafeLink(descriptionText, isCaught ? currentFish.korDescription : "???");
 
         // 이미지 업데이트
         if (fishDisplayImage != null)

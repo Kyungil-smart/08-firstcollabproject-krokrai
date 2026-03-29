@@ -24,15 +24,14 @@ public class TraderUI : MonoBehaviour
     private bool isFilterMode = false;              // 현재 필터창이 열려 있는지
     private bool _isUpdatingAll = false;            // 무한 루프 방지
 
+    private bool _isInitialized = false;            // UI창 초기화 여부
+
     private void Awake()
     {
         // DataTower에서 돈 관련 내용 구독
         if (DataTower.instance != null)
         {
-            DataTower.instance.OnChangedMoney += UpdateGoldUI;
-
-            // DataTower 돈 추가기능 필요
-            UpdateGoldUI(DataTower.instance.money);          
+            DataTower.instance.OnChangedMoney += UpdateGoldUI;        
         }
 
         // Select All 버튼 리스트너 등록
@@ -48,20 +47,38 @@ public class TraderUI : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        // 처음으로 창이 켜질 때 실행
+        InitTrader();
+        _isInitialized = true;
+    }
+
     private void OnEnable()
     {
-        if (DataTower.instance != null)
+        // 다시 켜질 때 실행
+        if (_isInitialized)
         {
-            // 리스트 생성
+            InitTrader();
+        }
+    }
+
+    private void InitTrader()
+    {
+        if(DataTower.instance != null)
+        {
+            // 보유 골드 갱신
+            UpdateGoldUI(DataTower.instance.money);
+
+            // 물고기 정보를 DataTower 인벤토리에서 받아옴
             listManager.RefreshList(DataTower.instance.Items, this);
-            
-            // 리스트가 생성된 직후, 현재 필터 상태를 즉시 적용
+
             if (filterManager != null)
-            {
+            {   
+                // 필터 등급에 맞는 물고기만 보여줌
                 listManager.ApplyFilter(filterManager.GetSelectedRates());
             }
-
-            // 금액 및 전체 선택 버튼 상태 갱신
+            
             OnSlotChanged();
         }
     }
@@ -161,6 +178,6 @@ public class TraderUI : MonoBehaviour
     private void UpdateGoldUI(ulong money)
     {
         // "N0"로 세자리 당 ',' 찍어주기 
-        if (goldText != null) goldText.text = $"{money.ToString("N0")} Gold";
+        if (goldText != null) goldText.text = $"보유 금액: {money.ToString("N0")} Gold";
     }
 }
