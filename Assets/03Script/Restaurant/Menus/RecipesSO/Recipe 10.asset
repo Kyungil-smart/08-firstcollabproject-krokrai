@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3114da32e2482f64f8c155c0534b1c43, type: 3}
-  m_Name: Recipe 7
+  m_Name: Recipe 10
   m_EditorClassIdentifier: Assembly-CSharp::RecipeContainer
-  recipe_ID: Recipe_8
-  recipeRarity: 1
-  recipe_KName: "\uB9DD\uCE58 \uACE0\uB4F1\uC5B4 \uC624\uBE10\uAD6C\uC774"
-  recipe_EName: 'Blue Mackerel '
+  recipe_ID: Recipe_11
+  recipeRarity: 2
+  recipe_KName: "\uAF41\uCE58 \uD1B5\uAD6C\uC774"
+  recipe_EName: Whole Grilled Pacific Saury
   prices: 20
   yield: 25
-  ingredient: Fish_8
+  ingredient: Fish_11
   dish_Sprite: NullException
   silhouette_Sprite: NullException
-  KDescription: "\uCE7C\uCE7C\uD55C \uACE0\uB4F1\uC5B4 \uC870\uB9BC\uC774\uB2E4."
-  EDescription: "This is a spicy mackerel stew.\r"
+  KDescription: "\uD3C9\uBC94\uD55C \uAF41\uCE58 \uD1B5\uAD6C\uC774\uB2E4."
+  EDescription: "This is a simple whole grilled saury.\r"

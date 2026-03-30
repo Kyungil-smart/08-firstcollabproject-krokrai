@@ -8,18 +8,9 @@ public class CustomerController : MonoBehaviour
     private SpriteRenderer _sr;
 
     [Header("Data")]
-    [SerializeField] private CustomerDataSO _data;
+    private CustomerDataSO _data;
     private Customer_Tips _tips;
     [SerializeField] private Restaurant_Fixed_value _fixedValue;
-
-    /*
-    // 데이터 나중에 DataTower에서 받아오기.
-    [Header("Runtime Data")]
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _eatDuration;
-    [SerializeField] private int _priceFactor;
-    [SerializeField] private float _spawnDelay;
-    */
 
     private RestaurantManager _restaurant;
     private RestaurantSeat _seat;
@@ -32,12 +23,6 @@ public class CustomerController : MonoBehaviour
 
     private void Awake()
     {
-        /*
-        _moveSpeed = _data.MoveSpeed;
-        _eatDuration = _data.EatDuration;
-        _priceFactor = _data.PriceScaleFactor; 
-        _spawnDelay = _data.SpawnDelay;
-        */
         _anim = GetComponentInChildren<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
     }
@@ -57,13 +42,14 @@ public class CustomerController : MonoBehaviour
     /// <param name="restaurant"></param>
     /// <param name="seat"></param>
     /// <param name="exitPoint"></param>
-    public void SetInfo(RestaurantSeat seat, Transform exitPoint, Customer_Tips tip)
+    public void SetInfo(RestaurantSeat seat, Transform exitPoint, Customer_Tips tip, CustomerDataSO so)
     {
         _seat = seat;
         _exitPoint = exitPoint;
 
+        _data = so;
+
         _tips = tip;
-        _eatCounte = 0;
         _maxEatCount = (byte)_data.orderChans.Length;
 
         _state = CustomerState.MoveToSeat;
@@ -92,17 +78,18 @@ public class CustomerController : MonoBehaviour
                     _anim.Play("Sit");
                     // 레이어 위치 변경
                     _sr.sortingOrder = -1;
+
                     // 식사 대기시간.
                     for (int i = 0; i < _maxEatCount; i++)
                     {
-                        if (_data.orderChans[i] == 0 || _data.orderChans[i] == -1)
+                        if (_data.orderChans[i] <= 0.001 || _data.orderChans[i] == -1)
                         {
                             break;
                         }
-                        else if (Random.Range(0, 1f) <= _data.orderChans[_eatCounte])
+                        else if (Random.Range(0, 1f) <= _data.orderChans[i])
                         {
                             yield return new WaitForSeconds(_data.orderTime[i]);
-                            _restaurant.TryCounsumeSushiAndEarnMoney((int)(1000 * _tips.tipsMulti));
+                            _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
                             yield return new WaitForSeconds(_data.eatDuration[i]); // WaitForSeconds 너무 많은 호출 후에 개선 필요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         }
                     }
@@ -119,7 +106,6 @@ public class CustomerController : MonoBehaviour
                     _anim.Play("Walk");
                     // 탈출 포인트까지 대기
                     yield return StartCoroutine(CoMoveTo(_exitPoint.position));
-                    Debug.Log($"{gameObject.name} 도착");
                     _seat.ClearSeat();
                     _restaurant.DeSpawnCustomer(gameObject);
                     yield break;
@@ -137,5 +123,6 @@ public class CustomerController : MonoBehaviour
             yield return null;
         }
         transform.position = targetPos;
+        yield break;
     }
 }

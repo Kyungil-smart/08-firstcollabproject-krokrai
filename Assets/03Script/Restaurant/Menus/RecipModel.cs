@@ -1,27 +1,38 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RecipModel : MonoBehaviour
 {
     //public int RecipID {  get; private set; }
     private RecipeContainer _recipe;
+    [SerializeField] Button _btn;
+    private RecipeInfoUI _riu;
 
     bool _canMake;
     bool _isUnlocked;
     bool _canUnlock;
     bool _isInitiated;
-    bool _isSelected;
 
-
-    private void Awake()
+    private void Start()
     {
         _canUnlock = false;
         _canMake = false;
         _isUnlocked = false;
         _isInitiated = false;
-        _isSelected = false;
     }
 
-    public void InitRecip(RecipeContainer rcp)
+    private void PassToRecipeInfo()
+    {
+        //_riu.SelectedRecipe(_recipe, _canMake);
+        _riu.SelectedRecipe(_recipe, true);
+    }
+
+    private void OnDestroy()
+    {
+        _btn.onClick.RemoveAllListeners();
+    }
+
+    public void InitRecip(RecipeContainer rcp, RecipeInfoUI riu)
     {
         if (_isInitiated)
         {
@@ -30,17 +41,24 @@ public class RecipModel : MonoBehaviour
         }
 
         _isInitiated = true;
+        _riu = riu;
         _recipe = rcp;
+
+        _btn.onClick.AddListener(PassToRecipeInfo);
         // 추가적인 의존성 관련 필요한 경우 추가.
     }
 
     /// <summary>
     /// 특정 물고기를 잡아 레시피 해금 가능할 경우 호출
     /// </summary>
-    public void UnlockConditionsMet()
+    public void CanUnlockConditionsMet()
     {
-        // Action으로 특정 물고기 숫자가 1 이상인 경우에만 호출 되게 설계 예정.
         _canUnlock = true;
+    }
+
+    public void UnlockThisRecipe()
+    {
+        _canMake = true;
     }
 
     /// <summary>
