@@ -40,7 +40,7 @@ public class DataTower : MonoBehaviour
             money -= mny;
         else
             money += mny;
-            OnChangedMoney?.Invoke(money);
+        OnChangedMoney?.Invoke(money);
         return true;
     }
 
@@ -229,7 +229,7 @@ public class DataTower : MonoBehaviour
     /// 인벤토리 슬롯 최댓값.
     /// </summary>
     public int InventorySlotMax;
-    
+
     public event Action<string> OnFisingNewFish;
     public event Action<Language> OnLanguageSettingChanged;
 
@@ -263,14 +263,14 @@ public class DataTower : MonoBehaviour
         {
             if (ForcedInitialized)
                 Debug.Log("강제 초기화 실행");
-            
-            
+
+
             money = 1000;
 
             InventorySlotMax = 10;
 
             customerVisitCount = 0;
-            
+
             masterVolume = 0.5f;
             BGMVolume = 0.5f;
             SFXVolume = 0.5f;
@@ -280,11 +280,39 @@ public class DataTower : MonoBehaviour
             rodLevel = 1;
             shipLevel = 1;
 
+
+
+            MasterLevel = 1;
+
+            MaxCustomerLimitLevel = 1;
+
+            MaxMenuLimitLevel = 1;
+
+            MaxSpawnLimit01Level = 1;
+
+            MaxSpawnLimit02Level = 1;
+
+            WeightLevel = 1;
+
+            BonusTipsMultiLevel = 1;
+
+            BonusDishPrice01Level = 1;
+
+            BonusDishPrice02Level = 1;
+
+            BonusFood01Level = 1;
+
+            BonusFood02Level = 1;
+
+            UnlockGramophoneLevel = 1;
+
+            UnlockCatObjectLevel = 1;
+
             fishingCount = 1;
             currentFishingCount = 1;
 
-            
-            
+
+
             fishingTime = 30;
             maxFishingTime = 1800;
         }
@@ -293,7 +321,7 @@ public class DataTower : MonoBehaviour
             Debug.LogWarning("강제 되지 않은 초기화 선언 감지됌");
         }
     }
-    
+
     IEnumerator DataRead()
     {
         while (!_dataCon.isDataLoaded)
@@ -323,7 +351,7 @@ public class DataTower : MonoBehaviour
     /// </summary>
     public void PullData()
     {
-        
+
     }
 
     /// <summary>
@@ -346,7 +374,7 @@ public class DataTower : MonoBehaviour
     // 미끼 갯수
     // 타이머
 
-   
+
 
     #region 식당 관련 함수들
 
@@ -360,7 +388,7 @@ public class DataTower : MonoBehaviour
     public void takeFish(FishData fish)
     {
         //_inventorySystem.Insert(); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
-        if ( !fishDatas.ContainsKey(fish.fishID)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
+        if (!fishDatas.ContainsKey(fish.fishID)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
         {
             fish.isCaught = true;
             fishDatas.Add(fish.fishID, fish);
@@ -379,10 +407,10 @@ public class DataTower : MonoBehaviour
     }
     #endregion
 
-    
+
     void CatchFishCounter(in FishData fish)
     {
-        switch(fish.fishRarity)
+        switch (fish.fishRarity)
         {
             case EFish_Rarity.Trash:
                 catchFishTrash++;
