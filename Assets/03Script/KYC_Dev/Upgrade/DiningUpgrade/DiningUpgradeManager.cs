@@ -12,61 +12,6 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private DiningUpgradeDataReader _dataReader;
     private WaitForEndOfFrame _waitForEndOfFrame = new();
-
-    /// <summary>
-    /// 식당 마스터 레벨
-    /// </summary>
-    public int MasterLevel;
-    
-    /// <summary>
-    /// 좌석 업그레이드 레벨
-    /// </summary>
-    public int MaxCustomerLimitLevel;
-    
-    /// <summary>
-    /// 특별 손님 업그레이드 레벨
-    /// </summary>
-    public int MaxSpawnLimit01Level;
-    
-    /// <summary>
-    /// VIP 업그레이드 레벨
-    /// </summary>
-    public int MaxSpawnLimit02Level;
-    
-    /// <summary>
-    /// 팁주는 손님 가중치 업그레이드 레벨
-    /// </summary>
-    public int WeightLevel;
-    
-    /// <summary>
-    /// 모금함(팁 액수 증가) 업그레이드 레벨
-    /// </summary>
-    public int BonusTipsMultiLevel;
-    
-    /// <summary>
-    /// 계산대(요리 가격 증가) 업그레이드 레벨
-    /// </summary>
-    public int BonusDishPrice01Level;
-    
-    /// <summary>
-    /// 밥솥(요리 가격 증가) 업그레이드 레벨
-    /// </summary>
-    public int BonusDishPrice02Level;
-    
-    /// <summary>
-    /// 식칼(요리 개수 증가) 업그레이드 레벨
-    /// </summary>
-    public int BonusFood01Level;
-    
-    /// <summary>
-    /// 도마(요리 개수 증가) 업그레이드 레벨
-    /// </summary>
-    public int BonusFood02Level;
-    
-    /// <summary>
-    /// 고양이 업그레이드 레벨
-    /// </summary>
-    public int UnlockCatObjectLevel;
     
     private int _masterLevelCost;
     private int _maxCustomerLimitLevelCost;
@@ -249,19 +194,6 @@ public class DiningUpgradeManager : MonoBehaviour
     private void Awake()
     {
         _dataReader = GetComponentInChildren<DiningUpgradeDataReader>();
-        
-        // ToDo: ToDo:DataTower로 변수 이관 되면 이 밑의 변수는 삭제
-        MasterLevel = 1;
-        MaxCustomerLimitLevel = 1;
-        MaxSpawnLimit01Level = 1;
-        MaxSpawnLimit02Level = 1;
-        WeightLevel = 1;
-        BonusTipsMultiLevel = 1;
-        BonusDishPrice01Level = 1;
-        BonusDishPrice02Level = 1;
-        BonusFood01Level = 1;
-        BonusFood02Level = 1;
-        UnlockCatObjectLevel = 1;
     }
 
     private void OnEnable()
@@ -330,9 +262,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanMasterLevelUp(DataTower.instance.money))
         {
-            MasterLevel++;
+            DataTower.instance.MasterLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_masterLevelCost);
-            OnMasterLevelUpgrade?.Invoke(MasterLevel);
+            OnMasterLevelUpgrade?.Invoke(DataTower.instance.MasterLevel);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -346,9 +278,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanMaxCustomerLimitLevelUp(DataTower.instance.money))
         {
-            MaxCustomerLimitLevel++;
+            DataTower.instance.MaxCustomerLimitLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_maxCustomerLimitLevelCost);
-            OnMaxCustomerLimitLevelUpgrade?.Invoke(MaxCustomerLimitLevel);
+            OnMaxCustomerLimitLevelUpgrade?.Invoke(DataTower.instance.MaxCustomerLimitLevel);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -362,9 +294,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanMaxSpawnLimit01LevelUp(DataTower.instance.money))
         {
-            MaxSpawnLimit01Level++;
+            DataTower.instance.MaxSpawnLimit01Level++;
             DataTower.instance.TryMoenyChanged((ulong)_maxSpawnLimit01LevelCost);
-            OnMaxSpawnLimit01LevelUpgrade?.Invoke(MaxSpawnLimit01Level);
+            OnMaxSpawnLimit01LevelUpgrade?.Invoke(DataTower.instance.MaxSpawnLimit01Level);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -378,9 +310,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanMaxSpawnLimit02LevelUp(DataTower.instance.money))
         {
-            MaxSpawnLimit02Level++;
+            DataTower.instance.MaxSpawnLimit02Level++;
             DataTower.instance.TryMoenyChanged((ulong)_maxSpawnLimit02LevelCost);
-            OnMaxSpawnLimit02LevelUpgrade?.Invoke(MaxSpawnLimit02Level);
+            OnMaxSpawnLimit02LevelUpgrade?.Invoke(DataTower.instance.MaxSpawnLimit02Level);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -394,9 +326,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanWeightLevelUp(DataTower.instance.money))
         {
-            WeightLevel++;
+            DataTower.instance.WeightLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_weightLevelCost);
-            OnWeightLevelUpgrade?.Invoke(WeightLevel);
+            OnWeightLevelUpgrade?.Invoke(DataTower.instance.WeightLevel);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -410,9 +342,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanBonusTipsMultiLevelUp(DataTower.instance.money))
         {
-            BonusTipsMultiLevel++;
+            DataTower.instance.BonusTipsMultiLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_bonusTipsMultiLevelCost);
-            OnBonusTipsMultiLevelUpgrade?.Invoke(BonusTipsMultiLevel);
+            OnBonusTipsMultiLevelUpgrade?.Invoke(DataTower.instance.BonusTipsMultiLevel);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -426,9 +358,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanBonusDishPrice01LevelUp(DataTower.instance.money))
         {
-            BonusDishPrice01Level++;
+            DataTower.instance.BonusDishPrice01Level++;
             DataTower.instance.TryMoenyChanged((ulong)_bonusDishPrice01LevelCost);
-            OnBonusDishPrice01LevelUpgrade?.Invoke(BonusDishPrice01Level);
+            OnBonusDishPrice01LevelUpgrade?.Invoke(DataTower.instance.BonusDishPrice01Level);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -442,9 +374,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanBonusDishPrice02LevelUp(DataTower.instance.money))
         {
-            BonusDishPrice02Level++;
+            DataTower.instance.BonusDishPrice02Level++;
             DataTower.instance.TryMoenyChanged((ulong)_bonusDishPrice02LevelCost);
-            OnBonusDishPrice02LevelUpgrade?.Invoke(BonusDishPrice02Level);
+            OnBonusDishPrice02LevelUpgrade?.Invoke(DataTower.instance.BonusDishPrice02Level);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -458,9 +390,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanBonusFood01LevelUp(DataTower.instance.money))
         {
-            BonusFood01Level++;
+            DataTower.instance.BonusFood01Level++;
             DataTower.instance.TryMoenyChanged((ulong)_bonusFood01LevelCost);
-            OnBonusFood01LevelUpgrade?.Invoke(BonusFood01Level);
+            OnBonusFood01LevelUpgrade?.Invoke(DataTower.instance.BonusFood01Level);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -474,9 +406,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanBonusFood02LevelUp(DataTower.instance.money))
         {
-            BonusFood02Level++;
+            DataTower.instance.BonusFood02Level++;
             DataTower.instance.TryMoenyChanged((ulong)_bonusFood02LevelCost);
-            OnBonusFood02LevelUpgrade?.Invoke(BonusFood02Level);
+            OnBonusFood02LevelUpgrade?.Invoke(DataTower.instance.BonusFood02Level);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -490,9 +422,9 @@ public class DiningUpgradeManager : MonoBehaviour
     {
         if (CanUnlockCatObjectLevelUp(DataTower.instance.money))
         {
-            UnlockCatObjectLevel++;
+            DataTower.instance.UnlockCatObjectLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_unlockCatObjectLevelCost);
-            OnUnlockCatObjectLevelUpgrade?.Invoke(UnlockCatObjectLevel);
+            OnUnlockCatObjectLevelUpgrade?.Invoke(DataTower.instance.UnlockCatObjectLevel);
             CheckCanUpgrades();
             CheckCosts();
         }
@@ -505,7 +437,7 @@ public class DiningUpgradeManager : MonoBehaviour
 
     private bool CanMasterLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Master_Lv.Length > MasterLevel;
+        bool chackLevel = _dataReader.Master_Lv.Length > DataTower.instance.MasterLevel;
         bool chackGold = curGold >= (ulong)_masterLevelCost;
         
         return chackGold && chackLevel;
@@ -524,9 +456,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanMaxCustomerLimitLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Max_Customer_Limit.Length > MaxCustomerLimitLevel;
+        bool chackLevel = _dataReader.Max_Customer_Limit.Length > DataTower.instance.MaxCustomerLimitLevel;
         bool chackGold = curGold >= (ulong)_maxCustomerLimitLevelCost;
-        bool chackGrade = CheckCanMaxCustomerLimitLevelUpgrade(MasterLevel,MaxCustomerLimitLevel);
+        bool chackGrade = CheckCanMaxCustomerLimitLevelUpgrade(DataTower.instance.MasterLevel,DataTower.instance.MaxCustomerLimitLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -559,9 +491,9 @@ public class DiningUpgradeManager : MonoBehaviour
 
     private bool CanMaxSpawnLimit01LevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Max_Spawn_Limit_1.Length > MaxSpawnLimit01Level;
+        bool chackLevel = _dataReader.Max_Spawn_Limit_1.Length > DataTower.instance.MaxSpawnLimit01Level;
         bool chackGold = curGold >= (ulong)_maxCustomerLimitLevelCost;
-        bool chackGrade = CheckCanMaxSpawnLimit01LevelUpgrade(MasterLevel, MaxSpawnLimit01Level);
+        bool chackGrade = CheckCanMaxSpawnLimit01LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.MaxSpawnLimit01Level);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -594,9 +526,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanMaxSpawnLimit02LevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Max_Spawn_Limit_2.Length > MaxSpawnLimit02Level;
+        bool chackLevel = _dataReader.Max_Spawn_Limit_2.Length > DataTower.instance.MaxSpawnLimit02Level;
         bool chackGold = curGold >= (ulong)_maxCustomerLimitLevelCost;
-        bool chackGrade = CheckCanMaxSpawnLimit02LevelUpgrade(MasterLevel, MaxSpawnLimit02Level);
+        bool chackGrade = CheckCanMaxSpawnLimit02LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.MaxSpawnLimit02Level);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -629,9 +561,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanWeightLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Weight.Length > WeightLevel;
+        bool chackLevel = _dataReader.Weight.Length > DataTower.instance.WeightLevel;
         bool chackGold = curGold >= (ulong)_weightLevelCost;
-        bool chackGrade = CheckCanWeightLevelUpgrade(MasterLevel, WeightLevel);
+        bool chackGrade = CheckCanWeightLevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.WeightLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -664,9 +596,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanBonusTipsMultiLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Bonus_Tips_Multi.Length > BonusTipsMultiLevel;
+        bool chackLevel = _dataReader.Bonus_Tips_Multi.Length > DataTower.instance.BonusTipsMultiLevel;
         bool chackGold = curGold >= (ulong)_bonusTipsMultiLevelCost;
-        bool chackGrade = CheckCanBonusTipsMultiLevelUpgrade(MasterLevel, BonusTipsMultiLevel);
+        bool chackGrade = CheckCanBonusTipsMultiLevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusTipsMultiLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -699,9 +631,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanBonusDishPrice01LevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Bonus_Dish_Price_1.Length > BonusDishPrice01Level;
+        bool chackLevel = _dataReader.Bonus_Dish_Price_1.Length > DataTower.instance.BonusDishPrice01Level;
         bool chackGold = curGold >= (ulong)_bonusDishPrice01LevelCost;
-        bool chackGrade = CheckCanBonusDishPrice01LevelUpgrade(MasterLevel, BonusDishPrice01Level);
+        bool chackGrade = CheckCanBonusDishPrice01LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusDishPrice01Level);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -734,9 +666,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanBonusDishPrice02LevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Bonus_Dish_Price_2.Length > BonusDishPrice02Level;
+        bool chackLevel = _dataReader.Bonus_Dish_Price_2.Length > DataTower.instance.BonusDishPrice02Level;
         bool chackGold = curGold >= (ulong)_bonusDishPrice02LevelCost;
-        bool chackGrade = CheckCanBonusDishPrice02LevelUpgrade(MasterLevel, BonusDishPrice02Level);
+        bool chackGrade = CheckCanBonusDishPrice02LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusDishPrice02Level);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -769,9 +701,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanBonusFood01LevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Bonus_Food_1.Length > BonusFood01Level;
+        bool chackLevel = _dataReader.Bonus_Food_1.Length > DataTower.instance.BonusFood01Level;
         bool chackGold = curGold >= (ulong)_bonusFood01LevelCost;
-        bool chackGrade = CheckCanBonusFood01LevelUpgrade(MasterLevel, BonusFood01Level);
+        bool chackGrade = CheckCanBonusFood01LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusFood01Level);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -804,9 +736,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanBonusFood02LevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Bonus_Food_2.Length > BonusFood02Level;
+        bool chackLevel = _dataReader.Bonus_Food_2.Length > DataTower.instance.BonusFood02Level;
         bool chackGold = curGold >= (ulong)_bonusFood02LevelCost;
-        bool chackGrade = CheckCanBonusFood02LevelUpgrade(MasterLevel, BonusFood02Level);
+        bool chackGrade = CheckCanBonusFood02LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusFood02Level);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -839,9 +771,9 @@ public class DiningUpgradeManager : MonoBehaviour
     
     private bool CanUnlockCatObjectLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Unlock_Cat_Object.Length > UnlockCatObjectLevel;
+        bool chackLevel = _dataReader.Unlock_Cat_Object.Length > DataTower.instance.UnlockCatObjectLevel;
         bool chackGold = curGold >= (ulong)_unlockCatObjectLevelCost;
-        bool chackGrade = CheckCanUnlockCatObjectLevelUpgrade(MasterLevel, UnlockCatObjectLevel);
+        bool chackGrade = CheckCanUnlockCatObjectLevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.UnlockCatObjectLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -877,31 +809,31 @@ public class DiningUpgradeManager : MonoBehaviour
     /// </summary>
     public void CheckCanUpgrades()
     {
-        CheckCanMaxCustomerLimitLevelUpgrade(MasterLevel,MaxCustomerLimitLevel);
-        CheckCanMaxSpawnLimit01LevelUpgrade(MasterLevel, MaxSpawnLimit01Level);
-        CheckCanMaxSpawnLimit02LevelUpgrade(MasterLevel, MaxSpawnLimit02Level);
-        CheckCanWeightLevelUpgrade(MasterLevel, WeightLevel);
-        CheckCanBonusTipsMultiLevelUpgrade(MasterLevel, BonusTipsMultiLevel);
-        CheckCanBonusDishPrice01LevelUpgrade(MasterLevel, BonusDishPrice01Level);
-        CheckCanBonusDishPrice02LevelUpgrade(MasterLevel, BonusDishPrice02Level);
-        CheckCanBonusFood01LevelUpgrade(MasterLevel, BonusFood01Level);
-        CheckCanBonusFood02LevelUpgrade(MasterLevel, BonusFood02Level);
-        CheckCanUnlockCatObjectLevelUpgrade(MasterLevel, UnlockCatObjectLevel);
+        CheckCanMaxCustomerLimitLevelUpgrade(DataTower.instance.MasterLevel,DataTower.instance.MaxCustomerLimitLevel);
+        CheckCanMaxSpawnLimit01LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.MaxSpawnLimit01Level);
+        CheckCanMaxSpawnLimit02LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.MaxSpawnLimit02Level);
+        CheckCanWeightLevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.WeightLevel);
+        CheckCanBonusTipsMultiLevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusTipsMultiLevel);
+        CheckCanBonusDishPrice01LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusDishPrice01Level);
+        CheckCanBonusDishPrice02LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusDishPrice02Level);
+        CheckCanBonusFood01LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusFood01Level);
+        CheckCanBonusFood02LevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.BonusFood02Level);
+        CheckCanUnlockCatObjectLevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.UnlockCatObjectLevel);
     }
     
     private void CheckCosts()
     {
-        _dataReader.GetMasterLevelCostData(MasterLevel,out _masterLevelCost);
-        _dataReader.GetMaxCustomerLimitCostData(MaxCustomerLimitLevel,out _maxCustomerLimitLevelCost);
-        _dataReader.GetMaxSpawnLimit01CostData(MaxSpawnLimit01Level,out _maxSpawnLimit01LevelCost);
-        _dataReader.GetMaxSpawnLimit02CostData(MaxSpawnLimit02Level,out _maxSpawnLimit02LevelCost);
-        _dataReader.GetWeightCostData(WeightLevel,out _weightLevelCost);
-        _dataReader.GetBonusTipsMultiCostData(BonusTipsMultiLevel,out _bonusTipsMultiLevelCost);
-        _dataReader.GetBonusDishPrice01CostData(BonusDishPrice01Level, out _bonusDishPrice01LevelCost);
-        _dataReader.GetBonusDishPrice02CostData(BonusDishPrice02Level, out _bonusDishPrice02LevelCost);
-        _dataReader.GetBonusFood01CostData(BonusFood01Level, out _bonusFood01LevelCost);
-        _dataReader.GetBonusFood02CostData(BonusFood02Level, out _bonusFood02LevelCost);
-        _dataReader.GetUnlockCatObjectCostData(UnlockCatObjectLevel,out _unlockCatObjectLevelCost);
+        _dataReader.GetMasterLevelCostData(DataTower.instance.MasterLevel,out _masterLevelCost);
+        _dataReader.GetMaxCustomerLimitCostData(DataTower.instance.MaxCustomerLimitLevel,out _maxCustomerLimitLevelCost);
+        _dataReader.GetMaxSpawnLimit01CostData(DataTower.instance.MaxSpawnLimit01Level,out _maxSpawnLimit01LevelCost);
+        _dataReader.GetMaxSpawnLimit02CostData(DataTower.instance.MaxSpawnLimit02Level,out _maxSpawnLimit02LevelCost);
+        _dataReader.GetWeightCostData(DataTower.instance.WeightLevel,out _weightLevelCost);
+        _dataReader.GetBonusTipsMultiCostData(DataTower.instance.BonusTipsMultiLevel,out _bonusTipsMultiLevelCost);
+        _dataReader.GetBonusDishPrice01CostData(DataTower.instance.BonusDishPrice01Level, out _bonusDishPrice01LevelCost);
+        _dataReader.GetBonusDishPrice02CostData(DataTower.instance.BonusDishPrice02Level, out _bonusDishPrice02LevelCost);
+        _dataReader.GetBonusFood01CostData(DataTower.instance.BonusFood01Level, out _bonusFood01LevelCost);
+        _dataReader.GetBonusFood02CostData(DataTower.instance.BonusFood02Level, out _bonusFood02LevelCost);
+        _dataReader.GetUnlockCatObjectCostData(DataTower.instance.UnlockCatObjectLevel,out _unlockCatObjectLevelCost);
     }
 
     #endregion
