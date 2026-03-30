@@ -5,6 +5,7 @@ public class OpenMenu : MonoBehaviour
 {
     [SerializeField] Button _btn;
     [SerializeField] GameObject _menu;
+    [SerializeField] GameObject _Fish;
 
     bool _active = false;
 
@@ -12,6 +13,12 @@ public class OpenMenu : MonoBehaviour
     void Start()
     {
         _active = false;
+    }
+
+    public void ChangeFishScene()
+    {
+        _Fish.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void OnChanged()

@@ -16,8 +16,9 @@ public class CustomerController : MonoBehaviour
     private RestaurantSeat _seat;
     private Transform _exitPoint;
 
-    private byte _eatCounte;
+    private int _eatCounte;
     private byte _maxEatCount;
+    bool _firstOrder;
 
     private CustomerState _state;
 
@@ -46,8 +47,9 @@ public class CustomerController : MonoBehaviour
     {
         _seat = seat;
         _exitPoint = exitPoint;
-
+        _firstOrder = true;
         _data = so;
+        _eatCounte = -1;
 
         _tips = tip;
         _maxEatCount = (byte)_data.orderChans.Length;
@@ -86,8 +88,9 @@ public class CustomerController : MonoBehaviour
                         {
                             break;
                         }
-                        else if (Random.Range(0, 1f) <= _data.orderChans[i])
+                        else if (_firstOrder || Random.Range(0, 1f) <= _data.orderChans[_eatCounte])
                         {
+                            _eatCounte++;
                             yield return new WaitForSeconds(_data.orderTime[i]);
                             _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
                             yield return new WaitForSeconds(_data.eatDuration[i]); // WaitForSeconds 너무 많은 호출 후에 개선 필요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
