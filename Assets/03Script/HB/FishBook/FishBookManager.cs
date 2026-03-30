@@ -24,13 +24,14 @@ public class FishBookManager : MonoBehaviour
     [Header("등급별 컨테이너 설정")]
     public List<RarityContainer> raritySettings;
 
+    // 탐색 속도를 위해 등급을 Key값으로 사용하는 딕셔너리
     private Dictionary<EFish_Rarity, Transform> _containers;
-
-
 
     private void Awake()
     {
         _containers = new Dictionary<EFish_Rarity, Transform>();
+
+        // 인스펙터에서 설정한 리스트를 딕셔너리에 담아 속도 UP
         foreach (var settings in raritySettings)
         {
             if (settings.container != null && !_containers.ContainsKey(settings.rarity))
@@ -38,9 +39,8 @@ public class FishBookManager : MonoBehaviour
                 _containers.Add(settings.rarity, settings.container);
             }
         }
+    }   
 
-    }
-    
     // 도감 창을 닫았다가 다시 열었을 때 첫 페이지로 초기화
     private void OnEnable()
     {
@@ -50,30 +50,30 @@ public class FishBookManager : MonoBehaviour
         }
 
         // 창이 실행될 때 기존에 있던 슬롯과 중첩되지 않게 다시 생성
-        GenerateBook();
+        StopAllCoroutines();
+        StartCoroutine(InitBookRoutine());
+    }
 
+    private IEnumerator InitBookRoutine()
+    {
+        // 다음 프레임까지 대기
+        yield return null;
+
+        GenerateBook();
         UpdateCompletionUI();
     }
 
     public void GenerateBook()
     {
-        if(_containers != null)
+        if(dataContainer == null || _containers == null) return;
+        
+        // 생성된 슬롯이 있으면 제거
+        foreach (Transform container in _containers.Values)
         {
-            // 생성된 슬롯이 있으면 제거
-            foreach (Transform container in _containers.Values)
+            for (int i = container.childCount - 1; i >= 0; i--)
             {
-                for (int i = container.childCount - 1; i >= 0; i--)
-                {
-                    Destroy(container.GetChild(i).gameObject);
-                }
+                Destroy(container.GetChild(i).gameObject);
             }
-            
-        }
-
-        // 데이터 컨테이너 체크
-        if (dataContainer == null)
-        {
-            return;
         }
 
         // 슬롯, 데이터 생성
@@ -83,12 +83,34 @@ public class FishBookManager : MonoBehaviour
 
             if (fishData == null) continue;
 
+            // 물고기 등급에 맞는 부모 컨테이너가 있는지 확인
             if (_containers.TryGetValue(fishData.fishRarity, out Transform targetParent))
             {
-                GameObject go = Instantiate(fishSlot, targetParent);
+                // 슬롯 생성
+                GameObject go = Instantiate(fishSlot, targetParent, false);
+
+                // 생선된 슬롯에 물고기 데이터와 상세창 전달
                 go.GetComponent<FishSlot>()?.SetupFishBook(fishData, fishListManager);
             }
         }
+        
+        Canvas.ForceUpdateCanvases();
+
+        foreach(var container in _containers.Values)
+        {
+            RectTransform rect = container.GetComponent<RectTransform>();
+
+            if (rect != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+            }
+        }
+
+        if (scrollRect != null && scrollRect.content != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+        }
+
     }
 
     private void UpdateCompletionUI()
@@ -100,7 +122,7 @@ public class FishBookManager : MonoBehaviour
 
         // 물고기 SO 데이터 컨테이너를 확인
         foreach (ScriptableObject obj in dataContainer.objs)
-        {   
+        {  
             // FishData타입으로 형변환
             FishData fish = obj as FishData;
 
@@ -114,8 +136,7 @@ public class FishBookManager : MonoBehaviour
                 }
             }
         }
-
         fishBookCompletionText.text = $"{caughtCount} / {totalFish}";    
-    }
 
+    }
 }
