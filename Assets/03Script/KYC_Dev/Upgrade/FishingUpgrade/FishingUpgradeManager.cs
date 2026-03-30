@@ -9,33 +9,19 @@ public class FishingUpgradeManager : MonoBehaviour
     // 싱글톤 여부는 협의해서 결정
     // 업그레이드 조건 확인, 수행
     // 업그레이드 효과는 다른 컴포넌트에서 수행
+
+    /// <summary>
+    /// TODO : 변수 삭제 예정 / DataTower에 있는 변수로 변경하세요
+    /// </summary>
+    public int RodLevel;
+    
+    /// <summary>
+    /// TODO : 변수 삭제 예정 / DataTower에 있는 변수로 변경하세요
+    /// </summary>
+    public int BaitLevel;
     
     private FishingUpgradeDataReader _dataReader;
     private WaitForEndOfFrame _waitForEndOfFrame = new();
-    
-    /// <summary>
-    /// 낚시 등급 : 모든 낚시 업그레이드의 기본
-    /// ToDo:DataTower로 차후 이관
-    /// </summary>
-    public int FishingGrade;
-
-    /// <summary>
-    /// 미끼 레벨
-    /// ToDo:DataTower로 차후 이관
-    /// </summary>
-    public int BaitLevel;
-
-    /// <summary>
-    /// 낚시대 레벨
-    /// ToDo:DataTower로 차후 이관
-    /// </summary>
-    public int RodLevel;
-
-    /// <summary>
-    /// 배 레벨
-    /// ToDo:DataTower로 차후 이관
-    /// </summary>
-    public int ShipLevel;
     
     private int _fishingGradeReqGold;
     private int _baitLevelReqGold;
@@ -108,31 +94,16 @@ public class FishingUpgradeManager : MonoBehaviour
     private void Awake()
     {
         _dataReader = GetComponentInChildren<FishingUpgradeDataReader>();
-        
-        // ToDo: ToDo:DataTower로 변수 이관 되면 이 밑의 변수는 삭제
-        FishingGrade = 1;
-        BaitLevel = 1;
-        RodLevel = 1;
-        ShipLevel = 1;
     }
 
     private void OnEnable()
     {
-        OnEnableReqGoldCheck();
         StartCoroutine(LoadingOnEnableRoutine());
     }
 
     private void OnDisable()
     {
         EventDisable();
-    }
-
-    private void OnEnableReqGoldCheck()
-    {
-        _dataReader.GetFishingGradeReqGoldData(FishingGrade ,out _fishingGradeReqGold);
-        _dataReader.GetBaitLevelReqGoldData(BaitLevel ,out _baitLevelReqGold);
-        _dataReader.GetRodLevelReqGoldData(RodLevel ,out _rodLevelReqGold);
-        _dataReader.GetShipLevelReqGoldData(ShipLevel ,out _shipLevelReqGold);
     }
 
     #region 이벤트 구독/해제
@@ -161,6 +132,8 @@ public class FishingUpgradeManager : MonoBehaviour
         }
         
         EventEnable();
+        CheckCanUpgrades();
+        CheckReqGolds();
     }
 
     #endregion
@@ -174,10 +147,11 @@ public class FishingUpgradeManager : MonoBehaviour
     {
         if (CanFishingGradeUp(DataTower.instance.money))
         {
-            FishingGrade++;
+            DataTower.instance.fishingGrade++;
             DataTower.instance.TryMoenyChanged((ulong)_fishingGradeReqGold);
-            OnFishingUpgrade?.Invoke(FishingGrade);
+            OnFishingUpgrade?.Invoke(DataTower.instance.fishingGrade);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
     }
@@ -189,10 +163,11 @@ public class FishingUpgradeManager : MonoBehaviour
     {
         if (CanBaitLevelUp(DataTower.instance.money))
         {
-            BaitLevel++;
+            DataTower.instance.baitLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_baitLevelReqGold);
-            OnBaitUpgrade?.Invoke(BaitLevel);
+            OnBaitUpgrade?.Invoke(DataTower.instance.baitLevel);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
     }
@@ -204,10 +179,11 @@ public class FishingUpgradeManager : MonoBehaviour
     {
         if (CanRodLevelUp(DataTower.instance.money))
         {
-            RodLevel++;
+            DataTower.instance.rodLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_rodLevelReqGold);
-            OnRodUpgrade?.Invoke(RodLevel);
+            OnRodUpgrade?.Invoke(DataTower.instance.rodLevel);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
     }
@@ -219,19 +195,13 @@ public class FishingUpgradeManager : MonoBehaviour
     {
         if (CanShipLevelUp(DataTower.instance.money))
         {
-            ShipLevel++;
+            DataTower.instance.shipLevel++;
             DataTower.instance.TryMoenyChanged((ulong)_shipLevelReqGold);
-            OnShipUpgrade?.Invoke(ShipLevel);
+            OnShipUpgrade?.Invoke(DataTower.instance.shipLevel);
             CheckCanUpgrades();
+            CheckReqGolds();
         }
         
-    }
-
-    private void CheckCanUpgrades()
-    {
-        CheckCanBaitLevelUpgrade(FishingGrade,BaitLevel);
-        CheckCanRodLevelUpgrade(FishingGrade, RodLevel);
-        CheckCanShipLevelUpgrade(FishingGrade, ShipLevel);
     }
 
     #endregion
@@ -240,7 +210,7 @@ public class FishingUpgradeManager : MonoBehaviour
 
     private bool CanFishingGradeUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Grades.Length > FishingGrade;
+        bool chackLevel = _dataReader.Grades.Length > DataTower.instance.fishingGrade;
         bool chackGold = curGold >= (ulong)_fishingGradeReqGold;
         
         return chackGold && chackLevel;
@@ -259,9 +229,9 @@ public class FishingUpgradeManager : MonoBehaviour
     
     private bool CanBaitLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Grades.Length > BaitLevel;
+        bool chackLevel = _dataReader.Grades.Length > DataTower.instance.baitLevel;
         bool chackGold = curGold >= (ulong)_baitLevelReqGold;
-        bool chackGrade = CheckCanBaitLevelUpgrade(FishingGrade,BaitLevel);
+        bool chackGrade = CheckCanBaitLevelUpgrade(DataTower.instance.fishingGrade,DataTower.instance.baitLevel);
         
         
         return chackGold && chackLevel && chackGrade;
@@ -295,9 +265,9 @@ public class FishingUpgradeManager : MonoBehaviour
 
     private bool CanRodLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Grades.Length > RodLevel;
+        bool chackLevel = _dataReader.Grades.Length > DataTower.instance.rodLevel;
         bool chackGold = curGold >= (ulong)_rodLevelReqGold;
-        bool chackGrade = CheckCanRodLevelUpgrade(FishingGrade,RodLevel);
+        bool chackGrade = CheckCanRodLevelUpgrade(DataTower.instance.fishingGrade,DataTower.instance.rodLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -330,9 +300,9 @@ public class FishingUpgradeManager : MonoBehaviour
 
     private bool CanShipLevelUp(ulong curGold)
     {
-        bool chackLevel = _dataReader.Grades.Length > ShipLevel;
+        bool chackLevel = _dataReader.Grades.Length > DataTower.instance.shipLevel;
         bool chackGold = curGold >= (ulong)_shipLevelReqGold;
-        bool chackGrade = CheckCanShipLevelUpgrade(FishingGrade,ShipLevel);
+        bool chackGrade = CheckCanShipLevelUpgrade(DataTower.instance.fishingGrade,DataTower.instance.shipLevel);
         
         return chackGold && chackLevel && chackGrade;
     }
@@ -361,6 +331,24 @@ public class FishingUpgradeManager : MonoBehaviour
         CanShipLevelUpgrade?.Invoke(result);
 
         return result;
+    }
+    
+    /// <summary>
+    /// 업그레이드 가능한지 체크
+    /// </summary>
+    public void CheckCanUpgrades()
+    {
+        CheckCanBaitLevelUpgrade(DataTower.instance.fishingGrade,DataTower.instance.baitLevel);
+        CheckCanRodLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.rodLevel);
+        CheckCanShipLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.shipLevel);
+    }
+    
+    private void CheckReqGolds()
+    {
+        _dataReader.GetFishingGradeReqGoldData(DataTower.instance.fishingGrade ,out _fishingGradeReqGold);
+        _dataReader.GetBaitLevelReqGoldData(DataTower.instance.baitLevel ,out _baitLevelReqGold);
+        _dataReader.GetRodLevelReqGoldData(DataTower.instance.rodLevel ,out _rodLevelReqGold);
+        _dataReader.GetShipLevelReqGoldData(DataTower.instance.shipLevel ,out _shipLevelReqGold);
     }
 
     #endregion

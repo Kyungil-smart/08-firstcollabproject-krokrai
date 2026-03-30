@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,21 +16,8 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private FishData[] _datas;
     
     private Dictionary<string, FishData> _fishDatas = new ();
+    private WaitForEndOfFrame _wfEndOfFrame = new();
     
-    /// <summary>
-    /// 인벤토리 최대 슬롯 > 업그레이드 단계에서 변화 하지만 일단 임의 값 입력
-    /// </summary>
-    public int InventorySlotMax;
-    
-    /// <summary>
-    /// 아이템 관리 리스트
-    /// </summary>
-    public List<FishData> Items = new();
-    
-    /// <summary>
-    /// 인벤토리에 변화가 있을 때 구독한 View에서 받기 위함
-    /// ToDo:Temp_Item을 나중에 정식 아이템 SO로 변경 할 것
-    /// </summary>
     public event Action OnInventorySet;
     public event Action OnInventoryChanged;
     public event Action<int,int> OnInventoryExtended;
@@ -41,7 +29,7 @@ public class InventorySystem : MonoBehaviour
 
     private void Start()
     {
-        OnInventorySet?.Invoke();
+        StartCoroutine(InventoryStartRoutine());
     }
 
     private void InventoryInit()
@@ -50,11 +38,21 @@ public class InventorySystem : MonoBehaviour
         {
             _fishDatas.TryAdd(data.fishID, data);
         }
-        
-        for (int i = 0; i < InventorySlotMax; i++)
+    }
+    
+    private IEnumerator InventoryStartRoutine()
+    {
+        while (DataTower.instance == null)
         {
-            Items.Add(_empty);
+            yield return _wfEndOfFrame;
         }
+        
+        for (int i = 0; i < DataTower.instance.InventorySlotMax; i++)
+        {
+            DataTower.instance.Items.Add(_empty);
+        }
+        
+        OnInventorySet?.Invoke();
     }
 
     /// <summary>
@@ -63,9 +61,9 @@ public class InventorySystem : MonoBehaviour
     /// <param name="fishID">해당 되는 FishID를 **오타없이** 입력</param>
     public void Insert(string fishID)
     {
-        if(!Items.Contains(_empty)) return;
-        Items.Remove(_empty);
-        Items.Insert(0, _fishDatas[fishID]);
+        if(!DataTower.instance.Items.Contains(_empty)) return;
+        DataTower.instance.Items.Remove(_empty);
+        DataTower.instance.Items.Insert(0, _fishDatas[fishID]);
         OnInventoryChanged?.Invoke();
     }
 
@@ -75,13 +73,13 @@ public class InventorySystem : MonoBehaviour
     /// <param name="slot"></param>
     public void InventoryExtend(int slot)
     {
-        int lagacySlotMax = InventorySlotMax;
-        InventorySlotMax += slot;
+        int legacySlotMax = DataTower.instance.InventorySlotMax;
+        DataTower.instance.InventorySlotMax += slot;
         for (int i = 0; i < slot; i++)
         {
-            Items.Add(_empty);
+            DataTower.instance.Items.Add(_empty);
         }
-        OnInventoryExtended?.Invoke(lagacySlotMax, slot);
+        OnInventoryExtended?.Invoke(legacySlotMax, slot);
     }
 
     
@@ -91,9 +89,9 @@ public class InventorySystem : MonoBehaviour
     /// <param name="fishID">해당 되는 FishID를 **오타없이** 입력</param>
     public void Erase(string fishID)
     {
-        if(!Items.Contains(_fishDatas[fishID])) return;
-        Items.Remove(_fishDatas[fishID]);
-        Items.Add(_empty);
+        if(!DataTower.instance.Items.Contains(_fishDatas[fishID])) return;
+        DataTower.instance.Items.Remove(_fishDatas[fishID]);
+        DataTower.instance.Items.Add(_empty);
         OnInventoryChanged?.Invoke();
     }
 
@@ -102,8 +100,8 @@ public class InventorySystem : MonoBehaviour
     /// </summary>
     public void EraseAll()
     {
-        Items.Clear();
-        InventoryInit();
+        DataTower.instance.Items.Clear();
+        InventoryStartRoutine();
         OnInventoryChanged?.Invoke();
     }
 
@@ -119,10 +117,10 @@ public class InventorySystem : MonoBehaviour
                 switch (DataTower.instance.languageSetting)
                 {
                     case Language.ENG:
-                        Items.Sort((a, b) => a.engName.CompareTo(b.engName));
+                        DataTower.instance.Items.Sort((a, b) => a.engName.CompareTo(b.engName));
                         break;
                     case Language.KOR:
-                        Items.Sort((a, b) => a.korName.CompareTo(b.korName));
+                        DataTower.instance.Items.Sort((a, b) => a.korName.CompareTo(b.korName));
                         break;
                     default:
                         break;
@@ -130,11 +128,11 @@ public class InventorySystem : MonoBehaviour
                 OnInventoryChanged?.Invoke();
                 break;
             case 2:
-                Items.Sort((a, b) => a.fishType.CompareTo(b.fishType));
+                DataTower.instance.Items.Sort((a, b) => a.fishType.CompareTo(b.fishType));
                 OnInventoryChanged?.Invoke();
                 break;
             case 3:
-                Items.Sort((a, b) => a.fishRarity.CompareTo(b.fishRarity));
+                DataTower.instance.Items.Sort((a, b) => a.fishRarity.CompareTo(b.fishRarity));
                 OnInventoryChanged?.Invoke();
                 break;
             default:
