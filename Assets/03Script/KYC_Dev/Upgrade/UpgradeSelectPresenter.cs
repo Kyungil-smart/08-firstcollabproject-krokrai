@@ -451,7 +451,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 마스터 레벨
     private void SetViewMasterLevel()
     {
-        int level = _dUpgrade.MasterLevel;
+        int level = DataTower.instance.MasterLevel;
         _dUpgrade.CheckEnoughGoldMasterLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMasterLevelCostData(level, out int cost);
         _views[0].RenewalLevelText(level,_dDataReader.Master_Lv.Length);
@@ -468,7 +468,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 좌석 업그레이드 레벨
     private void SetViewMaxCustomerLimitLevel()
     {
-        int level = _dUpgrade.MaxCustomerLimitLevel;
+        int level = DataTower.instance.MaxCustomerLimitLevel;
         _dUpgrade.CheckEnoughGoldMaxCustomerLimitLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMaxCustomerLimitCostData(level, out int cost);
         _views[1].RenewalLevelText(level,_dDataReader.Max_Customer_Limit.Length);
@@ -485,7 +485,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 특별 손님 업그레이드 레벨
     private void SetViewMaxSpawnLimit01Level()
     {
-        int level = _dUpgrade.MaxSpawnLimit01Level;
+        int level = DataTower.instance.MaxSpawnLimit01Level;
         _dUpgrade.CheckEnoughGoldMaxSpawnLimit01LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMaxSpawnLimit01CostData(level, out int cost);
         _views[2].RenewalLevelText(level,_dDataReader.Max_Spawn_Limit_1.Length);
@@ -502,7 +502,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // VIP 업그레이드 레벨
     private void SetViewMaxSpawnLimit02Level()
     {
-        int level = _dUpgrade.MaxSpawnLimit02Level;
+        int level = DataTower.instance.MaxSpawnLimit02Level;
         _dUpgrade.CheckEnoughGoldMaxSpawnLimit02LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMaxSpawnLimit02CostData(level, out int cost);
         _views[3].RenewalLevelText(level,_dDataReader.Max_Spawn_Limit_2.Length);
@@ -519,7 +519,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 팁주는 손님 가중치 업그레이드 레벨
     private void SetViewWeightLevel()
     {
-        int level = _dUpgrade.WeightLevel;
+        int level = DataTower.instance.WeightLevel;
         _dUpgrade.CheckEnoughGoldWeightLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetWeightCostData(level, out int cost);
         _views[4].RenewalLevelText(level,_dDataReader.Weight.Length);
@@ -536,7 +536,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 모금함(팁 액수 증가) 업그레이드 레벨
     private void SetViewBonusTipsMultiLevel()
     {
-        int level = _dUpgrade.BonusTipsMultiLevel;
+        int level = DataTower.instance.BonusTipsMultiLevel;
         _dUpgrade.CheckEnoughGoldBonusTipsMultiLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusTipsMultiCostData(level, out int cost);
         _views[5].RenewalLevelText(level,_dDataReader.Bonus_Tips_Multi.Length);
@@ -553,7 +553,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 계산대(요리 가격 증가) 업그레이드 레벨
     private void SetViewBonusDishPrice01Level()
     {
-        int level = _dUpgrade.BonusDishPrice01Level;
+        int level = DataTower.instance.BonusDishPrice01Level;
         _dUpgrade.CheckEnoughGoldBonusDishPrice01LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusDishPrice01CostData(level, out int cost);
         _views[6].RenewalLevelText(level,_dDataReader.Bonus_Dish_Price_1.Length);
@@ -570,7 +570,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 밥솥(요리 가격 증가) 업그레이드 레벨
     private void SetViewBonusDishPrice02Level()
     {
-        int level = _dUpgrade.BonusDishPrice02Level;
+        int level = DataTower.instance.BonusDishPrice02Level;
         _dUpgrade.CheckEnoughGoldBonusDishPrice02LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusDishPrice02CostData(level, out int cost);
         _views[7].RenewalLevelText(level,_dDataReader.Bonus_Dish_Price_2.Length);
@@ -587,7 +587,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 식칼(요리 개수 증가) 업그레이드 레벨
     private void SetViewBonusFood01Level()
     {
-        int level = _dUpgrade.BonusFood01Level;
+        int level = DataTower.instance.BonusFood01Level;
         _dUpgrade.CheckEnoughGoldBonusFood01LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusFood01CostData(level, out int cost);
         _views[8].RenewalLevelText(level,_dDataReader.Bonus_Food_1.Length);
@@ -604,7 +604,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 도마(요리 개수 증가) 업그레이드 레벨
     private void SetViewBonusFood02Level()
     {
-        int level = _dUpgrade.BonusFood02Level;
+        int level = DataTower.instance.BonusFood02Level;
         _dUpgrade.CheckEnoughGoldBonusFood02LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusFood02CostData(level, out int cost);
         _views[9].RenewalLevelText(level,_dDataReader.Bonus_Food_2.Length);
@@ -621,7 +621,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
     // 고양이 업그레이드 레벨
     private void SetViewUnlockCatObjectLevel()
     {
-        int level = _dUpgrade.UnlockCatObjectLevel;
+        int level = DataTower.instance.UnlockCatObjectLevel;
         _dUpgrade.CheckEnoughGoldUnlockCatObjectLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetUnlockCatObjectCostData(level, out int cost);
         _views[10].RenewalLevelText(level,_dDataReader.Unlock_Cat_Object.Length);
