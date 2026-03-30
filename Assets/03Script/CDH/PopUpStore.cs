@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class ToStore : MonoBehaviour
+public class PopUpStore : MonoBehaviour
 {
     public GameObject fisherView;
     public GameObject restaurantView;
 
-    public void OpenStore()
+    public void OpenStoreUI()
     {
         fisherView.SetActive(false);
 
         restaurantView.SetActive(true);
     }
 
-    public void CloseStore()
+    public void CloseStoreUI()
     {
         fisherView.SetActive(true);
 
