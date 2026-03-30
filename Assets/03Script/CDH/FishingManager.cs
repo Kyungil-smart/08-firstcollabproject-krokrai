@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
+    [Header("확률 데이터 리스트")]
+    public List<FishRateData> fishRateList = new List<FishRateData>();
     public int fishingCount = 1; // 최대 낚시 가능한 횟수
     private int _currentCount; // 현재 낚시 가능한 횟수
     public Sprite fishingImage; // 클릭 시 변경되는 스프라이트 이미지
@@ -37,9 +39,11 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         {
             _upgradeManager.OnRodUpgrade += RodgradeMaxCount;
             _upgradeManager.OnBaitUpgrade += BaitgradeMaxCount;
+            _upgradeManager.OnFishingUpgrade += FishRateLevel;
 
             RodgradeMaxCount(DataTower.instance.rodLevel);
             BaitgradeMaxCount(DataTower.instance.baitLevel);
+            FishRateLevel(DataTower.instance.fishingGrade);
         }
     }
 
@@ -226,7 +230,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         foreach (FishData randomFish in fishDatabase)
         {
-            if (randomFish.fishRarity.ToString() == rarity) 
+            if (randomFish.fishRarity.ToString() == rarity)
             {
                 filteredFish.Add(randomFish);
             }
@@ -240,5 +244,16 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         int randomIndex = UnityEngine.Random.Range(0, filteredFish.Count);
         return filteredFish[randomIndex];
+    }
+
+    public void FishRateLevel(int level)
+    {
+        int index = level - 1;
+
+        if (index >= 0 && index < fishRateList.Count)
+        {
+            fishCurrentRate = fishRateList[index];
+            Debug.Log("확률 레벨 증가");
+        }
     }
 }
