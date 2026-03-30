@@ -2535,6 +2535,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &535594735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 535594737}
+  - component: {fileID: 535594736}
+  m_Layer: 0
+  m_Name: DataTower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &535594736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535594735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71589b6d60dbf94caf230398b4eb580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DataTower
+  _dataCon: {fileID: 11400000, guid: 4f7a9ee9d18a7b5469199816a8344e35, type: 2}
+  MasterLevel: 0
+  MaxCustomerLimitLevel: 0
+  MaxMenuLimitLevel: 0
+  MaxSpawnLimit01Level: 0
+  MaxSpawnLimit02Level: 0
+  WeightLevel: 0
+  BonusTipsMultiLevel: 0
+  BonusDishPrice01Level: 0
+  BonusDishPrice02Level: 0
+  BonusFood01Level: 0
+  BonusFood02Level: 0
+  UnlockGramophoneLevel: 0
+  UnlockCatObjectLevel: 0
+  masterVolume: 0
+  BGMVolume: 0
+  SFXVolume: 0
+  transparentLevel: 0
+  fishingGrade: 0
+  baitLevel: 0
+  rodLevel: 0
+  shipLevel: 0
+  fishingCount: 0
+  currentFishingCount: 0
+  catchFishs: 0
+  catchFishTrash: 0
+  catchFishNormal: 0
+  catchFishFine: 0
+  catchFishSuperior: 0
+  catchFishRare: 0
+  catchFishElite: 0
+  catchFishFantastic: 0
+  catchFishLegendary: 0
+  fishingTime: 0
+  maxFishingTime: 0
+  isDataInitiated: 0
+  Items: []
+  InventorySlotMax: 0
+--- !u!4 &535594737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535594735}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1059.2474, y: 739.78864, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &551113499
 GameObject:
   m_ObjectHideFlags: 0
@@ -10536,3 +10618,4 @@ SceneRoots:
   - {fileID: 1606076715477993312}
   - {fileID: 1553491621}
   - {fileID: 1361452974}
+  - {fileID: 535594737}

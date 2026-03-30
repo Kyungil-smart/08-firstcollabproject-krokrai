@@ -27,14 +27,26 @@ public class RestaurantManager : MonoBehaviour
     private GameObject _randomPrefab;
 
     private RestaurantSeat _emptySeat;
+    private bool haveDish;
 
     private Coroutine _spawnCo;
 
     private WaitForSeconds[] _seconds;
     private WaitForSeconds _baseDelay;
-     
+
+    private void OnEnable()
+    {
+        _menuCtrl.OnDish += HaveDish;
+    }
+
+    public void HaveDish(bool b)
+    {
+        haveDish = b;
+    }
+
     private void Start()
     {
+        haveDish = false;
         /*
         _baseDelay = new WaitForSeconds(5);
         _seconds = new WaitForSeconds[10];
@@ -43,7 +55,7 @@ public class RestaurantManager : MonoBehaviour
             _seconds[i] = new WaitForSeconds(i);
         }
         */
-        _baseDelay = new WaitForSeconds(3);
+        _baseDelay = new WaitForSeconds(_fixedValue.dishWashTime);
 
         _customerPool = new Queue<GameObject>(8);
         for (int i = 0; i < 8 ; i++)
@@ -79,6 +91,11 @@ public class RestaurantManager : MonoBehaviour
         // 설거지? 시간 => 대기시간 => 스폰
         while (true)
         {
+            if (!haveDish)
+            {
+                yield return null;
+                continue;
+            }
             // 손님 성향 및 이미지 랜덤 생성
             GetRandomCustomerPrefab();
             // 예외처리.
@@ -87,7 +104,8 @@ public class RestaurantManager : MonoBehaviour
 
             // 스폰 대기 시간.
             //yield return _baseDelay ;
-            yield return new WaitForSeconds(5);
+            yield return _baseDelay;
+            yield return new WaitForSeconds(UnityEngine.Random.Range(_fixedValue.minSpawnDelay, _fixedValue.maxSpawnDelay +1));
             // 후에 추가 딜레이 필요
 
             // 빈자리 탐색 및 반환 받음.
