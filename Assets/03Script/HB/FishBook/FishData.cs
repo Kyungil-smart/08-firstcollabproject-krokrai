@@ -13,8 +13,8 @@ public class FishData : ScriptableObject, IDataSeter
     public string engName;              // 이름(영어)
     public EFish_Rarity fishRarity;     // 물고기 등급
     public EFish_Type fishType;         // 종류
-    public int length;                  // 물고기 길이
-    public int weight;                  // 물고기 무게
+    public float length;                  // 물고기 길이
+    public float weight;                  // 물고기 무게
     public Sprite fishSprite;           // 물고기 이미지(유니티 프로그램내에서 첨부)
     public Sprite silhouetteSprite;     // 실루엣 이미지
     public int price;                   // 물고가 판매 가격(소상인)
@@ -42,10 +42,10 @@ public class FishData : ScriptableObject, IDataSeter
         fishRarity = ChangeToFishRarityEnum(datas[3]);
         fishType = ChangeToFishTypeEnum(datas[4]);
 
-        // int 타입 parsing
+        // int, float 타입 parsing
         // 길이, 무게, 생선 판매 가격
-        if (!int.TryParse(datas[5], out length)) length = -1;
-        if (!int.TryParse(datas[6], out weight)) weight = -1;
+        if (!float.TryParse(datas[5], out length)) length = -1f;
+        if (!float.TryParse(datas[6], out weight)) weight = -1f;
         if (!int.TryParse(datas[9], out price)) price = -1;
 
         // 설명(한, 영)
