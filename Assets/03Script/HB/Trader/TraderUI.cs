@@ -27,12 +27,17 @@ public class TraderUI : MonoBehaviour
     private bool _isInitialized = false;            // UI창 초기화 여부
 
     private void Awake()
-    {
+    {/*
         // DataTower에서 돈 관련 내용 구독
         if (DataTower.instance != null)
         {
+            Debug.Log("DataTower에 이벤트 구독 시도");
             DataTower.instance.OnChangedMoney += UpdateGoldUI;        
         }
+        else
+        {
+            Debug.Log("DataTower에 instace가 Null임");
+        }*/
 
         // Select All 버튼 리스트너 등록
         if (selectAllButton != null)
@@ -49,16 +54,39 @@ public class TraderUI : MonoBehaviour
 
     private void Start()
     {
+        if (DataTower.instance != null)
+        {
+            DataTower.instance.OnChangedMoney -= UpdateGoldUI;
+            DataTower.instance.OnChangedMoney += UpdateGoldUI;
+
+            Debug.Log($"Start 시점 잔액 : {DataTower.instance.money}");
+            UpdateGoldUI(DataTower.instance.money);
+        }
+        else
+        {
+            Debug.Log("Start시점에도 DataTower없음");
+        }
+
         // 처음으로 창이 켜질 때 실행
         InitTrader();
         _isInitialized = true;
     }
 
+    private void OnDisable()
+    {
+        if(DataTower.instance != null)
+        {
+            DataTower.instance.OnChangedMoney -= UpdateGoldUI;
+        }
+    }
+
     private void OnEnable()
     {
         // 다시 켜질 때 실행
-        if (_isInitialized)
+        if (_isInitialized && DataTower.instance != null)
         {
+            DataTower.instance.OnChangedMoney -= UpdateGoldUI;
+            DataTower.instance.OnChangedMoney += UpdateGoldUI;
             InitTrader();
         }
     }
@@ -105,24 +133,34 @@ public class TraderUI : MonoBehaviour
     public void OnSellButtonClicked()
     {
         var selected = selectionManager.SelectedSlots(listManager.GetAllSlots());
-        long price = selectionManager.TotalSelectedPrice(listManager.GetAllSlots());
 
-        // 데이터 타워에서 돈 받아옴
-        DataTower.instance.TryMoenyChanged((ulong)price);
+        if (selected.Count == 0) return;
+        
+        // 총 판매 가격 계산
+        long totalPrice = selectionManager.TotalSelectedPrice(listManager.GetAllSlots());
 
-        // 판매된 물고기 삭제
-        foreach (var slot in selected)
+        // 데이터 타워에서 돈 추가 (DataTower에 돈 추가는 false)
+        if (DataTower.instance.TryMoenyChanged((ulong)totalPrice, false))
         {
-            DataTower.instance.Items.Remove(slot.GetFishData());
-            Destroy(slot.gameObject);
+            // 판매된 물고기 삭제
+            foreach (var slot in selected)
+            {
+                FishData data = slot.GetFishData();
+
+                // 인벤토리 데이터 제거
+                DataTower.instance.Items.Remove(data);
+
+                listManager.GetAllSlots().Remove(slot);
+                Destroy(slot.gameObject);
+            }
+
+            // UI 정리
+            if(selectAllButton != null) selectAllButton.isOn = false;
+            OnSlotChanged();
+
+            Debug.Log($"{totalPrice} Gold, 판매 완료");
         }
-
-        // 내부 리스트 갱신
-        listManager.GetAllSlots().RemoveAll(s => s == null || selected.Contains(s));
-
-        // UI 정리
-        if(selectAllButton != null) selectAllButton.isOn = false;
-        OnSlotChanged();
+       
     }
     
     public void OnFilterButtonClicked()
@@ -177,7 +215,11 @@ public class TraderUI : MonoBehaviour
 
     private void UpdateGoldUI(ulong money)
     {
+        Debug.Log($"전달받은 금액 : {money}");
         // "N0"로 세자리 당 ',' 찍어주기 
         if (goldText != null) goldText.text = $"Money: {money.ToString("N0")} Gold";
+
+        else
+        Debug.Log("goldText가 인스펙터에서 연결되지 않음");
     }
 }

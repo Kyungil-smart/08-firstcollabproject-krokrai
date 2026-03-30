@@ -1038,6 +1038,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71589b6d60dbf94caf230398b4eb580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataTower
+  _dataCon: {fileID: 0}
+  MasterLevel: 0
+  MaxCustomerLimitLevel: 0
+  MaxMenuLimitLevel: 0
+  MaxSpawnLimit01Level: 0
+  MaxSpawnLimit02Level: 0
+  WeightLevel: 0
+  BonusTipsMultiLevel: 0
+  BonusDishPrice01Level: 0
+  BonusDishPrice02Level: 0
+  BonusFood01Level: 0
+  BonusFood02Level: 0
+  UnlockGramophoneLevel: 0
+  UnlockCatObjectLevel: 0
   masterVolume: 0
   BGMVolume: 0
   SFXVolume: 0
@@ -6492,7 +6506,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.000030517578}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &271770491794643506
 MonoBehaviour:
@@ -6565,7 +6579,7 @@ RectTransform:
   m_Father: {fileID: 4397140150999668918}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
