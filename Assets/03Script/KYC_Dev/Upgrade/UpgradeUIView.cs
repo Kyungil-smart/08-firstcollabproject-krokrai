@@ -112,22 +112,6 @@ public class UpgradeUIView : MonoBehaviour
     {
         _currentGoldText.text = amount.ToString();
     }
-    
-    /// <summary>
-    /// 닫기 버튼 구현
-    /// </summary>
-    public void OnClickCloseButton()
-    {
-        gameObject.SetActive(false);
-    }
-    
-    /// <summary>
-    /// BackGround 클릭했을 때 창 닫기 구현
-    /// </summary>
-    public void OnClickBackGround()
-    {
-        OnClickCloseButton();
-    }
 
     /// <summary>
     /// 낚시 업그레이드 목록 선택 토글
