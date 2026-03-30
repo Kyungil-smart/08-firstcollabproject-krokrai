@@ -946,6 +946,7 @@ GameObject:
   - component: {fileID: 2054291870829537220}
   - component: {fileID: 521680222736941114}
   - component: {fileID: 7558810456811637906}
+  - component: {fileID: 5546043803162481094}
   m_Layer: 5
   m_Name: UpgradeUI
   m_TagString: Untagged
@@ -1058,8 +1059,21 @@ MonoBehaviour:
   _toggleFishingUpgradeButton: {fileID: 2849825205746785032}
   _toggleDiningUpgradeButton: {fileID: 1234771202559281257}
   _id_Money: {fileID: 0}
-  _id_Fishhook: {fileID: 0}
+  _id_Fishing: {fileID: 0}
   _id_Restaurant: {fileID: 0}
+--- !u!114 &5546043803162481094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4632449891827102967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2800758e7f737b24290cabcd04c93d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleUpgradeUI
+  _ui: {fileID: 4632449891827102967}
 --- !u!1 &5038142644206316742
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,9 +2424,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7558810456811637906}
-        m_TargetAssemblyTypeName: FishingUpgradeUIController, Assembly-CSharp
-        m_MethodName: OnClickCloseButton
+      - m_Target: {fileID: 5546043803162481094}
+        m_TargetAssemblyTypeName: ToggleUpgradeUI, Assembly-CSharp
+        m_MethodName: OnButtenClickUIClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2578,9 +2592,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7558810456811637906}
-        m_TargetAssemblyTypeName: UpgradeUIView, Assembly-CSharp
-        m_MethodName: OnClickBackGround
+      - m_Target: {fileID: 5546043803162481094}
+        m_TargetAssemblyTypeName: ToggleUpgradeUI, Assembly-CSharp
+        m_MethodName: OnButtenClickUIClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
