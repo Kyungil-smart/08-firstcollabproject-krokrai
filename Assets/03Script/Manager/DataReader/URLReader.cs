@@ -7,7 +7,7 @@ public struct  URLReader
 {
     public char splitSymbol => '\t';
 
-    public IEnumerator Load(string url, Action<char, string[]> SuccessCallback) //, Action FailureCallback) ½ÇÆĞ ÇßÀ» ¶§ °ÔÀÓ¿¡ ´ëÇÑ ¿¹¿ÜÃ³¸® »çÇ×À» µî·ÏÇØ¾ß ÇÒ¶§.
+    public IEnumerator Load(string url, Action<char, string[]> SuccessCallback) //, Action FailureCallback) ì‹¤íŒ¨ í–ˆì„ ë•Œ ê²Œì„ì— ëŒ€í•œ ì˜ˆì™¸ì²˜ë¦¬ ì‚¬í•­ì„ ë“±ë¡í•´ì•¼ í• ë•Œ.
     {
         string sheetId = url.Split("d/")[1].Split('/')[0];
         string gid = url.Split("gid=")[1].Split('&')[0].Split('#')[0];
@@ -20,7 +20,7 @@ public struct  URLReader
 
             if (uwr.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError($"<color = yellow>¸µÅ©¸¦ ÅëÇØ µ¥ÀÌÅÍ ÀĞ¾î¿À±â ½ÇÆĞ. ¿¡·¯ : {uwr.error}</color>");
+                Debug.LogError($"ë§í¬ë¥¼ í†µí•´ ë°ì´í„° ì½ì–´ì˜¤ê¸° ì‹¤íŒ¨. ì—ëŸ¬ : {uwr.error}");
                 yield break;
             }
 
