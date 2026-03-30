@@ -30,13 +30,17 @@ public class DataTower : MonoBehaviour
     /// 실패한 경우 : false 반환 (가급적이면 false 반환하지 않게 예외처리 할 것.)
     /// </summary>
     /// <param name="mny">차감할 금액</param>
+    /// <param name="isWithdraw">돈 추가인지 차감인지</param>
     /// <returns></returns>
-    public bool TryMoenyChanged(ulong mny)
+    public bool TryMoenyChanged(ulong mny, bool isWithdraw = true)
     {
         if (money - mny < 0)
             return false;
-        money -= mny;
-        OnChangedMoney?.Invoke(money);
+        if (isWithdraw)
+            money -= mny;
+        else
+            money += mny;
+            OnChangedMoney?.Invoke(money);
         return true;
     }
 

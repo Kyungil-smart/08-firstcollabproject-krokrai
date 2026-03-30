@@ -21,6 +21,7 @@ public class MenuCtrl : MonoBehaviour
         {
             dishUIs[i].Init(this);
         }
+        OnMaxMenu?.Invoke(false);
     }
 
     /// <summary>
@@ -55,15 +56,6 @@ public class MenuCtrl : MonoBehaviour
         }
         return _inDishUList[UnityEngine.Random.Range(0, _inDishUList.Count)].EatMenu();
     }
-
-#if UNITY_EDITOR
-    public void RandomEting()
-    {
-        
-        if (_inDishUList.Count <= 0) return;
-        _inDishUList[UnityEngine.Random.Range(0, _inDishUList.Count)].EatMenu();
-    }
-#endif
 
     public void ReturnDish(in DishUI dish)
     {

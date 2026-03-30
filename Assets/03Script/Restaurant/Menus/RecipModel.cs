@@ -19,13 +19,12 @@ public class RecipModel : MonoBehaviour
         _canMake = false;
         _isUnlocked = false;
         _isInitiated = false;
-
-        
     }
 
     private void PassToRecipeInfo()
     {
-        _riu.SelectedRecipe(_recipe, _canMake);
+        //_riu.SelectedRecipe(_recipe, _canMake);
+        _riu.SelectedRecipe(_recipe, true);
     }
 
     private void OnDestroy()
@@ -41,12 +40,11 @@ public class RecipModel : MonoBehaviour
             return;
         }
 
-        _riu = riu;
-        
-        _btn.onClick.AddListener(PassToRecipeInfo);
-
         _isInitiated = true;
+        _riu = riu;
         _recipe = rcp;
+
+        _btn.onClick.AddListener(PassToRecipeInfo);
         // 추가적인 의존성 관련 필요한 경우 추가.
     }
 

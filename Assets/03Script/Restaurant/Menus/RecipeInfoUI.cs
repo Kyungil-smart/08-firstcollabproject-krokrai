@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +10,14 @@ public class RecipeInfoUI : MonoBehaviour
     [SerializeField] Button _btn;
     [SerializeField] MenuCtrl _menuctrl;
 
+    RecipeContainer _rcp;
+
     FishData fish;
     Language _lng; // 현재 언어
 
     bool _canMake;
 
-    public void ThisRecipeCanMake(bool b) => _canMake = b;
+    public void ThisRecipeCanMake(bool b) => _canMake = !b;
 
     public void ChangedLanguage(Language lng)
     {
@@ -46,6 +49,8 @@ public class RecipeInfoUI : MonoBehaviour
         _img[0].sprite =  여기에 나중에 만들 스프라이트 접근용 함수 입력
          */
 
+        _rcp = rcp;
+
         if (DataTower.instance.fishDatas.ContainsKey(rcp.ingredient))
             fish = DataTower.instance.fishDatas[rcp.ingredient];
         else
@@ -68,6 +73,12 @@ public class RecipeInfoUI : MonoBehaviour
                 break;
         }
 
+        
+
         // TODO : 물고기 소지 및 관련 인벤토리 작업 완료 후 진입. @@@@@@@@@
+    }
+    public void MakeMenu()
+    {
+        _menuctrl.InsertDish(_rcp);
     }
 }

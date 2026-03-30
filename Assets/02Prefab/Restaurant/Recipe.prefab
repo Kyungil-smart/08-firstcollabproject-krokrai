@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82679c82578937e4c98519de74929526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RecipModel
+  _btn: {fileID: -8516579465297262810}
 --- !u!114 &1775547861284959734
 MonoBehaviour:
   m_ObjectHideFlags: 0

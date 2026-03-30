@@ -8,9 +8,10 @@ public class RestaurantManager : MonoBehaviour
     // 후에 아래 리소스는 정리 및 DataTower로 인계
     [Header("Resources")]
     // 후에 메뉴판이랑 연동해서 관리할 것이기 때문에 메뉴판 완성 시 함수 안에 포함된 모든 _sushiCount 수정 해야함 @@@@@@@@@@@@@@@@@@@@@@@
-    [SerializeField] private int _sushiCount = 50;
-    [SerializeField] private ulong _money = 1000;
-    
+    [SerializeField] private MenuCtrl _menuCtrl;
+    [SerializeField] private CustomerDataSO[] _customerData;
+    [SerializeField] private Customer_Tips[] _customerTips;
+    [SerializeField] private Restaurant_Fixed_value _fixedValue;
 
     [Header("Spawn")]
     [SerializeField] private GameObject[] _customerPrefab;
@@ -86,11 +87,8 @@ public class RestaurantManager : MonoBehaviour
 
             // 스폰 대기 시간.
             //yield return _baseDelay ;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5);
             // 후에 추가 딜레이 필요
-
-            // 초밥이 없는 겨우 예외처리
-            if (_sushiCount <= 0) continue;
 
             // 빈자리 탐색 및 반환 받음.
             _emptySeat = GetEmptySeat();
@@ -122,33 +120,7 @@ public class RestaurantManager : MonoBehaviour
         seat.SetOccupied();
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
-        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft,null, RndColor());
-    }
-    
-    // 임시 함수
-    private string RndColor()
-    {
-        switch (UnityEngine.Random.Range(0, 8))
-        {
-            case 0:
-                return "white";
-            case 1:
-                return "black";
-            case 2:
-                return "red";
-            case 3:
-                return "green";
-            case 4:
-                return "blu";
-            case 5:
-                return "yellow";
-            case 6:
-                return "cyan";
-            case 7:
-                return "brown";
-            default:
-                return "$fc8a1f";
-        }
+        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft, _customerTips[0], _customerData[0]); // 후에 수정
     }
 
     /// <summary>
@@ -212,19 +184,8 @@ public class RestaurantManager : MonoBehaviour
     /// </summary>
     /// <param name="price"></param>
     /// <returns></returns>
-    public bool TryCounsumeSushiAndEarnMoney(int price)
+    public void TryCounsumeSushiAndEarnMoney(float multi)
     {
-        if (_sushiCount <= 0) return false;
-
-        _sushiCount--;
-        _money += (ulong)price;
-        return true;
+        DataTower.instance.TryMoenyChanged((ulong)(_menuCtrl.RandomEating()*multi),false);
     }
-
-    /// <summary>
-    /// 초밥의 갯수를 추가하는 함수
-    /// 요리가 끝났을 때 추가하면 된다.
-    /// </summary>
-    /// <param name="amount"></param>
-    public void AddSushi(int amount) => _sushiCount += amount;
 }
