@@ -2566,17 +2566,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3548771370135012281, guid: 4ef05231e82c99b4582db425816763e6, type: 3}
   m_PrefabInstance: {fileID: 818842641}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &818842644 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6538025667334557649, guid: 4ef05231e82c99b4582db425816763e6, type: 3}
-  m_PrefabInstance: {fileID: 818842641}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b696585b1fccdbe419bc771e7e67964c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FishingManager
 --- !u!1 &878632479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2859,10 +2848,6 @@ PrefabInstance:
       propertyPath: countText
       value: 
       objectReference: {fileID: 1805795774}
-    - target: {fileID: 4183886587059565716, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
-      propertyPath: _manager
-      value: 
-      objectReference: {fileID: 818842644}
     - target: {fileID: 4183886587059565716, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
       propertyPath: timerText
       value: 
