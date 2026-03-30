@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,8 +6,10 @@ public class OpenMenu : MonoBehaviour
 {
     [SerializeField] Button _btn;
     [SerializeField] GameObject _menu;
-    [SerializeField] GameObject _Rast;
-    [SerializeField] GameObject _Fish;
+    [SerializeField] GameObject _restaurantScreen;
+    [SerializeField] GameObject _fish;
+
+    public event Action<bool> OnChangeSceneToRestaurant;
 
     bool _active = false;
 
@@ -16,17 +19,19 @@ public class OpenMenu : MonoBehaviour
         _active = false;
     }
 
-    public void ChangeFishScene()
+    public void OnFishScene()
     {
-        _Fish.SetActive(true);
+        _fish.SetActive(true);
         _menu.SetActive(false);
-        _Rast.SetActive(false);
+        _restaurantScreen.SetActive(false);
+        OnChangeSceneToRestaurant?.Invoke(false);
     }
 
-    public void OnChanged()
+    public void OnRestaurantScene()
     {
-        _Rast.SetActive(true);
-        _Fish.SetActive(false);
+        _fish.SetActive(false);
+        _restaurantScreen.SetActive(true);
+        OnChangeSceneToRestaurant?.Invoke(true);
     }
 
     public void OpenMenuPanel()

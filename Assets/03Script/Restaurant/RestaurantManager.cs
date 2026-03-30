@@ -15,38 +15,50 @@ public class RestaurantManager : MonoBehaviour
 
     [Header("Spawn")]
     [SerializeField] private GameObject[] _customerPrefab;
+    [SerializeField] private GameObject _customers;
     [SerializeField] private Transform _spawnPointRight;
     [SerializeField] private Transform _exitPointLeft;
 
     [Header("Seats")]
     [SerializeField] private List<RestaurantSeat> _seats = new List<RestaurantSeat>();
 
-    private DataTower _dataTower;
-
+    [Header("SceneChange")]
+    [SerializeField] private OpenMenu _openMenu;
     private Queue<GameObject> _customerPool; // 오브젝트 풀 패턴 기반 작동 예정
     private GameObject _randomPrefab;
 
     private RestaurantSeat _emptySeat;
-    private bool haveDish;
-
-    private Coroutine _spawnCo;
+    private bool _haveDish;
+    private bool _canVisual;
 
     private WaitForSeconds[] _seconds;
-    private WaitForSeconds _baseDelay;
+
 
     private void OnEnable()
     {
         _menuCtrl.OnDish += HaveDish;
+        _openMenu.OnChangeSceneToRestaurant += OnVisual;
+    }
+
+    private void OnDestroy()
+    {
+        _menuCtrl.OnDish += HaveDish;
+        _openMenu.OnChangeSceneToRestaurant -= OnVisual;
+    }
+
+    public void OnVisual(bool b)
+    {
+        _canVisual = b;
     }
 
     public void HaveDish(bool b)
     {
-        haveDish = b;
+        _haveDish = b;
     }
 
     private void Start()
     {
-        haveDish = false;
+        _haveDish = false;
         /*
         _baseDelay = new WaitForSeconds(5);
         _seconds = new WaitForSeconds[10];
@@ -55,34 +67,20 @@ public class RestaurantManager : MonoBehaviour
             _seconds[i] = new WaitForSeconds(i);
         }
         */
-        _baseDelay = new WaitForSeconds(_fixedValue.dishWashTime);
 
-        _customerPool = new Queue<GameObject>(8);
+        _customerPool = new Queue<GameObject>(10);
+
         for (int i = 0; i < 8 ; i++)
         {
-            GameObject obj = Instantiate(_customerPrefab[0]);
-            obj.GetComponent<CustomerController>().ConnectRestaurant(this);
+            GameObject obj = Instantiate(_customerPrefab[0]); // 나중에 데이터 타워 리셋 후 받게 만들기.
+            obj.GetComponent<CustomerController>().ConnectRestaurant(this, _openMenu);
+            obj.transform.SetParent(_customers.transform);
             obj.name = $"customer {i}";
             obj.SetActive(false);
             _customerPool.Enqueue( obj );
         }
 
-        _spawnCo = StartCoroutine(CoTrySpawnCustomer());
-    }
-
-    /// <summary>
-    /// 데이터 관리자에게 연결하기 위한 함수
-    /// RestaurantCompositionRoot.cs 를 제외하고 호출하는 스크립트가 없어야합니다.
-    /// </summary>
-    /// <param name="tower"></param>
-    public void ConnectDataTower(DataTower tower)
-    {
-        if (_dataTower != null)
-        {
-            Debug.Log($"초기화된 변수에 접근 시도가 있습니다. {gameObject.name}");
-            return;
-        }
-        _dataTower = tower;
+        StartCoroutine(CoTrySpawnCustomer());
     }
 
     private IEnumerator CoTrySpawnCustomer()
@@ -91,28 +89,26 @@ public class RestaurantManager : MonoBehaviour
         // 설거지? 시간 => 대기시간 => 스폰
         while (true)
         {
-            if (!haveDish)
+            if (!_haveDish)
             {
                 yield return null;
                 continue;
             }
+
+            // 빈자리 탐색 및 반환 받음.
+            _emptySeat = GetEmptySeat();
+            // 자리가 없는 경우 예외처리
+            if (_emptySeat == null) continue;
+
+            // 스폰 대기 시간.
+            yield return new WaitForSeconds(UnityEngine.Random.Range(_fixedValue.minSpawnDelay, _fixedValue.maxSpawnDelay + 1));
+
             // 손님 성향 및 이미지 랜덤 생성
             GetRandomCustomerPrefab();
             // 예외처리.
             if (_randomPrefab == null)
                 yield break;
-
-            // 스폰 대기 시간.
-            //yield return _baseDelay ;
-            yield return _baseDelay;
-            yield return new WaitForSeconds(UnityEngine.Random.Range(_fixedValue.minSpawnDelay, _fixedValue.maxSpawnDelay +1));
             // 후에 추가 딜레이 필요
-
-            // 빈자리 탐색 및 반환 받음.
-            _emptySeat = GetEmptySeat();
-
-            // 자리가 없는 경우 예외처리
-            if (_emptySeat == null) continue;
 
             // 최종적으로 빈자리와 손님을 소환
             SpawnCustomer(_emptySeat);
@@ -138,7 +134,7 @@ public class RestaurantManager : MonoBehaviour
         seat.SetOccupied();
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
-        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft, _customerTips[0], _customerData[0]); // 후에 수정
+        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft, _customerTips[0], _customerData[0], _canVisual); // 후에 수정
     }
 
     /// <summary>

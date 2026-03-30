@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerController
   _fixedValue: {fileID: 0}
+  _visualObject: {fileID: 4590847529964708730}
+  _openMenu: {fileID: 0}
 --- !u!1 &4590847529964708730
 GameObject:
   m_ObjectHideFlags: 0
