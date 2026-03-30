@@ -11,16 +11,15 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3114da32e2482f64f8c155c0534b1c43, type: 3}
   m_Name: Recipe 1
-  m_EditorClassIdentifier: Assembly-CSharp::RecipContainer
-  recipe_ID: 
-  recipe_Type: 0
-  recipe_KName: 
-  recipe_EName: 
-  prices: 0
-  yield: 0
-  ingredient: 
-  count: 0
-  dish_Sprite: 
-  silhouette_Sprite: 
-  KDescription: 
-  EDescription: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeContainer
+  recipe_ID: Recipe_2
+  recipeRarity: 0
+  recipe_KName: "\uC7A5\uD654 \uAD6C\uC774"
+  recipe_EName: Grilled Boots
+  prices: 20
+  yield: 25
+  ingredient: Fish_2
+  dish_Sprite: NullException
+  silhouette_Sprite: NullException
+  KDescription: "\uC124\uBA85 \uC791\uC131 \uD544\uC694"
+  EDescription: "Dummy Description\r"

@@ -17,17 +17,17 @@ public class UpgradeUIView : MonoBehaviour
     [SerializeField] Button _toggleFishingUpgradeButton;
     [SerializeField] Button _toggleDiningUpgradeButton;
     
-    [Header("TranslationData / AutoSetting")]
-    [SerializeField] FishingTranslationData _id_Money;
-    [SerializeField] FishingTranslationData _id_Fishhook;
-    [SerializeField] FishingTranslationData _id_Restaurant;
+    [Header("TranslationData / AutoSetting / For Debug")]
+    [SerializeField] TranslationData _id_Money;
+    [SerializeField] TranslationData _id_Fishing;
+    [SerializeField] TranslationData _id_Restaurant;
     
-    private TranslationDataReader _translationDataReader;
+    private TranslationDataReader _tDataReader;
     private WaitForEndOfFrame _waitForEndOfFrame = new();
 
     private void Awake()
     {
-        _translationDataReader = FindFirstObjectByType<TranslationDataReader>();
+        _tDataReader = FindFirstObjectByType<TranslationDataReader>();
     }
 
     private void OnEnable()
@@ -77,9 +77,9 @@ public class UpgradeUIView : MonoBehaviour
 
     private void SetTranslationText()
     {
-        _translationDataReader.GetFTranslationData("Money", out _id_Money);
-        _translationDataReader.GetFTranslationData("Fishhook", out _id_Fishhook);
-        _translationDataReader.GetFTranslationData("Restaurant", out _id_Restaurant);
+        _id_Money = _tDataReader.GetTranslationData("Money");
+        _id_Fishing = _tDataReader.GetTranslationData("Fishing");
+        _id_Restaurant = _tDataReader.GetTranslationData("Restaurant");
         TranslationText(DataTower.instance.languageSetting);
     }
     
@@ -89,12 +89,12 @@ public class UpgradeUIView : MonoBehaviour
         {
             case Language.ENG:
                 _moneyText.text = _id_Money.En;
-                _toggleFishingUpgradeText.text = _id_Fishhook.En;
+                _toggleFishingUpgradeText.text = _id_Fishing.En;
                 _toggleDiningUpgradeText.text = _id_Restaurant.En;
                 break;
             case Language.KOR:
                 _moneyText.text = _id_Money.Kor;
-                _toggleFishingUpgradeText.text = _id_Fishhook.Kor;
+                _toggleFishingUpgradeText.text = _id_Fishing.Kor;
                 _toggleDiningUpgradeText.text = _id_Restaurant.Kor;
                 break;
         }
@@ -111,22 +111,6 @@ public class UpgradeUIView : MonoBehaviour
     private void RenewalGoldText(ulong amount)
     {
         _currentGoldText.text = amount.ToString();
-    }
-    
-    /// <summary>
-    /// 닫기 버튼 구현
-    /// </summary>
-    public void OnClickCloseButton()
-    {
-        gameObject.SetActive(false);
-    }
-    
-    /// <summary>
-    /// BackGround 클릭했을 때 창 닫기 구현
-    /// </summary>
-    public void OnClickBackGround()
-    {
-        OnClickCloseButton();
     }
 
     /// <summary>

@@ -14,11 +14,11 @@ public class UpgradeSelectView : MonoBehaviour
     [SerializeField] Image _upgradeIconSprite;
     [SerializeField] Button _upgradeButton;
     
-    [Header("TranslationData / Auto Setting")]
-    public FishingTranslationData UpgradeTargetData;
-    public FishingTranslationData UpgradeDescriptionData;
-    public FishingTranslationData UpgradeToolTipData;
-    public FishingTranslationData UpgradeToolTipMaxData;
+    [Header("TranslationData / AutoSetting / For Debug")]
+    public TranslationData UpgradeTargetData;
+    public TranslationData UpgradeDescriptionData;
+    public TranslationData UpgradeToolTipData;
+    public TranslationData UpgradeToolTipMaxData;
     
     public event Action OnTryUpgrade;
 

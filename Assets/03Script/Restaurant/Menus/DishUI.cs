@@ -27,7 +27,7 @@ public class DishUI : MonoBehaviour
         _rcp = rcp;
         _sushi = _rcp.yield;
 
-        _tmpUGUI[0].text = _rcp.name;
+        _tmpUGUI[0].text = _rcp.recipe_KName; // 로컬라이제이션 진행 때 수정 해야됌 @@@@@@@@@@@@@@@@
         _tmpUGUI[1].text = _sushi.ToString();
     }
 
@@ -54,10 +54,6 @@ public class DishUI : MonoBehaviour
     /// </summary>
     public int EatMenu()
     {
-        if ( _sushi <= 0 )
-        {
-            return 0;
-        }
         _sushi--;
         _tmpUGUI[1].text = _sushi.ToString();
 

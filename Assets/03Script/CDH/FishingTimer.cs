@@ -8,12 +8,15 @@ public class FishingTimer : MonoBehaviour
     [Range(0f, 3600f)]
     [SerializeField] public float fishingTime; // 낚시 가능 횟수 충전까지 남은 시간
     [SerializeField] public float maxFishingTime = 3600f; // 낚시 가능 횟수 최대 쿨타임
+    [SerializeField] private FishingManager _manager;
     public TMP_Text timerText; // 시간을 화면에 표시할 UI 텍스트 컴포넌트
-    private FishingManager _manager; // 낚시 횟수 증가를 위한 FishingManager.cs 참조
 
     private void Start()
     {
-        _manager = FindFirstObjectByType<FishingManager>();
+        if (_manager == null)
+    {
+        Debug.Log("인스펙터창을 확인하세요.");
+    }
         StartCoroutine(StartCountdown());
     }
 

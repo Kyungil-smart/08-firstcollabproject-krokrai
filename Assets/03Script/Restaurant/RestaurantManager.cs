@@ -8,9 +8,10 @@ public class RestaurantManager : MonoBehaviour
     // 후에 아래 리소스는 정리 및 DataTower로 인계
     [Header("Resources")]
     // 후에 메뉴판이랑 연동해서 관리할 것이기 때문에 메뉴판 완성 시 함수 안에 포함된 모든 _sushiCount 수정 해야함 @@@@@@@@@@@@@@@@@@@@@@@
-    [SerializeField] private int _sushiCount = 50;
-    [SerializeField] private ulong _money = 1000;
-    
+    [SerializeField] private MenuCtrl _menuCtrl;
+    [SerializeField] private CustomerDataSO[] _customerData;
+    [SerializeField] private Customer_Tips[] _customerTips;
+    [SerializeField] private Restaurant_Fixed_value _fixedValue;
 
     [Header("Spawn")]
     [SerializeField] private GameObject[] _customerPrefab;
@@ -26,14 +27,26 @@ public class RestaurantManager : MonoBehaviour
     private GameObject _randomPrefab;
 
     private RestaurantSeat _emptySeat;
+    private bool haveDish;
 
     private Coroutine _spawnCo;
 
     private WaitForSeconds[] _seconds;
     private WaitForSeconds _baseDelay;
-     
+
+    private void OnEnable()
+    {
+        _menuCtrl.OnDish += HaveDish;
+    }
+
+    public void HaveDish(bool b)
+    {
+        haveDish = b;
+    }
+
     private void Start()
     {
+        haveDish = false;
         /*
         _baseDelay = new WaitForSeconds(5);
         _seconds = new WaitForSeconds[10];
@@ -42,13 +55,14 @@ public class RestaurantManager : MonoBehaviour
             _seconds[i] = new WaitForSeconds(i);
         }
         */
-        _baseDelay = new WaitForSeconds(3);
+        _baseDelay = new WaitForSeconds(_fixedValue.dishWashTime);
 
         _customerPool = new Queue<GameObject>(8);
         for (int i = 0; i < 8 ; i++)
         {
             GameObject obj = Instantiate(_customerPrefab[0]);
             obj.GetComponent<CustomerController>().ConnectRestaurant(this);
+            obj.name = $"customer {i}";
             obj.SetActive(false);
             _customerPool.Enqueue( obj );
         }
@@ -77,6 +91,11 @@ public class RestaurantManager : MonoBehaviour
         // 설거지? 시간 => 대기시간 => 스폰
         while (true)
         {
+            if (!haveDish)
+            {
+                yield return null;
+                continue;
+            }
             // 손님 성향 및 이미지 랜덤 생성
             GetRandomCustomerPrefab();
             // 예외처리.
@@ -84,11 +103,10 @@ public class RestaurantManager : MonoBehaviour
                 yield break;
 
             // 스폰 대기 시간.
-            yield return _baseDelay ;
+            //yield return _baseDelay ;
+            yield return _baseDelay;
+            yield return new WaitForSeconds(UnityEngine.Random.Range(_fixedValue.minSpawnDelay, _fixedValue.maxSpawnDelay +1));
             // 후에 추가 딜레이 필요
-
-            // 초밥이 없는 겨우 예외처리
-            if (_sushiCount <= 0) continue;
 
             // 빈자리 탐색 및 반환 받음.
             _emptySeat = GetEmptySeat();
@@ -120,7 +138,7 @@ public class RestaurantManager : MonoBehaviour
         seat.SetOccupied();
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
-        //_randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft);
+        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft, _customerTips[0], _customerData[0]); // 후에 수정
     }
 
     /// <summary>
@@ -184,19 +202,8 @@ public class RestaurantManager : MonoBehaviour
     /// </summary>
     /// <param name="price"></param>
     /// <returns></returns>
-    public bool TryCounsumeSushiAndEarnMoney(int price)
+    public void TryCounsumeSushiAndEarnMoney(float multi)
     {
-        if (_sushiCount <= 0) return false;
-
-        _sushiCount--;
-        _money += (ulong)price;
-        return true;
+        DataTower.instance.TryMoenyChanged((ulong)(_menuCtrl.RandomEating()*multi),false);
     }
-
-    /// <summary>
-    /// 초밥의 갯수를 추가하는 함수
-    /// 요리가 끝났을 때 추가하면 된다.
-    /// </summary>
-    /// <param name="amount"></param>
-    public void AddSushi(int amount) => _sushiCount += amount;
 }

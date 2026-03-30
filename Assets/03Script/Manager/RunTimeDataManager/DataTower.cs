@@ -5,6 +5,7 @@ Data Tower : 중앙 데이터 관리자. / 대부분의 데이터에 대하여, 
 
 */
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class DataTower : MonoBehaviour
 {
     #region 기본 변수
 
+    [SerializeField] DataContainer _dataCon;
     /// <summary>
     /// 소지 금액 ulong으로 받아야함.
     /// </summary>
@@ -28,16 +30,45 @@ public class DataTower : MonoBehaviour
     /// 실패한 경우 : false 반환 (가급적이면 false 반환하지 않게 예외처리 할 것.)
     /// </summary>
     /// <param name="mny">차감할 금액</param>
+    /// <param name="isWithdraw">돈 추가인지 차감인지</param>
     /// <returns></returns>
-    public bool TryMoenyChanged(ulong mny)
+    public bool TryMoenyChanged(ulong mny, bool isWithdraw = true)
     {
         if (money - mny < 0)
             return false;
-        money -= mny;
+        if (isWithdraw)
+            money -= mny;
+        else
+            money += mny;
         OnChangedMoney?.Invoke(money);
         return true;
     }
 
+    public int MasterLevel;
+
+    public int MaxCustomerLimitLevel;
+
+    public int MaxMenuLimitLevel;
+
+    public int MaxSpawnLimit01Level;
+
+    public int MaxSpawnLimit02Level;
+
+    public int WeightLevel;
+
+    public int BonusTipsMultiLevel;
+
+    public int BonusDishPrice01Level;
+
+    public int BonusDishPrice02Level;
+
+    public int BonusFood01Level;
+
+    public int BonusFood02Level;
+
+    public int UnlockGramophoneLevel;
+
+    public int UnlockCatObjectLevel;
 
 
     //List<Temp_Item> Items; // Item SO 작업 후 추가 작업 예정 @@@@@@@@@@@@@@@@@@@@
@@ -198,14 +229,14 @@ public class DataTower : MonoBehaviour
     /// 인벤토리 슬롯 최댓값.
     /// </summary>
     public int InventorySlotMax;
-    
+
     public event Action<string> OnFisingNewFish;
     public event Action<Language> OnLanguageSettingChanged;
 
     public event Action OnDataTowerLoaded;
 
     private InventorySystem _inventorySystem; // 참조 걸어줄 방식 지정 필요.
-    private Dictionary<string, FishData> _fishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
+    public Dictionary<string, FishData> fishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
 
     public Language languageSetting { get; private set; } /// <summary> 현재 설정된 언어, 기본 값 : 영어 </summary>
 
@@ -222,6 +253,7 @@ public class DataTower : MonoBehaviour
         }
         languageSetting = Language.ENG; // 기본 값 영어로 출력 되게 설정 되었습니다. 
         InitializedData();
+        StartCoroutine(DataRead());
         OnDataTowerLoaded?.Invoke();
     }
 
@@ -231,14 +263,14 @@ public class DataTower : MonoBehaviour
         {
             if (ForcedInitialized)
                 Debug.Log("강제 초기화 실행");
-            _fishDatas = new Dictionary<string, FishData>(20); // 하드 코딩 되어 있으니 후에 데이터 테이블 완성 후 수정 필요 @@@@@@@@@@@@@@@@@@
-            
+
+
             money = 1000;
 
             InventorySlotMax = 10;
 
             customerVisitCount = 0;
-            
+
             masterVolume = 0.5f;
             BGMVolume = 0.5f;
             SFXVolume = 0.5f;
@@ -248,11 +280,39 @@ public class DataTower : MonoBehaviour
             rodLevel = 1;
             shipLevel = 1;
 
+
+
+            MasterLevel = 1;
+
+            MaxCustomerLimitLevel = 1;
+
+            MaxMenuLimitLevel = 1;
+
+            MaxSpawnLimit01Level = 1;
+
+            MaxSpawnLimit02Level = 1;
+
+            WeightLevel = 1;
+
+            BonusTipsMultiLevel = 1;
+
+            BonusDishPrice01Level = 1;
+
+            BonusDishPrice02Level = 1;
+
+            BonusFood01Level = 1;
+
+            BonusFood02Level = 1;
+
+            UnlockGramophoneLevel = 1;
+
+            UnlockCatObjectLevel = 1;
+
             fishingCount = 1;
             currentFishingCount = 1;
 
-            
-            
+
+
             fishingTime = 30;
             maxFishingTime = 1800;
         }
@@ -262,12 +322,36 @@ public class DataTower : MonoBehaviour
         }
     }
 
+    IEnumerator DataRead()
+    {
+        while (!_dataCon.isDataLoaded)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        if (_dataCon.objs[0] is not FishData)
+        {
+            Debug.LogError($"{gameObject.name}에 저장된 DataContainer가 FishData가 들어있지 않는 컨테이너입니다.");
+            yield break;
+        }
+
+
+        fishDatas = new Dictionary<string, FishData>(_dataCon.objs.Length);
+        FishData _tmpFishData;
+        for (int i = 0; i < _dataCon.objs.Length; i++)
+        {
+            _tmpFishData = _dataCon.objs[i] as FishData;
+            fishDatas.Add(_tmpFishData.fishID, _tmpFishData);
+        }
+        yield break;
+    }
+
     /// <summary>
     /// 저장을 위해서 데이터를 호출 할 수 있는 부분.
     /// </summary>
     public void PullData()
     {
-        
+
     }
 
     /// <summary>
@@ -290,7 +374,7 @@ public class DataTower : MonoBehaviour
     // 미끼 갯수
     // 타이머
 
-   
+
 
     #region 식당 관련 함수들
 
@@ -303,18 +387,18 @@ public class DataTower : MonoBehaviour
     /// </summary>
     public void takeFish(FishData fish)
     {
-        //_inventorySystem.Insert(); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
-        if ( !_fishDatas.ContainsKey(fish.fishID)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
+        _inventorySystem.Insert(fish.fishID); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
+        if (!fishDatas.ContainsKey(fish.fishID)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
         {
             fish.isCaught = true;
-            _fishDatas.Add(fish.fishID, fish);
+            fishDatas.Add(fish.fishID, fish);
 
             OnFisingNewFish?.Invoke(fish.fishID);
         }
-        else if (_fishDatas[fish.fishID].isCaught == false)
+        else if (fishDatas[fish.fishID].isCaught == false)
         {
             fish.isCaught = true;
-            _fishDatas[fish.fishID].isCaught = true;
+            fishDatas[fish.fishID].isCaught = true;
             OnFisingNewFish?.Invoke(fish.fishID);
         }
 
@@ -323,10 +407,10 @@ public class DataTower : MonoBehaviour
     }
     #endregion
 
-    
+
     void CatchFishCounter(in FishData fish)
     {
-        switch(fish.fishRarity)
+        switch (fish.fishRarity)
         {
             case EFish_Rarity.Trash:
                 catchFishTrash++;

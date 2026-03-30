@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
+    [Header("확률 데이터 리스트")]
+    public List<FishRateData> fishRateList = new List<FishRateData>();
     public int fishingCount = 1; // 최대 낚시 가능한 횟수
     private int _currentCount; // 현재 낚시 가능한 횟수
     public Sprite fishingImage; // 클릭 시 변경되는 스프라이트 이미지
@@ -32,6 +34,17 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         {
             uiManager.UpdateCountText(_currentCount, fishingCount);
         }
+
+        if (_upgradeManager != null)
+        {
+            _upgradeManager.OnRodUpgrade += RodgradeMaxCount;
+            _upgradeManager.OnBaitUpgrade += BaitgradeMaxCount;
+            _upgradeManager.OnFishingUpgrade += FishRateLevel;
+
+            RodgradeMaxCount(DataTower.instance.rodLevel);
+            BaitgradeMaxCount(DataTower.instance.baitLevel);
+            FishRateLevel(DataTower.instance.fishingGrade);
+        }
     }
 
     /// <summary>
@@ -40,20 +53,14 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     public void UpgradeFishingRod()
     {
         _upgradeManager.RodUpgrade();
-        RodgradeMaxCount();
-
-        if (uiManager != null)
-        {
-            uiManager.UpdateCountText(_currentCount, fishingCount);
-        }
     }
 
     /// <summary>
     /// 낚시대 강화 레벨에 따라 낚시 가능한 최대 횟수 값을 결정
     /// </summary>
-    public void RodgradeMaxCount()
+    public void RodgradeMaxCount(int newLevel)
     {
-        switch (_upgradeManager.RodLevel)
+        switch (newLevel)
         {
             case 1: fishingCount = 1; break;
             case 2: fishingCount = 2; break;
@@ -69,17 +76,16 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     public void UpgradeFishingBait()
     {
         _upgradeManager.BaitUpgrade();
-        BaitgradeMaxCount();
     }
 
     /// <summary>
     /// 미끼 강화 레벨에 따라 다음 충전까지 걸리는 최대 시간을 계산하여 타이머에 전달
     /// </summary>
-    public void BaitgradeMaxCount()
+    public void BaitgradeMaxCount(int newLevel)
     {
         float newTimer = 3600f;
 
-        switch (_upgradeManager.BaitLevel)
+        switch (newLevel)
         {
             case 1: newTimer = 3600f; break;
             case 2: newTimer = 3300f; break;
@@ -87,7 +93,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
             case 4: newTimer = 2400f; break;
             case 5: newTimer = 1800f; break;
             default:
-                if (_upgradeManager.BaitLevel >= 5)
+                if (newLevel >= 5)
                     newTimer = 1800f; break;
         }
 
@@ -224,7 +230,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         foreach (FishData randomFish in fishDatabase)
         {
-            if (randomFish.fishRarity.ToString() == rarity) 
+            if (randomFish.fishRarity.ToString() == rarity)
             {
                 filteredFish.Add(randomFish);
             }
@@ -238,5 +244,16 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         int randomIndex = UnityEngine.Random.Range(0, filteredFish.Count);
         return filteredFish[randomIndex];
+    }
+
+    public void FishRateLevel(int level)
+    {
+        int index = level - 1;
+
+        if (index >= 0 && index < fishRateList.Count)
+        {
+            fishCurrentRate = fishRateList[index];
+            Debug.Log("확률 레벨 증가");
+        }
     }
 }
