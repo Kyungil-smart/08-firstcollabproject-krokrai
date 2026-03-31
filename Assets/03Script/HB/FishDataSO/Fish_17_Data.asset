@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_17_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 1
+  fishID: Fish_17
+  korName: "\uAC08\uBCFC\uB77D"
+  engName: Dark-Banded Rockfish
+  fishRarity: 2
+  fishType: 0
+  length: 20
+  weight: 0.2
+  fishSprite: NullException
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uACA8\uC6B8\uCCA0 \uBC14\uB2E4\uB09A\uC2DC\uC758 \uC5B4\uC885\uC73C\uB85C
+    \uC778\uAE30\uAC00 \uC788\uB294 \uC0DD\uC120.\\n\uCC38\uB3D4\uACFC \uAC70\uC758
+    \uAC00\uAE4C\uC6B8 \uC815\uB3C4\uB85C \uAC15\uD55C \uAC10\uCE60\uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."
+  engDescription: "A popular fish for winter sea fishing.\\nIt is characterized by
+    a rich, savory flavor almost as intense as that of red sea bream.\r"
+  caughtDate: 

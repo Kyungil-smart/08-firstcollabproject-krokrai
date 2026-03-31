@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_8_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 1
+  fishID: Fish_8
+  korName: "\uB9DD\uCE58 \uACE0\uB4F1\uC5B4"
+  engName: Blue Mackerel
+  fishRarity: 1
+  fishType: 0
+  length: 40
+  weight: 0
+  fishSprite: NullException
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uCC38\uACE0\uB4F1\uC5B4\uBCF4\uB2E4 \uC791\uACE0 \uBC30\uC5D0
+    \uC810\uC774 \uC788\uB294 \uACE0\uB4F1\uC5B4.\\n\uB9DB\uC740 \uCC38\uACE0\uB4F1\uC5B4\uBCF4\uB2E4
+    \uB5A8\uC5B4\uC9C0\uC9C0\uB9CC \uC77C\uC815\uD55C \uB9DB\uC744 \uBCF4\uC7A5\uD55C\uB2E4."
+  engDescription: "A mackerel smaller than the common mackerel, with spots on its
+    belly.\\nWhile its flavor is not as rich as the common mackerel, it offers a
+    consistent taste.\r"
+  caughtDate: 

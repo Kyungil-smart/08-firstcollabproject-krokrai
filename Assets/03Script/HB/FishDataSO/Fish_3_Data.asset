@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_3_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 1
+  fishID: Fish_3
+  korName: "\uBBF8\uC5ED"
+  engName: Sea Mustard
+  fishRarity: 0
+  fishType: 2
+  length: 20
+  weight: 20
+  fishSprite: Fish_3
+  silhouetteSprite: NullException
+  price: 100
+  korDescription: "\uC2DD\uBB3C\uACFC \uC720\uC0AC\uD558\uC9C0\uB9CC \uC6D0\uC0DD\uC0DD\uBB3C\uB85C,\\n\uC740\uC740\uD55C
+    \uAC10\uCE60\uB9DB\uC774 \uBCC4\uBBF8\uB2E4."
+  engDescription: "Though similar to plants, they are protists,\\nand their subtle
+    umami flavor is a real treat.\r"
+  caughtDate: 

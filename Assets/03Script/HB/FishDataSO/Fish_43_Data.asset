@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_43_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 0
+  fishID: Fish_43
+  korName: "\uD639\uB4F1\uACE0\uB798"
+  engName: Minke Whale
+  fishRarity: 7
+  fishType: 0
+  length: 1600
+  weight: 40000
+  fishSprite: {fileID: 4966732595609684114, guid: 657149715d50440418fcd4f26b01f4c5, type: 3}
+  silhouetteSprite: {fileID: 4457835537561387818, guid: a657a0d48935d5740935648d017c31c0, type: 3}
+  price: 1000
+  korDescription: "\uC124\uBA85 \uCC44\uC6B0\uC790"
+  engDescription: "Dummy Description\r"

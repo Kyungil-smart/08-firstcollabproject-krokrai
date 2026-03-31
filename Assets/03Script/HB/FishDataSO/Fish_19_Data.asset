@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_19_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 1
+  fishID: Fish_19
+  korName: "\uC544\uADC0"
+  engName: Monkfish
+  fishRarity: 3
+  fishType: 0
+  length: 80
+  weight: 7
+  fishSprite: NullException
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uC61B\uB0A0\uC5D4 \uC880\uCC98\uB7FC \uBA39\uC9C0 \uC54A\uC558\uB358
+    \uC0DD\uC120.\\n\uCAC4\uAE43\uD558\uACE0 \uBD80\uB4DC\uB7EC\uC6B4 \uC2DD\uAC10\uC758
+    \uC0B4\uC774 \uBCC4\uBBF8\uB2E4."
+  engDescription: "A fish that was rarely eaten in the past. Its chewy yet tender
+    flesh is a delicacy.\r"
+  caughtDate: 
