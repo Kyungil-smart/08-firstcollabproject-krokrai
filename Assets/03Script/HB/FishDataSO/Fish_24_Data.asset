@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_24_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_24
   korName: "\uC789\uC5B4"
   engName: Carp
@@ -20,8 +20,12 @@ MonoBehaviour:
   fishType: 0
   length: 90
   weight: 15
-  fishSprite: {fileID: 4966732595609684114, guid: 657149715d50440418fcd4f26b01f4c5, type: 3}
-  silhouetteSprite: {fileID: 4457835537561387818, guid: a657a0d48935d5740935648d017c31c0, type: 3}
+  fishSprite: NullException
+  silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uC124\uBA85 \uCC44\uC6B0\uC790"
-  engDescription: "Dummy Description\r"
+  korDescription: "\uC61B \uC18D\uC124\uC5D0\uC11C \uC789\uC5B4\uB294 \uBBFC\uBB3C
+    \uC6A9\uC655\uC758 \uC544\uB4E4\uC774\uB77C\uACE0 \uBD88\uB838\uB2E4.\\n\uC694\uC998\uC740
+    \uC74C\uC2DD\uBCF4\uB2E4\uB294 \uC57D\uC73C\uB85C \uBA39\uB294\uB2E4."
+  engDescription: "According to old folklore, the carp was called the son of the
+    freshwater Dragon King. These days, it is consumed more as medicine than as food.\r"
+  caughtDate: 
