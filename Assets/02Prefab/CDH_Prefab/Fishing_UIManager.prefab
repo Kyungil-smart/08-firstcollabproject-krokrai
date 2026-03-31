@@ -11,11 +11,6 @@ GameObject:
   - component: {fileID: 4768009220385532772}
   - component: {fileID: 2050856745614473414}
   - component: {fileID: 4183886587059565716}
-  - component: {fileID: 1490864293702447954}
-  - component: {fileID: 6373638038842436730}
-  - component: {fileID: 1177480890485344730}
-  - component: {fileID: 6500620287459761589}
-  - component: {fileID: 523704995168761216}
   m_Layer: 0
   m_Name: Fishing_UIManager
   m_TagString: Untagged
@@ -65,70 +60,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishingTimer
   fishingTime: 3600
   maxFishingTime: 3600
+  _manager: {fileID: 0}
   timerText: {fileID: 0}
---- !u!114 &1490864293702447954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664686165094907141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b46416857f1e5c6498da143e23dc8220, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopUpStore
-  fisherView: {fileID: 0}
-  restaurantView: {fileID: 0}
---- !u!114 &6373638038842436730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664686165094907141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c745de288974aa429b6745a424bea5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopUpInventory
-  popInventoryUi: {fileID: 0}
---- !u!114 &1177480890485344730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664686165094907141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51cb4e883dafe204cbb92a959e6c8eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopUpUpgrade
-  popUpgradeUi: {fileID: 0}
---- !u!114 &6500620287459761589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664686165094907141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a715b92b43894354fbc90a78427f508d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SetUp
-  setUpUi: {fileID: 0}
---- !u!114 &523704995168761216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5664686165094907141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac025ae7b6f5a754da222edb2524e838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PopTurnOff
-  popTurnOffUi: {fileID: 0}
