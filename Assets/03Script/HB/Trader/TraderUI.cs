@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class TraderUI : MonoBehaviour
 {
@@ -27,18 +28,7 @@ public class TraderUI : MonoBehaviour
     private bool _isInitialized = false;            // UI창 초기화 여부
 
     private void Awake()
-    {/*
-        // DataTower에서 돈 관련 내용 구독
-        if (DataTower.instance != null)
-        {
-            Debug.Log("DataTower에 이벤트 구독 시도");
-            DataTower.instance.OnChangedMoney += UpdateGoldUI;        
-        }
-        else
-        {
-            Debug.Log("DataTower에 instace가 Null임");
-        }*/
-
+    {
         // Select All 버튼 리스트너 등록
         if (selectAllButton != null)
         {
@@ -132,12 +122,14 @@ public class TraderUI : MonoBehaviour
 
     public void OnSellButtonClicked()
     {
-        var selected = selectionManager.SelectedSlots(listManager.GetAllSlots());
+        var allSlots = listManager.GetAllSlots();
+        // 현재 선택된 슬롯 가져옴
+        var selected = new List<FishSlot>(selectionManager.SelectedSlots(allSlots));
 
         if (selected.Count == 0) return;
         
         // 총 판매 가격 계산
-        long totalPrice = selectionManager.TotalSelectedPrice(listManager.GetAllSlots());
+        long totalPrice = selectionManager.TotalSelectedPrice(allSlots);
 
         // 데이터 타워에서 돈 추가 (DataTower에 돈 추가는 false)
         if (DataTower.instance.TryMoenyChanged((ulong)totalPrice, false))
@@ -147,20 +139,35 @@ public class TraderUI : MonoBehaviour
             {
                 FishData data = slot.GetFishData();
 
-                // 인벤토리 데이터 제거
+                // 인벤토리 데이터를 소스에서 제거
                 DataTower.instance.Items.Remove(data);
-
+                
                 listManager.GetAllSlots().Remove(slot);
+                // 리스트에서 제거
+                allSlots.Remove(slot);
+
+                // 오브젝트 파괴
                 Destroy(slot.gameObject);
             }
 
-            // UI 정리
-            if(selectAllButton != null) selectAllButton.isOn = false;
+            ResetSelectAllButton();
+
             OnSlotChanged();
 
             Debug.Log($"{totalPrice} Gold, 판매 완료");
         }
        
+    }
+
+    private void ResetSelectAllButton()
+    {
+         // 판매 후 전체 선택 버튼 초기화
+        if(selectAllButton != null)
+        {
+            _isUpdatingAll = true;
+            selectAllButton.isOn = false;
+            _isUpdatingAll = false;
+        }
     }
     
     public void OnFilterButtonClicked()
@@ -194,23 +201,52 @@ public class TraderUI : MonoBehaviour
     {
         if(_isUpdatingAll || selectAllButton == null) return;
 
+        // 리스트를 변수에 담고 Null 체크
+        var allSlots = listManager.GetAllSlots();
+
+        if (allSlots == null || allSlots.Count == 0)
+        {
+            _isUpdatingAll = true;
+
+            if (selectAllButton.isOn)
+            {
+                selectAllButton.isOn = false;
+            }
+
+            _isUpdatingAll = false;
+            return;
+        }
+
+        // 현재 화면에 활성화된 슬롯만 추출
         var allActiveSlots = listManager.GetAllSlots().FindAll(s => s.gameObject.activeInHierarchy);
         
-        // 슬롯이 없다면 전체선택 버튼 끔
+        // 슬롯이 없다면 전체선택 버튼 끄고 종료
         if(allActiveSlots.Count == 0)
         {
             _isUpdatingAll = true;
-            selectAllButton.isOn = false;
+
+            if (selectAllButton.isOn)
+            {
+                selectAllButton.isOn = false;
+            }
+
             _isUpdatingAll = false;
 
             return;  
         } 
 
+        // 모든 활성화된 슬롯의 토글이 켜지 있는지
         bool allSelected = allActiveSlots.TrueForAll(s => s.slotToggle.isOn);
 
-        _isUpdatingAll = true;
-        selectAllButton.isOn = allSelected;
-        _isUpdatingAll = false;
+        // 전체 선탯 버튼 상태 동기화
+        if (selectAllButton.isOn != allSelected)
+        {
+            _isUpdatingAll = true;
+
+            selectAllButton.isOn = allSelected;
+
+            _isUpdatingAll = false;
+        }
     }
 
     private void UpdateGoldUI(ulong money)
