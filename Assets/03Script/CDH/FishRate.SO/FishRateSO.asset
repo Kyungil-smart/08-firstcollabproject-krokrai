@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FishRateSO
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
   _mainLine: 4
-  URL: https://docs.google.com/spreadsheets/d/1ECiDweNf4ghy1wlQ9fKA470ThPJxurLs/edit?gid=119111717#gid=119111717
+  URL: https://docs.google.com/spreadsheets/d/1hRIRi-KPGhrhNpjivmk3fK_2HeK9YeP1eK5ygCh837w/edit?gid=1861109465#gid=1861109465
   objs:
   - {fileID: 11400000, guid: f27b9810b03d37d4581daab63c2c9aaf, type: 2}
   - {fileID: 11400000, guid: 0846f5f4157cd1a4ebbc80e7d825c18e, type: 2}
