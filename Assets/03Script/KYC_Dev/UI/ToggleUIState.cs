@@ -5,11 +5,6 @@ public class ToggleUIState : MonoBehaviour
 {
     [SerializeField] GameObject _ui;
 
-    private void Awake()
-    {
-        OnButtenClickUIClose();
-    }
-
     /// <summary>
     /// 활성화 버튼 눌렀을 때
     /// </summary>
