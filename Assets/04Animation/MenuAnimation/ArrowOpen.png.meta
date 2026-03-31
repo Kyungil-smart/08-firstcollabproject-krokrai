@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f63f12257ff8a594799d04d785c605ee
+guid: bf7ee451b1e2f684a827dbb35c9e94bc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1227564231286400416
-    second: "\uC81C\uBAA9 \uC5C6\uC74C_0"
+      213: 6020856185371584383
+    second: ArrowOpen_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uC81C\uBAA9 \uC5C6\uC74C_0"
+      name: ArrowOpen_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06ad237e5d0d6fee0800000000000000
-      internalID: -1227564231286400416
+      spriteID: f7769ccfcc06e8350800000000000000
+      internalID: 6020856185371584383
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uC81C\uBAA9 \uC5C6\uC74C_0": -1227564231286400416
+      ArrowOpen_0: 6020856185371584383
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

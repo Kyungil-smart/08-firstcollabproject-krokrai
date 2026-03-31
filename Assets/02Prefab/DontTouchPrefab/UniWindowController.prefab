@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4466617494490421319
 Transform:
   m_ObjectHideFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   _isTopmost: 1
   _isBottommost: 0
   _isZoomed: 1
-  _shouldFitMonitor: 1
+  _shouldFitMonitor: 0
   _allowDropFiles: 0
   isHitTestEnabled: 1
   hitTestType: 1
