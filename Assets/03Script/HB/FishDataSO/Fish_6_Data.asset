@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_6_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 1
+  fishID: Fish_6
+  korName: "\uBA78\uCE58"
+  engName: Anchovy
+  fishRarity: 1
+  fishType: 0
+  length: 7.6
+  weight: 0.037
+  fishSprite: NullException
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uAC1C\uCCB4\uC218\uC5D0 \uB530\uB77C \uBC14\uB2E4\uC758 \uAC74\uAC15
+    \uC0C1\uD0DC\uB97C \uD655\uC778\uD560 \uC218 \uC788\uB2E4.\\n\uD06C\uAE30\uC5D0
+    \uB530\uB77C \uBCF6\uAC70\uB098 \uC870\uB9BC \uD639\uC740 \uC721\uC218\uC6A9\uC73C\uB85C
+    \uC0AC\uC6A9\uD55C\uB2E4."
+  engDescription: "The health of the ocean can be gauged by its population size.\\nDepending
+    on its size, it is used for stir-frying, braising, or making broth.\r"
+  caughtDate: 

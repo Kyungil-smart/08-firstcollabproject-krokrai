@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_10_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 1
+  fishID: Fish_10
+  korName: "\uC815\uC5B4\uB9AC"
+  engName: Sardine
+  fishRarity: 1
+  fishType: 0
+  length: 16
+  weight: 0.02
+  fishSprite: NullException
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uB2E8\uBC31\uC9C8\uACFC \uC9C0\uBC29\uC9C8\uC774 \uB9CE\uC544
+    \uBC14\uB2E4\uC758 \uC300\uC774\uB77C \uBD88\uB9AC\uB294 \uC0DD\uC120.\\n\uB2E4\uCC44\uB85C\uC6B4
+    \uC870\uB9AC\uBC95\uC758 \uAC00\uC9D3\uC218\uB97C \uC790\uB791\uD55C\uB2E4."
+  engDescription: "A fish rich in protein and fat, often called the \u201Crice of
+    the sea.\u201D\\nIt boasts a wide variety of cooking methods.\r"
+  caughtDate: 

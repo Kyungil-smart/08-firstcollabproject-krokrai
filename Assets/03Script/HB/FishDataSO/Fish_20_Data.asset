@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
+  m_Name: Fish_20_Data
+  m_EditorClassIdentifier: Assembly-CSharp::FishData
+  isCaught: 1
+  fishID: Fish_20
+  korName: "\uB2EC\uACE0\uAE30"
+  engName: John Dory
+  fishRarity: 3
+  fishType: 0
+  length: 50
+  weight: 6
+  fishSprite: NullException
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uBE44\uB298\uC774 \uAC70\uC758 \uC5C6\uACE0 \uBAB8 \uC591\uCABD\uC5D0
+    \uAC80\uC740 \uB465\uADFC \uC810\uC774 \uD2B9\uC9D5\uC778 \uC0DD\uC120.\\n\uC0B4\uCF54\uAE30\uC5D0
+    \uCC9C\uC5F0 MSG\uAC00 \uBC30\uC5B4\uC788\uB294 \uACE0\uAE09 \uC2DD\uC7AC\uB8CC\uB2E4."
+  engDescription: "A fish characterized by almost no scales and round black spots
+    on both sides of its body. It is a high-quality ingredient with natural MSG infused
+    into its flesh.\r"
+  caughtDate: 
