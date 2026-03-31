@@ -33,6 +33,13 @@ public class RestaurantManager : MonoBehaviour
 
     private WaitForSeconds[] _seconds;
 
+    private byte _normalCustomers;
+    private byte _specialCustomers;
+
+    private int _maxNormalCustomersWeight;
+    private int _halfNormalCustomersWeight;
+    private int _halfSpecialCustomersWeight;
+
 
     private void OnEnable()
     {
@@ -49,6 +56,7 @@ public class RestaurantManager : MonoBehaviour
     public void OnVisual(bool b)
     {
         _canVisual = b;
+        Debug.Log($"시각 효과 상태 : {_canVisual}");
     }
 
     public void HaveDish(bool b)
@@ -59,6 +67,9 @@ public class RestaurantManager : MonoBehaviour
     private void Start()
     {
         _haveDish = false;
+        byte i = 0;
+        _halfNormalCustomersWeight = 0;
+        _halfSpecialCustomersWeight = 0;
         /*
         _baseDelay = new WaitForSeconds(5);
         _seconds = new WaitForSeconds[10];
@@ -70,7 +81,7 @@ public class RestaurantManager : MonoBehaviour
 
         _customerPool = new Queue<GameObject>(10);
 
-        for (int i = 0; i < 8 ; i++)
+        for (i = 0; i < 10 ; i++)
         {
             GameObject obj = Instantiate(_customerPrefab[0]); // 나중에 데이터 타워 리셋 후 받게 만들기.
             obj.GetComponent<CustomerController>().ConnectRestaurant(this, _openMenu);
@@ -79,6 +90,30 @@ public class RestaurantManager : MonoBehaviour
             obj.SetActive(false);
             _customerPool.Enqueue( obj );
         }
+
+        for(i = 0; i < _customerData.Length; i++)
+        {
+            switch(_customerData[i].grade)
+            {
+                case CustomerGrade.NA:
+                    Debug.LogWarning("값 오류");
+                    break;
+                case CustomerGrade.NORMAL:
+                    _normalCustomers++;
+                    _maxNormalCustomersWeight += _customerData[i].weight;
+                    break;
+                case CustomerGrade.SPECIAL:
+                    _specialCustomers++;
+                    break;
+                case CustomerGrade.VIP:
+                    break;
+            }
+        }
+
+        for (i = 0; i  < _normalCustomers / 2; i++)
+            _halfNormalCustomersWeight += _customerData[i].weight;
+        for (i = 0; i < _specialCustomers / 2; i++)
+            _halfSpecialCustomersWeight += _customerData[i + _normalCustomers].weight;
 
         StartCoroutine(CoTrySpawnCustomer());
     }
@@ -98,20 +133,26 @@ public class RestaurantManager : MonoBehaviour
             // 빈자리 탐색 및 반환 받음.
             _emptySeat = GetEmptySeat();
             // 자리가 없는 경우 예외처리
-            if (_emptySeat == null) continue;
+            if (_emptySeat != null)
+            {
+                // 스폰 대기 시간.
+                yield return new WaitForSeconds(UnityEngine.Random.Range(_fixedValue.minSpawnDelay, _fixedValue.maxSpawnDelay + 1));
 
-            // 스폰 대기 시간.
-            yield return new WaitForSeconds(UnityEngine.Random.Range(_fixedValue.minSpawnDelay, _fixedValue.maxSpawnDelay + 1));
+                // 손님 성향 및 이미지 랜덤 생성
+                GetRandomCustomerPrefab();
 
-            // 손님 성향 및 이미지 랜덤 생성
-            GetRandomCustomerPrefab();
-            // 예외처리.
-            if (_randomPrefab == null)
-                yield break;
-            // 후에 추가 딜레이 필요
+                // 예외처리.
+                if (_randomPrefab == null)
+                    yield return null;
+                // 후에 추가 딜레이 필요
 
-            // 최종적으로 빈자리와 손님을 소환
-            SpawnCustomer(_emptySeat);
+                // 최종적으로 빈자리와 손님을 소환
+                SpawnCustomer(_emptySeat);
+            }
+            else
+            {
+                yield return null;
+            }
         }
     }
 
@@ -128,6 +169,7 @@ public class RestaurantManager : MonoBehaviour
         customer.SetInfo(this, seat, _exitPointLeft);
     }
     */
+
     private void SpawnCustomer(RestaurantSeat seat)
     {
         // 자리에 앉음 상태로 전환
@@ -135,6 +177,11 @@ public class RestaurantManager : MonoBehaviour
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
         _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft, _customerTips[0], _customerData[0], _canVisual); // 후에 수정
+    }
+
+    private void CustomerWeightSelecter()
+    {
+
     }
 
     /// <summary>
