@@ -203,7 +203,7 @@ public class RestaurantManager : MonoBehaviour
 
     private RestaurantSeat GetEmptySeat()
     {
-        for (int i = 0; i < _seats.Count; i++)
+        for (int i = 0; i < DataTower.instance.MaxCustomerLimitLevel; i++)
         {
             // 반복 문으로 모든 자리 탐색
             if (_seats[i].IsOccupied == false)
@@ -246,7 +246,10 @@ public class RestaurantManager : MonoBehaviour
     /// <param name="price"></param>
     /// <returns></returns>
     public void TryCounsumeSushiAndEarnMoney(float multi)
-    {
-        DataTower.instance.TryMoenyChanged((ulong)(_menuCtrl.RandomEating()*multi),false);
+    {// 기본 가격 = RandomEating // 현재 비용 높으니 후에 Action으로 전환 조치 필요.
+        DataTower.instance.TryMoenyChanged((ulong)((_menuCtrl.RandomEating()
+            * (1+DataTower.instance.BonusDishPrice01Level+DataTower.instance.BonusDishPrice02Level))
+            * multi),
+            false);
     }
 }
