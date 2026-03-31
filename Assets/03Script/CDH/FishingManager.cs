@@ -15,7 +15,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     private int _currentCount; // 현재 낚시 가능한 횟수
     public Sprite fishingImage; // 클릭 시 변경되는 스프라이트 이미지
     private Sprite _watingImage; // 대기 상태일 때의 스프라이트 이미지
-    private SpriteRenderer _spriteRenderer; // 이미지 교체를 위해 오브젝트의 SpriteRenderer 컴포넌트를 참조
+    private Image _fisherImage;
     public FishingUI uiManager; // 낚시 횟수를 갱신할 FishingUI.cs 참조
     private FishingUpgradeManager _upgradeManager; // 업그레이드 매니저 불러옴
     private FishingTimer _timer; // 낚시 횟수 자동 충전 시간을 관리하는 타이머
@@ -24,8 +24,8 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _watingImage = _spriteRenderer.sprite;
+        _fisherImage = GetComponent<Image>();
+        _watingImage = _fisherImage.sprite;
         _currentCount = fishingCount;
         _timer = FindFirstObjectByType<FishingTimer>();
         _upgradeManager = FindFirstObjectByType<FishingUpgradeManager>();
@@ -118,7 +118,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
                 uiManager.UpdateCountText(_currentCount, fishingCount);
             }
 
-            StartCoroutine(FishingImage());
+            StartCoroutine(FishingImageD());
         }
     }
 
@@ -126,16 +126,16 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     /// 클릭 시 짧은 시간 동안 낚시 이미지를 보여준 후 다시 대기 이미지로 복구하고, 실제 물고기를 뽑기
     /// </summary>
     /// <returns></returns>
-    IEnumerator FishingImage()
+    IEnumerator FishingImageD()
     {
         if (fishingImage != null)
         {
-            _spriteRenderer.sprite = fishingImage;
+            _fisherImage.sprite = fishingImage;
         }
 
         yield return new WaitForSeconds(0.1f);
 
-        _spriteRenderer.sprite = _watingImage;
+        _fisherImage.sprite = _watingImage;
 
         GetRandomFish();
     }
