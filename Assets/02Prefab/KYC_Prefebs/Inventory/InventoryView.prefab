@@ -257,7 +257,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4501514960398573096}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7596334559807710933}
+        m_TargetAssemblyTypeName: InventoryButtonController, Assembly-CSharp
+        m_MethodName: OnButtonClickByName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1053404860332858744
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +598,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8198872525131827433}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7596334559807710933}
+        m_TargetAssemblyTypeName: InventoryButtonController, Assembly-CSharp
+        m_MethodName: OnButtonClickSortSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1702376647095999176
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +759,7 @@ GameObject:
   - component: {fileID: 5786259566841176759}
   - component: {fileID: 3473236255674939734}
   - component: {fileID: 2190208129378942371}
+  - component: {fileID: 3914032504624457012}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -796,9 +821,22 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 90, y: 45}
-  m_Spacing: {x: 1, y: 1}
+  m_Spacing: {x: 30, y: 15}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &3914032504624457012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706183089988308502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07af7e9eabd1b434382a3e5bdb4f2056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryScrollView
+  _inventorySlotPrefab: {fileID: 698771529909208129, guid: d0f34af6a7dcb1f4981abfe90930896d, type: 3}
 --- !u!1 &2124088619043505879
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +928,8 @@ GameObject:
   - component: {fileID: 2778656685406472656}
   - component: {fileID: 801375334235433298}
   - component: {fileID: 4046435080851925465}
-  - component: {fileID: 128477878236505277}
+  - component: {fileID: 2362570126152197981}
+  - component: {fileID: 7596334559807710933}
   - component: {fileID: 5002464902541256378}
   m_Layer: 5
   m_Name: InventoryView
@@ -983,7 +1022,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &128477878236505277
+--- !u!114 &2362570126152197981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -992,11 +1031,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2130698265948267980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07af7e9eabd1b434382a3e5bdb4f2056, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a15d70463845d14da4f0d8e064fc1a3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryView
-  _inventorySlotPrefab: {fileID: 698771529909208129, guid: d0f34af6a7dcb1f4981abfe90930896d, type: 3}
-  _inventoryContent: {fileID: 1706183089988308502}
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryTextController
   _moneyText: {fileID: 8972100045164676782}
   _curGoldText: {fileID: 2248882998069926411}
   _countText: {fileID: 4907324137992487013}
@@ -1004,6 +1041,26 @@ MonoBehaviour:
   _byCaughtText: {fileID: 5760483327231386477}
   _byNameText: {fileID: 9085420954092952757}
   _byRairtyText: {fileID: 4651990491539152551}
+  _id_Money: {fileID: 0}
+  _id_Fish_Count: {fileID: 0}
+  _id_Order: {fileID: 0}
+  _id_Acquisition: {fileID: 0}
+  _id_Name: {fileID: 0}
+  _id_Rarity: {fileID: 0}
+--- !u!114 &7596334559807710933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130698265948267980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a854a5a7d4c944abf0c063b3dca7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryButtonController
+  _sortTab: {fileID: 4117155431239626144}
+  _encyclopediaPrefab: {fileID: 0}
 --- !u!114 &5002464902541256378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2137,7 +2194,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5062032928474549984}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7596334559807710933}
+        m_TargetAssemblyTypeName: InventoryButtonController, Assembly-CSharp
+        m_MethodName: OnButtonClickByCaught
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5747580717544778440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,7 +2804,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 82937490419750597}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7596334559807710933}
+        m_TargetAssemblyTypeName: InventoryButtonController, Assembly-CSharp
+        m_MethodName: OnButtonClickByRarity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7599023124537276579
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,7 +2937,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4311732413094572274}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7596334559807710933}
+        m_TargetAssemblyTypeName: InventoryButtonController, Assembly-CSharp
+        m_MethodName: OnButtonClickToEncyclopedia
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7806152541632358202
 GameObject:
   m_ObjectHideFlags: 0

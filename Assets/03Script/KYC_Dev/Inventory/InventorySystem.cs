@@ -16,11 +16,24 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private FishData[] _datas;
     
     private Dictionary<string, FishData> _fishDatas = new ();
+    private Dictionary<int, FishData> _fishAcquisitionDatas = new();
     private WaitForEndOfFrame _wfEndOfFrame = new();
+
+    /// <summary>
+    /// 현재 인벤토리 내부에 있는 물고기 숫자 기록용
+    /// </summary>
+    public int InventoryCount { get; private set; }
+
+    #region Events
     
+    // 인벤토리 view 관련 이벤트
     public event Action OnInventorySet;
     public event Action OnInventoryChanged;
     public event Action<int,int> OnInventoryExtended;
+    public event Action<int> OnInventoryCountChanged;
+
+    #endregion
+    
 
     private void Awake()
     {
@@ -51,8 +64,11 @@ public class InventorySystem : MonoBehaviour
         {
             DataTower.instance.Items.Add(_empty);
         }
+
+        InventoryCount = 0;
         
         OnInventorySet?.Invoke();
+        OnInventoryCountChanged?.Invoke(InventoryCount);
     }
 
     /// <summary>
@@ -64,7 +80,12 @@ public class InventorySystem : MonoBehaviour
         if(!DataTower.instance.Items.Contains(_empty)) return;
         DataTower.instance.Items.Remove(_empty);
         DataTower.instance.Items.Insert(0, _fishDatas[fishID]);
+        
+        RecordRecentCaught(_fishDatas[fishID]);
+        InventoryCount++;
+        
         OnInventoryChanged?.Invoke();
+        OnInventoryCountChanged?.Invoke(InventoryCount);
     }
 
     /// <summary>
@@ -92,7 +113,12 @@ public class InventorySystem : MonoBehaviour
         if(!DataTower.instance.Items.Contains(_fishDatas[fishID])) return;
         DataTower.instance.Items.Remove(_fishDatas[fishID]);
         DataTower.instance.Items.Add(_empty);
+        
+        DeleteLastestCaught(_fishDatas[fishID]);
+        InventoryCount--;
+        
         OnInventoryChanged?.Invoke();
+        OnInventoryCountChanged?.Invoke(InventoryCount);
     }
 
     /// <summary>
@@ -101,14 +127,15 @@ public class InventorySystem : MonoBehaviour
     public void EraseAll()
     {
         DataTower.instance.Items.Clear();
-        InventoryStartRoutine();
+        _fishAcquisitionDatas.Clear();
+        StartCoroutine(InventoryStartRoutine());
         OnInventoryChanged?.Invoke();
     }
 
     /// <summary>
     /// 아이템 정렬
     /// </summary>
-    /// <param name="sortBy">1. 이름순 / 2. 타입순 / 3. 레어리티 순</param>
+    /// <param name="sortBy">1. 이름순 / 2. 획득 순 / 3. 레어리티 순</param>
     public void SortItems(int sortBy)
     {
         switch (sortBy)
@@ -128,7 +155,21 @@ public class InventorySystem : MonoBehaviour
                 OnInventoryChanged?.Invoke();
                 break;
             case 2:
-                DataTower.instance.Items.Sort((a, b) => a.fishType.CompareTo(b.fishType));
+                DataTower.instance.Items.Clear();
+                
+                for (int i = _fishAcquisitionDatas.Count; i > 0; i--)
+                {
+                    DataTower.instance.Items.Insert(0, _fishAcquisitionDatas[i]);
+                }
+
+                if (DataTower.instance.InventorySlotMax - _fishAcquisitionDatas.Count > 0)
+                {
+                    for (int i = 0; i < DataTower.instance.InventorySlotMax - _fishAcquisitionDatas.Count; i++)
+                    {
+                        DataTower.instance.Items.Add(_empty);
+                    }
+                }
+                
                 OnInventoryChanged?.Invoke();
                 break;
             case 3:
@@ -137,6 +178,34 @@ public class InventorySystem : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    private void RecordRecentCaught(FishData data)
+    {
+        if (_fishAcquisitionDatas.Count != 0)
+        {
+            for (int i = _fishAcquisitionDatas.Count; i > 0; i--)
+            {
+                FishData temp = _fishAcquisitionDatas[i];
+                _fishAcquisitionDatas.TryAdd(i + 1, temp);
+                _fishAcquisitionDatas.Remove(i);
+            }
+        }
+        _fishAcquisitionDatas.TryAdd(1, data);
+    }
+
+    private void DeleteLastestCaught(FishData data)
+    {
+        if(_fishAcquisitionDatas.Count == 0) return;
+
+        for (int i = _fishAcquisitionDatas.Count; i > 0; i--)
+        {
+            if (_fishAcquisitionDatas[i] == data)
+            {
+                _fishAcquisitionDatas.Remove(i);
+                break;
+            }
         }
     }
 }

@@ -1,30 +1,19 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Object = UnityEngine.Object;
-using TMPro;
 
-public class InventoryView : MonoBehaviour
+public class InventoryScrollView : MonoBehaviour
 {
     [Tooltip("For Inventory System")]
     [SerializeField] GameObject _inventorySlotPrefab;
-    [SerializeField] GameObject _inventoryContent;
-
-    [Tooltip("UI Elements")]
-    [SerializeField] TextMeshProUGUI _moneyText;
-    [SerializeField] TextMeshProUGUI _curGoldText;
-    [SerializeField] TextMeshProUGUI _countText;
-    [SerializeField] TextMeshProUGUI _sortSelectText;
-    [SerializeField] TextMeshProUGUI _byCaughtText;
-    [SerializeField] TextMeshProUGUI _byNameText;
-    [SerializeField] TextMeshProUGUI _byRairtyText;
 
     private InventorySystem _inventorySystem;
-    private GameObject _fishBookPrefab;
-
+    
     private List<InventorySlotController> _slotLists = new();
+    
     
     private void Awake()
     {
@@ -33,23 +22,40 @@ public class InventoryView : MonoBehaviour
 
     private void OnEnable()
     {
+        EventEnable();
+    }
+
+    private void OnDisable()
+    {
+        EventDisable();
+    }
+
+    #region 이벤트 구독/해제
+
+    private void EventEnable()
+    {
+        
         _inventorySystem.OnInventorySet += SetView;
         _inventorySystem.OnInventoryChanged += ChangeView;
         _inventorySystem.OnInventoryExtended += ExtendView;
     }
 
-    private void OnDisable()
+    private void EventDisable()
     {
         _inventorySystem.OnInventorySet -= SetView;
         _inventorySystem.OnInventoryChanged -= ChangeView;
         _inventorySystem.OnInventoryExtended -= ExtendView;
     }
-    
+
+    #endregion
+
+    #region 인벤토리 창 컨트롤러
+
     private void SetView()
     {
         foreach (FishData item in DataTower.instance.Items)
         {
-            GameObject newItemSlot = Instantiate(_inventorySlotPrefab, _inventoryContent.transform);
+            GameObject newItemSlot = Instantiate(_inventorySlotPrefab, transform);
             InventorySlotController slotController = newItemSlot.GetComponent<InventorySlotController>();
             _slotLists.Add(slotController);
             slotController.SetInfo(item);
@@ -58,7 +64,16 @@ public class InventoryView : MonoBehaviour
 
     private void ChangeView()
     {
-        for (int i = 0; i < _slotLists.Count; i++)
+        int a = DataTower.instance.Items.Count;
+        int b = _slotLists.Count;
+
+        if (a < b)
+        {
+            DiscardView(b - a);
+            b = _slotLists.Count;
+        }
+
+        for (int i = 0; i < b; i++)
         {
             _slotLists[i].SetInfo(DataTower.instance.Items[i]);
         }
@@ -68,10 +83,22 @@ public class InventoryView : MonoBehaviour
     {
         for (int i = 0; i < slot; i++)
         {
-            GameObject newItemSlot = Instantiate(_inventorySlotPrefab, _inventoryContent.transform);
+            GameObject newItemSlot = Instantiate(_inventorySlotPrefab, transform);
             InventorySlotController slotController = newItemSlot.GetComponent<InventorySlotController>();
             _slotLists.Add(slotController);
             slotController.SetInfo(DataTower.instance.Items[lagacySlotMax + i - 1]);
         }
     }
+
+    private void DiscardView(int slot)
+    {
+        for (int i = 0; i < slot; i++)
+        {
+            _slotLists.RemoveAt(_slotLists.Count - 1);
+            Destroy(_inventorySlotPrefab);
+        }
+    }
+
+    #endregion
+    
 }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b770760ca6997e4b96cb6ce35a185b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem
-  _empty: {fileID: 11400000, guid: 023355e717247c5478f096abf079163e, type: 2}
+  _empty: {fileID: 11400000, guid: 4b467ba6ae74c194e92b876245aa24f5, type: 2}
   _datas:
   - {fileID: 11400000, guid: 2f6617075e044b349ba0985eaeb9ff2d, type: 2}
   - {fileID: 11400000, guid: c3b48134c3eaa754e87e99fc4f89ac2c, type: 2}
