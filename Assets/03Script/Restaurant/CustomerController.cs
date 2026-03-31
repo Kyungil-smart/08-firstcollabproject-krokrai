@@ -23,13 +23,14 @@ public class CustomerController : MonoBehaviour
     bool _firstOrder;
     bool _isVisualContect;
 
+    private float a;
+
     private CustomerState _state;
 
     private void Awake()
     {
         _anim = GetComponentInChildren<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
-        _isVisualContect = false;
     }
 
     public void SetVisual(bool b) // 여기에 낚시로 넘어가는 경우 Invoke 해줄 오브젝트 넣어 주기 및 체인 걸어주기.
@@ -90,7 +91,10 @@ public class CustomerController : MonoBehaviour
         _data = so;
         _eatCounte = -1;
 
+        a = _data.flow_Velocity;
+
         _isVisualContect = canVisual;
+        SetVisual(_isVisualContect);
 
         _tips = tip;
         _maxEatCount = (byte)_data.orderChans.Length;
@@ -131,6 +135,7 @@ public class CustomerController : MonoBehaviour
                         }
                         else if (_firstOrder || Random.Range(0, 1f) <= _data.orderChans[_eatCounte])
                         {
+                            _firstOrder = false;
                             _eatCounte++;
                             yield return new WaitForSeconds(_data.orderTime[i]);
                             _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
@@ -163,7 +168,7 @@ public class CustomerController : MonoBehaviour
         // 지정 좌석까지 이동하는 것을 구현.
         while ((transform.position - targetPos).sqrMagnitude > 0.01f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, _data.flow_Velocity * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, a * Time.deltaTime);
             yield return null;
         }
         transform.position = targetPos;

@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
   container:
   - {fileID: 11400000, guid: 462aaaa146c28ce4598615194fa02a34, type: 2}
+  - {fileID: 11400000, guid: 4f7a9ee9d18a7b5469199816a8344e35, type: 2}
