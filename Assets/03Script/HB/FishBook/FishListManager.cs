@@ -1,7 +1,9 @@
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
 
 public class FishListManager : MonoBehaviour
 {
@@ -22,6 +24,8 @@ public class FishListManager : MonoBehaviour
     public TextMeshProUGUI lengthText;      // Length TMP 연결
     public TextMeshProUGUI weightText;      // Weight TMP 연결
     public TextMeshProUGUI caughtDateText;  // CaughtData TMP 연결
+
+    private AsyncOperationHandle<Sprite> _displayHandle;
 
     private void Start()
     {
@@ -48,14 +52,34 @@ public class FishListManager : MonoBehaviour
         // 이미지 업데이트
         if (fishDisplayImage != null)
         {
-            // 잡았다면 물고기 이미지, 못 잡았다면 실루엣
-            Sprite displaySprite = isCaught ? currentFish.fishSprite : currentFish.silhouetteSprite;
-
-            if (displaySprite != null)
+            // 다른 물고기 클릭 시  이전 물고기는 메모리에서 지움
+            if (_displayHandle.IsValid())
             {
-                fishDisplayImage.sprite = displaySprite;
-                fishDisplayImage.color = Color.white;
+                Addressables.Release(_displayHandle);
+            }    
+
+            // 시트에서 이미지 파일 주소(string)을 확인
+            string address = isCaught ? currentFish.fishSprite :currentFish.silhouetteSprite; 
+
+            // 주소가 없거나 "NullException"이면 돌아가기
+            if (string.IsNullOrEmpty(address) || address == "NullException")
+            {
+                Debug.Log("이미지 주소가 비었습니다.");
+                return;
             }
+
+            // 주소가 있을 때만 이미지 불러오기
+            _displayHandle = Addressables.LoadAssetAsync<Sprite>(address);    
+            // UI에 배치
+            _displayHandle.Completed += (operation) =>
+            {
+                if (operation.Status == AsyncOperationStatus.Succeeded)
+                {   
+                    // 로드된 이미지 적용
+                    fishDisplayImage.sprite = operation.Result;
+                }
+            };
+                   
         }
     }
 
@@ -79,6 +103,14 @@ public class FishListManager : MonoBehaviour
         if (!gameObject.activeSelf)
         {
             gameObject.SetActive(true);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if(_displayHandle.IsValid())
+        {
+            Addressables.Release(_displayHandle);
         }
     }
 }

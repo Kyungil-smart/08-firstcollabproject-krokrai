@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class FishSlot : MonoBehaviour
 {
@@ -17,16 +19,18 @@ public class FishSlot : MonoBehaviour
     private FishData _currentFishData;
     private TraderUI _traderUI;
 
+    // 로드된 이미지의 관리, 출력
+    private AsyncOperationHandle<Sprite> _handle;
+
     // 상점용 셋업 함수
     public void SetupTrader(FishData data, TraderUI trader)
     {
         _currentFishData = data;
         _traderUI = trader;
 
-        // 물고기 이미지 설정
         if (fishImage != null)
         {
-            fishImage.sprite = data.fishSprite;
+            LoadImageAsync(data.fishSprite);
         }
 
         // priceText가 연결돼 있을 때 실행(상점 전용)
@@ -44,6 +48,33 @@ public class FishSlot : MonoBehaviour
             slotToggle.onValueChanged.RemoveAllListeners();
             slotToggle.onValueChanged.AddListener(OnToggleChanged);
         }
+    }
+
+    private void LoadImageAsync(string address)
+    {
+        // 주소가 없거나 "NullException"이면 돌아가기
+        if (string.IsNullOrEmpty(address) || address == "NullException")
+        {
+            Debug.Log("이미지 주소가 비었습니다.");
+            return;
+        }
+
+        // 로드된 이미지가 있다면, 불러오기 전 이미지를 메모리에서 해제
+        if (_handle.IsValid())
+        {
+            Addressables.Release(_handle);
+        }
+
+        // 구글 시트에 있는 이미지를 가져옴(결과물은 지금 X, _handle 이라는 영수증만 우선)
+        _handle = Addressables.LoadAssetAsync<Sprite>(address);
+
+        _handle.Completed += (operation) =>
+        {
+            if (operation.Status == AsyncOperationStatus.Succeeded)
+            {
+                fishImage.sprite = operation.Result;
+            }
+        };
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -65,23 +96,20 @@ public class FishSlot : MonoBehaviour
         _currentFishData = data;
         this.fishListManager = fishListManager;
 
-        if (fishImage != null)
-        {
-            if (data.isCaught)
-            {
-                fishImage.sprite = data.fishSprite;
-            }
-            else
-            {
-                fishImage.sprite = data.silhouetteSprite;
-            }
-        }
-
 
         // 도감용에서는 상점 UI 비활성화
         if (priceText != null) priceText.gameObject.SetActive(false);
         if (slotToggle != null) slotToggle.gameObject.SetActive(false);
         if (highlightUI != null) highlightUI.SetActive(false);
+
+        if (fishImage != null)
+        {
+            // 불러올 이미지 주소(string) 
+            string targetAddress = data.isCaught ? data.fishSprite : data.silhouetteSprite;
+
+            // 이미지 로드
+            LoadImageAsync(targetAddress);
+        }
     }
 
     public void OnSlotClick()
@@ -114,5 +142,13 @@ public class FishSlot : MonoBehaviour
     public FishData GetFishData()
     {
         return _currentFishData;
+    }
+
+    private void OnDestroy()
+    {
+        if (_handle.IsValid())
+        {
+            Addressables.Release(_handle);
+        }    
     }
 }
