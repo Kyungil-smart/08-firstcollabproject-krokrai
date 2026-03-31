@@ -73,6 +73,8 @@ public class FishSlot : MonoBehaviour
             if (operation.Status == AsyncOperationStatus.Succeeded)
             {
                 fishImage.sprite = operation.Result;
+
+                fishImage.preserveAspect = true;
             }
         };
     }
