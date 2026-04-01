@@ -74,7 +74,7 @@ public class FishingTimer : MonoBehaviour
         }
     }
 
-    private bool CheckingFull()
+    public bool CheckingFull()
     {
         return _manager.GetCurrentCount() < _manager.fishingCount;
     }
