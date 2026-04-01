@@ -25,7 +25,6 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         _fisherImage = GetComponent<Image>();
-        _watingImage = _fisherImage.sprite;
         _currentCount = fishingCount;
         _timer = FindFirstObjectByType<FishingTimer>();
         _upgradeManager = FindFirstObjectByType<FishingUpgradeManager>();
@@ -40,10 +39,12 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
             _upgradeManager.OnRodUpgrade += RodgradeMaxCount;
             _upgradeManager.OnBaitUpgrade += BaitgradeMaxCount;
             _upgradeManager.OnFishingUpgrade += FishRateLevel;
+            _upgradeManager.OnShipUpgrade += ShipUpgradeLevel;
 
             RodgradeMaxCount(DataTower.instance.rodLevel);
             BaitgradeMaxCount(DataTower.instance.baitLevel);
             FishRateLevel(DataTower.instance.fishingGrade);
+            ShipUpgradeLevel(DataTower.instance.fishingGrade);
         }
     }
 
@@ -255,5 +256,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
             fishCurrentRate = fishRateList[index];
             Debug.Log("확률 레벨 증가");
         }
+    }
+
+    public void UpgradeShipLevel()
+    {
+        _upgradeManager.ShipUpgrade();
+    }
+
+    public void ShipUpgradeLevel(int newLevel)
+    {
+        Debug.Log("배가 업그레이드 되었습니다 인벤토리가 확장되었는지 확인하세요");
     }
 }

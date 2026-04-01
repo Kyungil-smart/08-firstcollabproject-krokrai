@@ -13312,7 +13312,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19be9373151d75a47a81055fac7c2c5f, type: 2}
   - {fileID: 11400000, guid: ee680ccfe4f4100458a4cf870d04118c, type: 2}
   _fixedValue: {fileID: 11400000, guid: 6301e9a650f04b446a270797b2be7dd3, type: 2}
-  _diningUpgradeDataReader: {fileID: 0}
   _customerPrefab:
   - {fileID: 3275731141906476971, guid: 0423b4ec8c3d568489bbac0895e991a3, type: 3}
   _customers: {fileID: 4804989411914572688}
@@ -14470,10 +14469,6 @@ PrefabInstance:
     - target: {fileID: 4466617494490421319, guid: cf7a944669968c244b06ec0d149c71cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5477601840788304715, guid: cf7a944669968c244b06ec0d149c71cb, type: 3}
-      propertyPath: hitTestType
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5477601840788304715, guid: cf7a944669968c244b06ec0d149c71cb, type: 3}
       propertyPath: _shouldFitMonitor
