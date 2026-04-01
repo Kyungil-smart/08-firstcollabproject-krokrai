@@ -8,12 +8,14 @@ public class TouckLockToggleVer4 : MonoBehaviour
     [SerializeField] UniWindowController _uniWindowController;
     [SerializeField] Toggle _touchLockToggle;
     [SerializeField] CanvasGroup[] _canvasGroups;
+    [SerializeField] GameObject _touchLockCanvas; 
     
     private Color _toggleBackgroundColor;
 
     private void Awake()
     {
         _canvasGroups = FindObjectsByType<CanvasGroup>(FindObjectsSortMode.None);
+        _touchLockCanvas.SetActive(false);
     }
 
     public void TouchLockEnable()
@@ -26,9 +28,9 @@ public class TouckLockToggleVer4 : MonoBehaviour
         IsTouchLock(false);
     }
     
-    private void IsTouchLock(bool isOn)
+    private void IsTouchLock(bool state)
     {
-        switch (isOn)
+        switch (state)
         {
             case true:
                 foreach (CanvasGroup canvas in _canvasGroups)
@@ -37,6 +39,7 @@ public class TouckLockToggleVer4 : MonoBehaviour
                     canvas.interactable = false;
                 }
                 _uniWindowController.opacityThreshold = 0.99f;
+                _touchLockCanvas.SetActive(true);
                 
                 break;
             case false:
@@ -46,7 +49,7 @@ public class TouckLockToggleVer4 : MonoBehaviour
                     canvas.interactable = true;
                 }
                 _uniWindowController.opacityThreshold = 0.3f;
-                
+                _touchLockCanvas.SetActive(false);
                 break;
         }
     }
