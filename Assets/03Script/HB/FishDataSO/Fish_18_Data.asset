@@ -20,13 +20,11 @@ MonoBehaviour:
   fishType: 0
   length: 30
   weight: 0.05
-  fishSprite: Fish_18
+  fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uBC14\uB2E4\uC758 \uC2A4\uCE90\uBE48\uC800\uB77C\uB294 \uC774\uBA85\uC774
-    \uC788\uB294 \uC5B4\uB958\uB85C,\\n\uB2F4\uBC31\uD558\uBA74\uC11C \uCAC4\uAE43\uD0F1\uAE00\uD55C
-    \uC721\uC9C8, \uC9C4\uD55C \uB2E8\uB9DB\uACFC \uAC10\uCE60\uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."
-  engDescription: "Known by the nickname \u201Cscavenger of the sea,\u201D\\nthis
-    fish is characterized by its mild yet firm and springy texture, as well as its
-    deep sweetness and savory flavor.\r"
+  korDescription: "\uBC14\uB2E4\uC758 \uC2A4\uCE90\uBE48\uC800\uB85C,\\n\uCAC4\uAE43\uD0F1\uAE00\uD55C
+    \uC721\uC9C8\uC5D0 \uC9C4\uD55C \uB2E8\uB9DB\uACFC \uAC10\uCE60\uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."
+  engDescription: "A scavenger of the sea,\\nit is characterised by its firm, springy
+    texture and rich, sweet flavour.\r"
   caughtDate: 

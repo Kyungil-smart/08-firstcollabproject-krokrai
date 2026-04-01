@@ -23,10 +23,8 @@ MonoBehaviour:
   fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uACE0\uB4F1\uC5B4\uC640 \uAC19\uC774 \uAD6D\uBBFC \uC0DD\uC120
-    \uC911 \uD558\uB098.\\n\uB2E4\uC591\uD55C \uC694\uB9AC\uC5D0 \uC0AC\uC6A9\uD558\uC9C0\uB9CC
-    \uC18C\uAE08\uAD6C\uC774\uAC00 \uAC00\uC7A5 \uB9DB\uC788\uAC8C \uBA39\uB294 \uBC29\uBC95\uC774\uB2E4."
-  engDescription: "One of the nation\u2019s favorite fish, just like mackerel.\\nIt
-    is used in various dishes, but grilling with salt is the most delicious way to
-    enjoy it.\r"
+  korDescription: "\uAD6D\uBBFC \uC0DD\uC120 \uC911 \uD558\uB098.\\n\uADF8\uB9CC\uD07C
+    \uB2E4\uCC44\uB85C\uC6B4 \uB9DB\uC788\uB294 \uC694\uB9AC\uAC00 \uC788\uB2E4."
+  engDescription: "One of the nation\u2019s favourite fish.\\nConsequently, there
+    is a wide variety of delicious dishes made with it.\r"
   caughtDate: 
