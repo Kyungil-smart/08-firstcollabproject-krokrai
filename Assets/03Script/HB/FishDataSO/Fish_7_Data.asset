@@ -23,9 +23,9 @@ MonoBehaviour:
   fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uB0AE\uC740 \uC218\uC628 \uB355\uBD84\uC5D0 \uC9C0\uBC29 \uD568\uB7C9\uC774
-    \uB192\uC740 \uACE0\uB4F1\uC5B4.\\n1\uB144 \uB0B4\uB0B4 \uAE30\uB984\uC9C0\uACE0
-    \uACE0\uC18C\uD574 \uAD6C\uC774\uB85C \uCD5C\uACE0\uC774\uB2E4."
-  engDescription: "Mackerel has a high fat content thanks to the low water temperature.\\nIt
-    remains rich and flavorful year-round, making it excellent for grilling.\r"
+  korDescription: "\uB0AE\uC740 \uC218\uC628\uC73C\uB85C \uC9C0\uBC29 \uD568\uB7C9\uC774
+    \uB192\uC740 \uACE0\uB4F1\uC5B4.\\n1\uB144 \uB0B4\uB0B4 \uAE30\uB984\uC838 \uAD6C\uC774\uB85C
+    \uCD5C\uACE0\uB2E4."
+  engDescription: "Mackerel with a high fat content due to the low water temperature.\\nIt
+    remains fatty all year round, making it perfect for grilling.\r"
   caughtDate: 

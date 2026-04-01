@@ -23,10 +23,9 @@ MonoBehaviour:
   fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uBE44\uB298\uC774 \uAC70\uC758 \uC5C6\uACE0 \uBAB8 \uC591\uCABD\uC5D0
-    \uAC80\uC740 \uB465\uADFC \uC810\uC774 \uD2B9\uC9D5\uC778 \uC0DD\uC120.\\n\uC0B4\uCF54\uAE30\uC5D0
-    \uCC9C\uC5F0 MSG\uAC00 \uBC30\uC5B4\uC788\uB294 \uACE0\uAE09 \uC2DD\uC7AC\uB8CC\uB2E4."
-  engDescription: "A fish characterized by almost no scales and round black spots
-    on both sides of its body. It is a high-quality ingredient with natural MSG infused
-    into its flesh.\r"
+  korDescription: "\uBAB8 \uC591\uCABD\uC5D0 \uAC80\uC740 \uB465\uADFC \uC810\uC774
+    \uD2B9\uC9D5\uC778 \uC0DD\uC120.\\n\uCC9C\uC5F0 MSG\uAC00 \uBC30\uC5B4\uC788\uB294
+    \uACE0\uAE09 \uC2DD\uC7AC\uB8CC\uB2E4."
+  engDescription: "A fish characterised by black round spots on both sides of its
+    body.\\nIt is a high-quality ingredient rich in natural MSG.\r"
   caughtDate: 

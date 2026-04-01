@@ -23,10 +23,8 @@ MonoBehaviour:
   fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uAC00\uC744\uC5D0 \uC7A1\uD788\uB294 \uCE7C\uAC19\uC740 \uC0DD\uC120\uC774\uB77C
-    \uBD88\uB9B0\uB2E4.\\n\uAC00\uC744\uACFC \uACA8\uC6B8\uC5D0 \uAE30\uB984\uC774
-    \uC62C\uB77C \uACE0\uC18C\uD558\uACE0 \uB2F4\uBC31\uD55C \uB9DB\uC774 \uC77C\uD488\uC774\uB2E4."
-  engDescription: "It is known as the \u201Crazor-sharp fish\u201D caught in the
-    fall.\\nIts fat content increases in the fall and winter, giving it a rich yet
-    delicate flavor that is second to none.\r"
+  korDescription: "\uAC00\uC744\uC5D0 \uC7A1\uD788\uB294 \uCE7C\uAC19\uC740 \uC0DD\uC120.\\n\uB2F4\uBC31\uD558\uBA74\uC11C\uB3C4
+    \uAE30\uB984\uC9C4 \uACE0\uC18C\uD568\uC774 \uD2B9\uC9D5\uC774\uB2E4."
+  engDescription: "A fish with a firm, knife-like texture, caught in autumn.\\nIt
+    is characterised by a delicate yet rich, nutty flavour.\r"
   caughtDate: 
