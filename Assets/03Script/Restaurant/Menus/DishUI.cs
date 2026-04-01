@@ -25,7 +25,7 @@ public class DishUI : MonoBehaviour
     public void DishOnDish(RecipeContainer rcp)
     {
         _rcp = rcp;
-        _sushi = _rcp.yield * DataTower.instance.BonusFood01Level + DataTower.instance.BonusFood02Level;
+        _sushi = _rcp.yield + (DataTower.instance.BonusFood01Level + DataTower.instance.BonusFood02Level - 2);
 
         _tmpUGUI[0].text = _rcp.recipe_KName; // 로컬라이제이션 진행 때 수정 해야됌 @@@@@@@@@@@@@@@@
         _tmpUGUI[1].text = _sushi.ToString();
