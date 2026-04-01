@@ -13252,10 +13252,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fisher_View 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1246710588146862830, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 527.45
-      objectReference: {fileID: 0}
     - target: {fileID: 1423565045104337412, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
       propertyPath: m_LocalPosition.x
       value: -909.8695
