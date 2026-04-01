@@ -138,7 +138,10 @@ public class CustomerController : MonoBehaviour
                             _firstOrder = false;
                             _eatCounte++;
                             yield return new WaitForSeconds(_data.orderTime[i]);
-                            _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
+                            if (UnityEngine.Random.Range(0,1f) <= _tips.tipsRate) //팁 확률 측정 후 팁인 경우 팁과함께 아닌 경우 팁 제외
+                                _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
+                            else
+                                _restaurant.TryCounsumeSushiAndEarnMoney(1);
                             yield return new WaitForSeconds(_data.eatDuration[i]); // WaitForSeconds 너무 많은 호출 후에 개선 필요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                         }
                     }
@@ -156,7 +159,7 @@ public class CustomerController : MonoBehaviour
                     // 탈출 포인트까지 대기
                     yield return StartCoroutine(CoMoveTo(_exitPoint.position));
                     _seat.ClearSeat();
-                    _restaurant.DeSpawnCustomer(gameObject);
+                    _restaurant.DeSpawnCustomer(gameObject, _data.grade);
                     yield break;
             }
             yield return null;
