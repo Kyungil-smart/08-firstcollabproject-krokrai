@@ -1111,7 +1111,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2249598880335923918}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1174,8 +1174,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7826232319920026816}
         m_TargetAssemblyTypeName: TraderUI, Assembly-CSharp
-        m_MethodName: OnSelectAllButtonClicked
-        m_Mode: 6
+        m_MethodName: OnSelectAllButonClicked
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4236,8 +4236,10 @@ GameObject:
   - component: {fileID: 4108464119279653103}
   - component: {fileID: 5071418134335995621}
   - component: {fileID: 7826232319920026816}
-  - component: {fileID: 8467175141849814930}
+  - component: {fileID: 2400535814130069153}
+  - component: {fileID: 7643928183354411033}
   - component: {fileID: 345054216605460590}
+  - component: {fileID: 8467175141849814930}
   m_Layer: 5
   m_Name: Trader
   m_TagString: Untagged
@@ -4319,17 +4321,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddacd80a602f4004093a322a7a990218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TraderUI
+  economy: {fileID: 2400535814130069153}
+  filterUI: {fileID: 7643928183354411033}
   listManager: {fileID: 345054216605460590}
   selectionManager: {fileID: 8467175141849814930}
-  filterManager: {fileID: 839327633700805597}
-  filterPanel: {fileID: 2421698405936338692}
-  filterButtonText: {fileID: 7942259319790968945}
-  mainContentUI: {fileID: 3641438568815653459}
-  selectAllButton: {fileID: 4030857682242620414}
-  sellButton: {fileID: 3871444258651332717}
-  goldText: {fileID: 6785743844202893611}
-  totalPriceText: {fileID: 7758818887471637898}
---- !u!114 &8467175141849814930
+  filterLogic: {fileID: 839327633700805597}
+  selectAllToggle: {fileID: 4030857682242620414}
+--- !u!114 &2400535814130069153
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4338,9 +4336,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5241658353737232470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff95d8951a1fabf4892d42a7dfc1f8e5, type: 3}
+  m_Script: {fileID: 11500000, guid: a5346ccaa59fe8646a20777ed4572316, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
+  m_EditorClassIdentifier: Assembly-CSharp::TraderEconomy
+  sellButton: {fileID: 3871444258651332717}
+  goldText: {fileID: 6785743844202893611}
+  totalPriceText: {fileID: 7758818887471637898}
+--- !u!114 &7643928183354411033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5241658353737232470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246fab1bf1ecd464fb0e9b0db5c5561c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TraderFilterUI
+  filterPanel: {fileID: 2421698405936338692}
+  filterButtonText: {fileID: 7942259319790968945}
+  mainContentUI: {fileID: 3641438568815653459}
+  selectAllToggle: {fileID: 4030857682242620414}
 --- !u!114 &345054216605460590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4355,6 +4372,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TraderListManager
   content: {fileID: 5296950058798754620}
   fishSlotPrefab: {fileID: 7117152015522792800, guid: 6f1f8947830768b42a705643f4faf3d1, type: 3}
+--- !u!114 &8467175141849814930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5241658353737232470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff95d8951a1fabf4892d42a7dfc1f8e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
 --- !u!1 &5307904323309013171
 GameObject:
   m_ObjectHideFlags: 0
@@ -4479,7 +4508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.5, y: -1.1}
+  m_AnchoredPosition: {x: 0, y: 0.0000060797}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5473202613107016548

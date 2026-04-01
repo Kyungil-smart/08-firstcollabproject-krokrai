@@ -1,305 +1,146 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Collections.Generic;
 
 public class TraderUI : MonoBehaviour
 {
     [Header("스크립트 참조")]
-    public TraderListManager listManager;
-    public SelectionManager selectionManager;
-    public FilterManager filterManager;
-    
-    [Header("필터 UI")]
-    public GameObject filterPanel;                  // 필터 등급 창
-    public TextMeshProUGUI filterButtonText;        // 필터 버튼의 텍스트
-    public CanvasGroup mainContentUI;               // mainContent 오브젝트
+    public TraderEconomy economy;               // 돈, 가격 표시, 판매 로직 담당자
+    public TraderFilterUI filterUI;             // 필터 창 열고 닫는 UI 제어 담당자
+    public TraderListManager listManager;       // 실제 물고기 슬롯 리스트 생성/삭제 관리자
+    public SelectionManager selectionManager;   // 어떤 슬롯이 체크되었는지 계산하는 관리자
+    public FilterManager filterLogic;           // 어떤 등급을 걸러낼지 계산하는 관리자
+    public Toggle selectAllToggle;              // 전체선택 버튼
 
-    [Header("물고기 선택")]
-    public Toggle selectAllButton;                  // 전체 선택 버튼
-
-    [Header("판매, 경제 시스템")]
-    public Button sellButton;                       // 판매 버튼
-    public TextMeshProUGUI goldText;                // 현재 보유 골드TMP
-    public TextMeshProUGUI totalPriceText;          // 선택된 물고기의 합계 금액TMP
-
-    private bool isFilterMode = false;              // 현재 필터창이 열려 있는지
-    private bool _isUpdatingAll = false;            // 무한 루프 방지
-
-    private bool _isInitialized = false;            // UI창 초기화 여부
-
-    private void Awake()
-    {
-        // Select All 버튼 리스트너 등록
-        if (selectAllButton != null)
-        {
-            selectAllButton.onValueChanged.RemoveAllListeners();
-            selectAllButton.onValueChanged.AddListener(OnSelectAllButtonClicked);
-
-            _isUpdatingAll = true;
-            selectAllButton.isOn = false;
-            _isUpdatingAll = false;
-        }
-
-    }
-    private void OnEnable()
-    {
-        // 다시 켜질 때 실행
-        if (_isInitialized)
-        {
-            // 필터 모드 강제 종료 및 UI 초기화
-            isFilterMode = false;
-            if (filterPanel != null) filterPanel.SetActive(false);
-            if (filterButtonText != null) filterButtonText.text = "Filter";
-
-            // 배경 UI 조작 권한 복구 (CanvasGroup 초기화)
-            if (mainContentUI != null)
-            {
-                mainContentUI.interactable = true;
-                mainContentUI.blocksRaycasts = true; 
-            }
-
-            // 데이터 및 골드 갱신 로직
-            if (DataTower.instance != null)
-            {
-                DataTower.instance.OnChangedMoney -= UpdateGoldUI;
-                DataTower.instance.OnChangedMoney += UpdateGoldUI;
-                InitTrader();
-            }
-        }
-
-        // 필터 데이터 리셋, 실제 UI적용
-        if( filterManager != null)
-        {
-            filterManager.ResetFilter();
-
-            // 리셋된 필터 값을 가져와 리스트 매니저에게 적용
-            if (listManager != null)
-            {
-                listManager.ApplyFilter(filterManager.GetSelectedRates());
-            }   
-        }
-    }
+    private bool _isInitialized = false;       // Start가 초기설정끝냈는지
 
     private void Start()
     {
-        if (DataTower.instance != null)
-        {
-            DataTower.instance.OnChangedMoney -= UpdateGoldUI;
-            DataTower.instance.OnChangedMoney += UpdateGoldUI;
+        SetupEvents();
 
-            Debug.Log($"Start 시점 잔액 : {DataTower.instance.money}");
-            UpdateGoldUI(DataTower.instance.money);
-        }
-        else
-        {
-            Debug.Log("Start시점에도 DataTower없음");
-        }
+        RefreshAll();
 
-        // 처음으로 창이 켜질 때 실행
-        InitTrader();
-        _isInitialized = true;
+        _isInitialized = true;  
+    }
+
+    // 상점 UI가 켜질 때마다 실행되는 초기화
+    private void OnEnable()
+    {
+        if (!_isInitialized) return;
+
+        // 창이 켜질 때 필터와 리스트 상태 초기화
+        filterUI.ForceClose();
+        filterLogic.ResetFilter();
+
+        if(DataTower.instance != null)
+        {
+            RefreshAll();
+        }
     }
 
     private void OnDisable()
     {
-        if(DataTower.instance != null)
-        {
-            DataTower.instance.OnChangedMoney -= UpdateGoldUI;
-        }
+        CleanEvents();
     }
 
+    // 데이터 타워의 이벤트를 구독하고 초기 값 설정
+    private void SetupEvents()
+    {
+        if(DataTower.instance == null) return;
 
-    private void InitTrader()
+        //중복구독 방지
+        DataTower.instance.OnChangedMoney -= economy.UpdateGoldUI;
+        DataTower.instance.OnChangedMoney += economy.UpdateGoldUI;
+
+        economy.UpdateGoldUI(DataTower.instance.money);
+    }
+
+    // 데이터 타워와의 이벤트 연결을 끊음
+    private void CleanEvents()
     {
         if(DataTower.instance != null)
         {
-            // 보유 골드 갱신
-            UpdateGoldUI(DataTower.instance.money);
-
-            // 물고기 정보를 DataTower 인벤토리에서 받아옴
-            listManager.RefreshList(DataTower.instance.Items, this);
-
-            if (filterManager != null)
-            {   
-                // 필터 등급에 맞는 물고기만 보여줌
-                listManager.ApplyFilter(filterManager.GetSelectedRates());
-            }
-            
-            OnSlotChanged();
+            DataTower.instance.OnChangedMoney -= economy.UpdateGoldUI;
         }
     }
 
-    private void OnDestroy()
-    {
-        if (DataTower.instance != null)
-        {
-            DataTower.instance.OnChangedMoney -= UpdateGoldUI;
-        }    
-    }
-
-
-    // 슬롯의 토글이 바뀌면 FishSlot에서 이 함수 호출
-    public void OnSlotChanged()
-    {
-        long total = selectionManager.TotalSelectedPrice(listManager.GetAllSlots());
-        totalPriceText.text = $"Total Price: {total:N0} Gold";
-        sellButton.interactable = total > 0;
-
-        UpdateSelectAllToggleState(); 
-    }
-
+    // 판매 버튼 클릭 시 선택된 물고기를 팔고 리스트 갱신
     public void OnSellButtonClicked()
     {
         var allSlots = listManager.GetAllSlots();
-        // 현재 선택된 슬롯 가져옴
-        var selected = new List<FishSlot>(selectionManager.SelectedSlots(allSlots));
-
-        if (selected.Count == 0) return;
         
-        // 총 판매 가격 계산
-        long totalPrice = selectionManager.TotalSelectedPrice(allSlots);
+        // 선택된 슬롯만 먼저 가져옴
+        var selected = selectionManager.SelectedSlots(allSlots);
 
-        // 데이터 타워에서 돈 추가 (DataTower에 돈 추가는 false)
-        if (DataTower.instance.TryMoenyChanged((ulong)totalPrice, false))
+        long price = selectionManager.TotalSelectedPrice(selected);
+
+        // 경제 매니저에게 실제 판매
+        if (economy.CompleteTrade(selected, price))
         {
-            // 판매된 물고기 삭제
-            foreach (var slot in selected)
-            {
-                FishData data = slot.GetFishData();
+            // 리스트에서 제거
+            listManager.RemoveSlots(selected);
 
-                // 인벤토리 데이터를 소스에서 제거
-                DataTower.instance.Items.Remove(data);
-                
-                listManager.GetAllSlots().Remove(slot);
-                // 리스트에서 제거
-                allSlots.Remove(slot);
-
-                // 오브젝트 파괴
-                Destroy(slot.gameObject);
-            }
-
-            ResetSelectAllButton();
-
+            // 판매 후 0으로 리셋
             OnSlotChanged();
-
-            Debug.Log($"{totalPrice} Gold, 판매 완료");
-        }
-       
-    }
-
-    private void ResetSelectAllButton()
-    {
-         // 판매 후 전체 선택 버튼 초기화
-        if(selectAllButton != null)
-        {
-            _isUpdatingAll = true;
-            selectAllButton.isOn = false;
-            _isUpdatingAll = false;
         }
     }
-    
+
+    // 필터 버튼 클릭 시 호출 필터 창 토글/제어
     public void OnFilterButtonClicked()
     {
-        isFilterMode = !isFilterMode;
-        filterPanel.SetActive(isFilterMode);
-        filterButtonText.text = isFilterMode ? "Confirm" : "Filter";
+        filterUI.ToggleFilter();
 
-        // 필터창이 열리면 배경 UI조작 방지
-        if (mainContentUI != null)
+        // 필터창을 닫을 때 필터링 적용
+        if (!filterUI.isFilterMode)
         {
-            // 필터모드 일 때 interactale을 false, 닫히면true
-            mainContentUI.interactable = !isFilterMode;
-        }
-
-        // 확인을 클릭해 창 닫기, 창 닫을 때 초기화
-        if (!isFilterMode)
-        {
-            // 모든 슬롯 선택 해제
-            var allSlots = listManager.GetAllSlots();
-            if(allSlots != null)
-            {
-                selectionManager.AllSelection(allSlots, false);
-            } 
-
-            // 필터 적용, UI갱신  
-            listManager.ApplyFilter(filterManager.GetSelectedRates());
+            selectionManager.AllSelection(listManager.GetAllSlots(), false);
+            listManager.ApplyFilter(filterLogic.GetSelectedRates());
             OnSlotChanged();
         }
     }
 
-    public void OnSelectAllButtonClicked(bool isOn)
+    // 슬롯 상태 변경 시 호출, 하단 합계 금액 텍스트 갱신
+    public void OnSlotChanged()
     {
-        if (_isUpdatingAll) return;
+        var allSlots = listManager.GetAllSlots();
 
-        _isUpdatingAll = true;
+        // 판매 합계 금액
+        economy.UpdatePriceUI(selectionManager.TotalSelectedPrice(allSlots));
 
+        // 전체 선택 토글 상태 업데이트
+        if (selectAllToggle != null)
+        {
+            // 루프 방지
+            selectAllToggle.onValueChanged.RemoveAllListeners();
+
+            // 다 켜져있는지 확인
+            selectAllToggle.isOn = selectionManager.IsAllSelected(allSlots);
+
+            // 리스너 연결
+            selectAllToggle.onValueChanged.AddListener(OnSelectAllToggleChanged);
+        }
+    }
+
+    public void OnSelectAllToggleChanged(bool isOn)
+    {
         selectionManager.AllSelection(listManager.GetAllSlots(), isOn);
-        _isUpdatingAll = false;
-
         OnSlotChanged();
     }
 
-
-    private void UpdateSelectAllToggleState()
+    // 모든 데이터와 UI를 동기화해 새로고침
+    private void RefreshAll()
     {
-        if(_isUpdatingAll || selectAllButton == null) return;
+        if(DataTower.instance == null) return;
 
-        // 리스트를 변수에 담고 Null 체크
-        var allSlots = listManager.GetAllSlots();
+        // 가지고 있는 잔액
+        economy.UpdateGoldUI(DataTower.instance.money);
 
-        if (allSlots == null || allSlots.Count == 0)
-        {
-            _isUpdatingAll = true;
-
-            if (selectAllButton.isOn)
-            {
-                selectAllButton.isOn = false;
-            }
-
-            _isUpdatingAll = false;
-            return;
-        }
-
-        // 현재 화면에 활성화된 슬롯만 추출
-        var allActiveSlots = listManager.GetAllSlots().FindAll(s => s.gameObject.activeInHierarchy);
+        // 리스트 생성
+        listManager.RefreshList(DataTower.instance.Items, this);
         
-        // 슬롯이 없다면 전체선택 버튼 끄고 종료
-        if(allActiveSlots.Count == 0)
-        {
-            _isUpdatingAll = true;
+        // 필터 적용
+        listManager.ApplyFilter(filterLogic.GetSelectedRates());
 
-            if (selectAllButton.isOn)
-            {
-                selectAllButton.isOn = false;
-            }
-
-            _isUpdatingAll = false;
-
-            return;  
-        } 
-
-        // 모든 활성화된 슬롯의 토글이 켜지 있는지
-        bool allSelected = allActiveSlots.TrueForAll(s => s.slotToggle.isOn);
-
-        // 전체 선탯 버튼 상태 동기화
-        if (selectAllButton.isOn != allSelected)
-        {
-            _isUpdatingAll = true;
-
-            selectAllButton.isOn = allSelected;
-
-            _isUpdatingAll = false;
-        }
-    }
-
-    private void UpdateGoldUI(ulong money)
-    {
-        Debug.Log($"전달받은 금액 : {money}");
-        // "N0"로 세자리 당 ',' 찍어주기 
-        if (goldText != null) goldText.text = $"Money: {money.ToString("N0")} Gold";
-
-        else
-        Debug.Log("goldText가 인스펙터에서 연결되지 않음");
+        // 초기화
+        OnSlotChanged();
     }
 }

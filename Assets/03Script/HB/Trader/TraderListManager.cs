@@ -26,6 +26,20 @@ public class TraderListManager : MonoBehaviour
             }
         }
     }
+    
+    // 판매 완료된 슬롯을 관리 리스트에서 제거
+    public void RemoveSlots(List<FishSlot> selectedSlots)
+    {
+        if (selectedSlots == null) return;
+
+        foreach (var slot in selectedSlots)
+        {
+            if (_allSlots.Contains(slot))
+            {
+                _allSlots.Remove(slot);
+            }
+        }
+    }
 
     // 등급 리스트를 받아 슬롯 끄고 켜기
     public void ApplyFilter(List<EFish_Rarity> selectedRates)
