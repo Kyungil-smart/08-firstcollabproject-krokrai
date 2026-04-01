@@ -72,8 +72,8 @@ public class UpgradeUIView : MonoBehaviour
     }
 
     #endregion
-    
-    
+
+    #region 번역 관련
 
     private void SetTranslationText()
     {
@@ -100,14 +100,13 @@ public class UpgradeUIView : MonoBehaviour
         }
     }
 
+    #endregion
+    
     private void SetGoldText()
     {
         RenewalGoldText(DataTower.instance.money);
     }
     
-    /// <summary>
-    /// 현재 골드가 변화 할 때, 골드 Text를 변화 시킴
-    /// </summary>
     private void RenewalGoldText(ulong amount)
     {
         _currentGoldText.text = amount.ToString();

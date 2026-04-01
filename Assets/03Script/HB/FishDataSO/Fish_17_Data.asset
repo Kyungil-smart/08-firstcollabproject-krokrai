@@ -23,9 +23,9 @@ MonoBehaviour:
   fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uACA8\uC6B8\uCCA0 \uBC14\uB2E4\uB09A\uC2DC\uC758 \uC5B4\uC885\uC73C\uB85C
-    \uC778\uAE30\uAC00 \uC788\uB294 \uC0DD\uC120.\\n\uCC38\uB3D4\uACFC \uAC70\uC758
-    \uAC00\uAE4C\uC6B8 \uC815\uB3C4\uB85C \uAC15\uD55C \uAC10\uCE60\uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."
-  engDescription: "A popular fish for winter sea fishing.\\nIt is characterized by
-    a rich, savory flavor almost as intense as that of red sea bream.\r"
+  korDescription: "\uACA8\uC6B8\uCCA0 \uBC14\uB2E4\uB09A\uC2DC\uC5D0 \uC778\uAE30\uC788\uB294
+    \uC0DD\uC120.\\n\uCC38\uB3D4\uACFC \uB9E4\uC6B0 \uC720\uC0AC\uD55C \uAC15\uD55C
+    \uAC10\uCE60\uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."
+  engDescription: "A popular fish for winter sea fishing.\\nIt is characterised by
+    a rich, savoury flavour very similar to that of red seabream.\r"
   caughtDate: 

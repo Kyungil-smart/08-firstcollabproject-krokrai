@@ -27,6 +27,8 @@ public class FishBookManager : MonoBehaviour
     // 탐색 속도를 위해 등급을 Key값으로 사용하는 딕셔너리
     private Dictionary<EFish_Rarity, Transform> _containers;
 
+    private WaitForEndOfFrame _waitForEndOfFrame = new WaitForEndOfFrame();
+
     private void Awake()
     {
         _containers = new Dictionary<EFish_Rarity, Transform>();
@@ -56,10 +58,12 @@ public class FishBookManager : MonoBehaviour
 
     private IEnumerator InitBookRoutine()
     {
-        // 다음 프레임까지 대기
-        yield return null;
-
+        // 하위 UI들이 배치된 후 다음 로직 실행
         GenerateBook();
+
+        yield return _waitForEndOfFrame;
+
+        UpdateLayouts();
         UpdateCompletionUI();
     }
 
@@ -67,41 +71,74 @@ public class FishBookManager : MonoBehaviour
     {
         if(dataContainer == null || _containers == null) return;
         
-        // 생성된 슬롯이 있으면 제거
+        // 기존 모든 등급 컨테이너의 자식을 비활성화
         foreach (Transform container in _containers.Values)
         {
-            for (int i = container.childCount - 1; i >= 0; i--)
+            foreach (Transform child in container)
             {
-                Destroy(container.GetChild(i).gameObject);
+                child.gameObject.SetActive(false);
             }
         }
 
-        // 슬롯, 데이터 생성
+        // 등급별로 현재 사용 중인 슬롯 인덱스 추적
+        Dictionary<EFish_Rarity, int> containerFishCount = new Dictionary<EFish_Rarity, int>();
+
+        // 슬롯, 데이터 생성, 재활용
         foreach (ScriptableObject obj in dataContainer.objs)
         {
             FishData fishData = obj as FishData;
 
             if (fishData == null) continue;
 
-            // 물고기 등급에 맞는 부모 컨테이너가 있는지 확인
             if (_containers.TryGetValue(fishData.fishRarity, out Transform targetParent))
             {
-                // 슬롯 생성
-                GameObject go = Instantiate(fishSlot, targetParent, false);
-
-                // 생선된 슬롯에 물고기 데이터와 상세창 전달
-                go.GetComponent<FishSlot>()?.SetupFishBook(fishData, fishListManager);
+                // 등급을 처음 만났다면 0으로 초기화
+            if (!containerFishCount.ContainsKey(fishData.fishRarity))
+            {
+                containerFishCount[fishData.fishRarity] = 0;
             }
+            
+            // 현재 이 등급의 몇 번째 슬롯을 처리할 차례인지
+            int currentIndex = containerFishCount[fishData.fishRarity];
+            GameObject slotGameObject;
+
+            // 컨테이너에 자식 슬롯이 currentIndex보다 많다면 기존 걸 사용
+            if (currentIndex < targetParent.childCount)
+            {
+                slotGameObject = targetParent.GetChild(currentIndex).gameObject;
+                slotGameObject.SetActive(true);
+            }
+
+            else
+            {
+                slotGameObject = Instantiate(fishSlot, targetParent, false);
+            }
+
+            // 슬롯 셋업
+            FishSlot slotScript = slotGameObject.GetComponent<FishSlot>();
+
+            if(slotScript != null)
+            {
+                slotScript.SetupFishBook(fishData, fishListManager);
+            }
+            
+            // 현재 등급 다음을 위해 카운트 증가
+            containerFishCount[fishData.fishRarity]++;
+            }
+            
         }
         
-        Canvas.ForceUpdateCanvases();
-
-        foreach(var container in _containers.Values)
+    }
+    private void UpdateLayouts()
+    {
+        // 하위 등급별 컨테이너부터 리빌드
+        foreach (var container in _containers.Values)
         {
-            RectTransform rect = container.GetComponent<RectTransform>();
-
-            if (rect != null)
+            // 화면에 켜져있는 등급만 리빌드
+            if (container.gameObject.activeInHierarchy)
             {
+                RectTransform rect = container.GetComponent<RectTransform>();
+
                 LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
             }
         }
@@ -110,7 +147,6 @@ public class FishBookManager : MonoBehaviour
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
         }
-
     }
 
     private void UpdateCompletionUI()
@@ -139,4 +175,5 @@ public class FishBookManager : MonoBehaviour
         fishBookCompletionText.text = $"{caughtCount} / {totalFish}";    
 
     }
+
 }

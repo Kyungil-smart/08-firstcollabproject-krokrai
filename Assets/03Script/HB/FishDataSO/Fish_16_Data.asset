@@ -23,10 +23,8 @@ MonoBehaviour:
   fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uC0C1\uC5B4\uC758 \uBBFC\uBB3C\uD310\uC774\uB77C \uBD80\uB97C
-    \uC815\uB3C4\uB85C \uD06C\uB2E4.\\n\uCD5C\uADFC \uC7A5\uC5B4\uAD6C\uC774\uC758
-    \uB300\uC2E0\uD560 \uC7AC\uB8CC\uB85C \uC778\uAE30\uB97C \uC5BB\uACE0 \uC788\uB2E4."
-  engDescription: "It\u2019s so large that it\u2019s often referred to as the \u201Cfreshwater
-    version of a shark.\u201D\\nRecently, it has been gaining popularity as an alternative
-    to grilled eel.\r"
+  korDescription: "\uBBFC\uBB3C\uC758 \uC0C1\uC5B4\uB77C \uBD80\uB97C \uC815\uB3C4\uB85C
+    \uD06C\uB2E4.\\n\uC7A5\uC5B4 \uB300\uC2E0 \uC0DD\uC120\uC73C\uB85C \uAC01\uAD11\uBC1B\uB294\uB2E4."
+  engDescription: "It is so large that it is often referred to as a \u2018freshwater
+    shark\u2019.\\nIt is gaining popularity as a fish alternative to eel.\r"
   caughtDate: 

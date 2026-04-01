@@ -12,6 +12,7 @@ public class RestaurantManager : MonoBehaviour
     [SerializeField] private CustomerDataSO[] _customerData;
     [SerializeField] private Customer_Tips[] _customerTips;
     [SerializeField] private Restaurant_Fixed_value _fixedValue;
+    [SerializeField] private DiningUpgradeDataReader _diningUpgradeDataReader;
 
     [Header("Spawn")]
     [SerializeField] private GameObject[] _customerPrefab;
@@ -37,9 +38,17 @@ public class RestaurantManager : MonoBehaviour
     private byte _specialCustomers;
 
     private int _maxNormalCustomersWeight;
+    private int _maxSpecialCustomersWeight;
+    private int _maxVIPCustomersWeight;
+
     private int _halfNormalCustomersWeight;
     private int _halfSpecialCustomersWeight;
 
+    private byte _currentSpawnedSpecialCustomer;
+    private byte _currentSpawnedVIPCustomer;
+
+    int _currentWeightLevel;
+    int _temp_Numbers;
 
     private void OnEnable()
     {
@@ -104,8 +113,10 @@ public class RestaurantManager : MonoBehaviour
                     break;
                 case CustomerGrade.SPECIAL:
                     _specialCustomers++;
+                    _maxSpecialCustomersWeight += _customerData[i].weight;
                     break;
                 case CustomerGrade.VIP:
+                    _maxVIPCustomersWeight += _customerData[i].weight;
                     break;
             }
         }
@@ -156,45 +167,130 @@ public class RestaurantManager : MonoBehaviour
         }
     }
 
-    // 받아온 정보를 기반으로 손님 생성
-    /*
-    private void SpawnCustomer(RestaurantSeat seat, CustomerController prefab)
-    {
-        // 이 방식은 object pool로 교체 필요.
-        CustomerController customer = Instantiate(prefab, _spawnPointRight.position, Quaternion.identity);
-        
-        // 자리에 앉음 상태로 전환
-        seat.SetOccupied(customer);
-        // 손님 설정 초기화
-        customer.SetInfo(this, seat, _exitPointLeft);
-    }
-    */
-
     private void SpawnCustomer(RestaurantSeat seat)
     {
         // 자리에 앉음 상태로 전환
+        _currentWeightLevel = DataTower.instance.WeightLevel;
+        _temp_Numbers = CustomerWeightSelecter(UnityEngine.Random.Range(0,
+            (_maxNormalCustomersWeight
+            + CanSpawnVIPCustomer()
+            + CanSpawnSpecialCustomer())));
+
         seat.SetOccupied();
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
-        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat, _exitPointLeft, _customerTips[0], _customerData[0], _canVisual); // 후에 수정
+        _randomPrefab.GetComponent<CustomerController>().SetInfo(seat,
+            _exitPointLeft,
+            _customerTips[(int)_customerData[_temp_Numbers].grade],
+            _customerData[_temp_Numbers],
+            _canVisual); // 후에 수정
     }
 
-    private void CustomerWeightSelecter()
+    private int CanSpawnSpecialCustomer()
     {
+        if (_currentSpawnedSpecialCustomer < DataTower.instance.MaxSpawnLimit01Level - 1)
+        {
+            return _maxSpecialCustomersWeight + (DataTower.instance.MaxSpawnLimit01Level - 1) * _diningUpgradeDataReader.Weight[_currentWeightLevel].Effect_Value_1;
+        }
+        else
+            return 0;
+    }
 
+    private int CanSpawnVIPCustomer()
+    {
+        if (_currentSpawnedVIPCustomer < DataTower.instance.MaxSpawnLimit02Level - 1)
+        {
+            return _maxVIPCustomersWeight;
+        }
+        else
+            return 0;
+    }
+
+    private int CustomerWeightSelecter(int weight)
+    {
+        // weight 업글시 스페셜 손님 가중치
+        _maxSpecialCustomersWeight = _maxSpecialCustomersWeight 
+            + (_diningUpgradeDataReader.Weight[_currentWeightLevel].Effect_Value_1
+            * _specialCustomers);
+
+        if (weight - _maxNormalCustomersWeight < 0)
+        {
+            // 노말 손님들만 존재(0보다 작으니)
+            Debug.Log("Normal Spawn");
+            if (weight - _halfNormalCustomersWeight < 0)
+            {
+                return CustomerWeightFinder(weight, 0);
+            }
+            else
+            {
+                weight -= _halfNormalCustomersWeight;
+                return CustomerWeightFinder(weight, (byte)(_normalCustomers / 2));
+            }
+        }
+        else
+        {
+            // 그 외 스페셜 및 vip
+            weight -= _maxNormalCustomersWeight;
+            if (weight - _maxSpecialCustomersWeight < 0 && DataTower.instance.MaxSpawnLimit01Level > 1)
+            {
+                // 스페셜만
+                Debug.Log("Special Spawn");
+                _currentSpawnedSpecialCustomer++;
+                if ( weight - _halfSpecialCustomersWeight < 0)
+                    return CustomerWeightFinder(weight, _normalCustomers);
+                else
+                {
+                    weight -= _halfSpecialCustomersWeight;
+                    return CustomerWeightFinder(weight, (byte)((_normalCustomers + _specialCustomers) / 2));
+                }
+            }
+            else
+            {
+                _currentSpawnedVIPCustomer++;
+                Debug.Log("VIP Spawn");
+                return CustomerWeightFinder(weight, (byte)(_normalCustomers + _specialCustomers) );
+            }
+        }
+    }
+
+    private int CustomerWeightFinder(int weight, byte startNumber)
+    { // 가중치를 빼면서 작업 하기
+        startNumber -= 1;
+        for (byte i = startNumber; i < _customerData.Length; i++)
+        {
+            if (weight - _customerData[i].weight <= 0)
+            {
+                return i;
+            }
+            else
+            {
+                weight -= _customerData[i].weight;
+            }
+        }
+        return -1;
     }
 
     /// <summary>
     /// CustomerController 기반 오브젝트를 object pool로 반환.
     /// </summary>
     /// <param name="obj"></param>
-    public void DeSpawnCustomer(GameObject obj)
+    public void DeSpawnCustomer(GameObject obj, CustomerGrade grade)
     {
         // 비용은 비싸지만 프레임마다 호출이 아니니 괜찮을 듯한 생각.
         if ( !(obj != null && obj.GetComponent<CustomerController>() is CustomerController))
         {
             Debug.Log("잘 못된 반환 형식");
             return;
+        }
+
+        switch(grade)
+        {
+            case CustomerGrade.SPECIAL:
+                _currentSpawnedSpecialCustomer--;
+                break;
+            case CustomerGrade.VIP:
+                _currentSpawnedVIPCustomer--;
+                break;
         }
             
         obj.SetActive(false);
@@ -203,7 +299,7 @@ public class RestaurantManager : MonoBehaviour
 
     private RestaurantSeat GetEmptySeat()
     {
-        for (int i = 0; i < _seats.Count; i++)
+        for (int i = 0; i < DataTower.instance.MaxCustomerLimitLevel; i++)
         {
             // 반복 문으로 모든 자리 탐색
             if (_seats[i].IsOccupied == false)
@@ -246,7 +342,16 @@ public class RestaurantManager : MonoBehaviour
     /// <param name="price"></param>
     /// <returns></returns>
     public void TryCounsumeSushiAndEarnMoney(float multi)
-    {
-        DataTower.instance.TryMoenyChanged((ulong)(_menuCtrl.RandomEating()*multi),false);
+    {// 기본 가격 = RandomEating // 현재 비용 높으니 후에 Action으로 전환 조치 필요.
+        DataTower.instance.TryMoenyChanged(
+            (ulong)(
+            (_menuCtrl.RandomEating()
+                * (1 
+                    + _diningUpgradeDataReader.Bonus_Dish_Price_1[DataTower.instance.BonusDishPrice01Level].Effect_Value_1 // 호출 횟수가 많지 않아서 임시 작업, 성능 문제 발생 시 수정 필요.
+                    + _diningUpgradeDataReader.Bonus_Dish_Price_2[DataTower.instance.BonusDishPrice02Level].Effect_Value_2))
+                * multi
+                * DataTower.instance.BonusTipsMultiLevel
+            ),
+            false);
     }
 }

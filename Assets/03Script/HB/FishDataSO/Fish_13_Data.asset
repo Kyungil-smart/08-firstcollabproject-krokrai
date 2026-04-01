@@ -23,10 +23,8 @@ MonoBehaviour:
   fishSprite: NullException
   silhouetteSprite: NullException
   price: 1000
-  korDescription: "\uAD6D\uBBFC \uC0DD\uC120 \uC911 \uD558\uB098\uB85C,\\n\uAC00\uC744
-    \uACE0\uB4F1\uC5B4\uB294 \uBA70\uB290\uB9AC\uB3C4 \uC548 \uC900\uB2E4\uACE0 \uD560
-    \uC815\uB3C4\uB85C \uAC00\uC744~\uACA8\uC6B8\uCCA0\uC5D4 \uB9DB\uC774 \uC88B\uC544\uC9C4\uB2E4."
-  engDescription: "As one of Korea\u2019s most beloved fish,\\nautumn mackerel is
-    so delicious during the fall and winter that it\u2019s said even a daughter-in-law
-    wouldn\u2019t part with it.\r"
+  korDescription: "\uAD6D\uBBFC \uC0DD\uC120 \uC911 \uD558\uB098.\\n\uAC00\uC744
+    \uACE0\uB4F1\uC5B4\uB294 \uBA70\uB290\uB9AC\uB3C4 \uC548 \uC900\uB2E4."
+  engDescription: "One of the nation\u2019s favourite fish.\\nThey say autumn mackerel
+    is so good, you wouldn\u2019t even give it to your daughter-in-law.\r"
   caughtDate: 
