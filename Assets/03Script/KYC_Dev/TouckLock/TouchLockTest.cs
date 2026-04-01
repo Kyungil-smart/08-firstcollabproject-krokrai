@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using TMPro;
 using Kirurobo;
+using UnityEngine.UI;
 
 public class TouchLockTest : MonoBehaviour
 {
@@ -13,7 +14,12 @@ public class TouchLockTest : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _through;
     [SerializeField] private TextMeshProUGUI _pos;
     [SerializeField] private TextMeshProUGUI _time;
+    [SerializeField] private TextMeshProUGUI _alpha;
+    [SerializeField] private TextMeshProUGUI _buttonAlpha;
+    [SerializeField] private TextMeshProUGUI _opacity;
     [SerializeField] private UniWindowController _uniWindowController;
+    [SerializeField] CanvasGroup _canvasGroup;
+    [SerializeField] private Image _image;
     
     Vector2 _pointerPos;
     private float _timer;
@@ -29,6 +35,9 @@ public class TouchLockTest : MonoBehaviour
         _pointerPos = Pointer.current.position.ReadValue();
         _hit.text = _uniWindowController.isHitTestEnabled.ToString();
         _through.text = _uniWindowController.isClickThrough.ToString();
+        _alpha.text = _canvasGroup.alpha.ToString();
+        _buttonAlpha.text = _image.color.ToString();
+        _opacity.text = _uniWindowController.opacityThreshold.ToString();
         _pos.text = $"({_pointerPos.x} ,{_pointerPos.y})";
         TimerUI();
     }
