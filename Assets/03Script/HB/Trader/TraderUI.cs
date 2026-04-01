@@ -13,6 +13,7 @@ public class TraderUI : MonoBehaviour
     [Header("필터 UI")]
     public GameObject filterPanel;                  // 필터 등급 창
     public TextMeshProUGUI filterButtonText;        // 필터 버튼의 텍스트
+    public CanvasGroup mainContentUI;               // mainContent 오브젝트
 
     [Header("물고기 선택")]
     public Toggle selectAllButton;                  // 전체 선택 버튼
@@ -40,6 +41,44 @@ public class TraderUI : MonoBehaviour
             _isUpdatingAll = false;
         }
 
+    }
+    private void OnEnable()
+    {
+        // 다시 켜질 때 실행
+        if (_isInitialized)
+        {
+            // 필터 모드 강제 종료 및 UI 초기화
+            isFilterMode = false;
+            if (filterPanel != null) filterPanel.SetActive(false);
+            if (filterButtonText != null) filterButtonText.text = "Filter";
+
+            // 배경 UI 조작 권한 복구 (CanvasGroup 초기화)
+            if (mainContentUI != null)
+            {
+                mainContentUI.interactable = true;
+                mainContentUI.blocksRaycasts = true; 
+            }
+
+            // 데이터 및 골드 갱신 로직
+            if (DataTower.instance != null)
+            {
+                DataTower.instance.OnChangedMoney -= UpdateGoldUI;
+                DataTower.instance.OnChangedMoney += UpdateGoldUI;
+                InitTrader();
+            }
+        }
+
+        // 필터 데이터 리셋, 실제 UI적용
+        if( filterManager != null)
+        {
+            filterManager.ResetFilter();
+
+            // 리셋된 필터 값을 가져와 리스트 매니저에게 적용
+            if (listManager != null)
+            {
+                listManager.ApplyFilter(filterManager.GetSelectedRates());
+            }   
+        }
     }
 
     private void Start()
@@ -70,16 +109,6 @@ public class TraderUI : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        // 다시 켜질 때 실행
-        if (_isInitialized && DataTower.instance != null)
-        {
-            DataTower.instance.OnChangedMoney -= UpdateGoldUI;
-            DataTower.instance.OnChangedMoney += UpdateGoldUI;
-            InitTrader();
-        }
-    }
 
     private void InitTrader()
     {
@@ -176,9 +205,24 @@ public class TraderUI : MonoBehaviour
         filterPanel.SetActive(isFilterMode);
         filterButtonText.text = isFilterMode ? "Confirm" : "Filter";
 
-        // 확인을 클릭해 창 닫기
+        // 필터창이 열리면 배경 UI조작 방지
+        if (mainContentUI != null)
+        {
+            // 필터모드 일 때 interactale을 false, 닫히면true
+            mainContentUI.interactable = !isFilterMode;
+        }
+
+        // 확인을 클릭해 창 닫기, 창 닫을 때 초기화
         if (!isFilterMode)
         {
+            // 모든 슬롯 선택 해제
+            var allSlots = listManager.GetAllSlots();
+            if(allSlots != null)
+            {
+                selectionManager.AllSelection(allSlots, false);
+            } 
+
+            // 필터 적용, UI갱신  
             listManager.ApplyFilter(filterManager.GetSelectedRates());
             OnSlotChanged();
         }
