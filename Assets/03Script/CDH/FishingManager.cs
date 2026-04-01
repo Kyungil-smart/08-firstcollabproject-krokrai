@@ -25,7 +25,6 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         _fisherImage = GetComponent<Image>();
-        _watingImage = _fisherImage.sprite;
         _currentCount = fishingCount;
         _timer = FindFirstObjectByType<FishingTimer>();
         _upgradeManager = FindFirstObjectByType<FishingUpgradeManager>();
