@@ -58,13 +58,13 @@ public class TouchLockTest : MonoBehaviour
         _testObject.SetActive(!_testObject.activeSelf);
     }
 
-    public void OnPointerEnter()
-    {
-        _testObject2.SetActive(true);
-    }
-
-    public void OnPointerExit()
-    {
-        _testObject2.SetActive(false);
-    }
+    // public void OnPointerEnter()
+    // {
+    //     _testObject2.SetActive(true);
+    // }
+    //
+    // public void OnPointerExit()
+    // {
+    //     _testObject2.SetActive(false);
+    // }
 }
