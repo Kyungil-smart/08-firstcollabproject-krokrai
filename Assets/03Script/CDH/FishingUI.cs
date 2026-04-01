@@ -11,7 +11,7 @@ public class FishingUI : MonoBehaviour
     {
         if (countText != null)
         {
-            countText.text = $"{current} / {total}";
+            countText.text = $"{current}/{total}";
         }
     }
 }
