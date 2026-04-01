@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,28 +12,19 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 {
     [Header("확률 데이터 리스트")]
     public List<FishRateData> fishRateList = new List<FishRateData>();
+    [Header("스크립트 연결")]
+    [SerializeField] private FishingTimer _timer;
+    [SerializeField] private FishingUpgradeManager _upgradeManager; // 업그레이드 매니저 불러옴
     public int fishingCount = 1; // 최대 낚시 가능한 횟수
     private int _currentCount; // 현재 낚시 가능한 횟수
-    public Sprite fishingImage; // 클릭 시 변경되는 스프라이트 이미지
-    private Sprite _watingImage; // 대기 상태일 때의 스프라이트 이미지
-    private Image _fisherImage;
     public FishingUI uiManager; // 낚시 횟수를 갱신할 FishingUI.cs 참조
-    private FishingUpgradeManager _upgradeManager; // 업그레이드 매니저 불러옴
-    private FishingTimer _timer; // 낚시 횟수 자동 충전 시간을 관리하는 타이머
     public List<FishData> fishDatabase = new List<FishData>(); // 게임에 존재하는 모든 물고기 데이터 리스트
     public FishRateData fishCurrentRate; // 구글 시트에서 받아온 등급별 확률 데이터
+    private Animator _animator;
 
     private void Start()
     {
-        _fisherImage = GetComponent<Image>();
-        _currentCount = fishingCount;
-        _timer = FindFirstObjectByType<FishingTimer>();
-        _upgradeManager = FindFirstObjectByType<FishingUpgradeManager>();
-
-        if (uiManager != null)
-        {
-            uiManager.UpdateCountText(_currentCount, fishingCount);
-        }
+        _animator = GetComponent<Animator>();
 
         if (_upgradeManager != null)
         {
@@ -46,6 +38,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
             FishRateLevel(DataTower.instance.fishingGrade);
             ShipUpgradeLevel(DataTower.instance.fishingGrade);
         }
+
+        _currentCount = fishingCount;
+
+        if (uiManager != null)
+        {
+            uiManager.UpdateCountText(_currentCount, fishingCount);
+        }
+            
+        StartCoroutine(IdleVariationRoutine());
     }
 
     /// <summary>
@@ -68,6 +69,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
             case 3: fishingCount = 3; break;
             case 4: fishingCount = 4; break;
             case 5: fishingCount = 5; break;
+        }
+
+        Debug.Log($"낚싯대 레벨: {fishingCount}");
+
+        _currentCount = fishingCount;
+        
+        if (uiManager != null)
+        {
+            uiManager.UpdateCountText(_currentCount, fishingCount); 
         }
     }
 
@@ -98,6 +108,8 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
                     newTimer = 1800f; break;
         }
 
+        Debug.Log($"현재 미끼 레벨: {newLevel}");
+        
         if (_timer != null)
         {
             _timer.UpdateMaxTime(newTimer);
@@ -119,27 +131,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
                 uiManager.UpdateCountText(_currentCount, fishingCount);
             }
 
-            StartCoroutine(FishingImageD());
+            if (_animator != null)
+            {
+                _animator.SetTrigger("Fishing");
+            }
+
+            GetRandomFish();
         }
     }
 
-    /// <summary>
-    /// 클릭 시 짧은 시간 동안 낚시 이미지를 보여준 후 다시 대기 이미지로 복구하고, 실제 물고기를 뽑기
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator FishingImageD()
-    {
-        if (fishingImage != null)
-        {
-            _fisherImage.sprite = fishingImage;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        _fisherImage.sprite = _watingImage;
-
-        GetRandomFish();
-    }
 
     /// <summary>
     ///  외부에서 신호를 받아 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
@@ -254,7 +254,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         if (index >= 0 && index < fishRateList.Count)
         {
             fishCurrentRate = fishRateList[index];
-            Debug.Log("확률 레벨 증가");
+            Debug.Log($"현재 플레이어 레벨: {level}");
         }
     }
 
@@ -265,6 +265,56 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
     public void ShipUpgradeLevel(int newLevel)
     {
-        Debug.Log("배가 업그레이드 되었습니다 인벤토리가 확장되었는지 확인하세요");
+        Debug.Log($"현재 배 레벨: {newLevel}");
+    }
+
+    IEnumerator IdleVariationRoutine()
+    {
+        while (true)
+        {
+            bool isFullNow = _timer.CheckingFull();
+            _animator.SetBool("IsFull", !isFullNow);
+
+            if (!isFullNow)
+            {
+                yield return new WaitForSeconds(0.1f);
+                continue;
+            }
+
+            float waitTime = UnityEngine.Random.Range(10f, 15f);
+            float timeFlow = 0f;
+
+            while (timeFlow < waitTime)
+            {
+                if (!_timer.CheckingFull())
+                    break;
+
+                timeFlow += 0.1f;
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            if (!_timer.CheckingFull()) continue;
+
+            float randomVar = UnityEngine.Random.Range(0f, 100f);
+            int targetIdx = 0;
+
+            if (randomVar <= 40f)
+            {
+                targetIdx = 1;
+            }
+
+            else if (randomVar <= 60f)
+            {
+                targetIdx = 2;
+            }
+
+            else targetIdx = 3;
+
+            _animator.SetInteger("IdleIdx", targetIdx);
+
+            yield return new WaitForSeconds(0.1f);
+            _animator.SetInteger("IdleIdx", 0);
+
+        }
     }
 }
