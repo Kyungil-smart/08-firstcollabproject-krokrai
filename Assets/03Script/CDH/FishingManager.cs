@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -45,7 +44,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         {
             uiManager.UpdateCountText(_currentCount, fishingCount);
         }
-            
+
         StartCoroutine(IdleVariationRoutine());
     }
 
@@ -74,10 +73,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         Debug.Log($"낚싯대 레벨: {fishingCount}");
 
         _currentCount = fishingCount;
-        
+
         if (uiManager != null)
         {
-            uiManager.UpdateCountText(_currentCount, fishingCount); 
+            uiManager.UpdateCountText(_currentCount, fishingCount);
         }
     }
 
@@ -109,7 +108,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
 
         Debug.Log($"현재 미끼 레벨: {newLevel}");
-        
+
         if (_timer != null)
         {
             _timer.UpdateMaxTime(newTimer);
@@ -183,8 +182,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         if (selectedFish != null)
         {
             Debug.Log($"{currentRarity}, {selectedFish.korName}");
+            if (DataTower.instance != null)
+            {
+                DataTower.instance.takeFish(selectedFish);
+            }
 
-            DataTower.instance.takeFish(selectedFish);
+            else
+            {
+                Debug.Log("DataTower 인스턴스를 찾을 수 없습니다.");
+            }
         }
     }
 
