@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 3
   tags:
   - Inven_Empty
-  - TouckLock
   layers:
   - Default
   - TransparentFX
@@ -13,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - UI.ToggleTouchLock
+  - Drag&Drop
   - 
   - 
   - 
@@ -43,11 +42,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 2003375653
+    locked: 0
   - name: Character
     uniqueID: 1520508583
     locked: 0
-  - name: BackGround
-    uniqueID: 2003375653
+  - name: 
+    uniqueID: 3455517141
     locked: 0
   m_RenderingLayers:
   - Default

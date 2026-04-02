@@ -919,15 +919,15 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1461802704}
   - {fileID: 2120971564}
+  - {fileID: 417612579}
   - {fileID: 439818020}
   - {fileID: 797436925}
   - {fileID: 6138130980621296692}
   - {fileID: 1338881155}
-  - {fileID: 1461802704}
   - {fileID: 1324790341}
   - {fileID: 239924417}
-  - {fileID: 417612579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1711,18 +1711,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 601946599}
     m_Modifications:
-    - target: {fileID: 1058913657335837126, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206277420403151318, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2346218117836689209, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2374686259026735050, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1803,21 +1791,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3806068472737617384, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3915467318706179877, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4070651821172608119, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
       propertyPath: m_Name
       value: SettingsUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8375840007309565515, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

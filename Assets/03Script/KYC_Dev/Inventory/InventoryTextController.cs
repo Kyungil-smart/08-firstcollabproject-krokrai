@@ -146,7 +146,7 @@ public class InventoryTextController : MonoBehaviour
     
     private void RenewalGoldText(ulong amount)
     {
-        _curGoldText.text = amount.ToString();
+        _curGoldText.text = amount.TextFormatCurrency();
     }
     
     private void SetCountText()

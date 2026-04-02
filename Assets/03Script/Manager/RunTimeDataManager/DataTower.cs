@@ -235,7 +235,7 @@ public class DataTower : MonoBehaviour
 
     public event Action OnDataTowerLoaded;
 
-    private InventorySystem _inventorySystem; // 참조 걸어줄 방식 지정 필요.
+    [SerializeField] private InventorySystem _inventorySystem; // 참조 걸어줄 방식 지정 필요.
     public Dictionary<string, FishData> fishDatas;  // 물고기 고유번호, 물고기 저장방식(SO) 기입 후 사용 예정. 목적 : 데이터 검사용 예시 : 해당 물고기가 도감에 등록 되어 있는지
 
     public Language languageSetting { get; private set; } /// <summary> 현재 설정된 언어, 기본 값 : 영어 </summary>
@@ -388,14 +388,13 @@ public class DataTower : MonoBehaviour
     public void takeFish(FishData fish)
     {
         _inventorySystem.Insert(fish.fishID); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
-        if (!fishDatas.ContainsKey(fish.fishID)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
+        if (!fishDatas[fish.fishID].isCaught) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
         {
-            fish.isCaught = true;
-            fishDatas.Add(fish.fishID, fish);
+            fishDatas[fish.fishID].isCaught = true;
 
             OnFisingNewFish?.Invoke(fish.fishID);
         }
-        else if (fishDatas[fish.fishID].isCaught == false)
+        else
         {
             fish.isCaught = true;
             fishDatas[fish.fishID].isCaught = true;

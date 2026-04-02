@@ -56,15 +56,16 @@ public class UpgradeSelectPresenter : MonoBehaviour
         switch (MainUpgradeType)
         {
             case EMainUpgradeType.Fishing:
+                SetFishingTranslationTextSetting();
                 SetViewPlayerGrade();
                 SetViewBaitLevel();
                 SetViewRodLevel();
                 SetViewShipLevel();
-                SetFishingTranslationTextSetting();
                 _fUpgrade.CheckCanUpgrades();
                 break;
             
             case EMainUpgradeType.Dining:
+                SetDiningTranslationTextSetting();
                 SetViewMasterLevel();
                 SetViewMaxCustomerLimitLevel();
                 SetViewMaxSpawnLimit01Level();
@@ -76,7 +77,6 @@ public class UpgradeSelectPresenter : MonoBehaviour
                 SetViewBonusFood01Level();
                 SetViewBonusFood02Level();
                 SetViewUnlockCatObjectLevel();
-                SetDiningTranslationTextSetting();
                 _dUpgrade.CheckCanUpgrades();
                 break;
         }
@@ -361,74 +361,143 @@ public class UpgradeSelectPresenter : MonoBehaviour
     private void SetViewPlayerGrade()
     {
         int level = DataTower.instance.fishingGrade;
+        int maxLevel = _fDataReader.Grades.Length;
         _fUpgrade.CheckEnoughGoldFishingGradeUpgrade(DataTower.instance.money);
         _fDataReader.GetFishingGradeReqGoldData(level, out int reqGold);
-        _views[0].RenewalLevelText(level,_fDataReader.Grades.Length);
+        _views[0].RenewalLevelText(level,maxLevel);
         _views[0].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[0].RenewalToolTipMaxTextForFishingGrade(level);
+        }
+        else
+        {
+            _views[0].RenewalTooltipTextForFishingGrade(level);
+        }
     }
     
     private void RenewalPlayerGrade(int level)
     {
+        int maxLevel = _fDataReader.Grades.Length;
         _fDataReader.GetFishingGradeReqGoldData(level, out int reqGold);
-        _views[0].RenewalLevelText(level,_fDataReader.Grades.Length);
+        _views[0].RenewalLevelText(level,maxLevel);
         _views[0].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[0].RenewalToolTipMaxTextForFishingGrade(level);
+        }
+        else
+        {
+            _views[0].RenewalTooltipTextForFishingGrade(level);
+        }
     }
 
     // 미끼 레벨
     private void SetViewBaitLevel()
     {
         int level = DataTower.instance.baitLevel;
-        
+        int maxLevel = _fDataReader.Baits.Length;
         _fUpgrade.CheckEnoughGoldBaitLevelUpgrade(DataTower.instance.money);
         _fUpgrade.CheckCanBaitLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.baitLevel);
         _fDataReader.GetBaitLevelReqGoldData(level, out int reqGold);
-        _views[1].RenewalLevelText(level,_fDataReader.Baits.Length);
+        _views[1].RenewalLevelText(level,maxLevel);
         _views[1].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[1].RenewalToolTipMaxText(level,_fDataReader.Baits[level-1].Apply_Value.ToString());
+        }
+        else
+        {
+            _views[1].RenewalTooltipText(level,_fDataReader.Baits[level-1].Apply_Value.ToString(),_fDataReader.Baits[level].Apply_Value.ToString());
+        }
     }
     
     private void RenewalBaitLevel(int level)
     {
+        int maxLevel = _fDataReader.Baits.Length;
         _fDataReader.GetBaitLevelReqGoldData(level, out int reqGold);
-        _views[1].RenewalLevelText(level,_fDataReader.Baits.Length);
+        _views[1].RenewalLevelText(level,maxLevel);
         _views[1].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[1].RenewalToolTipMaxText(level,_fDataReader.Baits[level-1].Apply_Value.ToString());
+        }
+        else
+        {
+            _views[1].RenewalTooltipText(level,_fDataReader.Baits[level-1].Apply_Value.ToString(),_fDataReader.Baits[level].Apply_Value.ToString());
+        }
     }
     
     // 낚시대 레벨
     private void SetViewRodLevel()
     {
         int level = DataTower.instance.rodLevel;
-        
+        int maxLevel = _fDataReader.Rods.Length;
         _fUpgrade.CheckEnoughGoldRodLevelUpgrade(DataTower.instance.money);
         _fUpgrade.CheckCanRodLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.rodLevel);
         _fDataReader.GetRodLevelReqGoldData(level, out int reqGold);
-        _views[2].RenewalLevelText(level,_fDataReader.Rods.Length);
+        _views[2].RenewalLevelText(level,maxLevel);
         _views[2].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[2].RenewalToolTipMaxText(level,_fDataReader.Rods[level-1].Apply_Value.ToString());
+        }
+        else
+        {
+            _views[2].RenewalTooltipText(level,_fDataReader.Rods[level-1].Apply_Value.ToString(),_fDataReader.Rods[level].Apply_Value.ToString());
+        }
     }
     
     private void RenewalRodLevel(int level)
     {
+        int maxLevel = _fDataReader.Rods.Length;
         _fDataReader.GetRodLevelReqGoldData(level, out int reqGold);
-        _views[2].RenewalLevelText(level,_fDataReader.Rods.Length);
+        _views[2].RenewalLevelText(level,maxLevel);
         _views[2].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[2].RenewalToolTipMaxText(level,_fDataReader.Rods[level-1].Apply_Value.ToString());
+        }
+        else
+        {
+            _views[2].RenewalTooltipText(level,_fDataReader.Rods[level-1].Apply_Value.ToString(),_fDataReader.Rods[level].Apply_Value.ToString());
+        }
     }
 
     // 배 레벨
     private void SetViewShipLevel()
     {
         int level = DataTower.instance.shipLevel;
-        
+        int maxLevel = _fDataReader.Ships.Length;
         _fUpgrade.CheckEnoughGoldShipLevelUpgrade(DataTower.instance.money);
         _fUpgrade.CheckCanShipLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.shipLevel);
         _fDataReader.GetShipLevelReqGoldData(level, out int reqGold);
-        _views[3].RenewalLevelText(level,_fDataReader.Ships.Length);
+        _views[3].RenewalLevelText(level,maxLevel);
         _views[3].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[3].RenewalToolTipMaxText(level,_fDataReader.Ships[level-1].Apply_Value.ToString());
+        }
+        else
+        {
+            _views[3].RenewalTooltipText(level,_fDataReader.Ships[level-1].Apply_Value.ToString(),_fDataReader.Ships[level].Apply_Value.ToString());
+        }
     }
     
     private void RenewalShipLevel(int level)
     {
+        int maxLevel = _fDataReader.Ships.Length;
         _fDataReader.GetShipLevelReqGoldData(level, out int reqGold);
-        _views[3].RenewalLevelText(level,_fDataReader.Ships.Length);
+        _views[3].RenewalLevelText(level,maxLevel);
         _views[3].RenewalReqGoldText(reqGold);
+        if (level == maxLevel)
+        {
+            _views[3].RenewalToolTipMaxText(level,_fDataReader.Ships[level-1].Apply_Value.ToString());
+        }
+        else
+        {
+            _views[3].RenewalTooltipText(level,_fDataReader.Ships[level-1].Apply_Value.ToString(),_fDataReader.Ships[level].Apply_Value.ToString());
+        }
     }
 
     // 텍스트 세팅
@@ -452,187 +521,385 @@ public class UpgradeSelectPresenter : MonoBehaviour
     private void SetViewMasterLevel()
     {
         int level = DataTower.instance.MasterLevel;
+        int maxLevel = _dDataReader.Master_Lv.Length;
         _dUpgrade.CheckEnoughGoldMasterLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMasterLevelCostData(level, out int cost);
-        _views[0].RenewalLevelText(level,_dDataReader.Master_Lv.Length);
+        _views[0].RenewalLevelText(level,maxLevel);
         _views[0].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[0].RenewalToolTipMaxText(level,_dDataReader.Master_Lv[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[0].RenewalTooltipText(level,_dDataReader.Master_Lv[level-1].Effect_Value_1.ToString(),_dDataReader.Master_Lv[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalMasterLevel(int level)
     {
+        int maxLevel = _dDataReader.Master_Lv.Length;
         _dDataReader.GetMasterLevelCostData(level, out int cost);
-        _views[0].RenewalLevelText(level,_dDataReader.Master_Lv.Length);
+        _views[0].RenewalLevelText(level,maxLevel);
         _views[0].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[0].RenewalToolTipMaxText(level,_dDataReader.Master_Lv[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[0].RenewalTooltipText(level,_dDataReader.Master_Lv[level-1].Effect_Value_1.ToString(),_dDataReader.Master_Lv[level].Effect_Value_1.ToString());
+        }
     }
     
     // 좌석 업그레이드 레벨
     private void SetViewMaxCustomerLimitLevel()
     {
         int level = DataTower.instance.MaxCustomerLimitLevel;
+        int maxLevel = _dDataReader.Max_Customer_Limit.Length;
         _dUpgrade.CheckEnoughGoldMaxCustomerLimitLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMaxCustomerLimitCostData(level, out int cost);
-        _views[1].RenewalLevelText(level,_dDataReader.Max_Customer_Limit.Length);
+        _views[1].RenewalLevelText(level,maxLevel);
         _views[1].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[1].RenewalToolTipMaxText(level,_dDataReader.Max_Customer_Limit[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[1].RenewalTooltipText(level,_dDataReader.Max_Customer_Limit[level-1].Effect_Value_1.ToString(),_dDataReader.Max_Customer_Limit[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalMaxCustomerLimitLevel(int level)
     {
+        int maxLevel = _dDataReader.Max_Customer_Limit.Length;
         _dDataReader.GetMaxCustomerLimitCostData(level, out int cost);
-        _views[1].RenewalLevelText(level,_dDataReader.Max_Customer_Limit.Length);
+        _views[1].RenewalLevelText(level,maxLevel);
         _views[1].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[1].RenewalToolTipMaxText(level,_dDataReader.Max_Customer_Limit[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[1].RenewalTooltipText(level,_dDataReader.Max_Customer_Limit[level-1].Effect_Value_1.ToString(),_dDataReader.Max_Customer_Limit[level].Effect_Value_1.ToString());
+        }
     }
     
     // 특별 손님 업그레이드 레벨
     private void SetViewMaxSpawnLimit01Level()
     {
         int level = DataTower.instance.MaxSpawnLimit01Level;
+        int maxLevel = _dDataReader.Max_Spawn_Limit_1.Length;
         _dUpgrade.CheckEnoughGoldMaxSpawnLimit01LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMaxSpawnLimit01CostData(level, out int cost);
-        _views[2].RenewalLevelText(level,_dDataReader.Max_Spawn_Limit_1.Length);
+        _views[2].RenewalLevelText(level,maxLevel);
         _views[2].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[2].RenewalToolTipMaxText(level,_dDataReader.Max_Spawn_Limit_1[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[2].RenewalTooltipText(level,_dDataReader.Max_Spawn_Limit_1[level-1].Effect_Value_1.ToString(),_dDataReader.Max_Spawn_Limit_1[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalMaxSpawnLimit01Level(int level)
     {
+        int maxLevel = _dDataReader.Max_Spawn_Limit_1.Length;
         _dDataReader.GetMaxSpawnLimit01CostData(level, out int cost);
-        _views[2].RenewalLevelText(level,_dDataReader.Max_Spawn_Limit_1.Length);
+        _views[2].RenewalLevelText(level,maxLevel);
         _views[2].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[2].RenewalToolTipMaxText(level,_dDataReader.Max_Spawn_Limit_1[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[2].RenewalTooltipText(level,_dDataReader.Max_Spawn_Limit_1[level-1].Effect_Value_1.ToString(),_dDataReader.Max_Spawn_Limit_1[level].Effect_Value_1.ToString());
+        }
     }
     
     // VIP 업그레이드 레벨
     private void SetViewMaxSpawnLimit02Level()
     {
         int level = DataTower.instance.MaxSpawnLimit02Level;
+        int maxLevel = _dDataReader.Max_Spawn_Limit_2.Length;
         _dUpgrade.CheckEnoughGoldMaxSpawnLimit02LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetMaxSpawnLimit02CostData(level, out int cost);
-        _views[3].RenewalLevelText(level,_dDataReader.Max_Spawn_Limit_2.Length);
+        _views[3].RenewalLevelText(level,maxLevel);
         _views[3].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[3].RenewalToolTipMaxText(level,_dDataReader.Max_Spawn_Limit_2[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[3].RenewalTooltipText(level,_dDataReader.Max_Spawn_Limit_2[level-1].Effect_Value_1.ToString(),_dDataReader.Max_Spawn_Limit_2[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalMaxSpawnLimit02Level(int level)
     {
+        int maxLevel = _dDataReader.Max_Spawn_Limit_2.Length;
         _dDataReader.GetMaxSpawnLimit02CostData(level, out int cost);
-        _views[3].RenewalLevelText(level,_dDataReader.Max_Spawn_Limit_2.Length);
+        _views[3].RenewalLevelText(level,maxLevel);
         _views[3].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[3].RenewalToolTipMaxText(level,_dDataReader.Max_Spawn_Limit_2[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[3].RenewalTooltipText(level,_dDataReader.Max_Spawn_Limit_2[level-1].Effect_Value_1.ToString(),_dDataReader.Max_Spawn_Limit_2[level].Effect_Value_1.ToString());
+        }
     }
     
     // 팁주는 손님 가중치 업그레이드 레벨
     private void SetViewWeightLevel()
     {
         int level = DataTower.instance.WeightLevel;
+        int maxLevel = _dDataReader.Weight.Length;
         _dUpgrade.CheckEnoughGoldWeightLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetWeightCostData(level, out int cost);
-        _views[4].RenewalLevelText(level,_dDataReader.Weight.Length);
+        _views[4].RenewalLevelText(level,maxLevel);
         _views[4].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[4].RenewalToolTipMaxText(level,_dDataReader.Weight[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[4].RenewalTooltipText(level,_dDataReader.Weight[level-1].Effect_Value_1.ToString(),_dDataReader.Weight[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalWeightLevel(int level)
     {
+        int maxLevel = _dDataReader.Weight.Length;
         _dDataReader.GetWeightCostData(level, out int cost);
-        _views[4].RenewalLevelText(level,_dDataReader.Weight.Length);
+        _views[4].RenewalLevelText(level,maxLevel);
         _views[4].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[4].RenewalToolTipMaxText(level,_dDataReader.Weight[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[4].RenewalTooltipText(level,_dDataReader.Weight[level-1].Effect_Value_1.ToString(),_dDataReader.Weight[level].Effect_Value_1.ToString());
+        }
     }
     
     // 모금함(팁 액수 증가) 업그레이드 레벨
     private void SetViewBonusTipsMultiLevel()
     {
         int level = DataTower.instance.BonusTipsMultiLevel;
+        int maxLevel = _dDataReader.Bonus_Tips_Multi.Length;
         _dUpgrade.CheckEnoughGoldBonusTipsMultiLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusTipsMultiCostData(level, out int cost);
-        _views[5].RenewalLevelText(level,_dDataReader.Bonus_Tips_Multi.Length);
+        _views[5].RenewalLevelText(level,maxLevel);
         _views[5].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[5].RenewalToolTipMaxText(level,_dDataReader.Bonus_Tips_Multi[level-1].Effect_Value_2.ToString());
+        }
+        else
+        {
+            _views[5].RenewalTooltipText(level,_dDataReader.Bonus_Tips_Multi[level-1].Effect_Value_2.ToString(),_dDataReader.Bonus_Tips_Multi[level].Effect_Value_2.ToString());
+        }
     }
     
     private void RenewalBonusTipsMultiLevel(int level)
     {
+        int maxLevel = _dDataReader.Bonus_Tips_Multi.Length;
         _dDataReader.GetBonusTipsMultiCostData(level, out int cost);
-        _views[5].RenewalLevelText(level,_dDataReader.Bonus_Tips_Multi.Length);
+        _views[5].RenewalLevelText(level,maxLevel);
         _views[5].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[5].RenewalToolTipMaxText(level,_dDataReader.Bonus_Tips_Multi[level-1].Effect_Value_2.ToString());
+        }
+        else
+        {
+            _views[5].RenewalTooltipText(level,_dDataReader.Bonus_Tips_Multi[level-1].Effect_Value_2.ToString(),_dDataReader.Bonus_Tips_Multi[level].Effect_Value_2.ToString());
+        }
     }
 
     // 계산대(요리 가격 증가) 업그레이드 레벨
     private void SetViewBonusDishPrice01Level()
     {
         int level = DataTower.instance.BonusDishPrice01Level;
+        int maxLevel = _dDataReader.Bonus_Dish_Price_1.Length;
         _dUpgrade.CheckEnoughGoldBonusDishPrice01LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusDishPrice01CostData(level, out int cost);
-        _views[6].RenewalLevelText(level,_dDataReader.Bonus_Dish_Price_1.Length);
+        _views[6].RenewalLevelText(level,maxLevel);
         _views[6].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[6].RenewalToolTipMaxText(level,_dDataReader.Bonus_Dish_Price_1[level-1].Effect_Value_2.ToString());
+        }
+        else
+        {
+            _views[6].RenewalTooltipText(level,_dDataReader.Bonus_Dish_Price_1[level-1].Effect_Value_2.ToString(),_dDataReader.Bonus_Dish_Price_1[level].Effect_Value_2.ToString());
+        }
     }
     
     private void RenewalBonusDishPrice01Level(int level)
     {
+        int maxLevel = _dDataReader.Bonus_Dish_Price_1.Length;
         _dDataReader.GetBonusDishPrice01CostData(level, out int cost);
-        _views[6].RenewalLevelText(level,_dDataReader.Bonus_Dish_Price_1.Length);
+        _views[6].RenewalLevelText(level,maxLevel);
         _views[6].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[6].RenewalToolTipMaxText(level,_dDataReader.Bonus_Dish_Price_1[level-1].Effect_Value_2.ToString());
+        }
+        else
+        {
+            _views[6].RenewalTooltipText(level,_dDataReader.Bonus_Dish_Price_1[level-1].Effect_Value_2.ToString(),_dDataReader.Bonus_Dish_Price_1[level].Effect_Value_2.ToString());
+        }
     }
     
     // 밥솥(요리 가격 증가) 업그레이드 레벨
     private void SetViewBonusDishPrice02Level()
     {
         int level = DataTower.instance.BonusDishPrice02Level;
+        int maxLevel = _dDataReader.Bonus_Dish_Price_2.Length;
         _dUpgrade.CheckEnoughGoldBonusDishPrice02LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusDishPrice02CostData(level, out int cost);
-        _views[7].RenewalLevelText(level,_dDataReader.Bonus_Dish_Price_2.Length);
+        _views[7].RenewalLevelText(level,maxLevel);
         _views[7].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[7].RenewalToolTipMaxText(level,_dDataReader.Bonus_Dish_Price_2[level-1].Effect_Value_2.ToString());
+        }
+        else
+        {
+            _views[7].RenewalTooltipText(level,_dDataReader.Bonus_Dish_Price_2[level-1].Effect_Value_2.ToString(),_dDataReader.Bonus_Dish_Price_2[level].Effect_Value_2.ToString());
+        }
     }
     
     private void RenewalBonusDishPrice02Level(int level)
     {
+        int maxLevel = _dDataReader.Bonus_Dish_Price_2.Length;
         _dDataReader.GetBonusDishPrice02CostData(level, out int cost);
-        _views[7].RenewalLevelText(level,_dDataReader.Bonus_Dish_Price_2.Length);
+        _views[7].RenewalLevelText(level,maxLevel);
         _views[7].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[7].RenewalToolTipMaxText(level,_dDataReader.Bonus_Dish_Price_2[level-1].Effect_Value_2.ToString());
+        }
+        else
+        {
+            _views[7].RenewalTooltipText(level,_dDataReader.Bonus_Dish_Price_2[level-1].Effect_Value_2.ToString(),_dDataReader.Bonus_Dish_Price_2[level].Effect_Value_2.ToString());
+        }
     }
     
     // 식칼(요리 개수 증가) 업그레이드 레벨
     private void SetViewBonusFood01Level()
     {
         int level = DataTower.instance.BonusFood01Level;
+        int maxLevel = _dDataReader.Bonus_Food_1.Length;
         _dUpgrade.CheckEnoughGoldBonusFood01LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusFood01CostData(level, out int cost);
-        _views[8].RenewalLevelText(level,_dDataReader.Bonus_Food_1.Length);
+        _views[8].RenewalLevelText(level,maxLevel);
         _views[8].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[8].RenewalToolTipMaxText(level,_dDataReader.Bonus_Food_1[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[8].RenewalTooltipText(level,_dDataReader.Bonus_Food_1[level-1].Effect_Value_1.ToString(),_dDataReader.Bonus_Food_1[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalBonusFood01Level(int level)
     {
+        int maxLevel = _dDataReader.Bonus_Food_1.Length;
         _dDataReader.GetBonusFood01CostData(level, out int cost);
-        _views[8].RenewalLevelText(level,_dDataReader.Bonus_Food_1.Length);
+        _views[8].RenewalLevelText(level,maxLevel);
         _views[8].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[8].RenewalToolTipMaxText(level,_dDataReader.Bonus_Food_1[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[8].RenewalTooltipText(level,_dDataReader.Bonus_Food_1[level-1].Effect_Value_1.ToString(),_dDataReader.Bonus_Food_1[level].Effect_Value_1.ToString());
+        }
     }
     
     // 도마(요리 개수 증가) 업그레이드 레벨
     private void SetViewBonusFood02Level()
     {
         int level = DataTower.instance.BonusFood02Level;
+        int maxLevel = _dDataReader.Bonus_Food_2.Length;
         _dUpgrade.CheckEnoughGoldBonusFood02LevelUpgrade(DataTower.instance.money);
         _dDataReader.GetBonusFood02CostData(level, out int cost);
-        _views[9].RenewalLevelText(level,_dDataReader.Bonus_Food_2.Length);
+        _views[9].RenewalLevelText(level,maxLevel);
         _views[9].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[9].RenewalToolTipMaxText(level,_dDataReader.Bonus_Food_2[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[9].RenewalTooltipText(level,_dDataReader.Bonus_Food_2[level-1].Effect_Value_1.ToString(),_dDataReader.Bonus_Food_2[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalBonusFood02Level(int level)
     {
+        int maxLevel = _dDataReader.Bonus_Food_2.Length;
         _dDataReader.GetBonusFood02CostData(level, out int cost);
-        _views[9].RenewalLevelText(level,_dDataReader.Bonus_Food_2.Length);
+        _views[9].RenewalLevelText(level,maxLevel);
         _views[9].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[9].RenewalToolTipMaxText(level,_dDataReader.Bonus_Food_2[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[9].RenewalTooltipText(level,_dDataReader.Bonus_Food_2[level-1].Effect_Value_1.ToString(),_dDataReader.Bonus_Food_2[level].Effect_Value_1.ToString());
+        }
     }
     
     // 고양이 업그레이드 레벨
     private void SetViewUnlockCatObjectLevel()
     {
         int level = DataTower.instance.UnlockCatObjectLevel;
+        int maxLevel = _dDataReader.Unlock_Cat_Object.Length;
         _dUpgrade.CheckEnoughGoldUnlockCatObjectLevelUpgrade(DataTower.instance.money);
         _dDataReader.GetUnlockCatObjectCostData(level, out int cost);
-        _views[10].RenewalLevelText(level,_dDataReader.Unlock_Cat_Object.Length);
+        _views[10].RenewalLevelText(level,maxLevel);
         _views[10].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[10].RenewalToolTipMaxText(level,_dDataReader.Unlock_Cat_Object[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[10].RenewalTooltipText(level,_dDataReader.Unlock_Cat_Object[level-1].Effect_Value_1.ToString(),_dDataReader.Unlock_Cat_Object[level].Effect_Value_1.ToString());
+        }
     }
     
     private void RenewalUnlockCatObjectLevel(int level)
     {
+        int maxLevel = _dDataReader.Unlock_Cat_Object.Length;
         _dDataReader.GetUnlockCatObjectCostData(level, out int cost);
-        _views[10].RenewalLevelText(level,_dDataReader.Unlock_Cat_Object.Length);
+        _views[10].RenewalLevelText(level,maxLevel);
         _views[10].RenewalReqGoldText(cost);
+        if (level == maxLevel)
+        {
+            _views[10].RenewalToolTipMaxText(level,_dDataReader.Unlock_Cat_Object[level-1].Effect_Value_1.ToString());
+        }
+        else
+        {
+            _views[10].RenewalTooltipText(level,_dDataReader.Unlock_Cat_Object[level-1].Effect_Value_1.ToString(),_dDataReader.Unlock_Cat_Object[level].Effect_Value_1.ToString());
+        }
     }
     
     // 텍스트 세팅
