@@ -2,28 +2,30 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    public void OnClickErase()
+    [SerializeField] InventorySystem _system;
+    
+    public void OnClickAddFish1()
     {
-        
+        _system.Insert("Fish_1");
     }
     
-    public void OnClickEraseAll()
+    public void OnClickAddFish2()
     {
-        
+        _system.Insert("Fish_2");
     }
     
-    public void OnClickInsert01()
+    public void OnClickDeleteFish1()
     {
-        
+        _system.Erase("Fish_1");
     }
     
-    public void OnClickInsert02()
+    public void OnClickDeleteFish2()
     {
-        
+        _system.Erase("Fish_2");
     }
     
-    public void OnClickInsert03()
+    public void OnClickExtend()
     {
-        
+        _system.InventoryExtend(10);
     }
 }
