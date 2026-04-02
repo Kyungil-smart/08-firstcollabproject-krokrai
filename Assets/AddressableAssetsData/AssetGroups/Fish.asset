@@ -10,55 +10,64 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Fish
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Default Local Group
+  m_GroupName: Fish
   m_GUID: b286d628235b3b540ac5744cbc40f9cb
   m_SerializeEntries:
   - m_GUID: 0b59b36b49831c04bb8fa9df76690ecb
     m_Address: Fish_1
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0d2578e5bdf6c33448bf5ed59f13c924
     m_Address: Fish_5
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1d41f469f14139147a7dfd3c27cb6eea
     m_Address: Fish_4
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1fab37bb9b994884eb247e3eb9d062b4
     m_Address: Fish_18
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2e2978c7b35e39f49865b474c720578f
     m_Address: Fish_11
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4bb277ca6de1f4b4cb06f93c225ce6b5
     m_Address: Fish_14
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4c060e266db7d8641aa6b1ac30c56c4a
     m_Address: Fish_10
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 50768a3155c0006408ec4aacedd2b462
     m_Address: Fish_16
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6e464ac09e296204387dbbfe28c76b8c
     m_Address: Fish_17
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8507069c9434d214396a29edf2dd36e7
     m_Address: Fish_19
@@ -75,15 +84,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a657a0d48935d5740935648d017c31c0
-    m_Address: TestFish
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ae9dcf92884fee64db1d8fc5c067ed12
     m_Address: Fish_2
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b37683919d779bd4eb5aa3b6d570478c
     m_Address: Fish_9
@@ -103,7 +108,8 @@ MonoBehaviour:
   - m_GUID: da3dfb01b2ca8bc4da4c753181a7ef39
     m_Address: Fish_3
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - LabelTest
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd468fc21e7b0234b9d94022f1561364
     m_Address: Fish_15

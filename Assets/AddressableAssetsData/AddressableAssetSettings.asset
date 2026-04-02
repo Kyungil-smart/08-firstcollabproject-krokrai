@@ -101,6 +101,8 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - LabelTest
+    - hgchgvgj
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 20bbd789cbf8bcb4388079ecb6b37036, type: 2}

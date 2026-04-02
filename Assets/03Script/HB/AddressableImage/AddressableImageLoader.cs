@@ -2,14 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Collections.Generic;
 
-// 이미지 없는 곳에 붙이는 것 방지
-[RequireComponent(typeof(Image))]
+
 public class AddressableImageLoader : MonoBehaviour
 {
-    [Header("이미지 컴포넌트")]
+    [Header("단일 이미지 로드 시")]
     [SerializeField] private Image _targetImage;
-    private AsyncOperationHandle<Sprite> _handle;
+
+    [Header("그룹으로 로드 할 때")]
+    [SerializeField] private List<Image> _targetSlots = new List<Image>();
+    private AsyncOperationHandle<Sprite> _handle;                   // 단일 이미지 로드
+    private AsyncOperationHandle<IList<Sprite>> _groupHandle;       // 그룹 이미지 로드
 
     private void Awake()
     {
@@ -49,6 +53,34 @@ public class AddressableImageLoader : MonoBehaviour
         };
     }
 
+    public void LoadByLabel(string labelName)
+    {
+        ReleaseGroup();
+
+        // 전체 로드 되도록
+        _groupHandle = Addressables.LoadAssetsAsync<Sprite>(labelName, null);
+
+        _groupHandle.Completed += (op) =>
+        {
+            if (this == null || op.Status != AsyncOperationStatus.Succeeded) return;
+
+            // 로드된 걸 리스트로 복사
+            List<Sprite> sortedList = new List<Sprite>(op.Result);
+
+            // 이름순으로 정렬
+            sortedList.Sort((a, b) => string.Compare(a.name, b.name));
+
+            // 정렬된 리스트를 슬롯에 순서대로 배치
+            for (int i = 0; i < sortedList.Count; i++)
+            {
+                if (i >= _targetSlots.Count) break;
+            
+                _targetSlots[i].sprite = sortedList[i];
+                _targetSlots[i].preserveAspect = true;
+            }
+        };
+    }
+
     public void ResetImage()
     {
         ReleaseImage();
@@ -66,8 +98,22 @@ public class AddressableImageLoader : MonoBehaviour
         }
     }
 
+    public void ReleaseGroup()
+    {
+        if (_groupHandle.IsValid())
+        {
+            Addressables.Release(_groupHandle);
+        }
+
+        foreach (var slot in _targetSlots)
+        {
+            if (slot != null) slot.sprite = null;
+        }
+    }
+
     private void OnDestroy()
     {
-        ReleaseImage();        
+        ReleaseImage();
+        ReleaseGroup();    
     }
 }
