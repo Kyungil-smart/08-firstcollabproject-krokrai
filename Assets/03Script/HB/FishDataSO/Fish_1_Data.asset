@@ -21,8 +21,8 @@ MonoBehaviour:
   length: 1
   weight: 1
   fishSprite: Fish_1
-  silhouetteSprite: NullException
-  price: 1
+  silhouetteSprite: 1
+  price: 2
   korDescription: "\uD3D0\uAE30\uBB3C \uC911 \uD558\uB098.\\n\uD568\uBD80\uB85C \uBC84\uB9AC\uACE0
     \uAC00\uC9C0 \uB9D0\uC790."
   engDescription: "One type of waste.\\nLet\u2019s not throw it away carelessly.\r"

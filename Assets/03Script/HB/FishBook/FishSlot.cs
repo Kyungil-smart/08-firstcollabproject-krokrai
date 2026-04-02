@@ -31,7 +31,7 @@ public class FishSlot : MonoBehaviour
         slotToggle?.gameObject.SetActive(true);
 
         // 이미지 로드
-        imageLoader?.LoadImage(data?.fishSprite);
+        imageLoader?.SetImage(data?.fishSprite);
 
         // priceText가 연결돼 있을 때 실행(상점 전용)
         if (priceText != null)
@@ -68,7 +68,7 @@ public class FishSlot : MonoBehaviour
 
         string spriteLoad = data.isCaught ? data.fishSprite : data.silhouetteSprite;
 
-        imageLoader?.LoadImage(spriteLoad);
+        imageLoader?.SetImage(data.fishSprite, data.isCaught);
     }
 
     public void OnSlotClick()

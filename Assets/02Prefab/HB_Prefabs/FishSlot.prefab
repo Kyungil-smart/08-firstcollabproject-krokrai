@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 5, y: 5, z: 5, w: 5}
   m_Maskable: 1
@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8276c49e8cbcf104ca513921ecb45c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AddressableImageLoader
-  _targetImage: {fileID: 7488778211833736153}
 --- !u!114 &538721894803235824
 MonoBehaviour:
   m_ObjectHideFlags: 0

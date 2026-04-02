@@ -40,7 +40,7 @@ public class FishListManager : MonoBehaviour
         // 상세창을 닫으면 메모리에서 이미지를 해제
         if (imageLoader != null)
         {
-            imageLoader.ReleaseImage();
+            imageLoader.SetImage(null);
         }
     }
 
@@ -66,7 +66,7 @@ public class FishListManager : MonoBehaviour
             // 시트에서 이미지 파일 주소(string)을 확인
             string address = isCaught ? currentFish.fishSprite :currentFish.silhouetteSprite; 
 
-            imageLoader.LoadImage(address);                   
+            imageLoader.SetImage(address);                   
         }
     }
 
