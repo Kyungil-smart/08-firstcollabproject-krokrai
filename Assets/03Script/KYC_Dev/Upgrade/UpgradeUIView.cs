@@ -109,7 +109,7 @@ public class UpgradeUIView : MonoBehaviour
     
     private void RenewalGoldText(ulong amount)
     {
-        _currentGoldText.text = amount.ToString();
+        _currentGoldText.text = amount.TextFormatCurrency();
     }
 
     /// <summary>

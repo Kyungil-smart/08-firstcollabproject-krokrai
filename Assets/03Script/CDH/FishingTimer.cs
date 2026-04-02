@@ -27,23 +27,20 @@ public class FishingTimer : MonoBehaviour
     {
         maxFishingTime = newTime;
 
-        if (!CheckingFull())
-        {
             fishingTime = maxFishingTime;
             TimerUI(fishingTime);
-        }
     }
 
     IEnumerator StartCountdown()
     {
         while (true)
         {
-            if (!CheckingFull())
+            if (CheckingFull())
             {
                 fishingTime = maxFishingTime;
                 TimerUI(fishingTime);
 
-                yield return new WaitUntil(CheckingFull);
+                yield return new WaitUntil(() => !CheckingFull());
             }
 
             yield return new WaitForSecondsRealtime(1f);
@@ -76,6 +73,6 @@ public class FishingTimer : MonoBehaviour
 
     public bool CheckingFull()
     {
-        return _manager.GetCurrentCount() < _manager.fishingCount;
+        return _manager.GetCurrentCount() >= _manager.fishingCount;
     }
 }

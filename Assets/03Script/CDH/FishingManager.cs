@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour, IPointerClickHandler
@@ -45,8 +45,19 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         {
             uiManager.UpdateCountText(_currentCount, fishingCount);
         }
-            
+
         StartCoroutine(IdleVariationRoutine());
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current == null) return;
+
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) RodgradeMaxCount(1);
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) RodgradeMaxCount(2);
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) RodgradeMaxCount(3);
+        if (Keyboard.current.digit4Key.wasPressedThisFrame) RodgradeMaxCount(4);
+        if (Keyboard.current.digit5Key.wasPressedThisFrame) RodgradeMaxCount(5);
     }
 
     /// <summary>
@@ -73,11 +84,9 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
 
         Debug.Log($"낚싯대 레벨: {fishingCount}");
 
-        _currentCount = fishingCount;
-        
         if (uiManager != null)
         {
-            uiManager.UpdateCountText(_currentCount, fishingCount); 
+            uiManager.UpdateCountText(_currentCount, fishingCount);
         }
     }
 
@@ -109,7 +118,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
         }
 
         Debug.Log($"현재 미끼 레벨: {newLevel}");
-        
+
         if (_timer != null)
         {
             _timer.UpdateMaxTime(newTimer);
@@ -122,199 +131,219 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
+        AnimatorStateInfo aniState = _animator.GetCurrentAnimatorStateInfo(0);
+
         if (_currentCount > 0)
         {
-            _currentCount--;
-
-            if (uiManager != null)
+            if (aniState.IsName("fishing") || aniState.IsName("result"))
             {
-                uiManager.UpdateCountText(_currentCount, fishingCount);
+                _animator.ResetTrigger("Fishing");
+                _animator.SetTrigger("resultCatch");
             }
 
-            if (_animator != null)
+            else
             {
+                _animator.ResetTrigger("resultCatch");
                 _animator.SetTrigger("Fishing");
             }
 
+            _currentCount--;
+            UpdateUI();
             GetRandomFish();
         }
-    }
+        else { Debug.Log("낚시횟수가 부족합니다"); }
+}
 
-
-    /// <summary>
-    ///  외부에서 신호를 받아 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
-    /// </summary>
-    public void FishingChance()
+private void UpdateUI()
+{
+    if (uiManager != null)
     {
-        if (_currentCount < fishingCount)
-        {
-            _currentCount++;
+        uiManager.UpdateCountText(_currentCount, fishingCount);
+    }
+}
 
-            if (uiManager != null)
-            {
-                uiManager.UpdateCountText(_currentCount, fishingCount);
-            }
+
+/// <summary>
+///  외부에서 신호를 받아 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
+/// </summary>
+public void FishingChance()
+{
+    if (_currentCount < fishingCount)
+    {
+        _currentCount++;
+
+        if (uiManager != null)
+        {
+            uiManager.UpdateCountText(_currentCount, fishingCount);
         }
     }
+}
 
-    /// <summary>
-    /// 외부에서 현재 남은 낚시 횟수를 참조할 수 있게 반환
-    /// </summary>
-    /// <returns></returns>
-    public int GetCurrentCount()
+/// <summary>
+/// 외부에서 현재 남은 낚시 횟수를 참조할 수 있게 반환
+/// </summary>
+/// <returns></returns>
+public int GetCurrentCount()
+{
+    return _currentCount;
+}
+
+/// <summary>
+/// fishDatabase의 Count 범위 내에서 무작위 FishData 반환
+/// </summary>
+public void GetRandomFish()
+{
+    if (fishDatabase.Count == 0)
     {
-        return _currentCount;
+        Debug.Log("등록된 물고기가 없습니다.");
+        return;
     }
 
-    /// <summary>
-    /// fishDatabase의 Count 범위 내에서 무작위 FishData 반환
-    /// </summary>
-    public void GetRandomFish()
+    string currentRarity = GetFishRarity();
+    FishData selectedFish = GetRandomRarityFish(currentRarity);
+
+    if (selectedFish != null)
     {
-        if (fishDatabase.Count == 0)
+        Debug.Log($"{currentRarity}, {selectedFish.korName}");
+        if (DataTower.instance != null)
         {
-            Debug.Log("등록된 물고기가 없습니다.");
-            return;
-        }
-
-        string currentRarity = GetFishRarity();
-        FishData selectedFish = GetRandomRarityFish(currentRarity);
-
-        if (selectedFish != null)
-        {
-            Debug.Log($"{currentRarity}, {selectedFish.korName}");
-
             DataTower.instance.takeFish(selectedFish);
         }
+
+        else
+        {
+            Debug.Log("DataTower 인스턴스를 찾을 수 없습니다.");
+        }
+    }
+}
+
+/// <summary>
+/// 확률을 바탕으로 주사위를 굴려 당첨된 등급 문자열을 반환
+/// </summary>
+/// <returns></returns>
+private string GetFishRarity()
+{
+    float rarityRate = UnityEngine.Random.Range(0f, 100f);
+    float baseValue = 0;
+
+    if (fishCurrentRate == null)
+    {
+        Debug.Log("데이터가 연결되지 않습니다.");
+        return "Normal";
     }
 
-    /// <summary>
-    /// 확률을 바탕으로 주사위를 굴려 당첨된 등급 문자열을 반환
-    /// </summary>
-    /// <returns></returns>
-    private string GetFishRarity()
+    if (rarityRate <= (baseValue += fishCurrentRate.trash))
+    { return "Trash"; }
+    if (rarityRate <= (baseValue += fishCurrentRate.normal))
+    { return "Normal"; }
+    if (rarityRate <= (baseValue += fishCurrentRate.fine))
+    { return "Fine"; }
+    if (rarityRate <= (baseValue += fishCurrentRate.superior))
+    { return "Superior"; }
+    if (rarityRate <= (baseValue += fishCurrentRate.rare))
+    { return "Rare"; }
+    if (rarityRate <= (baseValue += fishCurrentRate.elite))
+    { return "Elite"; }
+    if (rarityRate <= (baseValue += fishCurrentRate.fantastic))
+    { return "Fantastic"; }
+    return "Legendary";
+}
+
+/// <summary>
+/// 특정 등급을 매개변수로 받아, 해당 등급에 속하는 물고기들 중 한 마리를 무작위로 선택하여 반환
+/// </summary>
+/// <param name="rarity"></param>
+/// <returns></returns>
+public FishData GetRandomRarityFish(string rarity)
+{
+    List<FishData> filteredFish = new List<FishData>();
+
+    foreach (FishData randomFish in fishDatabase)
     {
-        float rarityRate = UnityEngine.Random.Range(0f, 100f);
-        float baseValue = 0;
-
-        if (fishCurrentRate == null)
+        if (randomFish.fishRarity.ToString() == rarity)
         {
-            Debug.Log("데이터가 연결되지 않습니다.");
-            return "Normal";
-        }
-
-        if (rarityRate <= (baseValue += fishCurrentRate.trash))
-        { return "Trash"; }
-        if (rarityRate <= (baseValue += fishCurrentRate.normal))
-        { return "Normal"; }
-        if (rarityRate <= (baseValue += fishCurrentRate.fine))
-        { return "Fine"; }
-        if (rarityRate <= (baseValue += fishCurrentRate.superior))
-        { return "Superior"; }
-        if (rarityRate <= (baseValue += fishCurrentRate.rare))
-        { return "Rare"; }
-        if (rarityRate <= (baseValue += fishCurrentRate.elite))
-        { return "Elite"; }
-        if (rarityRate <= (baseValue += fishCurrentRate.fantastic))
-        { return "Fantastic"; }
-        return "Legendary";
-    }
-
-    /// <summary>
-    /// 특정 등급을 매개변수로 받아, 해당 등급에 속하는 물고기들 중 한 마리를 무작위로 선택하여 반환
-    /// </summary>
-    /// <param name="rarity"></param>
-    /// <returns></returns>
-    public FishData GetRandomRarityFish(string rarity)
-    {
-        List<FishData> filteredFish = new List<FishData>();
-
-        foreach (FishData randomFish in fishDatabase)
-        {
-            if (randomFish.fishRarity.ToString() == rarity)
-            {
-                filteredFish.Add(randomFish);
-            }
-        }
-
-        if (filteredFish.Count == 0)
-        {
-            Debug.Log($"물고기가 없습니다");
-            return null;
-        }
-
-        int randomIndex = UnityEngine.Random.Range(0, filteredFish.Count);
-        return filteredFish[randomIndex];
-    }
-
-    public void FishRateLevel(int level)
-    {
-        int index = level - 1;
-
-        if (index >= 0 && index < fishRateList.Count)
-        {
-            fishCurrentRate = fishRateList[index];
-            Debug.Log($"현재 플레이어 레벨: {level}");
+            filteredFish.Add(randomFish);
         }
     }
 
-    public void UpgradeShipLevel()
+    if (filteredFish.Count == 0)
     {
-        _upgradeManager.ShipUpgrade();
+        Debug.Log($"물고기가 없습니다");
+        return null;
     }
 
-    public void ShipUpgradeLevel(int newLevel)
-    {
-        Debug.Log($"현재 배 레벨: {newLevel}");
-    }
+    int randomIndex = UnityEngine.Random.Range(0, filteredFish.Count);
+    return filteredFish[randomIndex];
+}
 
-    IEnumerator IdleVariationRoutine()
+public void FishRateLevel(int level)
+{
+    int index = level - 1;
+
+    if (index >= 0 && index < fishRateList.Count)
     {
-        while (true)
+        fishCurrentRate = fishRateList[index];
+        Debug.Log($"현재 플레이어 레벨: {level}");
+    }
+}
+
+public void UpgradeShipLevel()
+{
+    _upgradeManager.ShipUpgrade();
+}
+
+public void ShipUpgradeLevel(int newLevel)
+{
+    Debug.Log($"현재 배 레벨: {newLevel}");
+}
+
+IEnumerator IdleVariationRoutine()
+{
+    while (true)
+    {
+        bool isFullNow = _timer.CheckingFull();
+        _animator.SetBool("IsFull", isFullNow);
+
+        if (!isFullNow)
         {
-            bool isFullNow = _timer.CheckingFull();
-            _animator.SetBool("IsFull", !isFullNow);
-
-            if (!isFullNow)
-            {
-                yield return new WaitForSeconds(0.1f);
-                continue;
-            }
-
-            float waitTime = UnityEngine.Random.Range(10f, 15f);
-            float timeFlow = 0f;
-
-            while (timeFlow < waitTime)
-            {
-                if (!_timer.CheckingFull())
-                    break;
-
-                timeFlow += 0.1f;
-                yield return new WaitForSeconds(0.1f);
-            }
-
-            if (!_timer.CheckingFull()) continue;
-
-            float randomVar = UnityEngine.Random.Range(0f, 100f);
-            int targetIdx = 0;
-
-            if (randomVar <= 40f)
-            {
-                targetIdx = 1;
-            }
-
-            else if (randomVar <= 60f)
-            {
-                targetIdx = 2;
-            }
-
-            else targetIdx = 3;
-
-            _animator.SetInteger("IdleIdx", targetIdx);
-
             yield return new WaitForSeconds(0.1f);
-            _animator.SetInteger("IdleIdx", 0);
-
+            continue;
         }
+
+        float waitTime = UnityEngine.Random.Range(10f, 15f);
+        float timeFlow = 0f;
+
+        while (timeFlow < waitTime)
+        {
+            if (!_timer.CheckingFull())
+                break;
+
+            timeFlow += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        if (!_timer.CheckingFull()) continue;
+
+        float randomVar = UnityEngine.Random.Range(0f, 100f);
+        int targetIdx = 0;
+
+        if (randomVar <= 40f)
+        {
+            targetIdx = 1;
+        }
+
+        else if (randomVar <= 60f)
+        {
+            targetIdx = 2;
+        }
+
+        else targetIdx = 3;
+
+        _animator.SetInteger("IdleIdx", targetIdx);
+
+        yield return new WaitForSeconds(0.1f);
+        _animator.SetInteger("IdleIdx", 0);
+
     }
+}
 }

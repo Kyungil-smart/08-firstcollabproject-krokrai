@@ -79,7 +79,7 @@ public class UpgradeSelectView : MonoBehaviour
     /// <param name="requiredGold"></param>
     public void RenewalReqGoldText(int requiredGold)
     {
-        _upgradeReqGoldText.text = requiredGold.ToString();
+        _upgradeReqGoldText.text = requiredGold.TextFormatComma();
     }
 
     /// <summary>
