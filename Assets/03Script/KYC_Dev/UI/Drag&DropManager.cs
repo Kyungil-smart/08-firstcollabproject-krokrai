@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 
 public class DragNDropManager : MonoBehaviour
 {
-    [SerializeField] LayerMask _dragNDropLayer;
-    
     private InputSystem_Actions _actions;
     private Vector2 _startPos;
     private DragNDropTarget _target;
+    
+    
 
     private void Awake()
     {
@@ -21,14 +21,14 @@ public class DragNDropManager : MonoBehaviour
     {
         _actions.Enable();
 
-        _actions.UI.Click.performed += OnPointerDown;
-        _actions.UI.Click.canceled += OnPointerUp;
+        _actions.DragNDrop.Drag.performed += OnPointerDown;
+        _actions.DragNDrop.Drag.canceled += OnPointerUp;
     }
 
     private void OnDisable()
     {
-        _actions.UI.Click.performed -= OnPointerDown;
-        _actions.UI.Click.canceled -= OnPointerUp;
+        _actions.DragNDrop.Drag.performed -= OnPointerDown;
+        _actions.DragNDrop.Drag.canceled -= OnPointerUp;
         
         _actions.Disable();
     }
@@ -37,13 +37,13 @@ public class DragNDropManager : MonoBehaviour
     {
         Debug.Log("OnPointerDown");
         _startPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
-        Ray2D ray2D = new Ray2D(_startPos, Vector2.zero);
-        RaycastHit2D hit2D = Physics2D.Raycast(ray2D.origin, ray2D.direction, _dragNDropLayer);
+        RaycastHit2D[] hit2Ds = Physics2D.RaycastAll(_startPos, Vector2.zero);
 
-        if (hit2D.collider != null)
+        foreach (RaycastHit2D hit2D in hit2Ds)
         {
-            _target = hit2D.collider.GetComponent<DragNDropTarget>();
-            _target.isMove = true;
+            hit2D.collider.gameObject.TryGetComponent(out _target);
+            if(_target != null)_target.isMove = true;
+            Debug.Log("OnMove");
         }
     }
 
@@ -53,5 +53,10 @@ public class DragNDropManager : MonoBehaviour
         if(_target == null) return;
         _target.isMove = false;
         _target = null;
+    }
+    
+    public void OnClickTest()
+    {
+        Debug.Log("OnClickTest");
     }
 }
