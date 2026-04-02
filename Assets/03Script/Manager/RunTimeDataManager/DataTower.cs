@@ -388,14 +388,13 @@ public class DataTower : MonoBehaviour
     public void takeFish(FishData fish)
     {
         _inventorySystem.Insert(fish.fishID); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
-        if (!fishDatas.ContainsKey(fish.fishID)) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
+        if (!fishDatas[fish.fishID].isCaught) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
         {
-            fish.isCaught = true;
-            fishDatas.Add(fish.fishID, fish);
+            fishDatas[fish.fishID].isCaught = true;
 
             OnFisingNewFish?.Invoke(fish.fishID);
         }
-        else if (fishDatas[fish.fishID].isCaught == false)
+        else
         {
             fish.isCaught = true;
             fishDatas[fish.fishID].isCaught = true;
