@@ -3448,6 +3448,10 @@ PrefabInstance:
       propertyPath: fishingTime
       value: 3600
       objectReference: {fileID: 0}
+    - target: {fileID: 4183886587059565716, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
+      propertyPath: maxFishingTime
+      value: 3600
+      objectReference: {fileID: 0}
     - target: {fileID: 4768009220385532772, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 34.367676
@@ -4831,6 +4835,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 993227393}
     - target: {fileID: 3148155395807197637, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
+      propertyPath: fishingCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148155395807197637, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
       propertyPath: _upgradeManager
       value: 
       objectReference: {fileID: 1841044108}
@@ -4838,12 +4846,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 368431071}
+    - target: {fileID: 4477717252832471599, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
+      propertyPath: restaurantView
+      value: 
+      objectReference: {fileID: 7890455423304644539}
     - target: {fileID: 4688910806673614064, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
       propertyPath: restaurantView
       value: 
       objectReference: {fileID: 7890455423304644539}
+    - target: {fileID: 8612511566949368617, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1846440106781925242, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bed279177a6c0e84aaeec61888d82e76, type: 3}
