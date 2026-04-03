@@ -16,12 +16,17 @@ public class DragNDropTarget : MonoBehaviour
         MovingPosition();
     }
 
-    public void MovingPosition()
+    private void MovingPosition()
     {
         if(isMove)
         {
             Vector2 currentPosition = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
             transform.position = currentPosition;
         }
+    }
+    
+    private void SetBoundery()
+    {
+        isMove = true;
     }
 }
