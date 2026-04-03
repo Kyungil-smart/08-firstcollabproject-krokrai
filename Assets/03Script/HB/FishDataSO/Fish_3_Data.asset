@@ -22,7 +22,7 @@ MonoBehaviour:
   weight: 20
   fishSprite: Fish_3
   silhouetteSprite: NullException
-  price: 100
+  price: 3
   korDescription: "\uC2DD\uBB3C\uACFC \uC720\uC0AC\uD558\uC9C0\uB9CC \uC6D0\uC0DD\uC0DD\uBB3C\uB85C,\\n\uC740\uC740\uD55C
     \uAC10\uCE60\uB9DB\uC774 \uBCC4\uBBF8\uB2E4."
   engDescription: "Though similar to plants, they are protists,\\nand their subtle

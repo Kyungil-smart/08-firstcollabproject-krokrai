@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_45_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  isCaught: 1
+  fishID: Fish_45
+  korName: "\uC6A9\uC655"
+  engName: Sea Dragon King
+  fishRarity: 7
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 500
+  weight: 100
+  fishSprite: Fish_45
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uBC14\uB2E4\uC758 \uC655\uC778 \uC6A9\uC655...\uADFC\uB370 \uC5B4\uB5BB\uAC8C
+    \uB09A\uC558\uB0D0..."
+  engDescription: The Dragon King, ruler of the seas... but how on earth did you
+    catch him...
+  caughtDate: 

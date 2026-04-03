@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FishingUpgradeContainer
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
   _mainLine: 4
-  URL: https://docs.google.com/spreadsheets/d/1dHXAyPUFog1jobErjLGzVv9B0kvEP2eLKdm1clTT4WE/edit?gid=127761084#gid=127761084
+  URL: https://docs.google.com/spreadsheets/d/1RYyMDBKqIaUHzLJDaNLLnOHs_pde3VXeMLhm_ch-7f0/edit?gid=1438935655#gid=1438935655
   objs:
   - {fileID: 11400000, guid: 2ee0ca32e9d166645bbb0179e11da67a, type: 2}
   - {fileID: 11400000, guid: 1a9ef5d3e88fc974fb1bb58e3a3564b5, type: 2}

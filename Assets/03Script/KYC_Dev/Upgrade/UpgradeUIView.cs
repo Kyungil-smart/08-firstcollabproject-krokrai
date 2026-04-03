@@ -9,7 +9,6 @@ public class UpgradeUIView : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI _moneyText;
-    [SerializeField] TextMeshProUGUI _currentGoldText;
     [SerializeField] TextMeshProUGUI _toggleFishingUpgradeText;
     [SerializeField] TextMeshProUGUI _toggleDiningUpgradeText;
     [SerializeField] GameObject _fishingUpgradePanel;
@@ -24,6 +23,9 @@ public class UpgradeUIView : MonoBehaviour
     
     private TranslationDataReader _tDataReader;
     private WaitForEndOfFrame _waitForEndOfFrame = new();
+
+    private string _moneyFrontText;
+    private string _moneyBackText;
 
     private void Awake()
     {
@@ -88,14 +90,37 @@ public class UpgradeUIView : MonoBehaviour
         switch (language)
         {
             case Language.ENG:
-                _moneyText.text = _id_Money.En;
                 _toggleFishingUpgradeText.text = _id_Fishing.En;
                 _toggleDiningUpgradeText.text = _id_Restaurant.En;
+                SplitMoneyText(language, out _moneyFrontText, out _moneyBackText);
+                SetGoldText();
                 break;
             case Language.KOR:
-                _moneyText.text = _id_Money.Kor;
                 _toggleFishingUpgradeText.text = _id_Fishing.Kor;
                 _toggleDiningUpgradeText.text = _id_Restaurant.Kor;
+                SplitMoneyText(language, out _moneyFrontText, out _moneyBackText);
+                SetGoldText();
+                break;
+        }
+    }
+
+    private void SplitMoneyText(Language language, out string front, out string back)
+    {
+        switch (language)
+        {
+            case Language.ENG:
+                string[] temp = _id_Money.En.Split("{0:N0}");
+                front = temp[0];
+                back = temp[1];
+                break;
+            case Language.KOR:
+                string[] temp1 = _id_Money.Kor.Split("{0:N0}");
+                front = temp1[0];
+                back = temp1[1];
+                break;
+            default:
+                front = "";
+                back = "";
                 break;
         }
     }
@@ -109,7 +134,8 @@ public class UpgradeUIView : MonoBehaviour
     
     private void RenewalGoldText(ulong amount)
     {
-        _currentGoldText.text = amount.TextFormatCurrency();
+        string temp = amount.TextFormatCurrency();
+        _moneyText.text = $"{_moneyFrontText}{temp}{_moneyBackText}";
     }
 
     /// <summary>

@@ -12,8 +12,11 @@ public class UpgradeSelectView : MonoBehaviour
     [SerializeField] TextMeshProUGUI _upgradeLevelText;
     [SerializeField] TextMeshProUGUI _upgradeReqGoldText;
     [SerializeField] TextMeshProUGUI _toolTipText;
-    [SerializeField] Image _upgradeIconSprite;
+    [SerializeField] Image _upgradeSlotCurrentImage;
+    [SerializeField] Sprite _upgradeMaxSlotSprite;
     [SerializeField] Button _upgradeButton;
+    [SerializeField] Image _upgradeButtonImage;
+    [SerializeField] GameObject[] _maxLevelDisables;
     [SerializeField] Slider _slider;
     
     [Header("TranslationData / AutoSetting / For Debug")]
@@ -79,7 +82,7 @@ public class UpgradeSelectView : MonoBehaviour
     /// <param name="requiredGold"></param>
     public void RenewalReqGoldText(int requiredGold)
     {
-        _upgradeReqGoldText.text = requiredGold.TextFormatComma();
+        _upgradeReqGoldText.text = requiredGold.TextFormatCurrency();
     }
 
     /// <summary>
@@ -111,6 +114,7 @@ public class UpgradeSelectView : MonoBehaviour
     public void RenewalToolTipMaxText(int curLevel, string curEffect)
     {
         _toolTipText.text = $"{_ttmindex0}{curLevel}{_ttmindex1}{curEffect}{_ttmindex2}";
+        UpgradeMaxEffect();
     }
 
     /// <summary>
@@ -120,15 +124,7 @@ public class UpgradeSelectView : MonoBehaviour
     public void RenewalToolTipMaxTextForFishingGrade(int curLevel)
     {
         _toolTipText.text = $"{_ttmindex0}{curLevel}{_ttmindex1}";
-    }
-
-    /// <summary>
-    /// UI의 아이콘 스프라이트 출력 명령
-    /// ToDo:스프라이트 설정 넘어오면 작성
-    /// </summary>
-    public void SetUpgradeIconSprite(Image sprite)
-    {
-        _upgradeIconSprite = sprite;
+        UpgradeMaxEffect();
     }
 
     /// <summary>
@@ -141,16 +137,17 @@ public class UpgradeSelectView : MonoBehaviour
         {
             case true:
                 _upgradeButton.interactable = true;
+                _upgradeButtonImage.color = Color.white;
                 break;
             case false:
                 _upgradeButton.interactable = false;
+                _upgradeButtonImage.color = Color.gray;
                 break;
         }
     }
 
     /// <summary>
     /// 업그레이드 버튼의 텍스트 색 수정
-    /// ToDo:에셋 적용 후 배경색에 따라 수정 필요
     /// </summary>
     /// <param name="state">normal / red</param>
     public void ToggleReqGoldTextColor(bool state)
@@ -265,6 +262,15 @@ public class UpgradeSelectView : MonoBehaviour
                     _ttmindex2 = temp11[1];
                     break;
             }
+        }
+    }
+
+    private void UpgradeMaxEffect()
+    {
+        _upgradeSlotCurrentImage.sprite = _upgradeMaxSlotSprite;
+        foreach (GameObject obj in _maxLevelDisables)
+        {
+            obj.SetActive(false);
         }
     }
 }

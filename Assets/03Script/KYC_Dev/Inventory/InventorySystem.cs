@@ -190,6 +190,7 @@ public class InventorySystem : MonoBehaviour
                 FishData temp = _fishAcquisitionDatas[i];
                 _fishAcquisitionDatas.TryAdd(i + 1, temp);
                 _fishAcquisitionDatas.Remove(i);
+                
             }
         }
         _fishAcquisitionDatas.TryAdd(1, data);
@@ -198,13 +199,22 @@ public class InventorySystem : MonoBehaviour
     private void DeleteLastestCaught(FishData data)
     {
         if(_fishAcquisitionDatas.Count == 0) return;
-
+        
         for (int i = _fishAcquisitionDatas.Count; i > 0; i--)
         {
             if (_fishAcquisitionDatas[i] == data)
             {
                 _fishAcquisitionDatas.Remove(i);
                 break;
+            }
+        }
+
+        for (int i = 1; i <= _fishAcquisitionDatas.Count; i++)
+        {
+            if (!_fishAcquisitionDatas.ContainsKey(i))
+            {
+                _fishAcquisitionDatas.TryAdd(i, _fishAcquisitionDatas[i+1]); 
+                _fishAcquisitionDatas.Remove(i+1);
             }
         }
     }
