@@ -11,7 +11,6 @@ public class UpgradeSelectPresenter : MonoBehaviour
     
     [Header("Children Upgrade Select Views")]
     [SerializeField] UpgradeSelectView[] _views;
-    [SerializeField] Image[] _upgradeSprites;
     
     [Header("Upgrade Type")]
     [field: SerializeField]

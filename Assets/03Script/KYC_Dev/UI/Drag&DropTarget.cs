@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class DragNDropTarget : MonoBehaviour
 {
+    [SerializeField] private GameObject _backgrounnd;
+    
     public bool isMove;
     
     private Vector2 _minBounds;
@@ -51,6 +53,7 @@ public class DragNDropTarget : MonoBehaviour
             float x = Mathf.Clamp(pointerPosition.x , _minBounds.x + _halfWidth, _maxBounds.x - _halfHeight);
             float y = Mathf.Clamp(pointerPosition.y , _minBounds.y + _halfHeight, _maxBounds.y - _halfHeight);
             transform.position = new Vector3(x, y, transform.position.z);
+            _backgrounnd.transform.position = new Vector3(_backgrounnd.transform.position.x, y, _backgrounnd.transform.position.z);
         }
     }
     
