@@ -14,6 +14,9 @@ public class InventorySlotController : MonoBehaviour
     public FishData ItemInfo;
     private Image _image;
     private AsyncOperationHandle<Sprite> _handle;
+    private AddressableImageLoader _imageLoader;
+    
+    [SerializeField] private Image _baseImage;
 
     private void Awake()
     {

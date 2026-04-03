@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DiningUpgradeContainer
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
   _mainLine: 4
-  URL: https://docs.google.com/spreadsheets/d/1Ph0AHlSFzPjIXOMR884jMJ04TtclNv0DzZda-_Csbnc/edit?gid=1016189888#gid=1016189888
+  URL: https://docs.google.com/spreadsheets/d/1Rc_v8iclx240FUbNYHXT7XMy8Hh03gtY3_wkwGnwdFI/edit?gid=796212648#gid=796212648
   objs:
   - {fileID: 11400000, guid: 679be169622356d4eae41dc364f65fa6, type: 2}
   - {fileID: 11400000, guid: cd3f429354b46c74b8f702facb10f7e7, type: 2}
