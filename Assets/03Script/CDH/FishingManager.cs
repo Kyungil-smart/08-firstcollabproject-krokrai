@@ -139,7 +139,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     {
         float distance = (eventData.position - _pressPos).sqrMagnitude;
 
-        if (distance > 50f)
+        if (distance > 100f)
         {
             Debug.Log("드래그중! 낚시 X.");
             return;
@@ -147,7 +147,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
 
         AnimatorStateInfo aniState = _animator.GetCurrentAnimatorStateInfo(0);
 
-        if (aniState.IsName("fishing") || aniState.IsName("result"))
+        if (aniState.IsName("result"))
         {
             if (_currentCount > 0)
             {
@@ -159,18 +159,25 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             }
             else
             {
-                _animator.SetTrigger("resultCatch");
+                Debug.Log("낚시 횟수 0회");
             }
+            return;
+        }
+
+        if (aniState.IsName("fishing"))
+        {
+            if (_currentCount > 0)
+            {
+                _currentCount--;
+                UpdateUI();
+                GetRandomFish();
+            }
+            _animator.SetTrigger("resultCatch");
             return;
         }
 
         if (_currentCount > 0)
         {
-            if (aniState.IsName("fishing"))
-            {
-                _animator.SetTrigger("resultCatch");
-            }
-            else
             {
                 _animator.SetTrigger("Fishing");
                 _currentCount--;
