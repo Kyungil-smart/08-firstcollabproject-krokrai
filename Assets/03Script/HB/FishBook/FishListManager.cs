@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 
 public class FishListManager : MonoBehaviour
@@ -60,13 +58,10 @@ public class FishListManager : MonoBehaviour
         SafeLink(descriptionText, isCaught ? currentFish.korDescription : "???");
         SafeLink(caughtDateText, isCaught ? currentFish.caughtDate : "???");
 
-        // 이미지 업데이트
         if (imageLoader != null)
         {
-            // 시트에서 이미지 파일 주소(string)을 확인
-            string address = isCaught ? currentFish.fishSprite :currentFish.silhouetteSprite; 
-
-            imageLoader.SetImage(address);                   
+            // isCaught를 넘겨 로더 내부에서 색상을 처리
+            imageLoader.SetImage(currentFish.fishSprite, isCaught);
         }
     }
 

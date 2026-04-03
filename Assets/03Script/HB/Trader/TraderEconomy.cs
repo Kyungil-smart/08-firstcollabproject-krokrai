@@ -13,12 +13,12 @@ public class TraderEconomy : MonoBehaviour
     {
         Debug.Log($"전달받은 금액 : {money}");
         // "N0"로 세자리 당 ',' 찍어주기 
-        if (goldText != null) goldText.text = $"Money: {money.ToString("N0")} Gold";
+        if (goldText != null) goldText.text = $"Money: {money.TextFormatCurrency()} Gold";
     }
 
     public void UpdatePriceUI(long total)
     {
-        totalPriceText.text = $"Total Price: {total:N0} Gold";
+        totalPriceText.text = $"Total Price: {((ulong)total).TextFormatCurrency()} Gold";
         sellButton.interactable = total > 0;    
     } 
 
