@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Fish
+  m_Name: Customer
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Fish
-  m_GUID: b286d628235b3b540ac5744cbc40f9cb
+  m_GroupName: Customer
+  m_GUID: c7730e8a7c252b04ea5e9cd98fbe9f27
   m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 15addae841271be4e8b69d9634921eed, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 2786df6de1778e849b2e92350e92fa0c, type: 2}
-    - {fileID: 11400000, guid: 0d04bf29ae97c8c439da85eab5748521, type: 2}
+    - {fileID: 11400000, guid: d1f5eeb0c352bef4f96ee673b063d13e, type: 2}
+    - {fileID: 11400000, guid: 701439721ac55394890d5a9b3c763685, type: 2}

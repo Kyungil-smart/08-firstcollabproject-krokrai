@@ -18,6 +18,8 @@ public class CustomerController : MonoBehaviour
     private RestaurantSeat _seat;
     private Transform _exitPoint;
 
+    private WaitForSeconds _GaugeUpdateTime;
+
     private int _eatCounte;
     private byte _maxEatCount;
     bool _firstOrder;
@@ -31,6 +33,7 @@ public class CustomerController : MonoBehaviour
     {
         _anim = GetComponentInChildren<Animator>();
         _sr = GetComponentInChildren<SpriteRenderer>();
+        _GaugeUpdateTime = new WaitForSeconds(0.25f);
     }
 
     public void SetVisual(bool b) // 여기에 낚시로 넘어가는 경우 Invoke 해줄 오브젝트 넣어 주기 및 체인 걸어주기.
@@ -164,6 +167,27 @@ public class CustomerController : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    IEnumerator Gaugebar(bool isEatDuration)
+    {
+        switch(isEatDuration)
+        {
+            case true:
+                while (a <= 10)
+                {
+                    yield return new WaitForSeconds(0.25f);
+                    a = a + 0.25f + Time.deltaTime;
+                    //slider.value = a / _needTime;
+                    Debug.Log(a);
+                }
+                break;
+            case false:
+
+                break;
+
+        }
+        yield break;
     }
 
     private IEnumerator CoMoveTo(Vector3 targetPos)

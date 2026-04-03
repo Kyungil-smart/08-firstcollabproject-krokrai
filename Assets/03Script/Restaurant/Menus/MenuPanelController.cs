@@ -9,6 +9,8 @@ public class MenuPanelController : MonoBehaviour
     [SerializeField] RecipeInfoUI _recipeInfoUI;
     [SerializeField] MenuCtrl _menuCtrl;
 
+    RecipModel _currentRecipe;
+
     bool isUnlocked;
 
     private void Awake()
@@ -25,8 +27,9 @@ public class MenuPanelController : MonoBehaviour
     // 테스트용 임시 주석 처리
     public void SelectedRecipe() //(RecipeContainer rcp)
     {
+        //_currentRecipe.
         //_recipe = rcp;
-        _recipeInfoUI.SelectedRecipe(_recipe, isUnlocked);
+        _recipeInfoUI.SelectedRecipe(_recipe, true , isUnlocked);
 
         //CanMakeDish();
     }

@@ -6,6 +6,10 @@ public class RecipModel : MonoBehaviour
     //public int RecipID {  get; private set; }
     private RecipeContainer _recipe;
     [SerializeField] Button _btn;
+    [SerializeField] GameObject Outline; // 선택 될시(아마도 언락인 경우만)에만 선택.
+    [SerializeField] Image _btnImage; // 언락 될 시 색을 (0,0,0) -> (255,255,255) 교체
+    [SerializeField] Image _LockImage; // 언락 가능 시 깨진 자물쇠로 교체
+    [SerializeField] GameObject _ShildeImage; // 언락시 사라짐
     private RecipeInfoUI _riu;
 
     bool _canMake;
@@ -24,7 +28,7 @@ public class RecipModel : MonoBehaviour
     private void PassToRecipeInfo()
     {
         //_riu.SelectedRecipe(_recipe, _canMake);
-        _riu.SelectedRecipe(_recipe, true);
+        _riu.SelectedRecipe(_recipe, _canMake, _canUnlock);
     }
 
     private void OnDestroy()
@@ -44,6 +48,8 @@ public class RecipModel : MonoBehaviour
         _riu = riu;
         _recipe = rcp;
 
+        //_btnSprtRenderer.sprite =  // 스프라이트 추가 명령
+
         _btn.onClick.AddListener(PassToRecipeInfo);
         // 추가적인 의존성 관련 필요한 경우 추가.
     }
@@ -54,6 +60,7 @@ public class RecipModel : MonoBehaviour
     public void CanUnlockConditionsMet()
     {
         _canUnlock = true;
+        //_LockImage.sprite = ; // 깨진 자물쇠 받아와서 적용
     }
 
     public void UnlockThisRecipe()
@@ -67,8 +74,17 @@ public class RecipModel : MonoBehaviour
     /// <param name="canUnlock"></param>
     public void CanMakeDish(bool canMake)
     {
-        // Action으로 특정 물고기 숫자가 1 이상인 경우에만 호출 되게 설계 예정.
+        // 잡은 물고기 음식 만들때 상위에서 호출 후 여기로 넘어오게 하면 될듯
         _canMake = canMake;
+        if (_canMake)
+        {
+            // 물고기가 있는 경우. 적용
+        }
+        else
+        {
+            // 물고기가 없는 경우 적용.
+        }
+
     }
 
 }
