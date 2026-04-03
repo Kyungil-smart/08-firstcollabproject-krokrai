@@ -22,6 +22,11 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public FishRateData fishCurrentRate; // 구글 시트에서 받아온 등급별 확률 데이터
     private Animator _animator;
     private Vector2 _pressPos;
+    [Header("물고기 연출")]
+    public GameObject fishPrefab;
+    public Transform popPoint;
+    public List<Sprite> fishSprites;
+    private FishData _lastCaughtFish;
 
     private void Start()
     {
@@ -139,7 +144,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     {
         float distance = (eventData.position - _pressPos).sqrMagnitude;
 
-        if (distance > 50f)
+        if (distance > 100f)
         {
             Debug.Log("드래그중! 낚시 X.");
             return;
@@ -147,7 +152,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
 
         AnimatorStateInfo aniState = _animator.GetCurrentAnimatorStateInfo(0);
 
-        if (aniState.IsName("fishing") || aniState.IsName("result"))
+        if (aniState.IsName("result"))
         {
             if (_currentCount > 0)
             {
@@ -159,18 +164,25 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             }
             else
             {
-                _animator.SetTrigger("resultCatch");
+                Debug.Log("낚시 횟수 0회");
             }
+            return;
+        }
+
+        if (aniState.IsName("fishing"))
+        {
+            if (_currentCount > 0)
+            {
+                _currentCount--;
+                UpdateUI();
+                GetRandomFish();
+            }
+            _animator.SetTrigger("resultCatch");
             return;
         }
 
         if (_currentCount > 0)
         {
-            if (aniState.IsName("fishing"))
-            {
-                _animator.SetTrigger("resultCatch");
-            }
-            else
             {
                 _animator.SetTrigger("Fishing");
                 _currentCount--;
@@ -230,15 +242,26 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
         if (selectedFish != null)
         {
             Debug.Log($"{currentRarity}, {selectedFish.korName}");
+
+            _lastCaughtFish = selectedFish;
+
             if (DataTower.instance != null)
             {
                 DataTower.instance.takeFish(selectedFish);
             }
-
+            
             else
             {
                 Debug.Log("DataTower 인스턴스를 찾을 수 없습니다.");
             }
+        }
+    }
+    public void OnCatchAnimationEvent()
+    {
+        if (_lastCaughtFish != null)
+        {
+            PopFishResult(_lastCaughtFish);
+            _lastCaughtFish = null;
         }
     }
 
@@ -370,5 +393,34 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             _animator.SetInteger("IdleIdx", 0);
 
         }
+    }
+
+    private void PopFishResult(FishData data)
+    {
+        if (this == null || data == null) return;
+
+        if (fishPrefab == null)
+        {
+            return;
+        }
+
+        GameObject go = Instantiate(fishPrefab, popPoint.position, Quaternion.identity);
+        SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+
+            Sprite targetSprite = fishSprites.Find(x => x.name == data.fishSprite);
+            if (targetSprite != null)
+            {
+                sr.sprite = targetSprite;
+            }
+            else
+            {
+                Debug.LogWarning($"{data.fishSprite} 없음");
+            }
+
+            sr.sortingOrder = 5;
+        }
+        Destroy(go, 3f);
     }
 }
