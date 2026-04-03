@@ -21,6 +21,7 @@ public class AddressableImageLoader : MonoBehaviour
     // 함수 가져다 쓰면 이미지 변경 가능-> 변수명.SetImage("이미지 이름");
     public void SetImage(string address, bool isCaught = true)
     {
+
         // 주소가 비었을 때 방어 코드
         if (string.IsNullOrEmpty(address))
         {
