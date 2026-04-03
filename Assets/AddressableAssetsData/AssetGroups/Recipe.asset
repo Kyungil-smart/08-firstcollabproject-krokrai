@@ -14,7 +14,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Recipe
   m_GUID: a2f932935ded4614183656b0aeba2a14
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 16ce17f727caae84ca52a9e836ebc235
+    m_Address: Fish_1_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 271fc7f46bd08894bac6407110ee949a
+    m_Address: Fish_3_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 361f0e7b59bc75c4ca2f52e2e1972f92
+    m_Address: Fish_8_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f80a46a93f43b146be4a7348ab7c903
+    m_Address: Fish_9_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 428667d514973344c87602c9917d5b6d
+    m_Address: Fish_7_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45dd592d51510f742b0daaba9fb38fd1
+    m_Address: Fish_16_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8555392b727493c4b879f44d16e3a612
+    m_Address: Fish_12_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86a8393bd8e209943a6f4a4583261699
+    m_Address: Fish_14_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9111cd8e4d8863c47911ddfdd473a723
+    m_Address: Fish_17_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bd80d9247600a740adf3a98cfca5a6e
+    m_Address: Fish_6_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f40332efadae1f42917ee1427b0cbff
+    m_Address: Fish_11_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9192475f0752a045944ab8a3d096761
+    m_Address: Fish_2_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0e046e55eb87ab4c8efe2ff35f2724d
+    m_Address: Fish_13_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c912e4e846dceaa46891f3d0129616d7
+    m_Address: Fish_4_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1503c2d88f5cb14ab23b1d03ddc754a
+    m_Address: Fish_5_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5248f71d9631994eb5cc5d1a80a8513
+    m_Address: Fish_15_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d53cc8f912b13c749a1a0d1b22d17e04
+    m_Address: Fish_18_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7a4378f3e71e4142bf110bc6c495b72
+    m_Address: Fish_10_food
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 15addae841271be4e8b69d9634921eed, type: 2}
   m_SchemaSet:

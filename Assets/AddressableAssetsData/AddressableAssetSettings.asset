@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: b286d628235b3b540ac5744cbc40f9cb
   m_currentHash:
     serializedVersion: 2
-    Hash: 7d360c2ba9e8ce1ed1dc68e03dae3cb4
+    Hash: 242ebd7fc080ed4e4cd17c30f5da0129
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -101,8 +101,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - LabelTest
-    - hgchgvgj
+    - Fishs
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 20bbd789cbf8bcb4388079ecb6b37036, type: 2}

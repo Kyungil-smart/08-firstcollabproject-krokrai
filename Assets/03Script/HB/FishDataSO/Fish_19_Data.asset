@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 80
   weight: 7
-  fishSprite: NullException
+  fishSprite: Fish_19
   silhouetteSprite: NullException
-  price: 1000
+  price: 54
   korDescription: "\uC61B\uB0A0\uC5D4 \uC880\uCC98\uB7FC \uBA39\uC9C0 \uC54A\uC558\uB358
     \uC0DD\uC120.\\n\uCAC4\uAE43\uD558\uACE0 \uBD80\uB4DC\uB7EC\uC6B4 \uC2DD\uAC10\uC758
     \uC0B4\uC774 \uBCC4\uBBF8\uB2E4."

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_16_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_16
   korName: "\uBA54\uAE30"
   engName: Catfish
@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 60
   weight: 2
-  fishSprite: NullException
+  fishSprite: Fish_16
   silhouetteSprite: NullException
-  price: 1000
+  price: 35
   korDescription: "\uBBFC\uBB3C\uC758 \uC0C1\uC5B4\uB77C \uBD80\uB97C \uC815\uB3C4\uB85C
     \uD06C\uB2E4.\\n\uC7A5\uC5B4 \uB300\uC2E0 \uC0DD\uC120\uC73C\uB85C \uAC01\uAD11\uBC1B\uB294\uB2E4."
   engDescription: "It is so large that it is often referred to as a \u2018freshwater

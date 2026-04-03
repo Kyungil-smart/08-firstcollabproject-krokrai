@@ -22,7 +22,7 @@ MonoBehaviour:
   weight: 0.037
   fishSprite: Fish_6
   silhouetteSprite: NullException
-  price: 1000
+  price: 12
   korDescription: "\uAC1C\uCCB4\uC218\uC5D0 \uB530\uB77C \uBC14\uB2E4\uC758 \uAC74\uAC15
     \uC0C1\uD0DC\uB97C \uBCFC \uC218 \uC788\uB294 \uC5B4\uB958.\\n\uD06C\uAE30\uC5D0
     \uB530\uB77C \uB2E4\uC591\uD55C \uACF3\uC5D0 \uC0AC\uC6A9\uD55C\uB2E4."

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_11_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_11
   korName: "\uAF41\uCE58"
   engName: Saury
@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 30
   weight: 0.12
-  fishSprite: NullException
+  fishSprite: Fish_11
   silhouetteSprite: NullException
-  price: 1000
+  price: 13
   korDescription: "\uAC00\uC744\uC5D0 \uC7A1\uD788\uB294 \uCE7C\uAC19\uC740 \uC0DD\uC120.\\n\uB2F4\uBC31\uD558\uBA74\uC11C\uB3C4
     \uAE30\uB984\uC9C4 \uACE0\uC18C\uD568\uC774 \uD2B9\uC9D5\uC774\uB2E4."
   engDescription: "A fish with a firm, knife-like texture, caught in autumn.\\nIt

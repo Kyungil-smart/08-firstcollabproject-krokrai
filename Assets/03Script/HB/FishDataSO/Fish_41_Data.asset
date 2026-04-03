@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_41_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  isCaught: 1
+  fishID: Fish_41
+  korName: "\uACE0\uB798"
+  engName: Whale
+  fishRarity: 6
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 1600
+  weight: 40000
+  fishSprite: Fish_41
+  silhouetteSprite: NullException
+  price: 1000
+  korDescription: "\uBA78\uC885\uC704\uAE30\uC885 \uC0DD\uBA85\uCCB4.\\n100\uAC00\uC9C0\uC758
+    \uB9DB\uC774 \uB098\uB294 \uD2B9\uC0C9 \uC788\uB294 \uBCC4\uBBF8\uB2E4."
+  engDescription: "An endangered species.\\nIt is a unique delicacy with a hundred
+    different flavours.\r"
+  caughtDate: 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_5_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_5
   korName: "\uAE61\uD1B5"
   engName: Can
@@ -22,7 +22,7 @@ MonoBehaviour:
   weight: 5
   fishSprite: Fish_5
   silhouetteSprite: NullException
-  price: 1000
+  price: 3
   korDescription: "\uD3D0\uAE30\uBB3C \uC911 \uD558\uB098.\\n\uD568\uBD80\uB85C \uBC84\uB9AC\uACE0
     \uAC00\uC9C0 \uB9D0\uC790."
   engDescription: "One type of waste.\\nLet\u2019s not throw it away carelessly.\r"

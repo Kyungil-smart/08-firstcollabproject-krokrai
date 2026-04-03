@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_8_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_8
   korName: "\uB9DD\uCE58 \uACE0\uB4F1\uC5B4"
   engName: Blue Mackerel
@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 40
   weight: 0
-  fishSprite: NullException
+  fishSprite: Fish_8
   silhouetteSprite: NullException
-  price: 1000
+  price: 12
   korDescription: "\uC791\uACE0 \uBC30\uC5D0 \uC810\uC774 \uC788\uB294 \uACE0\uB4F1\uC5B4.\\n1\uB144
     \uB0B4\uB0B4 \uACE0\uC18C\uD558\uACE0 \uB2F4\uBC31\uD55C \uB9DB\uC744 \uBCF4\uC7A5\uD55C\uB2E4."
   engDescription: "A small mackerel with a spot on its belly.\\nIt guarantees a savoury
