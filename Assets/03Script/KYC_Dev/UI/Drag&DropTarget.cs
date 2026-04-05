@@ -4,9 +4,15 @@ using UnityEngine.InputSystem;
 
 public class DragNDropTarget : MonoBehaviour
 {
+    [Header("배경 지정")]
     [SerializeField] private GameObject _backgrounnd;
-    
+
+    [Header("반전할 이미지들")]
+    [SerializeField] private GameObject[] _mirroringImages;
+
+    [Header("For Debug")]
     public bool isMove;
+    [SerializeField] private bool _isMirroring;
     
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
@@ -19,6 +25,7 @@ public class DragNDropTarget : MonoBehaviour
     private void Awake()
     {
         isMove = false;
+        _isMirroring = false;
         _collider2D = GetComponent<Collider2D>();
     }
 
@@ -54,6 +61,37 @@ public class DragNDropTarget : MonoBehaviour
             float y = Mathf.Clamp(pointerPosition.y , _minBounds.y + _halfHeight, _maxBounds.y - _halfHeight);
             transform.position = new Vector3(x, y, transform.position.z);
             _backgrounnd.transform.position = new Vector3(_backgrounnd.transform.position.x, y, _backgrounnd.transform.position.z);
+            Mirroring(transform.position);
+        }
+    }
+
+    private void Mirroring(Vector3 position)
+    {
+        Vector2 camaraCenter = Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0.5f));
+
+        if (camaraCenter.x > position.x && !_isMirroring)
+        {
+            foreach (GameObject image in _mirroringImages)
+            {
+                float x = image.transform.localScale.x;
+                float y = image.transform.localScale.y;
+                float z = image.transform.localScale.z;
+
+                image.transform.localScale = new Vector3(x, -y, z);
+            }
+            _isMirroring = true;
+        }
+        else if(camaraCenter.x < position.x && _isMirroring)
+        {
+            foreach (GameObject image in _mirroringImages)
+            {
+                float x = image.transform.localScale.x;
+                float y = image.transform.localScale.y;
+                float z = image.transform.localScale.z;
+
+                image.transform.localScale = new Vector3(x, -y, z);
+            }
+            _isMirroring = false;
         }
     }
     
