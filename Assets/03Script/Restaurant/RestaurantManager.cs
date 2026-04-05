@@ -13,6 +13,7 @@ public class RestaurantManager : MonoBehaviour
     [SerializeField] private Customer_Tips[] _customerTips;
     [SerializeField] private Restaurant_Fixed_value _fixedValue;
     [SerializeField] private DiningUpgradeDataReader _diningUpgradeDataReader;
+    [SerializeField] private GaugeSetter[] _gaugeSetter;
 
     [Header("Spawn")]
     [SerializeField] private GameObject[] _customerPrefab;
@@ -28,11 +29,11 @@ public class RestaurantManager : MonoBehaviour
     private Queue<GameObject> _customerPool; // 오브젝트 풀 패턴 기반 작동 예정
     private GameObject _randomPrefab;
 
+    private GaugeSetter _currentGauge;
+
     private RestaurantSeat _emptySeat;
     private bool _haveDish;
     private bool _canVisual;
-
-    private WaitForSeconds[] _seconds;
 
     private byte _normalCustomers;
     private byte _specialCustomers;
@@ -135,11 +136,12 @@ public class RestaurantManager : MonoBehaviour
         // 설거지? 시간 => 대기시간 => 스폰
         while (true)
         {
+            /*
             if (!_haveDish)
             {
                 yield return null;
                 continue;
-            }
+            }*/
 
             // 빈자리 탐색 및 반환 받음.
             _emptySeat = GetEmptySeat();
@@ -176,13 +178,17 @@ public class RestaurantManager : MonoBehaviour
             + CanSpawnVIPCustomer()
             + CanSpawnSpecialCustomer())));
 
+        Debug.Log(_temp_Numbers);
+
         seat.SetOccupied();
+
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
         _randomPrefab.GetComponent<CustomerController>().SetInfo(seat,
             _exitPointLeft,
             _customerTips[(int)_customerData[_temp_Numbers].grade],
             _customerData[_temp_Numbers],
+            _currentGauge,
             _canVisual); // 후에 수정
     }
 
@@ -254,10 +260,10 @@ public class RestaurantManager : MonoBehaviour
     }
 
     private int CustomerWeightFinder(int weight, byte startNumber)
-    { // 가중치를 빼면서 작업 하기
-        startNumber -= 1;
+    {
         for (byte i = startNumber; i < _customerData.Length; i++)
         {
+            //Debug.Log($"CustomerWeightFinder 반복 횟수 : {i} / {_customerData.Length}\n시작 숫자 : {startNumber}");
             if (weight - _customerData[i].weight <= 0)
             {
                 return i;
@@ -303,21 +309,14 @@ public class RestaurantManager : MonoBehaviour
         {
             // 반복 문으로 모든 자리 탐색
             if (_seats[i].IsOccupied == false)
+            {
+                _currentGauge = _gaugeSetter[i];
+                Debug.Log($"{i}번째 자리 배정됌");
                 return _seats[i];
+            }
         }
         return null;
     }
-
-    // 입력된 손님 무작위  출력
-    /*
-    private CustomerController GetRandomCustomerPrefab()
-    {
-        if (_customerPrefab == null || _customerPrefab.Length == 0)
-            return null;
-
-        int randIndex = Random.Range(0, _customerPrefab.Length);
-        return _customerPrefab[randIndex];
-    }*/
 
     private void GetRandomCustomerPrefab()
     {

@@ -6,7 +6,7 @@ public class RecipModel : MonoBehaviour
     //public int RecipID {  get; private set; }
     private RecipeContainer _recipe;
     [SerializeField] Button _btn;
-    [SerializeField] GameObject Outline; // 선택 될시(아마도 언락인 경우만)에만 선택.
+    [SerializeField] GameObject Outline; // 선택 될시에만 선택.
     [SerializeField] Image _btnImage; // 언락 될 시 색을 (0,0,0) -> (255,255,255) 교체
     [SerializeField] Image _LockImage; // 언락 가능 시 깨진 자물쇠로 교체
     [SerializeField] GameObject _ShildeImage; // 언락시 사라짐
@@ -27,7 +27,6 @@ public class RecipModel : MonoBehaviour
 
     private void PassToRecipeInfo()
     {
-        //_riu.SelectedRecipe(_recipe, _canMake);
         _riu.SelectedRecipe(_recipe, _canMake, _canUnlock);
     }
 

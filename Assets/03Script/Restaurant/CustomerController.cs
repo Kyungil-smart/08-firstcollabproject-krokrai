@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using static Define;
 
 public class CustomerController : MonoBehaviour
@@ -13,6 +14,8 @@ public class CustomerController : MonoBehaviour
     [SerializeField] private Restaurant_Fixed_value _fixedValue;
     [SerializeField] private GameObject _visualObject;
     [SerializeField] private OpenMenu _openMenu;
+    
+    private GaugeSetter _gaugeSetter;
 
     private RestaurantManager _restaurant;
     private RestaurantSeat _seat;
@@ -86,13 +89,15 @@ public class CustomerController : MonoBehaviour
     /// <param name="restaurant"></param>
     /// <param name="seat"></param>
     /// <param name="exitPoint"></param>
-    public void SetInfo(RestaurantSeat seat, Transform exitPoint, Customer_Tips tip, CustomerDataSO so, bool canVisual)
+    public void SetInfo(RestaurantSeat seat, Transform exitPoint, Customer_Tips tip, CustomerDataSO so, GaugeSetter gauge, bool canVisual)
     {
         _seat = seat;
         _exitPoint = exitPoint;
         _firstOrder = true;
         _data = so;
-        _eatCounte = -1;
+        _gaugeSetter = gauge;
+        _gaugeSetter.SetCustomerGrade(_data.grade);
+        _eatCounte = 0;
 
         a = _data.flow_Velocity;
 
@@ -119,18 +124,22 @@ public class CustomerController : MonoBehaviour
                     if (_isVisualContect) _anim.Play("Walk");
                     // 자리에 이동할때까지 대기
                     yield return StartCoroutine(CoMoveTo(_seat.SitPosition));
+                    Debug.Log("도착 및 먹기 전환");
                     //앉은 상태가 되면 먹기 실행
                     _state = CustomerState.Eat;
                     break;
 
                 case CustomerState.Eat:
                     // 앉기로 전환
-                    if(_isVisualContect) _anim.Play("Sit");
+
+                    //if(_isVisualContect) _anim.Play("Sit");
+                    _anim.Play("Sit");
+
                     // 레이어 위치 변경
                     _sr.sortingOrder = -1;
 
                     // 식사 대기시간.
-                    for (int i = 0; i < _maxEatCount; i++)
+                    for (byte i = 0; i < _maxEatCount; i++)
                     {
                         if (_data.orderChans[i] <= 0.001 || _data.orderChans[i] == -1)
                         {
@@ -140,12 +149,14 @@ public class CustomerController : MonoBehaviour
                         {
                             _firstOrder = false;
                             _eatCounte++;
-                            yield return new WaitForSeconds(_data.orderTime[i]);
+                            yield return StartCoroutine(Gaugebar(false, i));
+                            /*
                             if (UnityEngine.Random.Range(0,1f) <= _tips.tipsRate) //팁 확률 측정 후 팁인 경우 팁과함께 아닌 경우 팁 제외
                                 _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
                             else
                                 _restaurant.TryCounsumeSushiAndEarnMoney(1);
-                            yield return new WaitForSeconds(_data.eatDuration[i]); // WaitForSeconds 너무 많은 호출 후에 개선 필요 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                            */
+                            Gaugebar(true,i);
                         }
                     }
 
@@ -169,23 +180,28 @@ public class CustomerController : MonoBehaviour
         }
     }
 
-    IEnumerator Gaugebar(bool isEatDuration)
+    IEnumerator Gaugebar(bool isEatDuration, byte num)
     {
+        _gaugeSetter.SetState(isEatDuration);
+        
         switch(isEatDuration)
         {
             case true:
-                while (a <= 10)
+                while (a <= _data.eatDuration[num])
                 {
-                    yield return new WaitForSeconds(0.25f);
+                    yield return _GaugeUpdateTime;
                     a = a + 0.25f + Time.deltaTime;
-                    //slider.value = a / _needTime;
-                    Debug.Log(a);
+                    _gaugeSetter.SliderValueUpdate(a / _data.eatDuration[num]);
                 }
                 break;
             case false:
-
+                while (a <= _data.orderTime[num])
+                {
+                    yield return _GaugeUpdateTime;
+                    a = a + 0.25f + Time.deltaTime;
+                    _gaugeSetter.SliderValueUpdate(a / _data.orderTime[num]);
+                }
                 break;
-
         }
         yield break;
     }
@@ -199,6 +215,7 @@ public class CustomerController : MonoBehaviour
             yield return null;
         }
         transform.position = targetPos;
+        Debug.Log("지정 좌석 도착");
         yield break;
     }
 }

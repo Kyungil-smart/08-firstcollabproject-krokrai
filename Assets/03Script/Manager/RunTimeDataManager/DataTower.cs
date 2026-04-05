@@ -70,6 +70,7 @@ public class DataTower : MonoBehaviour
 
     public int UnlockCatObjectLevel;
 
+    public int UnlockMenuLevel;
 
     //List<Temp_Item> Items; // Item SO 작업 후 추가 작업 예정 @@@@@@@@@@@@@@@@@@@@
 
@@ -257,6 +258,11 @@ public class DataTower : MonoBehaviour
         OnDataTowerLoaded?.Invoke();
     }
 
+    /// <summary>
+    /// 데이터 타워 초기화 명령 함수
+    /// true로 넣을 시 강제 초기화 진행됌
+    /// </summary>
+    /// <param name="ForcedInitialized">true인 경우 강제 초기화 실행</param>
     public void InitializedData(bool ForcedInitialized = false)
     {
         if (!isDataInitiated || !ForcedInitialized)
@@ -307,6 +313,8 @@ public class DataTower : MonoBehaviour
             UnlockGramophoneLevel = 1;
 
             UnlockCatObjectLevel = 1;
+
+            UnlockMenuLevel = 1;
 
             fishingCount = 1;
             currentFishingCount = 1;
@@ -394,15 +402,8 @@ public class DataTower : MonoBehaviour
 
             OnFisingNewFish?.Invoke(fish.fishID);
         }
-        else
-        {
-            fish.isCaught = true;
-            fishDatas[fish.fishID].isCaught = true;
-            OnFisingNewFish?.Invoke(fish.fishID);
-        }
 
         CatchFishCounter(in fish);
-        // 인벤토리에 추가
     }
     #endregion
 

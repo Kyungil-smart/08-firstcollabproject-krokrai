@@ -6,7 +6,7 @@ public class MenuCtrl : MonoBehaviour
 {
     // 일단 메뉴 대기열이 추가로 더 늘어나지 않는다는 전제 조건으로 작업됌
     [SerializeField] DishUI[] dishUIs;
-    List<DishUI> _inDishUList = new List<DishUI>(10);
+    List<DishUI> _inDishUList = new List<DishUI>(14);
 
     public event Action<bool> OnMaxMenu;
     public event Action<bool> OnDish;
@@ -14,7 +14,7 @@ public class MenuCtrl : MonoBehaviour
 
     // 아래 2개의 값은 데이터 타워에서 받아오기
     public int InsertedDish { get; private set; } = 0;
-    public int maxDsih { get; private set; } = 2;
+    public int maxDsih { get; private set; } = 6;
 
     private void Start()
     {
@@ -22,6 +22,12 @@ public class MenuCtrl : MonoBehaviour
         {
             dishUIs[i].Init(this);
         }
+
+        for (byte i = 0; i < maxDsih; i++)
+        {
+            dishUIs[i].OpenMenuPanel();
+        }
+
         OnMaxMenu?.Invoke(false);
     }
 
@@ -51,6 +57,12 @@ public class MenuCtrl : MonoBehaviour
         }
     }
 
+    public void UnlockedMenuPanel()
+    {
+        dishUIs[maxDsih].OpenMenuPanel();
+        maxDsih++;
+    }
+
     public int RandomEating()
     {
         if ( _inDishUList.Count == 0)
@@ -61,6 +73,10 @@ public class MenuCtrl : MonoBehaviour
         return _inDishUList[UnityEngine.Random.Range(0, _inDishUList.Count)].EatMenu();
     }
 
+    /// <summary>
+    /// 현재 메뉴 삭제 처리.
+    /// </summary>
+    /// <param name="dish"></param>
     public void ReturnDish(in DishUI dish)
     {
         InsertedDish--;
