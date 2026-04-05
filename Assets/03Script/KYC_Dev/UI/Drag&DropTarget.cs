@@ -16,6 +16,7 @@ public class DragNDropTarget : MonoBehaviour
     
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
+    private Vector2 _camaraCenter;
 
     private float _halfWidth;
     private float _halfHeight;
@@ -25,7 +26,6 @@ public class DragNDropTarget : MonoBehaviour
     private void Awake()
     {
         isMove = false;
-        _isMirroring = false;
         _collider2D = GetComponent<Collider2D>();
     }
 
@@ -33,6 +33,7 @@ public class DragNDropTarget : MonoBehaviour
     {
         InitClampBounds();
         GetColliderBounds();
+        CheckPosition(transform.position);
     }
 
     private void Update()
@@ -44,12 +45,18 @@ public class DragNDropTarget : MonoBehaviour
     {
         _minBounds = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         _maxBounds = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+        _camaraCenter = Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0.5f));
     }
 
     private void GetColliderBounds()
     {
         _halfWidth = _collider2D.bounds.extents.x;
         _halfHeight = _collider2D.bounds.extents.y;
+    }
+
+    private void CheckPosition(Vector3 position)
+    {
+        _isMirroring = _camaraCenter.x > position.x;
     }
 
     private void MovingPosition()
@@ -67,9 +74,7 @@ public class DragNDropTarget : MonoBehaviour
 
     private void Mirroring(Vector3 position)
     {
-        Vector2 camaraCenter = Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0.5f));
-
-        if (camaraCenter.x > position.x && !_isMirroring)
+        if (_camaraCenter.x > position.x && !_isMirroring)
         {
             foreach (GameObject image in _mirroringImages)
             {
@@ -81,7 +86,7 @@ public class DragNDropTarget : MonoBehaviour
             }
             _isMirroring = true;
         }
-        else if(camaraCenter.x < position.x && _isMirroring)
+        else if(_camaraCenter.x < position.x && _isMirroring)
         {
             foreach (GameObject image in _mirroringImages)
             {
