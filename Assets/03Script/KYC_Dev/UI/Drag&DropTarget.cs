@@ -1,25 +1,33 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class DragNDropTarget : MonoBehaviour
 {
-    [Header("배경 지정")]
+    [Header("배경 지정")] 
     [SerializeField] private GameObject _backgrounnd;
 
-    [Header("반전할 이미지들")]
+    [Header("반전할 이미지들")] 
     [SerializeField] private GameObject[] _mirroringImages;
 
-    [Header("For Debug")]
+    [Header("x축 한계 보정용")] 
+    [SerializeField] private GameObject _mask;
+    [SerializeField] private GameObject _handle;
+
+    [Header("For Debug")] 
     public bool isMove;
     [SerializeField] private bool _isMirroring;
-    
+
     private Vector2 _minBounds;
     private Vector2 _maxBounds;
     private Vector2 _camaraCenter;
 
     private float _halfWidth;
     private float _halfHeight;
+    private float _offsetX;
+    private float _offsetY;
+    private float _handleWidth;
 
     private Collider2D _collider2D;
 
@@ -38,7 +46,7 @@ public class DragNDropTarget : MonoBehaviour
 
     private void Update()
     {
-        MovingPosition();
+        if(isMove) MovingPosition();
     }
     
     private void InitClampBounds()
@@ -52,6 +60,9 @@ public class DragNDropTarget : MonoBehaviour
     {
         _halfWidth = _collider2D.bounds.extents.x;
         _halfHeight = _collider2D.bounds.extents.y;
+        _offsetX = _collider2D.offset.x;
+        _offsetY = _collider2D.offset.y;
+        _handleWidth = _handle.transform.localScale.x;
     }
 
     private void CheckPosition(Vector3 position)
@@ -61,15 +72,16 @@ public class DragNDropTarget : MonoBehaviour
 
     private void MovingPosition()
     {
-        if(isMove)
-        {
-            Vector2 pointerPosition = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
-            float x = Mathf.Clamp(pointerPosition.x , _minBounds.x + _halfWidth, _maxBounds.x - _halfHeight);
-            float y = Mathf.Clamp(pointerPosition.y , _minBounds.y + _halfHeight, _maxBounds.y - _halfHeight);
-            transform.position = new Vector3(x, y, transform.position.z);
-            _backgrounnd.transform.position = new Vector3(_backgrounnd.transform.position.x, y, _backgrounnd.transform.position.z);
-            Mirroring(transform.position);
-        }
+        Vector2 pointerPosition = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
+        float x = Mathf.Clamp(
+            pointerPosition.x, _minBounds.x + (_mask.transform.localScale.x + _handleWidth) - (_halfWidth - _offsetX), _maxBounds.x - (_halfWidth - _offsetX));
+        float y = Mathf.Clamp(
+            pointerPosition.y, _minBounds.y + (_halfHeight - _offsetY), _maxBounds.y - (_halfHeight - _offsetY));
+        transform.position = new Vector3(x, y, transform.position.z);
+        _backgrounnd.transform.position =
+            new Vector3(_backgrounnd.transform.position.x, y, _backgrounnd.transform.position.z);
+        Mirroring(transform.position);
+        
     }
 
     private void Mirroring(Vector3 position)
@@ -99,6 +111,4 @@ public class DragNDropTarget : MonoBehaviour
             _isMirroring = false;
         }
     }
-    
-    
 }
