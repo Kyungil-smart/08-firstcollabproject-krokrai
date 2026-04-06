@@ -158,12 +158,12 @@ public class RestaurantManager : MonoBehaviour
         // 설거지? 시간 => 대기시간 => 스폰
         while (true)
         {
-            /*
+            
             if (!_haveDish)
             {
                 yield return null;
                 continue;
-            }*/
+            }
 
             // 빈자리 탐색 및 반환 받음.
             _emptySeat = GetEmptySeat();

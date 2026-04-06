@@ -45,9 +45,7 @@ public class RecipeInfoUI : MonoBehaviour
     public void SelectedRecipe(in RecipeContainer rcp, in bool canMake, in bool isUnlcok)
     {
         if ( canMake && _canMake )
-            _btn.interactable = true;
-        else
-            _btn.interactable = false;
+
 
         // 렌더러 작업은 스프라이터 관련 매니저 완성 후
         /*

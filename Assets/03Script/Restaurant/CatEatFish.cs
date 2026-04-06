@@ -9,7 +9,7 @@ public class CatEatFish : MonoBehaviour
 
     public void EatFish()
     {
-        _btn.interactable = false;
+        _inven.SetCatFood();
 
         _ani.Play();
     }
