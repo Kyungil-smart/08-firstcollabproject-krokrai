@@ -9,6 +9,7 @@ public class WidgetSizeController : MonoBehaviour
     private Vector2 _startPos;
     private WidgetSizeHandle _target;
 
+    public event Action<bool> OnMove;
 
     private void Awake()
     {
@@ -34,23 +35,25 @@ public class WidgetSizeController : MonoBehaviour
 
     private void OnPointerDown(InputAction.CallbackContext context)
     {
-        Debug.Log("OnPointerDown");
         _startPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
         RaycastHit2D[] hit2Ds = Physics2D.RaycastAll(_startPos, Vector2.zero);
 
         foreach (RaycastHit2D hit2D in hit2Ds)
         {
             hit2D.collider.gameObject.TryGetComponent(out _target);
-            if (_target != null) _target.isMove = true;
-            Debug.Log("OnMove");
+            if (_target != null)
+            {
+                _target.isMove = true;
+                OnMove?.Invoke(true);
+            }
         }
     }
 
     private void OnPointerUp(InputAction.CallbackContext context)
     {
-        Debug.Log("OnPointerUp");
         if (_target == null) return;
         _target.isMove = false;
+        OnMove?.Invoke(false);
         _target = null;
     }
 }
