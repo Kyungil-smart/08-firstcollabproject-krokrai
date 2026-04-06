@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a268dac717f218c44ba9897ae57510c8, type: 3}
   m_Name: GuidePage_08
   m_EditorClassIdentifier: Assembly-CSharp::GuidePageSO
-  guideImage: {fileID: 2306541134913011901, guid: bfac6438a0493484a873e4cc2f101f7b, type: 3}
+  guideImage: {fileID: 21300000, guid: c3935213ef8cad6489f8173b01ce7838, type: 3}

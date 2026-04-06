@@ -22,6 +22,9 @@ public class TraderListManager : MonoBehaviour
             if (slot != null)
             {
                 slot.SetupTrader(data, trader);
+                // 호버링 설명창의 데이터 넘겨줌
+                trader.SetupSlot(go, data);
+
                 _allSlots.Add(slot);
             }
         }

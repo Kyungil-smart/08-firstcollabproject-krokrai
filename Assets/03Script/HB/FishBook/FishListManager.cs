@@ -26,6 +26,14 @@ public class FishListManager : MonoBehaviour
     public TextMeshProUGUI weightText;      // Weight TMP 연결
     public TextMeshProUGUI caughtDateText;  // CaughtData TMP 연결
 
+    private void OnEnable()
+    {
+        if(DataTower.instance != null)
+        {
+            DataTower.instance.OnLanguageSettingChanged += LanguageChanged;
+        }
+        UpdateFishUI();
+    }
 
     private void Start()
     {
@@ -35,6 +43,11 @@ public class FishListManager : MonoBehaviour
 
     private void OnDisable()
     {
+        if(DataTower.instance != null)
+        {
+            DataTower.instance.OnLanguageSettingChanged -= LanguageChanged;
+        }
+
         // 상세창을 닫으면 메모리에서 이미지를 해제
         if (imageLoader != null)
         {
@@ -42,20 +55,31 @@ public class FishListManager : MonoBehaviour
         }
     }
 
+    private void LanguageChanged(Language newLanguage)
+    {
+        UpdateFishUI();
+    }
+
     public void UpdateFishUI()
     {
         if(currentFish == null) return;
 
         bool isCaught = currentFish.isCaught;
+
+        // 현재 언어가 한국어인가
+        bool isKor = DataTower.instance.languageSetting == Language.KOR;
+
+        string displayName = isKor ? currentFish.korName : currentFish.engName;
+        string displayDescription = isKor ? currentFish.korDescription : currentFish.engDescription;
         
         // 삼항 연산자 잡았으면 물고기 정보 띄우고 아니면 ???
         SafeLink(fishNumText, currentFish.fishID);
-        SafeLink(fishNameText, isCaught ? currentFish.korName : "???");
+        SafeLink(fishNameText, isCaught ? displayName : "???");
         SafeLink(fishRateText, isCaught ? currentFish.fishRarity.ToString() : "???");
         SafeLink(groupText, isCaught ? currentFish.fishType.ToString() : "???");
         SafeLink(lengthText, isCaught ? $"{currentFish.length} cm" : "???");
         SafeLink(weightText, isCaught ? $"{currentFish.weight} kg" : "???");
-        SafeLink(descriptionText, isCaught ? currentFish.korDescription : "???");
+        SafeLink(descriptionText, isCaught ? displayDescription : "???");
         SafeLink(caughtDateText, isCaught ? currentFish.caughtDate : "???");
 
         if (imageLoader != null)

@@ -12,13 +12,23 @@ public class TraderEconomy : MonoBehaviour
     public void UpdateGoldUI(ulong money)
     {
         Debug.Log($"전달받은 금액 : {money}");
-        // "N0"로 세자리 당 ',' 찍어주기 
-        if (goldText != null) goldText.text = $"Money: {money.TextFormatCurrency()} Gold";
+
+        if (goldText == null) return;
+
+        bool isKor = DataTower.instance.languageSetting == Language.KOR;
+        string moneyLabel = isKor ? "보유 금액" : "Money";
+
+        goldText.text = $"{moneyLabel}: {money.TextFormatCurrency()} Gold";
     }
 
     public void UpdatePriceUI(long total)
     {
-        totalPriceText.text = $"Total Price: {((ulong)total).TextFormatCurrency()} Gold";
+        if (totalPriceText == null) return;
+
+        bool isKor = DataTower.instance.languageSetting == Language.KOR;
+        string priceLabel = isKor ? "총 판매 금액" : "Total Price";
+
+        totalPriceText.text = $"{priceLabel}: {((ulong)total).TextFormatCurrency()} Gold";
         sellButton.interactable = total > 0;    
     } 
 

@@ -51,9 +51,27 @@ public class FishBookManager : MonoBehaviour
             scrollRect.verticalNormalizedPosition = 1f;
         }
 
+        if (DataTower.instance != null)
+        {
+            DataTower.instance.OnLanguageSettingChanged += LanguageChanged;
+        }
+
         // 창이 실행될 때 기존에 있던 슬롯과 중첩되지 않게 다시 생성
         StopAllCoroutines();
         StartCoroutine(InitBookRoutine());
+    }
+
+    private void OnDisable()
+    {
+        if (DataTower.instance != null)
+        {
+            DataTower.instance.OnLanguageSettingChanged -= LanguageChanged;
+        }       
+    }
+
+    private void LanguageChanged(Language language)
+    {
+        UpdateCompletionUI();
     }
 
     private IEnumerator InitBookRoutine()
@@ -172,6 +190,8 @@ public class FishBookManager : MonoBehaviour
                 }
             }
         }
+
+
         fishBookCompletionText.text = $"{caughtCount} / {totalFish}";    
 
     }

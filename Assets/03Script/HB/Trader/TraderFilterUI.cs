@@ -35,7 +35,16 @@ public class TraderFilterUI : MonoBehaviour
         //버튼 텍스트 변경
         if (filterButtonText != null)
         {
-            filterButtonText.text = isFilterMode ? "Confirm" : "Filter";
+            bool isKor = DataTower.instance.languageSetting == Language.KOR;
+            if (isFilterMode)
+            {
+                filterButtonText.text = isKor ? "확인" : "Confirm";
+            }
+            
+            else
+            {
+                filterButtonText.text = isKor ? "필터" : "Filter";
+            }
         }
 
         if (mainContentUI != null)
