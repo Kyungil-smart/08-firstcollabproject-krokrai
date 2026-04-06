@@ -55,11 +55,10 @@ public class GaugeSetter : MonoBehaviour
     /// 식사 중 = true
     /// </summary>
     /// <param name="isEatDuration">식사 중이면 true</param>
-    public void SetState(bool isEatDuration)
+    public void SetState(bool isEatDuration, bool isVisible)
     {
-        Debug.Log($"배정된 상태 : {isEatDuration}");
+        gameObject.SetActive(isVisible);
         _fillImage.color = isEatDuration ? _gaugeRedColor : _gaugeBlueColor;
-        Debug.Log($"배정된 색 : {_fillImage.color}");
     }
 
     /// <summary>
@@ -70,5 +69,10 @@ public class GaugeSetter : MonoBehaviour
     public void SliderValueUpdate(in float value)
     {
         _slider.value = value;
+    }
+
+    public void GaugeOff()
+    {
+        gameObject.SetActive(false);
     }
 }

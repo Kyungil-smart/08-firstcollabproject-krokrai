@@ -1,12 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CatEatFish : MonoBehaviour
 {
     [SerializeField] InventorySystem _inven;
+    [SerializeField] Button _btn;
+    [SerializeField] Animation _ani;
+
     public void EatFish()
     {
-        // 연출 어쩌구
-        Debug.Log("고양이가 물고기 먹음 근데 말만 그럼.");
-        //_inven.
+        _btn.interactable = false;
+
+        _ani.Play();
+    }
+
+    public void CanEatFishState()
+    {
+        _btn.interactable = true;
     }
 }

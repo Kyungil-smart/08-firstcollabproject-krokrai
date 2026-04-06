@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3275731141906476971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.9, y: -0.4699998, z: 0}
+  m_LocalPosition: {x: 8.9, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -48,6 +48,7 @@ MonoBehaviour:
   _fixedValue: {fileID: 0}
   _visualObject: {fileID: 4590847529964708730}
   _openMenu: {fileID: 0}
+  _spriteLibrary: {fileID: 3717999199148373973}
 --- !u!1 &4590847529964708730
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +60,8 @@ GameObject:
   - component: {fileID: 6624103499332136210}
   - component: {fileID: 3392658875339751099}
   - component: {fileID: 7508475585256464503}
+  - component: {fileID: 6558165045188116165}
+  - component: {fileID: 3717999199148373973}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -76,7 +79,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6018763274241634174}
@@ -127,10 +130,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 2003375653
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: -1
-  m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 82f496379669e6c47be4c45e96dd29e6, type: 3}
+  m_MaskInteraction: 2
+  m_Sprite: {fileID: 21300000, guid: 75817ed5c022ddf479e86630dfb69087, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -162,3 +165,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6558165045188116165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590847529964708730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteResolver
+  m_CategoryHash: 7.622522e-34
+  m_labelHash: 0.00000002749411
+  m_SpriteKey: 0
+  m_SpriteHash: 1002916903
+--- !u!114 &3717999199148373973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4590847529964708730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrary
+  m_Library: []
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 6f301a20cbedb7c4986090f47c66357d, type: 3}
