@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class OpenMenu : MonoBehaviour
 {
-    [SerializeField] Button _btn;
     [SerializeField] GameObject _menu;
     [SerializeField] GameObject _restaurantScreen;
     [SerializeField] GameObject _fish;
