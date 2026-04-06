@@ -89,7 +89,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     }
 
     /// <summary>
-    ///  낚시대를 강화하여 최대 낚시 횟수를 늘리고 변경된 횟수를 UI에 반영
+    ///  낚시대 업그레이드 시 호출되는 인터페이스 메서드
     /// </summary>
     public void UpgradeFishingRod()
     {
@@ -97,7 +97,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     }
 
     /// <summary>
-    /// 낚시대 강화 레벨에 따라 낚시 가능한 최대 횟수 값을 결정
+    /// 낚시대 강화 레벨에 따라 낚시 가능한 최대 횟수 값을 UI에 갱신
     /// </summary>
     public void RodgradeMaxCount(int newLevel)
     {
@@ -119,7 +119,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     }
 
     /// <summary>
-    /// 미끼를 강화하여 낚시 횟수 충전 시간을 단축시키는 로직 실행
+    /// 미끼 업그레이드 시 호출되는 인터페이스 메서드
     /// </summary>
     public void UpgradeFishingBait()
     {
@@ -127,7 +127,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     }
 
     /// <summary>
-    /// 미끼 강화 레벨에 따라 다음 충전까지 걸리는 최대 시간을 계산하여 타이머에 전달
+    /// 미끼 레벨에 따라 타이머의 최대 쿨타임을 설정
     /// </summary>
     public void BaitgradeMaxCount(int newLevel)
     {
@@ -153,15 +153,17 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
         }
     }
 
+    /// <summary>
+    /// 클릭 시작 위치 저장
+    /// </summary>
     public void OnPointerDown(PointerEventData eventData)
     {
         _pressPos = eventData.position;
     }
 
     /// <summary>
-    /// 오브젝트 클릭 시 낚시 횟수 차감 및 낚시 연출 실행 메서드
+    /// 낚시 화면 클릭 시 호출 현재 애니메이션의 상태에 따라 낚시 연출 실행
     /// </summary>
-    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         float distance = (eventData.position - _pressPos).sqrMagnitude;
@@ -213,6 +215,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             }
         }
     }
+
+    /// <summary>
+    /// 현재 카운트 데이터를 UI 스크립트에 전달하여 화면 갱신
+    /// </summary>
     private void UpdateUI()
     {
         if (uiManager != null)
@@ -221,9 +227,8 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
         }
     }
 
-
     /// <summary>
-    ///  외부에서 신호를 받아 낚시 횟수를 1회 충전하고 UI를 갱신하는 메서드
+    ///  쿨타임이 지나면 낚시 횟수를 1회 충전
     /// </summary>
     public void FishingChance()
     {
@@ -239,16 +244,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     }
 
     /// <summary>
-    /// 외부에서 현재 남은 낚시 횟수를 참조할 수 있게 반환
+    /// 현재 남은 낚시 횟수를 반환
     /// </summary>
-    /// <returns></returns>
     public int GetCurrentCount()
     {
         return _currentCount;
     }
 
     /// <summary>
-    /// fishDatabase의 Count 범위 내에서 무작위 FishData 반환
+    /// 확률에 따라 무작위 물고기를 결정하고 데이터타워에 전달
     /// </summary>
     public void GetRandomFish()
     {
@@ -278,6 +282,10 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             }
         }
     }
+
+    /// <summary>
+    /// 화면에 물고기 팝업 연출
+    /// </summary>
     public void OnCatchAnimationEvent()
     {
         if (_lastCaughtFish != null)
@@ -288,9 +296,8 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     }
 
     /// <summary>
-    /// 확률을 바탕으로 주사위를 굴려 당첨된 등급 문자열을 반환
+    /// 시트에 설정된 확률에 따라 무작위 등급을 결정
     /// </summary>
-    /// <returns></returns>
     private string GetFishRarity()
     {
         float rarityRate = UnityEngine.Random.Range(0f, 100f);
@@ -320,10 +327,8 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     }
 
     /// <summary>
-    /// 특정 등급을 매개변수로 받아, 해당 등급에 속하는 물고기들 중 한 마리를 무작위로 선택하여 반환
+    /// 결정된 등급에 따라 해당 등급에 속하는 물고기를 리스트 안에서 한 마리를 무작위로 선택
     /// </summary>
-    /// <param name="rarity"></param>
-    /// <returns></returns>
     public FishData GetRandomRarityFish(string rarity)
     {
         List<FishData> filteredFish = new List<FishData>();
@@ -346,6 +351,9 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
         return filteredFish[randomIndex];
     }
 
+    /// <summary>
+    /// 플레이어 레벨에 맞는 확률 데이터 시트를 적용
+    /// </summary>
     public void FishRateLevel(int level)
     {
         int index = level - 1;
@@ -357,16 +365,25 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
         }
     }
 
+    /// <summary>
+    /// 배 업그레이드 실행 요청
+    /// </summary>
     public void UpgradeShipLevel()
     {
         _upgradeManager.ShipUpgrade();
     }
 
+  /// <summary>
+  /// 배 업그레이드 레벨 적용
+  /// </summary>
     public void ShipUpgradeLevel(int newLevel)
     {
         Debug.Log($"현재 배 레벨: {newLevel}");
     }
 
+    /// <summary>
+    /// 낚시 대기 상태일 때 무작위 연출 애니메이션을 재생하는 코루틴
+    /// </summary>
     IEnumerator IdleVariationRoutine()
     {
         while (true)
@@ -417,6 +434,9 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
         }
     }
 
+    /// <summary>
+    /// 낚인 물고기를 프리팹으로 생성하고 스프라이트를 설정하여 화면에 연출
+    /// </summary>
     private void PopFishResult(FishData data)
     {
         if (this == null || data == null || fishPrefab == null || popFishPoint == null) 
