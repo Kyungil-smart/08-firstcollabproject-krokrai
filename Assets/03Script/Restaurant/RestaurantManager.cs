@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 public class RestaurantManager : MonoBehaviour
 {
@@ -13,9 +15,11 @@ public class RestaurantManager : MonoBehaviour
     [SerializeField] private Customer_Tips[] _customerTips;
     [SerializeField] private Restaurant_Fixed_value _fixedValue;
     [SerializeField] private DiningUpgradeDataReader _diningUpgradeDataReader;
+    [SerializeField] private GaugeSetter[] _gaugeSetter;
+    [SerializeField] SpriteLibraryAsset[] _customerAsset;
 
     [Header("Spawn")]
-    [SerializeField] private GameObject[] _customerPrefab;
+    [SerializeField] private GameObject _customerPrefab;
     [SerializeField] private GameObject _customers;
     [SerializeField] private Transform _spawnPointRight;
     [SerializeField] private Transform _exitPointLeft;
@@ -28,11 +32,12 @@ public class RestaurantManager : MonoBehaviour
     private Queue<GameObject> _customerPool; // 오브젝트 풀 패턴 기반 작동 예정
     private GameObject _randomPrefab;
 
+    private GaugeSetter _currentGauge;
+    private SpriteLibraryAsset _currentSpriteLibrary;
+
     private RestaurantSeat _emptySeat;
     private bool _haveDish;
     private bool _canVisual;
-
-    private WaitForSeconds[] _seconds;
 
     private byte _normalCustomers;
     private byte _specialCustomers;
@@ -40,6 +45,8 @@ public class RestaurantManager : MonoBehaviour
     private int _maxNormalCustomersWeight;
     private int _maxSpecialCustomersWeight;
     private int _maxVIPCustomersWeight;
+
+    private int _currentmaxSpecialCustomerWeight;
 
     private int _halfNormalCustomersWeight;
     private int _halfSpecialCustomersWeight;
@@ -79,6 +86,20 @@ public class RestaurantManager : MonoBehaviour
         byte i = 0;
         _halfNormalCustomersWeight = 0;
         _halfSpecialCustomersWeight = 0;
+
+        _normalCustomers = 0;
+        _specialCustomers = 0;
+        
+
+        _currentmaxSpecialCustomerWeight = 0;
+
+        _maxNormalCustomersWeight = 0;
+        _maxSpecialCustomersWeight = 0;
+        _maxVIPCustomersWeight = 0;
+
+        _currentSpawnedSpecialCustomer = 0;
+        _currentSpawnedVIPCustomer = 0;
+
         /*
         _baseDelay = new WaitForSeconds(5);
         _seconds = new WaitForSeconds[10];
@@ -92,7 +113,7 @@ public class RestaurantManager : MonoBehaviour
 
         for (i = 0; i < 10 ; i++)
         {
-            GameObject obj = Instantiate(_customerPrefab[0]); // 나중에 데이터 타워 리셋 후 받게 만들기.
+            GameObject obj = Instantiate(_customerPrefab); // 나중에 데이터 타워 리셋 후 받게 만들기.
             obj.GetComponent<CustomerController>().ConnectRestaurant(this, _openMenu);
             obj.transform.SetParent(_customers.transform);
             obj.name = $"customer {i}";
@@ -121,6 +142,8 @@ public class RestaurantManager : MonoBehaviour
             }
         }
 
+        Debug.Log($"손님 수 : {_normalCustomers} / {_specialCustomers}");
+
         for (i = 0; i  < _normalCustomers / 2; i++)
             _halfNormalCustomersWeight += _customerData[i].weight;
         for (i = 0; i < _specialCustomers / 2; i++)
@@ -135,6 +158,7 @@ public class RestaurantManager : MonoBehaviour
         // 설거지? 시간 => 대기시간 => 스폰
         while (true)
         {
+            
             if (!_haveDish)
             {
                 yield return null;
@@ -167,6 +191,11 @@ public class RestaurantManager : MonoBehaviour
         }
     }
 
+    void GetRandomCustomerSprite()
+    {
+        _currentSpriteLibrary = _customerAsset[UnityEngine.Random.Range(0, _customerAsset.Length)];
+    }
+
     private void SpawnCustomer(RestaurantSeat seat)
     {
         // 자리에 앉음 상태로 전환
@@ -174,15 +203,22 @@ public class RestaurantManager : MonoBehaviour
         _temp_Numbers = CustomerWeightSelecter(UnityEngine.Random.Range(0,
             (_maxNormalCustomersWeight
             + CanSpawnVIPCustomer()
-            + CanSpawnSpecialCustomer())));
+            + CanSpawnSpecialCustomer() ) ));
+
+        Debug.Log(_temp_Numbers);
 
         seat.SetOccupied();
+
+        GetRandomCustomerSprite();
+
         _randomPrefab.SetActive(true);
         _randomPrefab.transform.position = _spawnPointRight.position;
         _randomPrefab.GetComponent<CustomerController>().SetInfo(seat,
             _exitPointLeft,
             _customerTips[(int)_customerData[_temp_Numbers].grade],
             _customerData[_temp_Numbers],
+            _currentGauge,
+            _currentSpriteLibrary,
             _canVisual); // 후에 수정
     }
 
@@ -190,7 +226,7 @@ public class RestaurantManager : MonoBehaviour
     {
         if (_currentSpawnedSpecialCustomer < DataTower.instance.MaxSpawnLimit01Level - 1)
         {
-            return _maxSpecialCustomersWeight + (DataTower.instance.MaxSpawnLimit01Level - 1) * _diningUpgradeDataReader.Weight[_currentWeightLevel].Effect_Value_1;
+            return _maxSpecialCustomersWeight + _specialCustomers * _diningUpgradeDataReader.Weight[_currentWeightLevel].Effect_Value_1;
         }
         else
             return 0;
@@ -209,14 +245,15 @@ public class RestaurantManager : MonoBehaviour
     private int CustomerWeightSelecter(int weight)
     {
         // weight 업글시 스페셜 손님 가중치
-        _maxSpecialCustomersWeight = _maxSpecialCustomersWeight 
+        _currentmaxSpecialCustomerWeight = _maxSpecialCustomersWeight 
             + (_diningUpgradeDataReader.Weight[_currentWeightLevel].Effect_Value_1
             * _specialCustomers);
 
+        Debug.Log($"손님 가중치 : {_maxNormalCustomersWeight} / {_currentmaxSpecialCustomerWeight} / {_maxVIPCustomersWeight}\n현재 스페셜 손님 가중치 : {CanSpawnSpecialCustomer()} / 현재 VIP 손님 가중치 : {CanSpawnVIPCustomer()}");
+
         if (weight - _maxNormalCustomersWeight < 0)
         {
-            // 노말 손님들만 존재(0보다 작으니)
-            Debug.Log("Normal Spawn");
+            Debug.Log($"Normal Spawn, {weight}");
             if (weight - _halfNormalCustomersWeight < 0)
             {
                 return CustomerWeightFinder(weight, 0);
@@ -234,30 +271,33 @@ public class RestaurantManager : MonoBehaviour
             if (weight - _maxSpecialCustomersWeight < 0 && DataTower.instance.MaxSpawnLimit01Level > 1)
             {
                 // 스페셜만
-                Debug.Log("Special Spawn");
+                Debug.Log($"Special Spawn, {weight}");
                 _currentSpawnedSpecialCustomer++;
                 if ( weight - _halfSpecialCustomersWeight < 0)
+                {
                     return CustomerWeightFinder(weight, _normalCustomers);
+                }
                 else
                 {
                     weight -= _halfSpecialCustomersWeight;
                     return CustomerWeightFinder(weight, (byte)((_normalCustomers + _specialCustomers) / 2));
                 }
             }
-            else
+            else 
             {
+                weight -= _maxSpecialCustomersWeight; // VIP 제대로 작동 안됌 나중에 고치기.
                 _currentSpawnedVIPCustomer++;
-                Debug.Log("VIP Spawn");
-                return CustomerWeightFinder(weight, (byte)(_normalCustomers + _specialCustomers) );
+                Debug.Log($"VIP Spawn, {weight}");
+                return CustomerWeightFinder(weight, (byte)(_normalCustomers + _specialCustomers));
             }
         }
     }
 
     private int CustomerWeightFinder(int weight, byte startNumber)
-    { // 가중치를 빼면서 작업 하기
-        startNumber -= 1;
+    {
         for (byte i = startNumber; i < _customerData.Length; i++)
         {
+            //Debug.Log($"CustomerWeightFinder 반복 횟수 : {i} / {_customerData.Length}\n시작 숫자 : {startNumber}");
             if (weight - _customerData[i].weight <= 0)
             {
                 return i;
@@ -287,9 +327,11 @@ public class RestaurantManager : MonoBehaviour
         {
             case CustomerGrade.SPECIAL:
                 _currentSpawnedSpecialCustomer--;
+                Debug.Log($"현재 스페셜 손님 수 : {_currentSpawnedSpecialCustomer}");
                 break;
             case CustomerGrade.VIP:
                 _currentSpawnedVIPCustomer--;
+                Debug.Log($"현재 스페셜 손님 수 : {_currentSpawnedVIPCustomer}");
                 break;
         }
             
@@ -303,33 +345,25 @@ public class RestaurantManager : MonoBehaviour
         {
             // 반복 문으로 모든 자리 탐색
             if (_seats[i].IsOccupied == false)
+            {
+                _currentGauge = _gaugeSetter[i];
                 return _seats[i];
+            }
         }
         return null;
     }
 
-    // 입력된 손님 무작위  출력
-    /*
-    private CustomerController GetRandomCustomerPrefab()
-    {
-        if (_customerPrefab == null || _customerPrefab.Length == 0)
-            return null;
-
-        int randIndex = Random.Range(0, _customerPrefab.Length);
-        return _customerPrefab[randIndex];
-    }*/
-
     private void GetRandomCustomerPrefab()
     {
-        if (_customerPrefab == null || _customerPrefab.Length == 0)
+        if (_customerPrefab == null)
         {
             Debug.LogWarning("프리팹이 등록되지 않았거나, 없습니다.");
             return;
         }
-        int randIndex = Random.Range(0, _customerPrefab.Length);
+
         if (_customerPool.Count == 0)
         {
-            _customerPool.Enqueue(_customerPrefab[randIndex]);
+            _customerPool.Enqueue(_customerPrefab);
             _randomPrefab = _customerPool.Dequeue();
         }
         else

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TraderUI : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class TraderUI : MonoBehaviour
     public SelectionManager selectionManager;   // 어떤 슬롯이 체크되었는지 계산하는 관리자
     public FilterManager filterLogic;           // 어떤 등급을 걸러낼지 계산하는 관리자
     public Toggle selectAllToggle;              // 전체선택 버튼
+    public GameObject descriptionPanel;         // 호버링 설명 패널 드래그 앤 드롭
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI rarityText;
 
     private bool _isInitialized = false;       // Start가 초기설정끝냈는지
 
@@ -33,6 +37,8 @@ public class TraderUI : MonoBehaviour
 
         if(DataTower.instance != null)
         {
+            DataTower.instance.OnLanguageSettingChanged -= LanguageChanged;
+            DataTower.instance.OnLanguageSettingChanged += LanguageChanged;
             RefreshAll();
         }
     }
@@ -40,6 +46,26 @@ public class TraderUI : MonoBehaviour
     private void OnDisable()
     {
         CleanEvents();
+
+        if (DataTower.instance != null)
+        {
+            DataTower.instance.OnLanguageSettingChanged -= LanguageChanged;
+        }
+    }
+
+    private void LanguageChanged(Language language)
+    {
+        RefreshAll();
+    }
+
+    public void SetupSlot(GameObject slotObject, FishData fishData)
+    {
+        var hovering = slotObject.GetComponent<HoveringFishDescription>();
+
+        if (hovering != null)
+        {
+            hovering.Setup(fishData, descriptionPanel, nameText, rarityText);   
+        }
     }
 
     // 데이터 타워의 이벤트를 구독하고 초기 값 설정
@@ -139,6 +165,8 @@ public class TraderUI : MonoBehaviour
         
         // 필터 적용
         listManager.ApplyFilter(filterLogic.GetSelectedRates());
+
+        filterUI.SetFilterUIMode(filterUI.isFilterMode);
 
         // 초기화
         OnSlotChanged();

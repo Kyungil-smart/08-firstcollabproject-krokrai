@@ -7,7 +7,6 @@ public class InventoryTextController : MonoBehaviour
 {
     [Tooltip("UI Texts")]
     [SerializeField] TextMeshProUGUI _moneyText;
-    [SerializeField] TextMeshProUGUI _curGoldText;
     [SerializeField] TextMeshProUGUI _countText;
     [SerializeField] TextMeshProUGUI _sortSelectText;
     [SerializeField] TextMeshProUGUI _byCaughtText;
@@ -28,6 +27,8 @@ public class InventoryTextController : MonoBehaviour
 
     private string _fishCountFrontText;
     private string _fishCountBackText;
+    private string _moneyFrontText;
+    private string _moneyBackText;
 
     private void Awake()
     {
@@ -100,8 +101,10 @@ public class InventoryTextController : MonoBehaviour
                 _byCaughtText.text = _id_Acquisition.En;
                 _byNameText.text = _id_Name.En;
                 _byRairtyText.text = _id_Rarity.En;
-                SetFishCountTranslationText(language, out _fishCountFrontText, out _fishCountBackText);
+                SplitFishCountText(language, out _fishCountFrontText, out _fishCountBackText);
+                SplitMoneyText(language, out _moneyFrontText, out _moneyBackText);
                 SetCountText();
+                SetGoldText();
                 break;
             case Language.KOR:
                 _moneyText.text = _id_Money.Kor;
@@ -109,13 +112,15 @@ public class InventoryTextController : MonoBehaviour
                 _byCaughtText.text = _id_Acquisition.Kor;
                 _byNameText.text = _id_Name.Kor;
                 _byRairtyText.text = _id_Rarity.Kor;
-                SetFishCountTranslationText(language, out _fishCountFrontText, out _fishCountBackText);
+                SplitFishCountText(language, out _fishCountFrontText, out _fishCountBackText);
+                SplitMoneyText(language, out _moneyFrontText, out _moneyBackText);
                 SetCountText();
+                SetGoldText();
                 break;
         }
     }
 
-    private void SetFishCountTranslationText(Language language, out string front, out string back)
+    private void SplitFishCountText(Language language, out string front, out string back)
     {
         string[] temp;
         switch (language)
@@ -136,6 +141,27 @@ public class InventoryTextController : MonoBehaviour
                 break;
         }
     }
+    
+    private void SplitMoneyText(Language language, out string front, out string back)
+    {
+        switch (language)
+        {
+            case Language.ENG:
+                string[] temp = _id_Money.En.Split("{0:N0}");
+                front = temp[0];
+                back = temp[1];
+                break;
+            case Language.KOR:
+                string[] temp1 = _id_Money.Kor.Split("{0:N0}");
+                front = temp1[0];
+                back = temp1[1];
+                break;
+            default:
+                front = "";
+                back = "";
+                break;
+        }
+    }
 
     #endregion
 
@@ -146,7 +172,8 @@ public class InventoryTextController : MonoBehaviour
     
     private void RenewalGoldText(ulong amount)
     {
-        _curGoldText.text = amount.TextFormatCurrency();
+        string temp = amount.TextFormatCurrency();
+        _moneyText.text = $"{_moneyFrontText}{temp}{_moneyBackText}";
     }
     
     private void SetCountText()

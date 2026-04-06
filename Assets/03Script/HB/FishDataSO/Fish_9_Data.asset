@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_9_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_9
   korName: "\uC804\uAC31\uC774"
   engName: Japanes Horse Mackerel
@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 30
   weight: 1
-  fishSprite: NullException
+  fishSprite: Fish_9
   silhouetteSprite: NullException
-  price: 1000
+  price: 12
   korDescription: "\uAD6D\uBBFC \uC0DD\uC120 \uC911 \uD558\uB098.\\n\uADF8\uB9CC\uD07C
     \uB2E4\uCC44\uB85C\uC6B4 \uB9DB\uC788\uB294 \uC694\uB9AC\uAC00 \uC788\uB2E4."
   engDescription: "One of the nation\u2019s favourite fish.\\nConsequently, there

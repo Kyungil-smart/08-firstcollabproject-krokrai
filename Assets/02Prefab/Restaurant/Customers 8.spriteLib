@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteLibrarySourceAsset
+  m_Library:
+  - m_Name: Main1
+    m_Hash: 142429503
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Sit
+      m_Hash: 854338608
+      m_Sprite: {fileID: 21300000, guid: 75817ed5c022ddf479e86630dfb69087, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 1a318ac1a547d1b439140eb0d499cdba, type: 3}
+    - m_Name: Stand
+      m_Hash: 628635570
+      m_Sprite: {fileID: 21300000, guid: 9952485406388ab489260064a42e89e0, type: 3}
+      m_FromMain: 1
+      m_SpriteOverride: {fileID: 21300000, guid: 018d6efd0324bb147ae071c756f8f7f1, type: 3}
+    m_FromMain: 1
+    m_EntryOverrideCount: 2
+  m_PrimaryLibraryGUID: 97763cde6fcd4e1459f7e5ef8d82e0f3
+  m_ModificationHash: 639110710522047105
+  m_Version: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_17_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_17
   korName: "\uAC08\uBCFC\uB77D"
   engName: Dark-Banded Rockfish
@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 20
   weight: 0.2
-  fishSprite: NullException
+  fishSprite: Fish_17
   silhouetteSprite: NullException
-  price: 1000
+  price: 35
   korDescription: "\uACA8\uC6B8\uCCA0 \uBC14\uB2E4\uB09A\uC2DC\uC5D0 \uC778\uAE30\uC788\uB294
     \uC0DD\uC120.\\n\uCC38\uB3D4\uACFC \uB9E4\uC6B0 \uC720\uC0AC\uD55C \uAC15\uD55C
     \uAC10\uCE60\uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."

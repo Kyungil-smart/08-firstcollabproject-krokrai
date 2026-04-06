@@ -46,15 +46,15 @@ public class FishData : ScriptableObject, IDataSeter
         // 길이, 무게, 생선 판매 가격
         if (!float.TryParse(datas[5], out length)) length = -1f;
         if (!float.TryParse(datas[6], out weight)) weight = -1f;
-        if (!int.TryParse(datas[9], out price)) price = -1;
+        if (!int.TryParse(datas[8], out price)) price = -1;
 
         // 이미지 어드레서블사용 (string)
         fishSprite = datas[7] != "" ? datas[7] : "NullException";
-        silhouetteSprite = datas[8] != "" ? datas[8] : "NullException";
+        //silhouetteSprite = datas[8] != "" ? datas[8] : "NullException";
 
         // 설명(한, 영)
-        korDescription = datas[10] != "" ? datas[10] : "NullException";
-        engDescription = datas[11] != "" ? datas[11] : "NullException";
+        korDescription = datas[9] != "" ? datas[9] : "NullException";
+        engDescription = datas[10] != "" ? datas[10] : "NullException";
     }
     
     EFish_Rarity ChangeToFishRarityEnum(string s)

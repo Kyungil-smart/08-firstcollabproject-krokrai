@@ -4,10 +4,11 @@ using UnityEngine.UI;
 public class MenuPanelController : MonoBehaviour
 {
     // TODO : 임시로 열고 사용 fish, recipe 모두 사용 후 참조 받는 걸로 변환 필요. @@@@@@
-    [SerializeField] FishData tempFishData;
     [SerializeField] RecipeContainer _recipe;
     [SerializeField] RecipeInfoUI _recipeInfoUI;
     [SerializeField] MenuCtrl _menuCtrl;
+
+    RecipModel _currentRecipe;
 
     bool isUnlocked;
 
@@ -25,8 +26,9 @@ public class MenuPanelController : MonoBehaviour
     // 테스트용 임시 주석 처리
     public void SelectedRecipe() //(RecipeContainer rcp)
     {
+        //_currentRecipe.
         //_recipe = rcp;
-        _recipeInfoUI.SelectedRecipe(_recipe, isUnlocked);
+        _recipeInfoUI.SelectedRecipe(_recipe, true , isUnlocked);
 
         //CanMakeDish();
     }

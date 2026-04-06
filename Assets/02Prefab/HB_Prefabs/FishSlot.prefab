@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 5, y: 5, z: 5, w: 5}
   m_Maskable: 1
@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3888331522287916181}
   - component: {fileID: 1299048826446483631}
-  - component: {fileID: 1756246527237479517}
+  - component: {fileID: -206039090361226693}
   - component: {fileID: 538721894803235824}
   - component: {fileID: 1640407436312011224}
   - component: {fileID: 2630787911025094913}
@@ -150,12 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e784fc53fc73fbb43980733858d99bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishSlot
-  imageLoader: {fileID: 1756246527237479517}
+  imageLoader: {fileID: -206039090361226693}
   fishListManager: {fileID: 0}
   priceText: {fileID: 0}
   highlightUI: {fileID: 0}
   slotToggle: {fileID: 0}
---- !u!114 &1756246527237479517
+--- !u!114 &-206039090361226693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8276c49e8cbcf104ca513921ecb45c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AddressableImageLoader
-  _targetImage: {fileID: 7488778211833736153}
 --- !u!114 &538721894803235824
 MonoBehaviour:
   m_ObjectHideFlags: 0

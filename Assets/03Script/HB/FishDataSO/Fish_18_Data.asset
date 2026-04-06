@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_18_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_18
   korName: "\uC0C8\uC6B0"
   engName: Shrimp
@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 30
   weight: 0.05
-  fishSprite: NullException
+  fishSprite: Fish_18
   silhouetteSprite: NullException
-  price: 1000
+  price: -1
   korDescription: "\uBC14\uB2E4\uC758 \uC2A4\uCE90\uBE48\uC800\uB85C,\\n\uCAC4\uAE43\uD0F1\uAE00\uD55C
     \uC721\uC9C8\uC5D0 \uC9C4\uD55C \uB2E8\uB9DB\uACFC \uAC10\uCE60\uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."
   engDescription: "A scavenger of the sea,\\nit is characterised by its firm, springy

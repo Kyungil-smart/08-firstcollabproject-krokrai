@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -120,6 +121,23 @@ public class InventorySystem : MonoBehaviour
         OnInventoryChanged?.Invoke();
         OnInventoryCountChanged?.Invoke(InventoryCount);
     }
+    
+    /// <summary>
+    /// 고양이가 랜덤으로 가져가는 기능에 대응하는 함수
+    /// </summary>
+    public void SetCatFood()
+    {
+        if(_fishAcquisitionDatas.Count == 0) return;
+        if(_fishAcquisitionDatas.Count == 1)
+        {
+            Erase(_fishAcquisitionDatas[1].fishID);
+        }
+        else
+        {
+            int temp = Random.Range(1, _fishAcquisitionDatas.Count);
+            Erase(_fishAcquisitionDatas[temp].fishID);
+        }
+    }
 
     /// <summary>
     /// 모든 아이템 제거
@@ -190,6 +208,7 @@ public class InventorySystem : MonoBehaviour
                 FishData temp = _fishAcquisitionDatas[i];
                 _fishAcquisitionDatas.TryAdd(i + 1, temp);
                 _fishAcquisitionDatas.Remove(i);
+                
             }
         }
         _fishAcquisitionDatas.TryAdd(1, data);
@@ -198,13 +217,22 @@ public class InventorySystem : MonoBehaviour
     private void DeleteLastestCaught(FishData data)
     {
         if(_fishAcquisitionDatas.Count == 0) return;
-
+        
         for (int i = _fishAcquisitionDatas.Count; i > 0; i--)
         {
             if (_fishAcquisitionDatas[i] == data)
             {
                 _fishAcquisitionDatas.Remove(i);
                 break;
+            }
+        }
+
+        for (int i = 1; i <= _fishAcquisitionDatas.Count; i++)
+        {
+            if (!_fishAcquisitionDatas.ContainsKey(i))
+            {
+                _fishAcquisitionDatas.TryAdd(i, _fishAcquisitionDatas[i+1]); 
+                _fishAcquisitionDatas.Remove(i+1);
             }
         }
     }

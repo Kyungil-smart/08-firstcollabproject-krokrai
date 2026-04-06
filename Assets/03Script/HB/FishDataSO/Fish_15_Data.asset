@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193ddd4a48b4954c9ff9fb053c28b3f, type: 3}
   m_Name: Fish_15_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
-  isCaught: 1
+  isCaught: 0
   fishID: Fish_15
   korName: "\uC6B0\uC218 \uAF41\uCE58"
   engName: Fine Saury
@@ -20,9 +20,9 @@ MonoBehaviour:
   fishType: 0
   length: 40
   weight: 0.5
-  fishSprite: NullException
+  fishSprite: Fish_15
   silhouetteSprite: NullException
-  price: 1000
+  price: 34
   korDescription: "\uBAB8\uC5D0 \uC88B\uC740 \uC0DD\uC120.\\n\uCAC0\uB4DD\uD55C \uACFC\uBA54\uAE30\uB098
     \uCE7C\uCE7C\uD55C \uBC25\uBC18\uCC2C\uC73C\uB85C \uC778\uAE30\uAC00 \uB192\uB2E4."
   engDescription: "A fish that is good for your health.\\nIt is popular as a chewy

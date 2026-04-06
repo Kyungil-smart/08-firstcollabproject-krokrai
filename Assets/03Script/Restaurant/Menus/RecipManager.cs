@@ -29,6 +29,26 @@ public class RecipManager : MonoBehaviour
 
     // 기존 데이터는 약 30개의 레시피가 있으면 모두 호출 될 수 있기 때문에 삭제 처리
 
+    private void Awake()
+    {
+        StartCoroutine(AddAction());
+    }
+
+    IEnumerator AddAction()
+    {
+        while(DataTower.instance == null)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        DataTower.instance.OnFisingNewFish += FirstFishingFish;
+        yield break;
+    }
+
+    private void OnDestroy()
+    {
+        DataTower.instance.OnFisingNewFish -= FirstFishingFish;
+    }
+
     private void Start()
     {
         StartCoroutine(DataRead());
@@ -38,7 +58,7 @@ public class RecipManager : MonoBehaviour
     {
         while ( !_dataCon.isDataLoaded )
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
 
         if ( _dataCon.objs[0] is not RecipeContainer )
@@ -46,10 +66,12 @@ public class RecipManager : MonoBehaviour
             Debug.LogError($"{gameObject.name}에 저장된 DataContainer가 RecipeContainer가 들어있지 않는 컨테이너입니다.");
             yield break;
         }
-        
-        
-        _recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
-        for (int i = 0; i < _dataCon.objs.Length; i++)
+
+
+        //_recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
+        _recipes = new Dictionary<string, GameObject>(3);
+        //for (int i = 0; i < _dataCon.objs.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
             _rcps = _dataCon.objs[i] as RecipeContainer;
             obj = Instantiate(tempRecipeObj, transform.position, Quaternion.identity);
@@ -57,32 +79,9 @@ public class RecipManager : MonoBehaviour
             obj.GetComponent<RecipModel>().InitRecip(_rcps, _riu);
             obj.name = _rcps.name;
 
-            _recipes.Add(_rcps.recipe_ID, obj);
+            _recipes.Add(_rcps.ingredient, obj);
         }
         yield break;
-    }
-
-
-    private void OnEnable()
-    {
-        //DataTower.instance.OnFisingNewFish += FirstFishingFish;
-    }
-
-    private void OnDisable()
-    {
-        //DataTower.instance.OnFisingNewFish -= FirstFishingFish;
-    }
-
-
-    /// <summary>
-    /// Data Tower에서 물고기 갯수를 받아오기 위한 함수.
-    /// </summary>
-    /// <param name="fishID"></param>
-    /// <returns></returns> 
-    public uint CheckHaveFish(uint fishID)
-    {
-
-        return 10; // 임시 작업
     }
 
     /// <summary>

@@ -26,12 +26,17 @@ public class FishSlot : MonoBehaviour
         _currentFishData = data;
         _traderUI = trader;
 
+        
         // 상점UI 활성화
         priceText?.gameObject.SetActive(true);
         slotToggle?.gameObject.SetActive(true);
 
-        // 이미지 로드
-        imageLoader?.LoadImage(data?.fishSprite);
+        // 이미지 로드, 색 초기화
+        if (imageLoader != null)
+        {
+            // 상점에서는 항상 원래 색 true
+            imageLoader.SetImage(data.fishSprite, true);
+        }
 
         // priceText가 연결돼 있을 때 실행(상점 전용)
         if (priceText != null)
@@ -66,9 +71,11 @@ public class FishSlot : MonoBehaviour
         if (slotToggle != null) slotToggle.gameObject.SetActive(false);
         if (highlightUI != null) highlightUI.SetActive(false);
 
-        string spriteLoad = data.isCaught ? data.fishSprite : data.silhouetteSprite;
-
-        imageLoader?.LoadImage(spriteLoad);
+        if (imageLoader != null)
+        {
+            // 이미지를 로드하며 실루엣 처리
+            imageLoader.SetImage(data.fishSprite, data.isCaught);
+        }
     }
 
     public void OnSlotClick()
