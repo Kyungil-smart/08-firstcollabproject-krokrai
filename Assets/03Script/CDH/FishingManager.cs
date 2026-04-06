@@ -22,11 +22,14 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public FishRateData fishCurrentRate; // 구글 시트에서 받아온 등급별 확률 데이터
     private Animator _animator;
     private Vector2 _pressPos;
+    private FishData _lastCaughtFish;
     [Header("물고기 연출")]
     public GameObject fishPrefab;
-    public Transform popPoint;
+    public Transform popFishPoint;
     public List<Sprite> fishSprites;
-    private FishData _lastCaughtFish;
+    public List<Sprite>raritySprites;
+    private GameObject _currentFish;
+   
 
     private void Start()
     {
@@ -61,9 +64,22 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
 
         if (Keyboard.current.digit1Key.wasPressedThisFrame) RodgradeMaxCount(1);
         if (Keyboard.current.digit2Key.wasPressedThisFrame) RodgradeMaxCount(2);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) RodgradeMaxCount(3);
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) RodgradeMaxCount(3); 
         if (Keyboard.current.digit4Key.wasPressedThisFrame) RodgradeMaxCount(4);
         if (Keyboard.current.digit5Key.wasPressedThisFrame) RodgradeMaxCount(5);
+
+        if (Keyboard.current.qKey.wasPressedThisFrame) FishRateLevel(1);
+        if (Keyboard.current.wKey.wasPressedThisFrame) FishRateLevel(2);
+        if (Keyboard.current.eKey.wasPressedThisFrame) FishRateLevel(3);
+        if (Keyboard.current.rKey.wasPressedThisFrame) FishRateLevel(4);
+        if (Keyboard.current.tKey.wasPressedThisFrame) FishRateLevel(5);
+        if (Keyboard.current.yKey.wasPressedThisFrame) FishRateLevel(6);
+        if (Keyboard.current.uKey.wasPressedThisFrame) FishRateLevel(7);
+        if (Keyboard.current.iKey.wasPressedThisFrame) FishRateLevel(8);
+        if (Keyboard.current.oKey.wasPressedThisFrame) FishRateLevel(9);
+        if (Keyboard.current.pKey.wasPressedThisFrame) FishRateLevel(10);
+
+
     }
 
     /// <summary>
@@ -397,14 +413,19 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
 
     private void PopFishResult(FishData data)
     {
-        if (this == null || data == null) return;
-
-        if (fishPrefab == null)
-        {
-            return;
+        if (this == null || data == null || fishPrefab == null || popFishPoint == null) 
+        { 
+            return; 
         }
 
-        GameObject go = Instantiate(fishPrefab, popPoint.position, Quaternion.identity);
+        if (_currentFish != null)
+        {
+            Destroy(_currentFish);
+        }
+
+        GameObject go = Instantiate(fishPrefab, popFishPoint.position, Quaternion.identity, popFishPoint);
+        _currentFish = go;
+
         SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
         if (sr != null)
         {
