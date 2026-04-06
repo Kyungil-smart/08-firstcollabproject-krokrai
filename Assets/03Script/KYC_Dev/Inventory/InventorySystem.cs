@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -119,6 +120,23 @@ public class InventorySystem : MonoBehaviour
         
         OnInventoryChanged?.Invoke();
         OnInventoryCountChanged?.Invoke(InventoryCount);
+    }
+    
+    /// <summary>
+    /// 고양이가 랜덤으로 가져가는 기능에 대응하는 함수
+    /// </summary>
+    public void SetCatFood()
+    {
+        if(_fishAcquisitionDatas.Count == 0) return;
+        if(_fishAcquisitionDatas.Count == 1)
+        {
+            Erase(_fishAcquisitionDatas[1].fishID);
+        }
+        else
+        {
+            int temp = Random.Range(1, _fishAcquisitionDatas.Count);
+            Erase(_fishAcquisitionDatas[temp].fishID);
+        }
     }
 
     /// <summary>
