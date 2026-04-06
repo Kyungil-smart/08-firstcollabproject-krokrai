@@ -14,27 +14,32 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public List<FishRateData> fishRateList = new List<FishRateData>();
     [Header("스크립트 연결")]
     [SerializeField] private FishingTimer _timer;
-    [SerializeField] private FishingUpgradeManager _upgradeManager; // 업그레이드 매니저 불러옴
+    [SerializeField] private FishingUpgradeManager _upgradeManager; // 업그레이드 데이터 참조
     public int fishingCount = 1; // 최대 낚시 가능한 횟수
     private int _currentCount; // 현재 낚시 가능한 횟수
-    public FishingUI uiManager; // 낚시 횟수를 갱신할 FishingUI.cs 참조
+    public FishingUI uiManager; // 낚시 횟수를 갱신할 Ui 참조
+
     public List<FishData> fishDatabase = new List<FishData>(); // 게임에 존재하는 모든 물고기 데이터 리스트
-    public FishRateData fishCurrentRate; // 구글 시트에서 받아온 등급별 확률 데이터
+    public FishRateData fishCurrentRate; // 현재 레벨에 적용된 등급별 확률 데이터
+
     private Animator _animator;
     private Vector2 _pressPos;
     private FishData _lastCaughtFish;
+    private GameObject _currentFish;
+
     [Header("물고기 연출")]
     public GameObject fishPrefab;
     public Transform popFishPoint;
     public List<Sprite> fishSprites;
     public List<Sprite>raritySprites;
-    private GameObject _currentFish;
+    
    
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
 
+        // FishingUpgradeManager의 이벤트에 메서드들을 연결
         if (_upgradeManager != null)
         {
             _upgradeManager.OnRodUpgrade += RodgradeMaxCount;
@@ -42,6 +47,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             _upgradeManager.OnFishingUpgrade += FishRateLevel;
             _upgradeManager.OnShipUpgrade += ShipUpgradeLevel;
 
+            // 현재 저장된 레벨 데이터로 초기 설정
             RodgradeMaxCount(DataTower.instance.rodLevel);
             BaitgradeMaxCount(DataTower.instance.baitLevel);
             FishRateLevel(DataTower.instance.fishingGrade);
