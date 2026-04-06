@@ -21,6 +21,13 @@ public class GuidePageController : MonoBehaviour
         UpdateUI(0);
     }
 
+    
+    private void OnEnable()
+    {
+        // 오브젝트가 확성화 될 때 1페이지로 띄우기
+        UpdateUI(0);
+    }
+
     public void ShowNext() => UpdateUI(_currentIndex + 1);
     public void ShowPrev() => UpdateUI(_currentIndex -1);
     private void UpdateUI(int index)

@@ -599,37 +599,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 601946599}
     m_Modifications:
-    - target: {fileID: 1580004863343250441, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3903603881378686268, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3903603881378686268, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5241658353737232470, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
       propertyPath: m_Name
       value: Trader
-      objectReference: {fileID: 0}
-    - target: {fileID: 5241658353737232470, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6174673469178072449, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6174673469178072449, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6174673469178072449, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 6239824138721453289, guid: 4e2ebf1da1092884d9cb854d44b789f2, type: 3}
       propertyPath: m_Pivot.x

@@ -6,6 +6,12 @@ public class TabManager : MonoBehaviour
     [Header("각 탭의 화면들")]
     [SerializeField] private List<GameObject> _panels = new List<GameObject>();
 
+    private void OnEnable()
+    {
+        // 창이 켜질 때 사운드 페이지로 초기화
+        OpenTab(0);
+    }
+
     // 버튼클릭 시 인덱스 번호로 전달
     public void OpenTab(int tabIndex)
     {

@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 87066446887783732}
   - component: {fileID: 6512980920976090163}
   - component: {fileID: 4908938079867063089}
+  - component: {fileID: 3451356885095386546}
   m_Layer: 5
   m_Name: TradeFishSlot
   m_TagString: Untagged
@@ -612,6 +613,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToggleHighlighter
   highlightUI: {fileID: 3191129361302776486}
+--- !u!114 &3451356885095386546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9020293035967815291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3962ae25f7c973644a0f549fe43f7657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoveringFishDescription
 --- !u!1001 &4518918616614847247
 PrefabInstance:
   m_ObjectHideFlags: 0
