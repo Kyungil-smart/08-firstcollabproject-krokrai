@@ -3,13 +3,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DragNDropManager : MonoBehaviour
+public class WidgetSizeController : MonoBehaviour
 {
     private InputSystem_Actions _actions;
     private Vector2 _startPos;
-    private DragNDropTarget _target;
-    
-    
+    private WidgetSizeHandle _target;
+
 
     private void Awake()
     {
@@ -29,7 +28,7 @@ public class DragNDropManager : MonoBehaviour
     {
         _actions.DragNDrop.Drag.performed -= OnPointerDown;
         _actions.DragNDrop.Drag.canceled -= OnPointerUp;
-        
+
         _actions.Disable();
     }
 
@@ -42,7 +41,7 @@ public class DragNDropManager : MonoBehaviour
         foreach (RaycastHit2D hit2D in hit2Ds)
         {
             hit2D.collider.gameObject.TryGetComponent(out _target);
-            if(_target != null)_target.isMove = true;
+            if (_target != null) _target.isMove = true;
             Debug.Log("OnMove");
         }
     }
@@ -50,7 +49,7 @@ public class DragNDropManager : MonoBehaviour
     private void OnPointerUp(InputAction.CallbackContext context)
     {
         Debug.Log("OnPointerUp");
-        if(_target == null) return;
+        if (_target == null) return;
         _target.isMove = false;
         _target = null;
     }
