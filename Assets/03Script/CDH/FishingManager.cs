@@ -14,24 +14,32 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public List<FishRateData> fishRateList = new List<FishRateData>();
     [Header("스크립트 연결")]
     [SerializeField] private FishingTimer _timer;
-    [SerializeField] private FishingUpgradeManager _upgradeManager; // 업그레이드 매니저 불러옴
+    [SerializeField] private FishingUpgradeManager _upgradeManager; // 업그레이드 데이터 참조
     public int fishingCount = 1; // 최대 낚시 가능한 횟수
     private int _currentCount; // 현재 낚시 가능한 횟수
-    public FishingUI uiManager; // 낚시 횟수를 갱신할 FishingUI.cs 참조
+    public FishingUI uiManager; // 낚시 횟수를 갱신할 Ui 참조
+
     public List<FishData> fishDatabase = new List<FishData>(); // 게임에 존재하는 모든 물고기 데이터 리스트
-    public FishRateData fishCurrentRate; // 구글 시트에서 받아온 등급별 확률 데이터
+    public FishRateData fishCurrentRate; // 현재 레벨에 적용된 등급별 확률 데이터
+
     private Animator _animator;
     private Vector2 _pressPos;
+    private FishData _lastCaughtFish;
+    private GameObject _currentFish;
+
     [Header("물고기 연출")]
     public GameObject fishPrefab;
-    public Transform popPoint;
+    public Transform popFishPoint;
     public List<Sprite> fishSprites;
-    private FishData _lastCaughtFish;
+    public List<Sprite>raritySprites;
+    
+   
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
 
+        // FishingUpgradeManager의 이벤트에 메서드들을 연결
         if (_upgradeManager != null)
         {
             _upgradeManager.OnRodUpgrade += RodgradeMaxCount;
@@ -39,6 +47,7 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             _upgradeManager.OnFishingUpgrade += FishRateLevel;
             _upgradeManager.OnShipUpgrade += ShipUpgradeLevel;
 
+            // 현재 저장된 레벨 데이터로 초기 설정
             RodgradeMaxCount(DataTower.instance.rodLevel);
             BaitgradeMaxCount(DataTower.instance.baitLevel);
             FishRateLevel(DataTower.instance.fishingGrade);
@@ -61,9 +70,22 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
 
         if (Keyboard.current.digit1Key.wasPressedThisFrame) RodgradeMaxCount(1);
         if (Keyboard.current.digit2Key.wasPressedThisFrame) RodgradeMaxCount(2);
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) RodgradeMaxCount(3);
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) RodgradeMaxCount(3); 
         if (Keyboard.current.digit4Key.wasPressedThisFrame) RodgradeMaxCount(4);
         if (Keyboard.current.digit5Key.wasPressedThisFrame) RodgradeMaxCount(5);
+
+        if (Keyboard.current.qKey.wasPressedThisFrame) FishRateLevel(1);
+        if (Keyboard.current.wKey.wasPressedThisFrame) FishRateLevel(2);
+        if (Keyboard.current.eKey.wasPressedThisFrame) FishRateLevel(3);
+        if (Keyboard.current.rKey.wasPressedThisFrame) FishRateLevel(4);
+        if (Keyboard.current.tKey.wasPressedThisFrame) FishRateLevel(5);
+        if (Keyboard.current.yKey.wasPressedThisFrame) FishRateLevel(6);
+        if (Keyboard.current.uKey.wasPressedThisFrame) FishRateLevel(7);
+        if (Keyboard.current.iKey.wasPressedThisFrame) FishRateLevel(8);
+        if (Keyboard.current.oKey.wasPressedThisFrame) FishRateLevel(9);
+        if (Keyboard.current.pKey.wasPressedThisFrame) FishRateLevel(10);
+
+
     }
 
     /// <summary>
@@ -397,14 +419,19 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
 
     private void PopFishResult(FishData data)
     {
-        if (this == null || data == null) return;
-
-        if (fishPrefab == null)
-        {
-            return;
+        if (this == null || data == null || fishPrefab == null || popFishPoint == null) 
+        { 
+            return; 
         }
 
-        GameObject go = Instantiate(fishPrefab, popPoint.position, Quaternion.identity);
+        if (_currentFish != null)
+        {
+            Destroy(_currentFish);
+        }
+
+        GameObject go = Instantiate(fishPrefab, popFishPoint.position, Quaternion.identity, popFishPoint);
+        _currentFish = go;
+
         SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
         if (sr != null)
         {

@@ -230,6 +230,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &626126110768997713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1976371264228238113}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1976371264228238113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626126110768997713}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 739492048075117799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768356363049810505
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,12 +955,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2578637295753278251}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8.18, y: -1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 739492048075117799}
+  m_Father: {fileID: 8581039521955461022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &987695786845962595
 SpriteRenderer:
@@ -1469,7 +1500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 739492048075117799}
+  m_Father: {fileID: 8581039521955461022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5348465447732655278
 SpriteRenderer:
@@ -1560,7 +1591,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 739492048075117799}
+  m_Father: {fileID: 8581039521955461022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1240266408227025992
 SpriteRenderer:
@@ -1771,6 +1802,9 @@ Transform:
   - {fileID: 4427492636456079343}
   - {fileID: 5852807411036235376}
   - {fileID: 4290317795158889358}
+  - {fileID: 1868845733424025313}
+  - {fileID: 6289971332479259290}
+  - {fileID: 563590307726151270}
   m_Father: {fileID: 739492048075117799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7329826249680759948
@@ -2441,9 +2475,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8581039521955461022}
-  - {fileID: 1868845733424025313}
-  - {fileID: 6289971332479259290}
-  - {fileID: 563590307726151270}
+  - {fileID: 1976371264228238113}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4959714762093058454
@@ -2504,4 +2536,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edecae4f9c94142408d60d7b8e60a2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragNDropTarget
+  _backgrounnd: {fileID: 0}
+  _mirroringImages: []
+  _mask: {fileID: 0}
+  _handle: {fileID: 0}
   isMove: 0
+  _isMirroring: 0
