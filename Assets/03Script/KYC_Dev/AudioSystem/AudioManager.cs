@@ -7,6 +7,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _bgmSource;
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioMixer _mixer;
+    
+    [Header("Sound Source")]
+    [SerializeField] private AudioClip _bgmClip;
+    [SerializeField] private AudioClip _sfxClick;
 
     /// <summary>
     /// BGM 플레이
@@ -26,6 +30,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySfx(AudioClip clip)
     {
         _sfxSource.PlayOneShot(clip);
+    }
+
+    public void OnClickSound()
+    {
+        PlaySfx(_sfxClick);
     }
     
     

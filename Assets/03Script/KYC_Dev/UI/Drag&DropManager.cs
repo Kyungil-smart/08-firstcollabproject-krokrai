@@ -35,7 +35,6 @@ public class DragNDropManager : MonoBehaviour
 
     private void OnPointerDown(InputAction.CallbackContext context)
     {
-        Debug.Log("OnPointerDown");
         _startPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
         RaycastHit2D[] hit2Ds = Physics2D.RaycastAll(_startPos, Vector2.zero);
 
@@ -43,13 +42,11 @@ public class DragNDropManager : MonoBehaviour
         {
             hit2D.collider.gameObject.TryGetComponent(out _target);
             if(_target != null)_target.isMove = true;
-            Debug.Log("OnMove");
         }
     }
 
     private void OnPointerUp(InputAction.CallbackContext context)
     {
-        Debug.Log("OnPointerUp");
         if(_target == null) return;
         _target.isMove = false;
         _target = null;
