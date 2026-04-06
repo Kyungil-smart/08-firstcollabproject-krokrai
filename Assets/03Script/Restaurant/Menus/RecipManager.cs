@@ -36,7 +36,7 @@ public class RecipManager : MonoBehaviour
 
     IEnumerator AddAction()
     {
-        while(DataTower.instance != null)
+        while(DataTower.instance == null)
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -58,7 +58,7 @@ public class RecipManager : MonoBehaviour
     {
         while ( !_dataCon.isDataLoaded )
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
 
         if ( _dataCon.objs[0] is not RecipeContainer )
@@ -66,10 +66,12 @@ public class RecipManager : MonoBehaviour
             Debug.LogError($"{gameObject.name}에 저장된 DataContainer가 RecipeContainer가 들어있지 않는 컨테이너입니다.");
             yield break;
         }
-        
-        
-        _recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
-        for (int i = 0; i < _dataCon.objs.Length; i++)
+
+
+        //_recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
+        _recipes = new Dictionary<string, GameObject>(3);
+        //for (int i = 0; i < _dataCon.objs.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
             _rcps = _dataCon.objs[i] as RecipeContainer;
             obj = Instantiate(tempRecipeObj, transform.position, Quaternion.identity);

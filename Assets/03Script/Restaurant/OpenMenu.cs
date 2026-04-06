@@ -7,6 +7,7 @@ public class OpenMenu : MonoBehaviour
     [SerializeField] GameObject _menu;
     [SerializeField] GameObject _restaurantScreen;
     [SerializeField] GameObject _fish;
+    [SerializeField] Button _masterBtn;
 
     public event Action<bool> OnChangeSceneToRestaurant;
 
@@ -36,6 +37,7 @@ public class OpenMenu : MonoBehaviour
     public void OpenMenuPanel()
     {
         _active = !_active;
+        _masterBtn.interactable = !_active;
         _menu.SetActive(_active);
     }
 }

@@ -6,11 +6,12 @@ public class RecipModel : MonoBehaviour
     //public int RecipID {  get; private set; }
     private RecipeContainer _recipe;
     [SerializeField] Button _btn;
+    [SerializeField] Button _unlockBtn;
     [SerializeField] GameObject Outline; // 선택 될시에만 선택.
     [SerializeField] Image _btnImage; // 언락 될 시 색을 (0,0,0) -> (255,255,255) 교체
     [SerializeField] Image _LockImage; // 언락 가능 시 깨진 자물쇠로 교체
     [SerializeField] GameObject _ShildeImage; // 언락시 사라짐
-    private RecipeInfoUI _riu;
+    [SerializeField] private RecipeInfoUI _riu;
 
     bool _canMake;
     bool _isUnlocked;
@@ -25,7 +26,7 @@ public class RecipModel : MonoBehaviour
         _isInitiated = false;
     }
 
-    private void PassToRecipeInfo()
+    public void PassToRecipeInfo()
     {
         _riu.SelectedRecipe(_recipe, _canMake, _canUnlock);
     }
@@ -33,6 +34,7 @@ public class RecipModel : MonoBehaviour
     private void OnDestroy()
     {
         _btn.onClick.RemoveAllListeners();
+        _unlockBtn.onClick.RemoveAllListeners();
     }
 
     public void InitRecip(RecipeContainer rcp, RecipeInfoUI riu)
@@ -50,6 +52,7 @@ public class RecipModel : MonoBehaviour
         //_btnSprtRenderer.sprite =  // 스프라이트 추가 명령
 
         _btn.onClick.AddListener(PassToRecipeInfo);
+        _unlockBtn.onClick.AddListener(PassToRecipeInfo);
         // 추가적인 의존성 관련 필요한 경우 추가.
     }
 
