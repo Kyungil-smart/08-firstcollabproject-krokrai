@@ -158,13 +158,11 @@ public class CustomerController : MonoBehaviour
                             _firstOrder = false;
                             _eatCounte++;
                             yield return StartCoroutine(Gaugebar(false, i));
-                            /*
                             if (UnityEngine.Random.Range(0,1f) <= _tips.tipsRate) //팁 확률 측정 후 팁인 경우 팁과함께 아닌 경우 팁 제외
                                 _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
                             else
                                 _restaurant.TryCounsumeSushiAndEarnMoney(1);
-                            */
-                            Gaugebar(true,i);
+                            yield return StartCoroutine(Gaugebar(true,i));
                         }
                     }
 

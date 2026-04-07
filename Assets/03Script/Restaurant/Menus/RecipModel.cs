@@ -6,12 +6,12 @@ public class RecipModel : MonoBehaviour
     //public int RecipID {  get; private set; }
     private RecipeContainer _recipe;
     [SerializeField] Button _btn;
-    [SerializeField] Button _unlockBtn;
     [SerializeField] GameObject Outline; // 선택 될시에만 선택.
     [SerializeField] Image _btnImage; // 언락 될 시 색을 (0,0,0) -> (255,255,255) 교체
     [SerializeField] Image _LockImage; // 언락 가능 시 깨진 자물쇠로 교체
     [SerializeField] GameObject _ShildeImage; // 언락시 사라짐
     [SerializeField] private RecipeInfoUI _riu;
+    [SerializeField] AddressableImageLoader _imgLoader;
 
     bool _canMake;
     bool _isUnlocked;
@@ -20,7 +20,7 @@ public class RecipModel : MonoBehaviour
 
     private void Start()
     {
-        _canUnlock = false;
+        _canUnlock = true;
         _canMake = false;
         _isUnlocked = false;
         _isInitiated = false;
@@ -28,13 +28,13 @@ public class RecipModel : MonoBehaviour
 
     public void PassToRecipeInfo()
     {
-        _riu.SelectedRecipe(_recipe, _canMake, _canUnlock);
+        Debug.Log($"레시피 데이터 : {_recipe}");
+        _riu.SelectedRecipe(_recipe, Outline,_canMake, _isUnlocked, _canUnlock);
     }
 
     private void OnDestroy()
     {
         _btn.onClick.RemoveAllListeners();
-        _unlockBtn.onClick.RemoveAllListeners();
     }
 
     public void InitRecip(RecipeContainer rcp, RecipeInfoUI riu)
@@ -49,10 +49,9 @@ public class RecipModel : MonoBehaviour
         _riu = riu;
         _recipe = rcp;
 
-        //_btnSprtRenderer.sprite =  // 스프라이트 추가 명령
+        _imgLoader.SetImage(_recipe.dish_Sprite);
 
         _btn.onClick.AddListener(PassToRecipeInfo);
-        _unlockBtn.onClick.AddListener(PassToRecipeInfo);
         // 추가적인 의존성 관련 필요한 경우 추가.
     }
 
@@ -67,7 +66,9 @@ public class RecipModel : MonoBehaviour
 
     public void UnlockThisRecipe()
     {
-        _canMake = true;
+        _isUnlocked = true;
+        _ShildeImage.SetActive(false);
+        _btnImage.color = Color.white;
     }
 
     /// <summary>
@@ -88,5 +89,4 @@ public class RecipModel : MonoBehaviour
         }
 
     }
-
 }

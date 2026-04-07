@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Customer_Tips_Container
   m_EditorClassIdentifier: Assembly-CSharp::DataContainer
   _mainLine: 4
-  URL: https://docs.google.com/spreadsheets/d/1sS54fdN2yw-rtl24L7xjGuufwEtqKRVBO6rQiyyEHD8/edit?gid=757994602#gid=757994602
+  URL: https://docs.google.com/spreadsheets/d/12-5GauWJ9_3H9tF-ud1uXN_DJyGt_cLaiyEnGY_sYew/edit?gid=95416806#gid=95416806
   objs:
   - {fileID: 11400000, guid: 2e3c369768df2ae4ebfed24353666106, type: 2}
   - {fileID: 11400000, guid: 19be9373151d75a47a81055fac7c2c5f, type: 2}

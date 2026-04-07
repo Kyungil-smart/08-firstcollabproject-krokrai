@@ -15,10 +15,17 @@ public class RecipeUnlockUI : MonoBehaviour
 
     [SerializeField] Sprite[] _sprite;
 
-    TranslationDataReader _reader;
+    [SerializeField] TranslationDataReader _reader;
     TranslationData _contextData;
     TranslationData[] _haveRecipeData;
     TranslationData _unlockRecipeData;
+
+    private void Awake()
+    {
+        _haveRecipeData = new TranslationData[2];
+        _unlockRecipeData = new TranslationData();
+        _contextData = new TranslationData();
+    }
 
     public void RecipeUnllockInfo(FishData so, bool canUnlock)
     {

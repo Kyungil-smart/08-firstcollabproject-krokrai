@@ -5,29 +5,30 @@ using UnityEngine.UI;
 
 public class RecipeInfoUI : MonoBehaviour
 {
-    [SerializeField] Image[] _img; // 1 : 요리될 메뉴 사진, 2번 금액, 3번 생산수, 4번 물고기
+    //[SerializeField] Image[] _img; // 1 : 요리될 메뉴 사진, 2번 금액, 3번 생산수, 4번 물고기
+    [SerializeField] AddressableImageLoader[] _imageLoaders;
     [SerializeField] GameObject[] _panels; // 1 : 요리, 2. 해금
-    [SerializeField] TextMeshProUGUI[] _tmpUGUI; // 1 : 메뉴 이름 2: 판매액, 3번 생산수, 4번 음식 설명, 5번 물고기 이름, 6번 물고기 소지 / 소모
+    [SerializeField] TextMeshProUGUI[] _tmpUGUI; // 1 : 메뉴 이름 2: 판매액, 3번 생산수, 4번 음식 설명, 5번 물고기 이름, 6번 물고기 소지 / 소모, 7번 버튼
     [SerializeField] Image[] _UnlockImg;
-    [SerializeField] TextMeshProUGUI[] _tmpUGUIUnlock; // 1 : 생선 이름, 2: 획득 여부
     [SerializeField] Button _btn;
     [SerializeField] MenuCtrl _menuctrl;
     [SerializeField] InventorySystem _inventorySystem;
+    [SerializeField] RecipeUnlockUI _unlockUI;
+    [SerializeField] GameObject _unlockedPopup;
+    [SerializeField] UnlockedPopup _unlockedPopupScript;
 
     RecipeContainer _rcp;
 
     FishData fish;
-    Language _lng; // 현재 언어
+    Language lng;
 
-    bool _canMake;
+    GameObject _currentObj;
+
+    bool _hasMenuSlot;
+    bool _currentCanMake;
     byte _currentHasFish;
 
-    public void ThisRecipeCanMake(bool b) => _canMake = !b;
-
-    public void ChangedLanguage(Language lng)
-    {
-        _lng = lng;
-    }
+    public void ThisRecipeCanMake(bool b) => _hasMenuSlot = !b;
 
     private void OnEnable()
     {
@@ -42,83 +43,103 @@ public class RecipeInfoUI : MonoBehaviour
     /// <summary>
     /// 선택된 레시피에 대한 정보 띄우기
     /// </summary>
-    public void SelectedRecipe(in RecipeContainer rcp, in bool canMake, in bool isUnlcok)
+    public void SelectedRecipe(in RecipeContainer rcp, in GameObject outline  ,in bool canMake, in bool isUnlock, in bool canUnlock)
     {
-        if ( canMake && _canMake )
+        _currentObj?.SetActive(false);
+        _currentObj = outline;
+        _currentObj.SetActive(true);
 
+        Debug.Log($"현재 들어온 레시피 정보 : {rcp.name}");
 
-        // 렌더러 작업은 스프라이터 관련 매니저 완성 후
-        /*
-        _img[0].sprite =  여기에 나중에 만들 스프라이트 접근용 함수 입력
-         */
+        lng = DataTower.instance.languageSetting;
 
         _rcp = rcp;
+        _currentCanMake = canMake;
+
+        _imageLoaders[0].SetImage(rcp.dish_Sprite,isUnlock);
+
+        _tmpUGUI[0].text = lng == Language.KOR ? _rcp.recipe_KName : _rcp.recipe_EName;
+
+        // 이미지 로딩 필요.
+
+        _tmpUGUI[1].text = (rcp.prices
+                * (1 + DataTower.instance.BonusDishPrice01Level + DataTower.instance.BonusDishPrice02Level))
+                .ToString();
+        _tmpUGUI[2].text = rcp.yield.ToString();
 
         if (DataTower.instance.fishDatas.ContainsKey(rcp.ingredient))
             fish = DataTower.instance.fishDatas[rcp.ingredient];
-        else
 
-
-            // TMP 관련
-        _tmpUGUI[1].text = (rcp.prices 
-                * ( 1 + DataTower.instance.BonusDishPrice01Level + DataTower.instance.BonusDishPrice02Level) )
-                .ToString();
-        _tmpUGUI[2].text = rcp.yield.ToString();
-        
-
-        if( !isUnlcok )
+        if (isUnlock)
         {
-            _panels[0].SetActive(true);
-            _panels[1].SetActive(false);
+            RecipeInfo(isUnlock);
+            
 
-            for (byte i = 0; i < DataTower.instance.Items.Count; i++)
-            {
-                if (fish.fishID == DataTower.instance.Items[i].fishID)
-                    _currentHasFish++;
-            }
-
-            _tmpUGUI[5].text = $"{_currentHasFish} / 1";
-            switch (_lng)
-            {
-                case Language.KOR:
-                    _tmpUGUI[0].text = rcp.recipe_KName;
-                    _tmpUGUI[3].text = rcp.KDescription.ToString();
-                    _tmpUGUI[4].text = fish.korName.ToString();
-                    break;
-                case Language.ENG:
-                    _tmpUGUI[0].text = rcp.recipe_EName;
-                    _tmpUGUI[3].text = rcp.EDescription.ToString();
-                    _tmpUGUI[4].text = fish.korName.ToString();
-                    break;
-            }
+            // 렌더러 작업은 스프라이터 관련 매니저 완성 후
+            /*
+            _img[0].sprite =  여기에 나중에 만들 스프라이트 접근용 함수 입력
+            */
         }
         else
         {
             _panels[1].SetActive(true);
             _panels[0].SetActive(false);
-            if (fish.isCaught)
-            {
 
-            }
-            else
-            {
-                switch (_lng)
-                {
-                    case Language.KOR:
+            _imageLoaders[2].SetImage(_rcp.ingredient, isUnlock);
 
-                        break;
-                    case Language.ENG:
-
-                        break;
-                }
-            }
+            if (canUnlock)
+                _unlockUI.RecipeUnllockInfo(fish, canUnlock);
         }
-            
-
-        
 
         // TODO : 물고기 소지 및 관련 인벤토리 작업 완료 후 진입. @@@@@@@@@
     }
+
+    public void RecipeInfo(in bool isUnlock)
+    {
+        _panels[0].SetActive(true);
+        _panels[1].SetActive(false);
+
+        if (_currentCanMake && _hasMenuSlot)
+            _btn.interactable = true;
+        else
+            _btn.interactable = false;
+
+        _imageLoaders[1].SetImage(_rcp.ingredient, isUnlock);
+
+        for (byte i = 0; i < DataTower.instance.Items.Count; i++)
+        {
+            if (fish.fishID == DataTower.instance.Items[i].fishID)
+                _currentHasFish++;
+        }
+
+        if (_currentHasFish <= 0)
+        {
+            _tmpUGUI[5].text = $"<color=red>{_currentHasFish} / 1</color>";
+        }
+        else
+        {
+            _tmpUGUI[5].text = $"{_currentHasFish} / 1";
+        }
+
+        switch (lng)
+        {
+            case Language.KOR:
+                _tmpUGUI[3].text = _rcp.KDescription.ToString();
+                _tmpUGUI[4].text = fish.korName.ToString();
+                break;
+            case Language.ENG:
+                _tmpUGUI[3].text = _rcp.EDescription.ToString();
+                _tmpUGUI[4].text = fish.engName.ToString();
+                break;
+        }
+    }
+
+    public void UnlockedPopup()
+    {
+        _unlockedPopup.SetActive(true);
+        _unlockedPopupScript.PopUp(_rcp);
+    }
+
     public void MakeMenu()
     {
         _currentHasFish--;

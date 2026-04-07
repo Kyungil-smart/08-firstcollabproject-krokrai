@@ -219,7 +219,7 @@ public class RestaurantManager : MonoBehaviour
             _customerData[_temp_Numbers],
             _currentGauge,
             _currentSpriteLibrary,
-            _canVisual); // 후에 수정
+            _canVisual);
     }
 
     private int CanSpawnSpecialCustomer()

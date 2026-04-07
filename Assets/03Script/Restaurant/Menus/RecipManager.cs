@@ -85,6 +85,15 @@ public class RecipManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 물고기 이름 넣으면 해당 레시피 잠금 해제
+    /// </summary>
+    /// <param name="s"></param>
+    public void SetRecipeUnlock(string s)
+    {
+        _recipes[s].GetComponent<RecipModel>().UnlockThisRecipe();
+    }
+
+    /// <summary>
     /// 낚시에 성공한 물고기가 처음 낚인 물고기인 경우. n(임시)에 값을 기준으로 해금
     /// </summary>
     /// <param name="n"></param>
