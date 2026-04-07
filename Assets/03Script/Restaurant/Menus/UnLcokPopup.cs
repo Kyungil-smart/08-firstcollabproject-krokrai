@@ -10,6 +10,7 @@ public class UnLcokPopup : MonoBehaviour
     [SerializeField] Button _confirmButton;
     [SerializeField] TextMeshProUGUI[] _texts; // 1. 잠금, 2번 비용, 3번 취소, 4번 확인
     [SerializeField] TranslationDataReader _reader;
+    [SerializeField] AudioManager _audioManager;
 
     private TranslationData[] _tranData = new TranslationData[3];
 
@@ -54,11 +55,13 @@ public class UnLcokPopup : MonoBehaviour
 
     public void CancleUnlock()
     {
+        _audioManager.PlaySfxClick();
         _unlockPanel.SetActive(false);
     }
 
     public void confirmUnlock()
     {
+        _audioManager.PlaySfxClick();
         DataTower.instance.UnlockMenuLevel++;
         _menuCtrl.UnlockedMenuPanel();
         _unlockPanel.SetActive(false);

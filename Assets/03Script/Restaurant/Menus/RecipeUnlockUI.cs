@@ -31,6 +31,7 @@ public class RecipeUnlockUI : MonoBehaviour
     {
         if (so == null)
             return;
+
         _canUnlockImage.sprite = canUnlock ? _sprite[1] : _sprite[0];
 
         _contextData = _reader.GetTranslationData("Restaurant_Recipe_Condition");

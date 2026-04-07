@@ -6,9 +6,11 @@ public class CatEatFish : MonoBehaviour
     [SerializeField] InventorySystem _inven;
     [SerializeField] Button _btn;
     [SerializeField] Animation _ani;
+    [SerializeField] AudioManager _audioManager;
 
     public void EatFish()
     {
+        _audioManager.PlaySfxCat();
         _inven.SetCatFood();
 
         _ani.Play();
