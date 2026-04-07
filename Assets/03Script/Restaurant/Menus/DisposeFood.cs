@@ -8,6 +8,7 @@ public class DisposeFood : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] _texts; // 1. alert, 2 : 남은 갯수, 3 : 아니오, 4 : 네;
     [SerializeField] AddressableImageLoader _imageLoader;
     [SerializeField] TranslationDataReader _reader;
+    [SerializeField] AudioManager _audioManager;
 
     TranslationData[] _datas;
     RecipeContainer _recipeData;
@@ -25,7 +26,7 @@ public class DisposeFood : MonoBehaviour
     {
         _recipeData = So;
         _ui = ui;
-        //_imageLoader.SetImage(So.dish_Sprite);
+        _imageLoader.SetImage(So.dish_Sprite);
 
         switch (DataTower.instance.languageSetting)
         {
@@ -49,12 +50,14 @@ public class DisposeFood : MonoBehaviour
 
     public void Cancel()
     {
+        _audioManager.PlaySfxClick();
         _ui = null;
         gameObject.SetActive(false);
     }
 
     public void Confirm()
     {
+        _audioManager.PlaySfxClick();
         _ui.DeleteMenuinPopup();
         gameObject.SetActive(false);
     }

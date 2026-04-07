@@ -13,6 +13,7 @@ public class UnlockedPopup : MonoBehaviour
     [SerializeField] TranslationDataReader _reader;
     [SerializeField] RecipeInfoUI _recipeUI;
     [SerializeField] RecipManager _recipeManager;
+    [SerializeField] AudioManager _audioManager;
     
     TranslationData[] _datas;
     RecipeContainer _rcp;
@@ -30,6 +31,8 @@ public class UnlockedPopup : MonoBehaviour
     {
         _rcp = recipe;
         //_fishImage.sprite = 
+
+        _audioManager.PlaySfxRecipe();
 
         switch(DataTower.instance.languageSetting)
         {
@@ -50,6 +53,7 @@ public class UnlockedPopup : MonoBehaviour
 
     public void Confirm()
     {
+        _audioManager.PlaySfxClick();
         _recipeUI.RecipeInfo(true);
         _recipeManager.SetRecipeUnlock(_rcp.ingredient);
         gameObject.SetActive(false);

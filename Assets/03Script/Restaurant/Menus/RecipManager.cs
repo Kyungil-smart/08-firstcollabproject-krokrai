@@ -68,10 +68,8 @@ public class RecipManager : MonoBehaviour
         }
 
 
-        //_recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
-        _recipes = new Dictionary<string, GameObject>(3);
-        //for (int i = 0; i < _dataCon.objs.Length; i++)
-        for (int i = 0; i < 3; i++)
+        _recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
+        for (int i = 0; i < _dataCon.objs.Length; i++)
         {
             _rcps = _dataCon.objs[i] as RecipeContainer;
             obj = Instantiate(tempRecipeObj, transform.position, Quaternion.identity);

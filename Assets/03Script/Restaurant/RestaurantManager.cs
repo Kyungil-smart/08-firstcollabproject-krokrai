@@ -17,6 +17,7 @@ public class RestaurantManager : MonoBehaviour
     [SerializeField] private DiningUpgradeDataReader _diningUpgradeDataReader;
     [SerializeField] private GaugeSetter[] _gaugeSetter;
     [SerializeField] SpriteLibraryAsset[] _customerAsset;
+    [SerializeField] AudioManager _audioManager;
 
     [Header("Spawn")]
     [SerializeField] private GameObject _customerPrefab;
@@ -114,7 +115,7 @@ public class RestaurantManager : MonoBehaviour
         for (i = 0; i < 10 ; i++)
         {
             GameObject obj = Instantiate(_customerPrefab); // 나중에 데이터 타워 리셋 후 받게 만들기.
-            obj.GetComponent<CustomerController>().ConnectRestaurant(this, _openMenu);
+            obj.GetComponent<CustomerController>().ConnectRestaurant(this, _openMenu, _audioManager);
             obj.transform.SetParent(_customers.transform);
             obj.name = $"customer {i}";
             obj.SetActive(false);

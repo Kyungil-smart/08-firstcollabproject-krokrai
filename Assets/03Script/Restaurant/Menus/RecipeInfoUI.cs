@@ -16,6 +16,7 @@ public class RecipeInfoUI : MonoBehaviour
     [SerializeField] RecipeUnlockUI _unlockUI;
     [SerializeField] GameObject _unlockedPopup;
     [SerializeField] UnlockedPopup _unlockedPopupScript;
+    [SerializeField] AudioManager _audioManager;
 
     RecipeContainer _rcp;
 
@@ -64,7 +65,7 @@ public class RecipeInfoUI : MonoBehaviour
 
         _tmpUGUI[1].text = (rcp.prices
                 * (1 + DataTower.instance.BonusDishPrice01Level + DataTower.instance.BonusDishPrice02Level))
-                .ToString();
+                .TextFormatCurrency();
         _tmpUGUI[2].text = rcp.yield.ToString();
 
         if (DataTower.instance.fishDatas.ContainsKey(rcp.ingredient))
@@ -86,9 +87,7 @@ public class RecipeInfoUI : MonoBehaviour
             _panels[0].SetActive(false);
 
             _imageLoaders[2].SetImage(_rcp.ingredient, isUnlock);
-
-            if (canUnlock)
-                _unlockUI.RecipeUnllockInfo(fish, canUnlock);
+            _unlockUI.RecipeUnllockInfo(fish, canUnlock);
         }
 
         // TODO : 물고기 소지 및 관련 인벤토리 작업 완료 후 진입. @@@@@@@@@
@@ -136,12 +135,14 @@ public class RecipeInfoUI : MonoBehaviour
 
     public void UnlockedPopup()
     {
+        _audioManager.PlaySfxClick();
         _unlockedPopup.SetActive(true);
         _unlockedPopupScript.PopUp(_rcp);
     }
 
     public void MakeMenu()
     {
+        _audioManager.PlaySfxClick();
         _currentHasFish--;
         _inventorySystem.Erase(fish.fishID);
         _menuctrl.InsertDish(_rcp);

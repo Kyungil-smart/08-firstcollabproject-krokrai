@@ -321,8 +321,8 @@ public class DataTower : MonoBehaviour
 
 
 
-            fishingTime = 30;
-            maxFishingTime = 1800;
+            fishingTime = 3600;
+            maxFishingTime = 3600;
         }
         else
         {
