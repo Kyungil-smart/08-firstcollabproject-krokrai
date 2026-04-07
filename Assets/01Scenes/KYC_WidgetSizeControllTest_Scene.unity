@@ -171,10 +171,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drag&DropSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 7693018490155285506, guid: 676231c347e548e4da1feb1206da62b6, type: 3}
-      propertyPath: _safetyInterval
-      value: 0.001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
