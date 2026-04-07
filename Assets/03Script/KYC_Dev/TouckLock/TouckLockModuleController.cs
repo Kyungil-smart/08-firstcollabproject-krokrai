@@ -25,6 +25,8 @@ public class TouckLockModuleController : MonoBehaviour
 
     private float _tempOpacity;
     
+    private AudioManager _audioManager;
+    
     /// <summary>
     /// ToDo:데이터 타워에 투명도 조절 변수 들어오면 지울 것
     /// </summary>
@@ -32,18 +34,21 @@ public class TouckLockModuleController : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        _audioManager = FindFirstObjectByType<AudioManager>();
         _tempOpacity = -1;
         _testOpacity = 1f;
+        gameObject.SetActive(false);
     }
 
     public void TouchLockEnable()
     {
+        _audioManager.PlaySfxLock();
         LockInvoke();
     }
     
     public void TouchLockDisable()
     {
+        _audioManager.PlaySfxUnlock();
         UnlockInvoke();
     }
 
