@@ -12,9 +12,13 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
 {
     [Header("확률 데이터 리스트")]
     public List<FishRateData> fishRateList = new List<FishRateData>();
+
     [Header("스크립트 연결")]
     [SerializeField] private FishingTimer _timer;
     [SerializeField] private FishingUpgradeManager _upgradeManager; // 업그레이드 데이터 참조
+
+    [SerializeField] private AudioManager _audioManager;
+
     public int fishingCount = 1; // 최대 낚시 가능한 횟수
     private int _currentCount; // 현재 낚시 가능한 횟수
     public FishingUI uiManager; // 낚시 횟수를 갱신할 Ui 참조
@@ -32,9 +36,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public Transform popFishPoint;
     public List<Sprite> fishSprites;
     public List<Sprite>raritySprites;
-    
-   
 
+
+    private void OnEnable()
+    {
+        if (_audioManager != null)
+        {
+            _audioManager.PlayBgmFishhook();
+        }
+    }
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -184,11 +194,16 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
                 UpdateUI();
                 GetRandomFish();
 
+                if (_audioManager != null)
+                {
+                    _audioManager.PlaySfxWater();
+                }
+
                 _animator.SetTrigger("resultCatch");
             }
             else
             {
-                Debug.Log("낚시 횟수 0회");
+                Debug.Log("낚시 횟수 0회"); 
             }
             return;
         }
@@ -201,7 +216,15 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
                 UpdateUI();
                 GetRandomFish();
             }
-            _animator.SetTrigger("resultCatch");
+
+            if (_audioManager != null)
+            {
+                _audioManager.StopSfxFishing();
+
+            }
+
+             _animator.SetTrigger("resultCatch");
+          
             return;
         }
 
@@ -212,6 +235,11 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
                 _currentCount--;
                 UpdateUI();
                 GetRandomFish();
+
+                if (_audioManager != null)
+                {
+                    _audioManager.PlaySfxFishing();
+                }
             }
         }
     }
