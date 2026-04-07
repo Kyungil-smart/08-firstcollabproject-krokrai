@@ -444,15 +444,21 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
 
             float waitTime = UnityEngine.Random.Range(10f, 15f);
-            yield return new WaitForSeconds(waitTime);
+            float 변수 = 0f;
+
+            while (변수 < waitTime)
+            {
+                변수 += Time.deltaTime;
+
+                if (_timer.CheckingFull()) break;
+
+                yield return null;
+            }
 
             if (_timer.CheckingFull()) continue;
 
             if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
-            {
-                yield return new WaitForSeconds(1f);
                 continue;
-            }
 
             float randomVar = UnityEngine.Random.Range(0f, 100f);
             int targetIdx = 0;
