@@ -76,7 +76,7 @@ public class DragNDropTarget : MonoBehaviour
         float x = Mathf.Clamp(
             pointerPosition.x, _minBounds.x + (_mask.transform.localScale.x + _handleWidth) - (HalfWidth - OffsetX), _maxBounds.x - (HalfWidth - OffsetX));
         float y = Mathf.Clamp(
-            pointerPosition.y, _minBounds.y + (_halfHeight - _offsetY), _maxBounds.y - (_halfHeight + _offsetY));
+            pointerPosition.y, _minBounds.y + (_halfHeight - _offsetY), _maxBounds.y - (_halfHeight + _offsetY + 1f));
         transform.position = new Vector3(x, y, transform.position.z);
         _backgrounnd.transform.position =
             new Vector3(_backgrounnd.transform.position.x, y, _backgrounnd.transform.position.z);
