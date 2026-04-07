@@ -240,7 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1976371264228238113}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4386894887835870443}
   m_Layer: 0
-  m_Name: PopPoint
+  m_Name: FishPopPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1948,6 +1948,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eab5253f03e6b17448ecb6e4fa96af28, type: 2}
   _timer: {fileID: 0}
   _upgradeManager: {fileID: 0}
+  _audioManager: {fileID: 0}
   fishingCount: 1
   uiManager: {fileID: 0}
   fishDatabase:
@@ -1998,7 +1999,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb94cc9ff99ebe244848267fb730ab05, type: 2}
   fishCurrentRate: {fileID: 11400000, guid: f27b9810b03d37d4581daab63c2c9aaf, type: 2}
   fishPrefab: {fileID: 0}
-  popPoint: {fileID: 4386894887835870443}
+  popFishPoint: {fileID: 4386894887835870443}
   fishSprites:
   - {fileID: 21300000, guid: e777726705f628b4ebd377e7f0ae0903, type: 3}
   - {fileID: 21300000, guid: 363d612737966ff4f81f1abf3395263c, type: 3}
@@ -2045,6 +2046,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1cd1f1cee26a98e498b863fb3887ac33, type: 3}
   - {fileID: 21300000, guid: e85074e976977d345bd5356ccc809618, type: 3}
   - {fileID: 21300000, guid: bc1c556e4bb439c438ead79f79cea7c4, type: 3}
+  raritySprites:
+  - {fileID: 21300000, guid: b4dd7b4f3ece7954aa4395255a8c277a, type: 3}
+  - {fileID: 21300000, guid: 72a86ebfedf95b54c81c13d42fae7227, type: 3}
+  - {fileID: 21300000, guid: c6020080f05283d4db962afbbd170439, type: 3}
+  - {fileID: 21300000, guid: 888df341227980546b11b7d3ed14c42e, type: 3}
+  - {fileID: 21300000, guid: 2c385c21792c7f2459728f0010973374, type: 3}
+  - {fileID: 21300000, guid: fafe40270d6fb8744985041b579ed527, type: 3}
+  - {fileID: 21300000, guid: 8f0b4e9ff7004e3408c0ead954d4e244, type: 3}
+  - {fileID: 21300000, guid: 93bb0d27223391044b1f8f4b894d66e1, type: 3}
 --- !u!95 &1217578968242132591
 Animator:
   serializedVersion: 7
@@ -2536,9 +2546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edecae4f9c94142408d60d7b8e60a2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragNDropTarget
-  _backgrounnd: {fileID: 0}
+  _backgrounnd: {fileID: 626126110768997713}
   _mirroringImages: []
   _mask: {fileID: 0}
-  _handle: {fileID: 0}
+  _handle: {fileID: 9193966439392755527}
   isMove: 0
   _isMirroring: 0
