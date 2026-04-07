@@ -23,9 +23,9 @@ public class DragNDropTarget : MonoBehaviour
     private Vector2 _maxBounds;
     private Vector2 _camaraCenter;
 
-    private float _halfWidth;
+    public float HalfWidth {get; private set; }
     private float _halfHeight;
-    private float _offsetX;
+    public float OffsetX {get; private set; }
     private float _offsetY;
     private float _handleWidth;
 
@@ -58,9 +58,9 @@ public class DragNDropTarget : MonoBehaviour
 
     private void GetColliderBounds()
     {
-        _halfWidth = _collider2D.bounds.extents.x;
+        HalfWidth = _collider2D.bounds.extents.x;
         _halfHeight = _collider2D.bounds.extents.y;
-        _offsetX = _collider2D.offset.x;
+        OffsetX = _collider2D.offset.x;
         _offsetY = _collider2D.offset.y;
         _handleWidth = _handle.transform.localScale.x;
     }
@@ -74,7 +74,7 @@ public class DragNDropTarget : MonoBehaviour
     {
         Vector2 pointerPosition = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
         float x = Mathf.Clamp(
-            pointerPosition.x, _minBounds.x + (_mask.transform.localScale.x + _handleWidth) - (_halfWidth - _offsetX), _maxBounds.x - (_halfWidth - _offsetX));
+            pointerPosition.x, _minBounds.x + (_mask.transform.localScale.x + _handleWidth) - (HalfWidth - OffsetX), _maxBounds.x - (HalfWidth - OffsetX));
         float y = Mathf.Clamp(
             pointerPosition.y, _minBounds.y + (_halfHeight - _offsetY), _maxBounds.y - (_halfHeight + _offsetY));
         transform.position = new Vector3(x, y, transform.position.z);

@@ -52,5 +52,8 @@ TagManager:
   - name: BackGround_bottom
     uniqueID: 3455517141
     locked: 0
+  - name: Handle
+    uniqueID: 610626535
+    locked: 0
   m_RenderingLayers:
   - Default

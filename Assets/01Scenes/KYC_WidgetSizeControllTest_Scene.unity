@@ -167,13 +167,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2303671162838207576, guid: 676231c347e548e4da1feb1206da62b6, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953461273183887083, guid: 676231c347e548e4da1feb1206da62b6, type: 3}
       propertyPath: m_Name
       value: Drag&DropSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 7693018490155285506, guid: 676231c347e548e4da1feb1206da62b6, type: 3}
-      propertyPath: _safetyInterval
-      value: 0.001
+    - target: {fileID: 8238557264488398845, guid: 676231c347e548e4da1feb1206da62b6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238557264488398845, guid: 676231c347e548e4da1feb1206da62b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
