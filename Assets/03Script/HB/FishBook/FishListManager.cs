@@ -65,9 +65,13 @@ public class FishListManager : MonoBehaviour
         if(currentFish == null) return;
 
         bool isCaught = currentFish.isCaught;
+        bool isKor = true;
 
-        // 현재 언어가 한국어인가
-        bool isKor = DataTower.instance.languageSetting == Language.KOR;
+        if (DataTower.instance != null)
+        {
+            // 현재 언어가 한국어인가
+            isKor = DataTower.instance.languageSetting == Language.KOR;     
+        }
 
         string displayName = isKor ? currentFish.korName : currentFish.engName;
         string displayDescription = isKor ? currentFish.korDescription : currentFish.engDescription;
