@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_35_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_35
+  korName: "\uD559\uAF41\uCE58"
+  engName: ' Japanese Halfbeak'
+  fishRarity: 5
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 25
+  weight: 0.2
+  fishSprite: Fish_35
+  silhouetteSprite: 
+  price: 96
+  korDescription: "\uAF41\uCE58\uC640 \uCE5C\uCC99\uC778 \uC785\uC774 \uD559\uACFC
+    \uB2EE\uC740 \uC5B4\uB958,\\n\uAF41\uCE58\uC5D0 \uBE44\uD574 \uC9C0\uBC29\uC774
+    \uC801\uACE0 \uB354 \uB2F4\uBC31\uD558\uB2E4."
+  engDescription: "A fish related to the saury, with a beak-like mouth,\\nIt has
+    less fat than the saury and a milder flavor.\r"
+  caughtDate: 

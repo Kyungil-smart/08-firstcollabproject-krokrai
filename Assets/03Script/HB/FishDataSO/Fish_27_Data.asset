@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Fish_27_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_27
+  korName: "\uD0A4\uC870\uAC1C"
+  engName: Key Clam
+  fishRarity: 4
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 30
+  weight: 0.38
+  fishSprite: Fish_27
+  silhouetteSprite: 
+  price: 80
+  korDescription: "\uD574\uC591 \uC624\uC5FC\uC73C\uB85C \uC5B4\uD68D\uC774 \uC5B4\uB824\uC6CC\uC9C4
+    \uC870\uAC1C.\\n\uD48D\uBD80\uD55C \uC601\uC591\uACFC \uB9DB\uC774 \uD2B9\uC9D5\uC774\uB2E4."
+  engDescription: "Shellfish that have become difficult to catch due to pollution.\\nThey
+    are characterised by their rich nutritional value and flavour.\r"
+  caughtDate: 

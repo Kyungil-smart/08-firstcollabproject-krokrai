@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_33_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_33
+  korName: "\uBCF4\uB9AC\uC22D\uC5B4"
+  engName: Barley Mullet
+  fishRarity: 5
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 60
+  weight: 1.5
+  fishSprite: Fish_33
+  silhouetteSprite: 
+  price: 95
+  korDescription: "\uBCF4\uB9AC \uC774\uC0AD\uC774 \uD330 \uC2DC\uAE30\uAC00 \uB9DB\uC788\uB294
+    \uC5B4\uB958.\\n\uD0F1\uAE00\uD558\uACE0 \uCAC4\uAE43\uD55C \uC2DD\uAC10 \uADF8\uB9AC\uACE0
+    \uAC10\uCE60\uB9DB\uC774 \uC77C\uD488\uC774\uB2E4."
+  engDescription: "Fish that are best enjoyed when the barley ears are ripe.\\nThey
+    have a firm, chewy texture and a rich, savory flavor.\r"
+  caughtDate: 

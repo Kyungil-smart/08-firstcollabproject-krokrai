@@ -402,7 +402,6 @@ public class DataTower : MonoBehaviour
 
             OnFisingNewFish?.Invoke(fish.fishID);
         }
-
         CatchFishCounter(in fish);
     }
     #endregion

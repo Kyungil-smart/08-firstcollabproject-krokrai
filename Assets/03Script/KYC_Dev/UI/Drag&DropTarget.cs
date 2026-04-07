@@ -76,7 +76,7 @@ public class DragNDropTarget : MonoBehaviour
         float x = Mathf.Clamp(
             pointerPosition.x, _minBounds.x + (_mask.transform.localScale.x + _handleWidth) - (_halfWidth - _offsetX), _maxBounds.x - (_halfWidth - _offsetX));
         float y = Mathf.Clamp(
-            pointerPosition.y, _minBounds.y + (_halfHeight - _offsetY), _maxBounds.y - (_halfHeight - _offsetY));
+            pointerPosition.y, _minBounds.y + (_halfHeight - _offsetY), _maxBounds.y - (_halfHeight + _offsetY));
         transform.position = new Vector3(x, y, transform.position.z);
         _backgrounnd.transform.position =
             new Vector3(_backgrounnd.transform.position.x, y, _backgrounnd.transform.position.z);
@@ -94,7 +94,7 @@ public class DragNDropTarget : MonoBehaviour
                 float y = image.transform.localScale.y;
                 float z = image.transform.localScale.z;
 
-                image.transform.localScale = new Vector3(x, -y, z);
+                image.transform.localScale = new Vector3(-x, y, z);
             }
             _isMirroring = true;
         }
@@ -106,7 +106,7 @@ public class DragNDropTarget : MonoBehaviour
                 float y = image.transform.localScale.y;
                 float z = image.transform.localScale.z;
 
-                image.transform.localScale = new Vector3(x, -y, z);
+                image.transform.localScale = new Vector3(-x, y, z);
             }
             _isMirroring = false;
         }

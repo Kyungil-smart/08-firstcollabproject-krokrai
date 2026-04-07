@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_28_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_28
+  korName: "\uC7A5\uC5B4"
+  engName: Eel
+  fishRarity: 4
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 120
+  weight: 4
+  fishSprite: Fish_28
+  silhouetteSprite: 
+  price: 81
+  korDescription: "\uBC24\uC5D0 \uD65C\uB3D9\uD558\uB294 \uC57C\uD589\uC131 \uC721\uC2DD
+    \uC5B4\uC885.\\n\uB2F4\uBC31\uD55C \uB9DB\uC73C\uB85C \uC815\uB825\uACFC \uD53C\uB85C
+    \uD68C\uBCF5\uC5D0 \uC88B\uB2E4."
+  engDescription: "A nocturnal predatory fish species active at night.\\nWith its
+    mild flavour, it is beneficial for boosting vitality and relieving fatigue.\r"
+  caughtDate: 

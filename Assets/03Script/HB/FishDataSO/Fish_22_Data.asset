@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_22_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: NullException
-  engName: NullException
-  fishRarity: -1
-  fishType: -1
-  length: -1
-  weight: -1
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: -1
-  korDescription: NullException
-  engDescription: "\r"
+  fishID: Fish_22
+  korName: "\uAE08\uBD95\uC5B4"
+  engName: Goldfish
+  fishRarity: 3
+  fishType: 0
+  length: 15
+  weight: 0.3
+  fishSprite: Fish_22
+  silhouetteSprite: 
+  price: 55
+  korDescription: "\uC704\uAC00 \uC5C6\uC5B4 \uC18C\uD654\uAC00 \uBE60\uB978 \uC0DD\uC120.\\n\uBA39\uC5B4\uBCF8
+    \uC0AC\uB78C\uB4E4\uC5D0 \uB530\uB974\uBA74 \uB9DB\uC740 \uADF8\uB7ED\uC800\uB7ED
+    \uAD1C\uCC2E\uB2E4\uACE0 \uD55C\uB2E4."
+  engDescription: "It has no stomach, so it digests quickly.\\nAccording to those
+    who have tried it, the taste is decent enough.\r"
+  caughtDate: 

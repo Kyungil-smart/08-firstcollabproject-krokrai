@@ -13,8 +13,9 @@ public class TouckLockModuleController : MonoBehaviour
     [SerializeField] CanvasGroup[] _canvasGroups;
     
     [Header("잠금 화면 때 보여질 캔버스 안에 있는 모든 이미지적 요소 목록에 추가")]
-    [SerializeField] Image[] _images;
-    
+    //[SerializeField] Image[] _images;
+    [SerializeField] SpriteRenderer[] _images;
+
     [Header("잠금화면때 보여지지 않을 UI 요소(프리팹 최 상단) 넣을 것")] 
     [SerializeField] GameObject[] _closeUis;
 
@@ -23,6 +24,7 @@ public class TouckLockModuleController : MonoBehaviour
     [Tooltip("이미지끼리 겹치면 투명도가 의도대로 적용 안되서 추가 보정치 필요")]
     [SerializeField] [Range(0.05f, 0.25f)] float _calibrationOpacity;
 
+    [SerializeField] GameObject _obj;
     private float _tempOpacity;
     
     private AudioManager _audioManager;
@@ -70,12 +72,21 @@ public class TouckLockModuleController : MonoBehaviour
             }
             canvas.interactable = false;
         }
-
+        /*
         foreach (Image image in _images)
         {
             if (image.color.a > _capOpacity)
             {
                 image.color = new Color(image.color.r, image.color.g, image.color.b, _capOpacity-_calibrationOpacity);
+            }
+        }
+        */
+
+        foreach (SpriteRenderer image in _images)
+        {
+            if (image.color.a > _capOpacity)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, _capOpacity - _calibrationOpacity);
             }
         }
 
@@ -96,8 +107,10 @@ public class TouckLockModuleController : MonoBehaviour
             }
             canvas.interactable = true;
         }
-        
-        foreach (Image image in _images)
+
+        _obj.SetActive(true);
+
+        foreach (SpriteRenderer image in _images)
         {
             if (_tempOpacity > 0)
             {

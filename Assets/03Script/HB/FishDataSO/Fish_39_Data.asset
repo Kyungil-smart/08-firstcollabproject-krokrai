@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: Fish_39_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_39
+  korName: "\uBC31\uC0C1\uC544\uB9AC"
+  engName: White Shark
+  fishRarity: 6
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 490
+  weight: 750
+  fishSprite: Fish_39
+  silhouetteSprite: 
+  price: 120
+  korDescription: "\uD574\uC591 \uC0DD\uD0DC\uACC4\uC758 \uCD5C\uC0C1\uC704 \uD3EC\uC2DD\uC790.\\n\uD64D\uC5B4\uCC98\uB7FC
+    \uC0AD\uD78C \uBC29\uC2DD\uC73C\uB85C \uBA39\uB294\uB2E4."
+  engDescription: "The apex predator of the marine ecosystem.\\nIt is eaten after
+    being fermented, similar to skate.\r"
+  caughtDate: 

@@ -19,7 +19,7 @@ public class RecipModel : MonoBehaviour
     bool _canUnlock;
     bool _isInitiated;
 
-    private void Start()
+    private void Awake()
     {
         _canUnlock = false;
         _canMake = false;
@@ -60,6 +60,7 @@ public class RecipModel : MonoBehaviour
     /// </summary>
     public void CanUnlockConditionsMet()
     {
+        Debug.Log($"{gameObject.name} 레시피 해금 됌");
         _canUnlock = true;
         _LockImage.sprite = _unlockSprite;
     }

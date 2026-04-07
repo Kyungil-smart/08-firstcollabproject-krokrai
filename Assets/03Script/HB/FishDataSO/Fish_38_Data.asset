@@ -18,10 +18,14 @@ MonoBehaviour:
   engName: Giant Squid
   fishRarity: 6
   fishType: 0
-  length: 100
-  weight: 100
-  fishSprite: {fileID: 4966732595609684114, guid: 657149715d50440418fcd4f26b01f4c5, type: 3}
-  silhouetteSprite: {fileID: 4457835537561387818, guid: a657a0d48935d5740935648d017c31c0, type: 3}
-  price: 1000
-  korDescription: "\uC124\uBA85 \uCC44\uC6B0\uC790"
-  engDescription: "Dummy Description\r"
+  length: 1200
+  weight: 500
+  fishSprite: Fish_38
+  silhouetteSprite: 
+  price: 120
+  korDescription: "\uC77C\uBC18\uC801\uC778 \uC624\uC9D5\uC5B4\uC640 \uB9E4\uC6B0
+    \uBE44\uC2B7\uD55C \uC0DD\uBA85\uCCB4.\\n\uAC00\uACF5\uC744 \uB9C8\uCE58\uBA74
+    \uB2F4\uBC31\uD558\uACE0 \uC57C\uB4E4\uC57C\uB4E4\uD55C \uC2DD\uAC10\uC744 \uC900\uB2E4."
+  engDescription: "A creature very similar to common squid.\\nOnce processed, it
+    has a mild flavor and a tender, chewy texture.\r"
+  caughtDate: 

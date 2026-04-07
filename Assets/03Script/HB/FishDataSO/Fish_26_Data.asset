@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_26_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_26
+  korName: "\uCCAD\uC0C8\uCE58"
+  engName: Striped Marlin
+  fishRarity: 4
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 420
+  weight: 500
+  fishSprite: Fish_26
+  silhouetteSprite: 
+  price: 80
+  korDescription: "\uB9E4\uC6B0 \uC0AC\uB0A9\uACE0 \uC131\uC9C8\uC774 \uAE09\uD55C
+    \uC0DD\uC120.\\n\uC539\uC744\uC218\uB85D \uAC10\uCE60\uB9DB\uC774 \uC62C\uB77C\uC640
+    \uC778\uAE30\uAC00 \uB9CE\uB2E4."
+  engDescription: "A very fierce and temperamental fish.\\nIt becomes more flavourful
+    the more you chew it, making it very popular.\r"
+  caughtDate: 

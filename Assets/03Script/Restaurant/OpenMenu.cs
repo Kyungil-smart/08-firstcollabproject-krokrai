@@ -19,6 +19,7 @@ public class OpenMenu : MonoBehaviour
     void Start()
     {
         _active = false;
+        _menu.SetActive(false);
     }
 
     public void OnFishScene()

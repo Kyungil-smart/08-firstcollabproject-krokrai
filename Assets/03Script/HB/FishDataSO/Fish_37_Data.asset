@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_37_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_37
+  korName: "\uD574\uB9C8"
+  engName: Seahorse
+  fishRarity: 5
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 5
+  weight: 0.02
+  fishSprite: Fish_37
+  silhouetteSprite: 
+  price: 96
+  korDescription: "\uC218\uCEF7\uC774 \uC784\uC2E0\uD558\uB294 \uB300\uD45C\uC801\uC778
+    \uC5B4\uB958\uB2E4.\\n\uB9D0\uB824 \uD280\uAE30\uBA74 \uBD81\uC5B4 \uB9DB\uACFC
+    \uBE44\uC2B7\uD558\uB2E4."
+  engDescription: "It is a well-known fish species in which the males become pregnant.\\nWhen
+    dried and fried, it tastes similar to dried pollack.\r"
+  caughtDate: 
