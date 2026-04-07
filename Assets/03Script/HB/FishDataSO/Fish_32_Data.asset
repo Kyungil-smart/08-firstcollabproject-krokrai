@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_32_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_32
+  korName: "\uAC00\uC624\uB9AC"
+  engName: Ray
+  fishRarity: 5
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 400
+  weight: 700
+  fishSprite: Fish_32
+  silhouetteSprite: 
+  price: 95
+  korDescription: "\uBD80\uB974\uB294 \uBA85\uCE6D\uC758 \uC5B4\uC6D0\uC774 \uBD88\uBD84\uBA85\uD55C
+    \uC5B4\uB958,\\n\uB2F4\uBC31\uD558\uACE0 \uBD80\uB4DC\uB7EC\uC6B4 \uC0B4\uACB0\uC5D0
+    \uCAC4\uAE43\uD55C \uC2DD\uAC10\uC774 \uC77C\uD488\uC774\uB2E4."
+  engDescription: "A fish whose name has an unclear etymology,\\nits mild, tender
+    flesh and chewy texture are exceptional.\r"
+  caughtDate: 

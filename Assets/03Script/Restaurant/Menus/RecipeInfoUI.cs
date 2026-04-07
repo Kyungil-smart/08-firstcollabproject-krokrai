@@ -50,8 +50,6 @@ public class RecipeInfoUI : MonoBehaviour
         _currentObj = outline;
         _currentObj.SetActive(true);
 
-        Debug.Log($"현재 들어온 레시피 정보 : {rcp.name}");
-
         lng = DataTower.instance.languageSetting;
 
         _rcp = rcp;

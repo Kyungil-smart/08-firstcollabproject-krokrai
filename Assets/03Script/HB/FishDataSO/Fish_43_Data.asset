@@ -14,14 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
   fishID: Fish_43
-  korName: "\uD639\uB4F1\uACE0\uB798"
-  engName: Minke Whale
+  korName: "\uC778\uC5B4"
+  engName: Mermaid
   fishRarity: 7
   fishType: 0
-  length: 1600
-  weight: 40000
-  fishSprite: {fileID: 4966732595609684114, guid: 657149715d50440418fcd4f26b01f4c5, type: 3}
-  silhouetteSprite: {fileID: 4457835537561387818, guid: a657a0d48935d5740935648d017c31c0, type: 3}
-  price: 1000
-  korDescription: "\uC124\uBA85 \uCC44\uC6B0\uC790"
-  engDescription: "Dummy Description\r"
+  length: 160
+  weight: 50
+  fishSprite: Fish_43
+  silhouetteSprite: 
+  price: 140
+  korDescription: "\uADC0\uC5FD\uAC8C \uC0DD\uAE34 \uC778\uC5B4\uAC00 \uC790\uC2E0\uC774
+    \uB9CC\uB4E0 \uC694\uB9AC\uB97C \uC790\uAFB8 \uAC74\uB124\uC900\uB2E4...\uBD84\uD558\uC9C0\uB9CC
+    \uAF64 \uB9DB\uC788\uB2E4."
+  engDescription: "A cute-looking mermaid keeps offering me the food she\u2019s made...
+    It\u2019s a bit annoying, but it\u2019s actually quite tasty.\r"
+  caughtDate: 

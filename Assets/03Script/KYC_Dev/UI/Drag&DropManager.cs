@@ -41,7 +41,11 @@ public class DragNDropManager : MonoBehaviour
         foreach (RaycastHit2D hit2D in hit2Ds)
         {
             hit2D.collider.gameObject.TryGetComponent(out _target);
-            if(_target != null)_target.isMove = true;
+            if (_target != null)
+            {
+                _target.isMove = true;
+                break;
+            }
         }
     }
 

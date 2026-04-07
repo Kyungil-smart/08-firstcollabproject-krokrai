@@ -32,6 +32,7 @@ public class RecipManager : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(AddAction());
+        StartCoroutine(DataRead());
     }
 
     IEnumerator AddAction()
@@ -47,11 +48,6 @@ public class RecipManager : MonoBehaviour
     private void OnDestroy()
     {
         DataTower.instance.OnFisingNewFish -= FirstFishingFish;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(DataRead());
     }
 
     IEnumerator DataRead()
@@ -97,7 +93,10 @@ public class RecipManager : MonoBehaviour
     /// <param name="n"></param>
     public void FirstFishingFish(string fishID)
     {
-        _recipes[fishID].GetComponent<RecipModel>().CanUnlockConditionsMet();
+        Debug.Log($"새로 들어온 물고기 : {fishID}");
+        GameObject obj;
+        obj = _recipes[fishID];
+        Debug.Log($"현재 물고기 레시피 : {obj.name}");
+        obj.GetComponent<RecipModel>().CanUnlockConditionsMet();
     }
-    // Data Tower에서 3가지 Action을 만들어서 1번 : 들어오거나 나가는 경우, 2번 : 갯수가 0이 된경우, 3번 : 갯수가 0이 아닌경우. 4번 : 도감용 첫 획득인 경우.
 }

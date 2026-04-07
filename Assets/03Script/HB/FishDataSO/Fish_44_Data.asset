@@ -13,15 +13,20 @@ MonoBehaviour:
   m_Name: Fish_44_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_44
+  korName: "\uB808\uBE44\uC544\uD0C4"
+  engName: Leviathan
+  fishRarity: 7
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 1750
+  weight: 57000
+  fishSprite: Fish_44
+  silhouetteSprite: 
+  price: 140
+  korDescription: "\uC138\uC0C1 \uADF8 \uC5B4\uB5A4 \uC0DD\uC120\uBCF4\uB2E4\uB3C4
+    \uB9DB\uC774 \uC88B\uC73C\uBA70, \uBA39\uB294 \uC0AC\uB78C\uC774 \uC6D0\uD558\uB294
+    \uC628\uAC16 \uCD5C\uACE0\uC758 \uC0DD\uC120 \uB9DB\uC744 \uB3D9\uC2DC\uC5D0
+    \uB0B8\uB2E4"
+  engDescription: "It is more delicious than any other fish in the world, offering
+    all the finest flavours a diner could wish for at once\r"
+  caughtDate: 

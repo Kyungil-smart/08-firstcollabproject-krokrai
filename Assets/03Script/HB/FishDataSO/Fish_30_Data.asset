@@ -18,10 +18,14 @@ MonoBehaviour:
   engName: Jellyfish
   fishRarity: 5
   fishType: 0
-  length: 200
-  weight: 200
-  fishSprite: {fileID: 4966732595609684114, guid: 657149715d50440418fcd4f26b01f4c5, type: 3}
-  silhouetteSprite: {fileID: 4457835537561387818, guid: a657a0d48935d5740935648d017c31c0, type: 3}
-  price: 1000
-  korDescription: "\uC124\uBA85 \uCC44\uC6B0\uC790"
-  engDescription: "Dummy Description\r"
+  length: 30
+  weight: 0.23
+  fishSprite: Fish_30
+  silhouetteSprite: 
+  price: 95
+  korDescription: "\uBAB8 \uB300\uBD80\uBD84\uC774 \uBB3C\uC778 \uC0DD\uBA85\uCCB4,\\n\uC5ED\uC0AC
+    \uAE4A\uC740 \uC2DD\uC7AC\uB8CC\uB85C, \uC624\uB3C5\uC624\uB3C5 \uC539\uD788\uB294
+    \uC2DD\uAC10\uC774 \uCD5C\uACE0\uB2E4."
+  engDescription: "A jelly composed mostly of water,\\na traditional ingredient with
+    a long history, known for its appealing, crunchy texture.\r"
+  caughtDate: 

@@ -6,11 +6,11 @@ public class ToggleUIState : MonoBehaviour
 {
     [SerializeField] GameObject _ui;
     
-    private AudioManager _audioManager;
+    [SerializeField] private AudioManager _audioManager;
 
-    private void Awake()
+    private void Start()
     {
-        _audioManager = FindFirstObjectByType<AudioManager>();
+        gameObject.SetActive(false);
     }
 
     /// <summary>
