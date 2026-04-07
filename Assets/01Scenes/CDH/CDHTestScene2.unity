@@ -31539,15 +31539,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1cd1f1cee26a98e498b863fb3887ac33, type: 3}
   - {fileID: 21300000, guid: e85074e976977d345bd5356ccc809618, type: 3}
   - {fileID: 21300000, guid: bc1c556e4bb439c438ead79f79cea7c4, type: 3}
-  raritySprites:
-  - {fileID: 21300000, guid: b4dd7b4f3ece7954aa4395255a8c277a, type: 3}
-  - {fileID: 21300000, guid: 72a86ebfedf95b54c81c13d42fae7227, type: 3}
-  - {fileID: 21300000, guid: c6020080f05283d4db962afbbd170439, type: 3}
-  - {fileID: 21300000, guid: 888df341227980546b11b7d3ed14c42e, type: 3}
-  - {fileID: 21300000, guid: 2c385c21792c7f2459728f0010973374, type: 3}
-  - {fileID: 21300000, guid: fafe40270d6fb8744985041b579ed527, type: 3}
-  - {fileID: 21300000, guid: 8f0b4e9ff7004e3408c0ead954d4e244, type: 3}
-  - {fileID: 21300000, guid: 93bb0d27223391044b1f8f4b894d66e1, type: 3}
 --- !u!4 &563590308826341179
 Transform:
   m_ObjectHideFlags: 0
@@ -33720,14 +33711,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.43921572, g: 0.43921572, b: 0.43921572, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 3789674849703664380, guid: ed3edc55dadb2a2499bf3b8ff335b0cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
