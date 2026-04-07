@@ -35,7 +35,14 @@ public class UpgradeSelectView : MonoBehaviour
     private string _ttmindex1;
     private string _ttmindex2;
     
+    private AudioManager _audioManager;
+    
     public event Action OnTryUpgrade;
+
+    private void Awake()
+    {
+        _audioManager = FindFirstObjectByType<AudioManager>();
+    }
 
     /// <summary>
     /// UI 텍스트 번역 설정
@@ -168,6 +175,7 @@ public class UpgradeSelectView : MonoBehaviour
     /// </summary>
     public void OnClickUpgradeButton()
     {
+        _audioManager.PlaySfxClick();
         OnTryUpgrade?.Invoke();
     }
 
