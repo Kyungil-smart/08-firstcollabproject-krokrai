@@ -41,7 +41,7 @@ public class FishBookManager : MonoBehaviour
                 _containers.Add(settings.rarity, settings.container);
             }
         }
-    }   
+    }  
 
     // 도감 창을 닫았다가 다시 열었을 때 첫 페이지로 초기화
     private void OnEnable()
@@ -191,9 +191,6 @@ public class FishBookManager : MonoBehaviour
             }
         }
 
-
         fishBookCompletionText.text = $"{caughtCount} / {totalFish}";    
-
     }
-
 }
