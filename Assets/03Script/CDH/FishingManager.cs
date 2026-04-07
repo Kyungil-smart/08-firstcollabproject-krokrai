@@ -37,16 +37,13 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public List<Sprite> fishSprites;
     public List<Sprite>raritySprites;
 
-
-    private void OnEnable()
+    private void Start()
     {
         if (_audioManager != null)
         {
             _audioManager.PlayBgmFishhook();
         }
-    }
-    private void Start()
-    {
+
         _animator = GetComponent<Animator>();
 
         // FishingUpgradeManager의 이벤트에 메서드들을 연결
