@@ -35,7 +35,6 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
     public GameObject fishPrefab;
     public Transform popFishPoint;
     public List<Sprite> fishSprites;
-    public List<Sprite>raritySprites;
 
     private void Start()
     {
@@ -416,25 +415,22 @@ public class FishingManager : MonoBehaviour, IPointerClickHandler, IPointerDownH
             bool isFullNow = _timer.CheckingFull();
             _animator.SetBool("IsFull", isFullNow);
 
-            if (!isFullNow)
+            if (isFullNow)
             {
                 yield return new WaitForSeconds(0.1f);
                 continue;
             }
 
             float waitTime = UnityEngine.Random.Range(10f, 15f);
-            float timeFlow = 0f;
+            yield return new WaitForSeconds(waitTime);
 
-            while (timeFlow < waitTime)
+            if (_timer.CheckingFull()) continue;
+
+            if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
             {
-                if (!_timer.CheckingFull())
-                    break;
-
-                timeFlow += 0.1f;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(1f);
+                continue;
             }
-
-            if (!_timer.CheckingFull()) continue;
 
             float randomVar = UnityEngine.Random.Range(0f, 100f);
             int targetIdx = 0;
