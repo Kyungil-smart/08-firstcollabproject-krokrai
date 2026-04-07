@@ -42,22 +42,14 @@ public class TouckLockModuleController : MonoBehaviour
 
     public void TouchLockEnable()
     {
+        _audioManager.PlaySfxLock();
         LockInvoke();
     }
     
     public void TouchLockDisable()
     {
-        UnlockInvoke();
-    }
-
-    public void TouchLockPlaySFX()
-    {
-        _audioManager.PlaySfxLock();
-    }
-
-    public void TouchUnlockPlaySFX()
-    {
         _audioManager.PlaySfxUnlock();
+        UnlockInvoke();
     }
 
     private void LockInvoke()
