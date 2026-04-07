@@ -39,7 +39,7 @@ public class RecipManager : MonoBehaviour
     {
         while(DataTower.instance == null)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
         DataTower.instance.OnFisingNewFish += FirstFishingFish;
         yield break;
@@ -54,7 +54,7 @@ public class RecipManager : MonoBehaviour
     {
         while ( !_dataCon.isDataLoaded )
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
         }
 
         if ( _dataCon.objs[0] is not RecipeContainer )
@@ -93,10 +93,7 @@ public class RecipManager : MonoBehaviour
     /// <param name="n"></param>
     public void FirstFishingFish(string fishID)
     {
-        Debug.Log($"새로 들어온 물고기 : {fishID}");
-        GameObject obj;
-        obj = _recipes[fishID];
-        Debug.Log($"현재 물고기 레시피 : {obj.name}");
-        obj.GetComponent<RecipModel>().CanUnlockConditionsMet();
+        Debug.Log($"현재 물고기 레시피 : {fishID}");
+        _recipes[fishID].GetComponent<RecipModel>().CanUnlockConditionsMet();
     }
 }
