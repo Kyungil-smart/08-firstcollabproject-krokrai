@@ -453,11 +453,11 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
 
             float waitTime = UnityEngine.Random.Range(10f, 15f);
-            float 변수 = 0f;
+            float currentWaitTime = 0f;
 
-            while (변수 < waitTime)
+            while (currentWaitTime < waitTime)
             {
-                변수 += Time.deltaTime;
+                currentWaitTime += Time.deltaTime;
 
                 if (_timer.CheckingFull()) break;
 
