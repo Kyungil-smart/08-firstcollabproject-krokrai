@@ -47,9 +47,16 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             {
                 _animator.Play("Wait", 0, 0f);
             }
+            else
+            {
+                _animator.Play("idle", 0, 0f);
+            }
         }
+
+        StopAllCoroutines();
+        StartCoroutine(IdleVariationRoutine());
     }
-    private void Start()
+    private void Awake()
     {
         if (_audioManager != null)
         {
@@ -80,7 +87,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             uiManager.UpdateCountText(_currentCount, fishingCount);
         }
 
-        StartCoroutine(IdleVariationRoutine());
+        // StartCoroutine(IdleVariationRoutine());
     }
 
     /*private void Update()
@@ -238,7 +245,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             if (_audioManager != null)
             {
                 _audioManager.StopSfxFishing();
-
+                _audioManager.PlaySfxWater();
             }
 
             _animator.SetTrigger("resultCatch");
@@ -432,6 +439,8 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     /// </summary>
     IEnumerator IdleVariationRoutine()
     {
+        yield return null;
+
         while (true)
         {
             bool isFullNow = _timer.CheckingFull();
