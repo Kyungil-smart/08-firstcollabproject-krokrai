@@ -29329,6 +29329,10 @@ PrefabInstance:
       propertyPath: countText
       value: 
       objectReference: {fileID: 1080214891763371415}
+    - target: {fileID: 2050856745614473414, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
+      propertyPath: timerText
+      value: 
+      objectReference: {fileID: 874238354708951924}
     - target: {fileID: 4183886587059565716, guid: e785c63db70710b40b3d50c64e5c734f, type: 3}
       propertyPath: _manager
       value: 

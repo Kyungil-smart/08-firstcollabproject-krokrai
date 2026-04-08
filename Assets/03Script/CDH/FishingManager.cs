@@ -47,9 +47,16 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             {
                 _animator.Play("Wait", 0, 0f);
             }
+            else
+            {
+                _animator.Play("idle", 0, 0f);
+            }
         }
+
+        StopAllCoroutines();
+        StartCoroutine(IdleVariationRoutine());
     }
-    private void Start()
+    private void Awake()
     {
         if (_audioManager != null)
         {
@@ -80,7 +87,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             uiManager.UpdateCountText(_currentCount, fishingCount);
         }
 
-        StartCoroutine(IdleVariationRoutine());
+        // StartCoroutine(IdleVariationRoutine());
     }
 
     /*private void Update()
@@ -179,7 +186,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     }
 
     /// <summary>
-    /// 낚시 화면 클릭 시 호출 현재 애니메이션의 상태에 따라 낚시 연출 실행
+    /// 낚시 화면 클릭 시 낚시 연출 실행
     /// </summary>
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -238,7 +245,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             if (_audioManager != null)
             {
                 _audioManager.StopSfxFishing();
-
+                _audioManager.PlaySfxWater();
             }
 
             _animator.SetTrigger("resultCatch");
@@ -432,6 +439,8 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     /// </summary>
     IEnumerator IdleVariationRoutine()
     {
+        yield return null;
+
         while (true)
         {
             bool isFullNow = _timer.CheckingFull();
@@ -444,11 +453,11 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
 
             float waitTime = UnityEngine.Random.Range(10f, 15f);
-            float 변수 = 0f;
+            float currentWaitTime = 0f;
 
-            while (변수 < waitTime)
+            while (currentWaitTime < waitTime)
             {
-                변수 += Time.deltaTime;
+                currentWaitTime += Time.deltaTime;
 
                 if (_timer.CheckingFull()) break;
 
