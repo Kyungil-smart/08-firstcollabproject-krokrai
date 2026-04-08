@@ -342,6 +342,10 @@ public class FishingUpgradeManager : MonoBehaviour
         _dataReader.GetBaitLevelReqGoldData(DataTower.instance.baitLevel ,out _baitLevelReqGold);
         _dataReader.GetRodLevelReqGoldData(DataTower.instance.rodLevel ,out _rodLevelReqGold);
         _dataReader.GetShipLevelReqGoldData(DataTower.instance.shipLevel ,out _shipLevelReqGold);
+        CheckEnoughGoldFishingGradeUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBaitLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldRodLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldShipLevelUpgrade(DataTower.instance.money);
     }
 
     #endregion
