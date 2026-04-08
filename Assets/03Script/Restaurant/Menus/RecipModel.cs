@@ -68,6 +68,7 @@ public class RecipModel : MonoBehaviour
     public void UnlockThisRecipe()
     {
         _isUnlocked = true;
+        _canMake = true;
         _ShildeImage.SetActive(false);
         _btnImage.color = Color.white;
     }

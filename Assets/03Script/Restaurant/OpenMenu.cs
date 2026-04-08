@@ -61,6 +61,7 @@ public class OpenMenu : MonoBehaviour
     {
         _audioManager.PlaySfxClick();
         _active = !_active;
+        
         if (_active)
         {
             _loadCanvas.alpha = 1;
@@ -73,6 +74,7 @@ public class OpenMenu : MonoBehaviour
             _loadCanvas.interactable = false;
             _loadCanvas.blocksRaycasts = false;
         }
+        
         _masterBtn.interactable = !_active;
         //_menu.SetActive(_active);
     }
