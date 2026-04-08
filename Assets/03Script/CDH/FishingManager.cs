@@ -212,7 +212,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (!_isLoaded)
         {
-            Debug.Log("아직 데이터 로딩 중입니다...");
+            Debug.Log("데이터 로딩 중");
             return;
         }
 
