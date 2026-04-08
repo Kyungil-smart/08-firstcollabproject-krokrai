@@ -9,7 +9,7 @@ public class FishingTimer : MonoBehaviour
     [SerializeField] public float fishingTime; // 현재 남은 최대 쿨타임
     [SerializeField] public float maxFishingTime = 3600f; // 충전 완료까지의 최대 시간
     [SerializeField] private FishingManager _manager; // 낚시 카운트를 관리하는 매니저
-    public TMP_Text timerText; // 시간을 화면에 표시할 UI 텍스트 컴포넌트
+   
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class FishingTimer : MonoBehaviour
         maxFishingTime = newTime;
 
             fishingTime = maxFishingTime;
-            TimerUI(fishingTime);
+        UpdateTimerUI();
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public class FishingTimer : MonoBehaviour
             if (CheckingFull())
             {
                 fishingTime = maxFishingTime;
-                TimerUI(fishingTime);
+                UpdateTimerUI();
 
                 yield return new WaitUntil(() => !CheckingFull());
             }
@@ -50,7 +50,7 @@ public class FishingTimer : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
             fishingTime--;
 
-            TimerUI(fishingTime);
+            UpdateTimerUI();
             TimeCycle();
         }
     }
@@ -58,12 +58,12 @@ public class FishingTimer : MonoBehaviour
     /// <summary>
     /// 남은 시간을 00:00 형태로 UI에 표시
     /// </summary>
-    /// <param name="time">표시할 시간</param>
-    private void TimerUI(float time)
+    private void UpdateTimerUI()
     {
-        int minutes = Mathf.FloorToInt(fishingTime / 60);
-        int seconds = Mathf.FloorToInt(fishingTime % 60);
-        timerText.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
+        if (_manager != null && _manager.uiManager != null)
+        {
+            _manager.uiManager.UpdateTimerText(fishingTime);
+        }        
     }
 
     /// <summary>
