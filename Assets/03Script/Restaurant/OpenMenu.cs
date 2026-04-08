@@ -25,6 +25,9 @@ public class OpenMenu : MonoBehaviour
         _loadCanvas.alpha = 0;
         _loadCanvas.interactable = false;
         _loadCanvas.blocksRaycasts = false;
+        _gaugeCanvas.alpha = 0;
+        _gaugeCanvas.interactable = false;
+        _gaugeCanvas.blocksRaycasts = false;
     }
 
     public void OnFishScene()

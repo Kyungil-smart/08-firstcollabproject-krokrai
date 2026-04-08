@@ -16,6 +16,7 @@ public class RecipeInfoUI : MonoBehaviour
     [SerializeField] GameObject _unlockedPopup;
     [SerializeField] UnlockedPopup _unlockedPopupScript;
     [SerializeField] AudioManager _audioManager;
+    [SerializeField] RecipManager _recipeManager;
 
     RecipeContainer _rcp;
 
@@ -137,7 +138,6 @@ public class RecipeInfoUI : MonoBehaviour
                 break;
         }
     }
-
     public void UnlockedPopup()
     {
         _audioManager.PlaySfxClick();
@@ -151,5 +151,10 @@ public class RecipeInfoUI : MonoBehaviour
         _currentHasFish--;
         _inventorySystem.Erase(fish.fishID);
         _menuctrl.InsertDish(_rcp);
+        _recipeManager.ReCall(_rcp);
+        if (_currentHasFish < 1)
+        {
+            _btn.interactable = false;
+        }
     }
 }

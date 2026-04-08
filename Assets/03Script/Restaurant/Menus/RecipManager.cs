@@ -76,6 +76,11 @@ public class RecipManager : MonoBehaviour
         yield break;
     }
 
+    public void ReCall(RecipeContainer rcp)
+    {
+        _recipes[rcp.ingredient].GetComponent<RecipModel>().PassToRecipeInfo();
+    }
+
     /// <summary>
     /// 물고기 이름 넣으면 해당 레시피 잠금 해제
     /// </summary>

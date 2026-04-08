@@ -11,6 +11,7 @@ public class RestaurantManager : MonoBehaviour
     [Header("Resources")]
     // 후에 메뉴판이랑 연동해서 관리할 것이기 때문에 메뉴판 완성 시 함수 안에 포함된 모든 _sushiCount 수정 해야함 @@@@@@@@@@@@@@@@@@@@@@@
     [SerializeField] private MenuCtrl _menuCtrl;
+    [SerializeField] private DataContainer _container;
     [SerializeField] private CustomerDataSO[] _customerData;
     [SerializeField] private Customer_Tips[] _customerTips;
     [SerializeField] private Restaurant_Fixed_value _fixedValue;
@@ -109,15 +110,6 @@ public class RestaurantManager : MonoBehaviour
         _currentSpawnedSpecialCustomer = 0;
         _currentSpawnedVIPCustomer = 0;
 
-        /*
-        _baseDelay = new WaitForSeconds(5);
-        _seconds = new WaitForSeconds[10];
-        for (int i = 1; i < 11; i++)
-        {
-            _seconds[i] = new WaitForSeconds(i);
-        }
-        */
-
         _customerPool = new Queue<GameObject>(10);
 
         for (i = 0; i < 10 ; i++)
@@ -130,9 +122,19 @@ public class RestaurantManager : MonoBehaviour
             _customerPool.Enqueue( obj );
         }
 
-        for(i = 0; i < _customerData.Length; i++)
+        StartCoroutine(CoTrySpawnCustomer());
+    }
+
+    IEnumerator Waiter()
+    {
+        while (_container.isDataLoaded)
         {
-            switch(_customerData[i].grade)
+            yield return null;
+        }
+
+        for (byte i = 0; i < _customerData.Length; i++)
+        {
+            switch (_customerData[i].grade)
             {
                 case CustomerGrade.NA:
                     Debug.LogWarning("값 오류");
@@ -153,16 +155,15 @@ public class RestaurantManager : MonoBehaviour
 
         Debug.Log($"손님 수 : {_normalCustomers} / {_specialCustomers}");
 
-        for (i = 0; i  < _normalCustomers / 2; i++)
+        for (byte i = 0; i < _normalCustomers / 2; i++)
             _halfNormalCustomersWeight += _customerData[i].weight;
-        for (i = 0; i < _specialCustomers / 2; i++)
+        for (byte i = 0; i < _specialCustomers / 2; i++)
             _halfSpecialCustomersWeight += _customerData[i + _normalCustomers].weight;
-
-        StartCoroutine(CoTrySpawnCustomer());
     }
 
     private IEnumerator CoTrySpawnCustomer()
     {
+        //yield return StartCoroutine(Waiter());
 
         // 설거지? 시간 => 대기시간 => 스폰
         while (true)
@@ -208,11 +209,11 @@ public class RestaurantManager : MonoBehaviour
     private void SpawnCustomer(RestaurantSeat seat)
     {
         // 자리에 앉음 상태로 전환
-        _currentWeightLevel = DataTower.instance.WeightLevel;
-        _temp_Numbers = CustomerWeightSelecter(UnityEngine.Random.Range(0,
-            (_maxNormalCustomersWeight
+        //_currentWeightLevel = DataTower.instance.WeightLevel;
+        _temp_Numbers = Random.Range(0, 20);//CustomerWeightSelecter(UnityEngine.Random.Range(0, 600)); //UnityEngine.Random.Range(0,
+            /*(_maxNormalCustomersWeight
             + CanSpawnVIPCustomer()
-            + CanSpawnSpecialCustomer() ) ));
+            + CanSpawnSpecialCustomer() ) ));*/
 
         Debug.Log(_temp_Numbers);
 
