@@ -192,7 +192,7 @@ public class InventorySystem : MonoBehaviour
                 OnInventoryChanged?.Invoke();
                 break;
             case 3:
-                DataTower.instance.Items.Sort((a, b) => a.fishRarity.CompareTo(b.fishRarity));
+                DataTower.instance.Items.Sort((a, b) => b.fishRarity.CompareTo(a.fishRarity));
                 OnInventoryChanged?.Invoke();
                 break;
             default:
