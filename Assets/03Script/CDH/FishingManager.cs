@@ -210,11 +210,14 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     /// </summary>
     private void GoFishing()
     {
-        if (!_isLoaded)
+        if (!_isLoaded || fishCurrentRate == null)
         {
             Debug.Log("데이터 로딩 중");
             return;
         }
+
+        string currentRarity = GetFishRarity();
+        if (currentRarity == "None") return;
 
         AnimatorStateInfo aniState = _animator.GetCurrentAnimatorStateInfo(0);
 
@@ -366,7 +369,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (fishCurrentRate == null)
         {
             Debug.Log("데이터가 연결되지 않습니다.");
-            return "Normal";
+            return "None";
         }
 
         if (rarityRate <= (baseValue += fishCurrentRate.trash))
@@ -383,7 +386,9 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         { return "Elite"; }
         if (rarityRate <= (baseValue += fishCurrentRate.fantastic))
         { return "Fantastic"; }
-        return "Legendary";
+        if (rarityRate <= (baseValue += fishCurrentRate.legendary))
+        { return "Legendary"; }
+        return "None";
     }
 
     /// <summary>
