@@ -29,11 +29,15 @@ public class InventoryTextController : MonoBehaviour
     private string _fishCountBackText;
     private string _moneyFrontText;
     private string _moneyBackText;
+    
+    private bool _isTransDataLoaded;
 
     private void Awake()
     {
         _inventorySystem = FindFirstObjectByType<InventorySystem>();
         _dataReader = FindFirstObjectByType<TranslationDataReader>();
+        _isTransDataLoaded = false;
+        _dataReader.OnDataLoaded += TransDataReaderReady;
     }
 
     private void OnEnable()
@@ -65,6 +69,11 @@ public class InventoryTextController : MonoBehaviour
     private IEnumerator LoadingOnEnableRoutine()
     {
         while (DataTower.instance == null)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
+        while (!_isTransDataLoaded)
         {
             yield return _waitForEndOfFrame;
         }
@@ -161,6 +170,11 @@ public class InventoryTextController : MonoBehaviour
                 back = "";
                 break;
         }
+    }
+    
+    private void TransDataReaderReady()
+    {
+        _isTransDataLoaded = true;
     }
 
     #endregion

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,7 +11,7 @@ public class ToggleUIState : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        StartCoroutine(StartRoutine());
     }
 
     /// <summary>
@@ -29,5 +30,11 @@ public class ToggleUIState : MonoBehaviour
     {
         _audioManager.PlaySfxClick();
         _ui.SetActive(false);
+    }
+    
+    private IEnumerator StartRoutine()
+    {
+        yield return new WaitForSecondsRealtime(0.001f);
+        gameObject.SetActive(false);
     }
 }

@@ -18,36 +18,10 @@ public class InventoryScrollView : MonoBehaviour
     private void Awake()
     {
         _inventorySystem = FindFirstObjectByType<InventorySystem>();
-    }
-
-    private void OnEnable()
-    {
-        EventEnable();
-    }
-
-    private void OnDisable()
-    {
-        EventDisable();
-    }
-
-    #region 이벤트 구독/해제
-
-    private void EventEnable()
-    {
-        
         _inventorySystem.OnInventorySet += SetView;
         _inventorySystem.OnInventoryChanged += ChangeView;
         _inventorySystem.OnInventoryExtended += ExtendView;
     }
-
-    private void EventDisable()
-    {
-        _inventorySystem.OnInventorySet -= SetView;
-        _inventorySystem.OnInventoryChanged -= ChangeView;
-        _inventorySystem.OnInventoryExtended -= ExtendView;
-    }
-
-    #endregion
 
     #region 인벤토리 창 컨트롤러
 
