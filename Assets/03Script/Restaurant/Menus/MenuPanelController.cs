@@ -28,7 +28,7 @@ public class MenuPanelController : MonoBehaviour
     {
         //_currentRecipe.
         //_recipe = rcp;
-        _recipeInfoUI.SelectedRecipe(_recipe, true , isUnlocked);
+        //_recipeInfoUI.SelectedRecipe(_recipe, canMake , isUnlocked);
 
         //CanMakeDish();
     }

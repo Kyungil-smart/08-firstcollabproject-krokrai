@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_23_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: NullException
-  engName: NullException
-  fishRarity: -1
-  fishType: -1
-  length: -1
-  weight: -1
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: -1
-  korDescription: NullException
-  engDescription: "\r"
+  fishID: Fish_23
+  korName: "\uD669\uAE08\uB3D4"
+  engName: Yellowback Seabream
+  fishRarity: 3
+  fishType: 0
+  length: 130
+  weight: 20
+  fishSprite: Fish_23
+  silhouetteSprite: 
+  price: 55
+  korDescription: "\uAF2C\uB9AC\uC9C0\uB290\uB7EC\uBBF8\uC5D0 \uB178\uB780 \uBC18\uC810\uC774
+    \uC788\uB294 \uC0DD\uC120.\\n\uCAC4\uAE43\uD558\uACE0 \uBD80\uB4DC\uB7EC\uC6B4
+    \uD69F\uAC10\uC73C\uB85C \uC778\uAE30\uAC00 \uB192\uB2E4."
+  engDescription: "A fish with a yellow spot on its tail fin.\\nIt is highly popular
+    for its firm yet tender texture when served as sashimi.\r"
+  caughtDate: 

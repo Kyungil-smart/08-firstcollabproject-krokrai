@@ -6,19 +6,7 @@ using UnityEngine.Serialization;
 
 public class FishingUpgradeManager : MonoBehaviour
 {
-    // 싱글톤 여부는 협의해서 결정
-    // 업그레이드 조건 확인, 수행
-    // 업그레이드 효과는 다른 컴포넌트에서 수행
-
-    /// <summary>
-    /// TODO : 변수 삭제 예정 / DataTower에 있는 변수로 변경하세요
-    /// </summary>
-    public int RodLevel;
-    
-    /// <summary>
-    /// TODO : 변수 삭제 예정 / DataTower에 있는 변수로 변경하세요
-    /// </summary>
-    public int BaitLevel;
+    [SerializeField] private DataContainer _container;
     
     private FishingUpgradeDataReader _dataReader;
     private WaitForEndOfFrame _waitForEndOfFrame = new();
@@ -127,6 +115,11 @@ public class FishingUpgradeManager : MonoBehaviour
     private IEnumerator LoadingOnEnableRoutine()
     {
         while (DataTower.instance == null)
+        {
+            yield return _waitForEndOfFrame;
+        }
+
+        while (!_container.isDataLoaded)
         {
             yield return _waitForEndOfFrame;
         }
@@ -343,12 +336,16 @@ public class FishingUpgradeManager : MonoBehaviour
         CheckCanShipLevelUpgrade(DataTower.instance.fishingGrade, DataTower.instance.shipLevel);
     }
     
-    private void CheckReqGolds()
+    public void CheckReqGolds()
     {
         _dataReader.GetFishingGradeReqGoldData(DataTower.instance.fishingGrade ,out _fishingGradeReqGold);
         _dataReader.GetBaitLevelReqGoldData(DataTower.instance.baitLevel ,out _baitLevelReqGold);
         _dataReader.GetRodLevelReqGoldData(DataTower.instance.rodLevel ,out _rodLevelReqGold);
         _dataReader.GetShipLevelReqGoldData(DataTower.instance.shipLevel ,out _shipLevelReqGold);
+        CheckEnoughGoldFishingGradeUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBaitLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldRodLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldShipLevelUpgrade(DataTower.instance.money);
     }
 
     #endregion

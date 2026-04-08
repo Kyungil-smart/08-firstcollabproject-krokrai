@@ -22,6 +22,7 @@ public class CustomerController : MonoBehaviour
     private RestaurantManager _restaurant;
     private RestaurantSeat _seat;
     private Transform _exitPoint;
+    private AudioManager _audioManager;
 
     private WaitForSeconds _GaugeUpdateTime;
 
@@ -48,7 +49,7 @@ public class CustomerController : MonoBehaviour
 
     public void SetVisual(bool b) // 여기에 낚시로 넘어가는 경우 Invoke 해줄 오브젝트 넣어 주기 및 체인 걸어주기.
     {
-        if (!gameObject.activeSelf) return;
+        //if (!gameObject.activeSelf) return;
         _isVisualContect = b;
         if (_isVisualContect)
         {
@@ -83,10 +84,11 @@ public class CustomerController : MonoBehaviour
     /// RestaurangtManager와 연결.
     /// </summary>
     /// <param name="restaurant"></param>
-    public void ConnectRestaurant(RestaurantManager restaurant, OpenMenu opmenu)
+    public void ConnectRestaurant(RestaurantManager restaurant, OpenMenu opmenu, AudioManager adMan)
     {
         _restaurant = restaurant;
         _openMenu = opmenu;
+        _audioManager = adMan;
         _openMenu.OnChangeSceneToRestaurant += SetVisual;
     }
 
@@ -158,13 +160,13 @@ public class CustomerController : MonoBehaviour
                             _firstOrder = false;
                             _eatCounte++;
                             yield return StartCoroutine(Gaugebar(false, i));
-                            /*
+                            _audioManager.PlaySfxPayMoney();
                             if (UnityEngine.Random.Range(0,1f) <= _tips.tipsRate) //팁 확률 측정 후 팁인 경우 팁과함께 아닌 경우 팁 제외
                                 _restaurant.TryCounsumeSushiAndEarnMoney(_tips.tipsMulti);
                             else
                                 _restaurant.TryCounsumeSushiAndEarnMoney(1);
-                            */
-                            Gaugebar(true,i);
+                            yield return StartCoroutine(Gaugebar(true,i));
+                            _audioManager.PlaySfxPayMoney();
                         }
                     }
 

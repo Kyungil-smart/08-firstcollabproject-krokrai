@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_40_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_40
+  korName: "\uD0B9\uD06C\uB7A9"
+  engName: King Crap
+  fishRarity: 6
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 180
+  weight: 2
+  fishSprite: Fish_40
+  silhouetteSprite: 
+  price: 120
+  korDescription: "\uC0AC\uC2E4 \uB2E4\uB9AC\uAC00 10\uAC1C\uC778 \uAC8C.\\n\uC0B4
+    \uC790\uCCB4\uAC00 \uBC84\uD130\uCC98\uB7FC \uB2EC\uCF64\uD55C \uD48D\uBBF8\uC640
+    \uCAC4\uAE43\uD55C \uC2DD\uAC10\uC73C\uB85C \uCC1C\uD574 \uBA39\uB294\uB2E4."
+  engDescription: "Actually, it has ten legs.\\nThe meat itself has a sweet, buttery
+    flavour and a chewy texture, and is usually steamed.\r"
+  caughtDate: 

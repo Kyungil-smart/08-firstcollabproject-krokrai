@@ -5,30 +5,27 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/01Scenes/MainScene.unity
     guid: 6ef9cf7b215ec0e41891ba6cbddf6704
   - enabled: 0
     path: Assets/01Scenes/SJO_Test_Scene.unity
     guid: bae940c250e13454b9d4224ca008746b
-  - enabled: 1
+  - enabled: 0
     path: Assets/01Scenes/HB/HB_Test_Scene.unity
     guid: 2b4b9c2e74764d64e95cedb20b15ac47
   - enabled: 0
-    path: Assets/01Scenes/CDH/CDH_TestScene.unity
-    guid: 38e5acb553f91df4da8e229bd7a57283
-  - enabled: 0
     path: Assets/01Scenes/MJY_Test_Scene.unity
     guid: 0ec468ea74c47a14b8298f62e78aabcf
-  - enabled: 0
-    path: Assets/01Scenes/CDH/CDH_TestScene3.unity
-    guid: 322a206b68bfc3e4983bb2d4d6bb4d43
   - enabled: 0
     path: Assets/01Scenes/KYC_TouchLockTest_Scene.unity
     guid: 1f3a10953172b9641aec8cea69c0f3a1
   - enabled: 0
     path: Assets/01Scenes/KYC_WidgetSizeControllTest_Scene.unity
     guid: f7fc6dc8f4c9717468a8b4ad7ab27faf
+  - enabled: 0
+    path: Assets/01Scenes/CDH/CDHTestScene2.unity
+    guid: cad397465f0ad214598d4b5cc9dc38fe
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: b26e8455115b60940b310f615ce5c33e, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

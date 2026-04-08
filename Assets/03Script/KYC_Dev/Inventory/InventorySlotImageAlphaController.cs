@@ -11,16 +11,7 @@ public class InventorySlotImageAlphaController : MonoBehaviour
     private void Awake()
     {
         _image = GetComponent<Image>();
-    }
-
-    private void OnEnable()
-    {
         _controller.OnItemChanged += ChangeAlpha;
-    }
-
-    private void OnDisable()
-    {
-        _controller.OnItemChanged -= ChangeAlpha;
     }
 
     private void ChangeAlpha(FishData data)

@@ -26,10 +26,22 @@ public class UpgradeUIView : MonoBehaviour
 
     private string _moneyFrontText;
     private string _moneyBackText;
+    
+    private AudioManager _audioManager;
+    
+    private bool _isTransDataLoaded;
+
+    public bool isFReady;
+    public bool isDReady;
 
     private void Awake()
     {
         _tDataReader = FindFirstObjectByType<TranslationDataReader>();
+        _audioManager = FindFirstObjectByType<AudioManager>();
+        _isTransDataLoaded = false;
+        isFReady = false;
+        isDReady = false;
+        _tDataReader.OnDataLoaded += TransDataReaderReady;
     }
 
     private void OnEnable()
@@ -42,8 +54,17 @@ public class UpgradeUIView : MonoBehaviour
         EventDisable();
     }
 
-    private void Start()
+    private IEnumerator SlotLoadingWaitRoutine()
     {
+        while (!isFReady)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        while (!isDReady)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
         OnClickToggleFishingUpgrade();
     }
 
@@ -68,9 +89,15 @@ public class UpgradeUIView : MonoBehaviour
             yield return _waitForEndOfFrame;
         }
         
+        while (!_isTransDataLoaded)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
         EventEnable();
         SetGoldText();
         SetTranslationText();
+        StartCoroutine(SlotLoadingWaitRoutine());
     }
 
     #endregion
@@ -124,6 +151,11 @@ public class UpgradeUIView : MonoBehaviour
                 break;
         }
     }
+    
+    private void TransDataReaderReady()
+    {
+        _isTransDataLoaded = true;
+    }
 
     #endregion
     
@@ -143,6 +175,7 @@ public class UpgradeUIView : MonoBehaviour
     /// </summary>
     public void OnClickToggleFishingUpgrade()
     {
+        _audioManager.PlaySfxClick();
         _diningUpgradePanel.SetActive(false);
         _fishingUpgradePanel.SetActive(true);
         _toggleFishingUpgradeButton.interactable = false;
@@ -154,6 +187,7 @@ public class UpgradeUIView : MonoBehaviour
     /// </summary>
     public void OnClickToggleDiningUpgrade()
     {
+        _audioManager.PlaySfxClick();
         _fishingUpgradePanel.SetActive(false);
         _diningUpgradePanel.SetActive(true);
         _toggleDiningUpgradeButton.interactable = false;

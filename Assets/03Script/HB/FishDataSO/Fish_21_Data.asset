@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_21_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: NullException
-  engName: NullException
-  fishRarity: -1
-  fishType: -1
-  length: -1
-  weight: -1
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: -1
-  korDescription: NullException
-  engDescription: "\r"
+  fishID: Fish_21
+  korName: "\uB0A0\uCE58"
+  engName: Flying Fish
+  fishRarity: 3
+  fishType: 0
+  length: 40
+  weight: 0.5
+  fishSprite: Fish_21
+  silhouetteSprite: 
+  price: 54
+  korDescription: "\uD65C\uACF5\uD558\uB294 \uB300\uD45C\uC801\uC778 \uC0DD\uC120.\\n\uC54C\uC774
+    \uC720\uBA85\uD558\uB098 \uACE0\uAE30 \uC5ED\uC2DC \uD48D\uBD80\uD55C \uC601\uC591\uACFC
+    \uC0B4\uCF54\uAE30 \uB9DB\uC774 \uC77C\uD488\uC774\uB2E4."
+  engDescription: "A classic gliding fish.\\nWhile its roe is famous, its meat is
+    also rich in nutrients and has an excellent flavor.\r"
+  caughtDate: 

@@ -13,15 +13,19 @@ MonoBehaviour:
   m_Name: Fish_31_Data
   m_EditorClassIdentifier: Assembly-CSharp::FishData
   isCaught: 0
-  fishID: 
-  korName: 
-  engName: 
-  fishRarity: 0
+  fishID: Fish_31
+  korName: "\uBCF5\uC5B4"
+  engName: Blowfish
+  fishRarity: 5
   fishType: 0
-  length: 0
-  weight: 0
-  fishSprite: {fileID: 0}
-  silhouetteSprite: {fileID: 0}
-  price: 0
-  korDescription: 
-  engDescription: 
+  length: 40
+  weight: 1.5
+  fishSprite: Fish_31
+  silhouetteSprite: 
+  price: 95
+  korDescription: "\uC21C\uC6B0\uB9AC\uB9D0 \uC774\uB984\uC778 \uC0DD\uC120\uC73C\uB85C,\\n\uADF8
+    \uB9DB, \uC8FD\uC74C\uACFC\uB3C4 \uBC14\uAFC0 \uAC00\uCE58\uAC00 \uC788\uB2E4\uB294
+    \uB9D0\uC774 \uC788\uC744 \uC815\uB3C4\uB85C \uB9DB\uC788\uB2E4."
+  engDescription: "Known by its native Korean name, \u201Csaengseon,\u201D\\nit is
+    so delicious that there is a saying it is worth dying for.\r"
+  caughtDate: 

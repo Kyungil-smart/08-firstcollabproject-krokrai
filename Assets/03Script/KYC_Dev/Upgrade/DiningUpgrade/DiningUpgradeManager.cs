@@ -6,9 +6,7 @@ using UnityEngine.Serialization;
 
 public class DiningUpgradeManager : MonoBehaviour
 {
-    // 싱글톤 여부는 협의해서 결정
-    // 업그레이드 조건 확인, 수행
-    // 업그레이드 효과는 다른 컴포넌트에서 수행
+    [SerializeField] private DataContainer _container;
     
     private DiningUpgradeDataReader _dataReader;
     private WaitForEndOfFrame _waitForEndOfFrame = new();
@@ -241,6 +239,11 @@ public class DiningUpgradeManager : MonoBehaviour
     private IEnumerator LoadingOnEnableRoutine()
     {
         while (DataTower.instance == null)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
+        while (!_container.isDataLoaded)
         {
             yield return _waitForEndOfFrame;
         }
@@ -821,7 +824,7 @@ public class DiningUpgradeManager : MonoBehaviour
         CheckCanUnlockCatObjectLevelUpgrade(DataTower.instance.MasterLevel, DataTower.instance.UnlockCatObjectLevel);
     }
     
-    private void CheckCosts()
+    public void CheckCosts()
     {
         _dataReader.GetMasterLevelCostData(DataTower.instance.MasterLevel,out _masterLevelCost);
         _dataReader.GetMaxCustomerLimitCostData(DataTower.instance.MaxCustomerLimitLevel,out _maxCustomerLimitLevelCost);
@@ -834,6 +837,17 @@ public class DiningUpgradeManager : MonoBehaviour
         _dataReader.GetBonusFood01CostData(DataTower.instance.BonusFood01Level, out _bonusFood01LevelCost);
         _dataReader.GetBonusFood02CostData(DataTower.instance.BonusFood02Level, out _bonusFood02LevelCost);
         _dataReader.GetUnlockCatObjectCostData(DataTower.instance.UnlockCatObjectLevel,out _unlockCatObjectLevelCost);
+        CheckEnoughGoldMasterLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldMaxCustomerLimitLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldMaxSpawnLimit01LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldMaxSpawnLimit02LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldWeightLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusTipsMultiLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusDishPrice01LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusDishPrice02LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusFood01LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusFood02LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldUnlockCatObjectLevelUpgrade(DataTower.instance.money);
     }
 
     #endregion

@@ -178,3 +178,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 628a697435e9f824d87b673092fe3a37, type: 2}
   - {fileID: 11400000, guid: ff073cdeb9152b34097fb954251a5a04, type: 2}
   - {fileID: 11400000, guid: c5f8f8e97cb40ec47a4a444592aafd64, type: 2}
+  _translationContainer: {fileID: 11400000, guid: 69a3e7c847bc3ef4a996ba6d7b59c8c5, type: 2}
+  _fLinkerContainer: {fileID: 11400000, guid: c4eed56556cc82d4e8b26fdcb6895938, type: 2}
+  _dLinkerContainer: {fileID: 11400000, guid: 4d8ba5bc780ade042852787b730481d9, type: 2}

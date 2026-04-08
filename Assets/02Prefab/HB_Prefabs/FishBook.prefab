@@ -150,8 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC6B0\uC218"
-  engText: Fine
+  translationKey: 
 --- !u!1 &291909702922931910
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,8 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC778\uBCA4\uD1A0\uB9AC"
-  engText: Inventory
+  translationKey: Inventory
 --- !u!1 &419542071086967824
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,8 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC804\uC124"
-  engText: Legendary
+  translationKey: 
 --- !u!1 &1263472649639453418
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +883,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySfxClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1807612985393870129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,8 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uBA85\uD488"
-  engText: Elite
+  translationKey: 
 --- !u!1 &2767135047641283521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,8 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: Superior
-  engText: "\uACE0\uAE09"
+  translationKey: 
 --- !u!1 &2831260508197935957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,8 +1654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC77C\uBC18"
-  engText: Normal
+  translationKey: 
 --- !u!1 &4029349382839233591
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,8 +2313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uD76C\uADC0"
-  engText: Rare
+  translationKey: 
 --- !u!1 &4853129511982533241
 GameObject:
   m_ObjectHideFlags: 0
@@ -2882,8 +2887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC4F0\uB808\uAE30"
-  engText: Trash
+  translationKey: 
 --- !u!1 &5647353014999243731
 GameObject:
   m_ObjectHideFlags: 0
@@ -3820,8 +3824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uD658\uC0C1"
-  engText: Fantastic
+  translationKey: 
 --- !u!1 &7620747122282899137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3942,7 +3945,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 522820404797738549}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlaySfxClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7893684163669289200
 GameObject:
   m_ObjectHideFlags: 0

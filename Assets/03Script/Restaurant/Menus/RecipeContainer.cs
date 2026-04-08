@@ -14,7 +14,6 @@ public class RecipeContainer : ScriptableObject, IDataSeter
     public int yield;
     public string ingredient;
     public string dish_Sprite;
-    public string silhouette_Sprite;
     public string KDescription;
     public string EDescription;
 
@@ -36,9 +35,8 @@ public class RecipeContainer : ScriptableObject, IDataSeter
             yield = -1;
         ingredient = datas[6] != "" ? datas[6] : "NullException";
         dish_Sprite = datas[7] != "" ? datas[7] : "NullException";
-        silhouette_Sprite = datas[8] != "" ? datas[8] : "NullException";
-        KDescription = datas[9] != "" ? datas[9] : "NullException";
-        EDescription = datas[10] != "" ? datas[10] : "NullException";
+        KDescription = datas[8] != "" ? datas[8] : "NullException";
+        EDescription = datas[9] != "" ? datas[9] : "NullException";
     }
 
     

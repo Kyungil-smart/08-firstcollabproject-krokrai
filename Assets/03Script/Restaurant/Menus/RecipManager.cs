@@ -32,14 +32,12 @@ public class RecipManager : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(AddAction());
+        StartCoroutine(DataRead());
     }
 
     IEnumerator AddAction()
     {
-        while(DataTower.instance == null)
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
+        yield return new WaitForSeconds(0.2f);
         DataTower.instance.OnFisingNewFish += FirstFishingFish;
         yield break;
     }
@@ -49,17 +47,14 @@ public class RecipManager : MonoBehaviour
         DataTower.instance.OnFisingNewFish -= FirstFishingFish;
     }
 
-    private void Start()
-    {
-        StartCoroutine(DataRead());
-    }
-
     IEnumerator DataRead()
     {
         while ( !_dataCon.isDataLoaded )
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
         }
+
+        Debug.Log("Read to Write Recipe");
 
         if ( _dataCon.objs[0] is not RecipeContainer )
         {
@@ -67,11 +62,8 @@ public class RecipManager : MonoBehaviour
             yield break;
         }
 
-
-        //_recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
-        _recipes = new Dictionary<string, GameObject>(3);
-        //for (int i = 0; i < _dataCon.objs.Length; i++)
-        for (int i = 0; i < 3; i++)
+        _recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
+        for (int i = 0; i < _dataCon.objs.Length; i++)
         {
             _rcps = _dataCon.objs[i] as RecipeContainer;
             obj = Instantiate(tempRecipeObj, transform.position, Quaternion.identity);
@@ -84,13 +76,27 @@ public class RecipManager : MonoBehaviour
         yield break;
     }
 
+    public void ReCall(RecipeContainer rcp)
+    {
+        _recipes[rcp.ingredient].GetComponent<RecipModel>().PassToRecipeInfo();
+    }
+
+    /// <summary>
+    /// 물고기 이름 넣으면 해당 레시피 잠금 해제
+    /// </summary>
+    /// <param name="s"></param>
+    public void SetRecipeUnlock(string s)
+    {
+        _recipes[s].GetComponent<RecipModel>().UnlockThisRecipe();
+    }
+
     /// <summary>
     /// 낚시에 성공한 물고기가 처음 낚인 물고기인 경우. n(임시)에 값을 기준으로 해금
     /// </summary>
     /// <param name="n"></param>
     public void FirstFishingFish(string fishID)
     {
+        Debug.Log($"현재 물고기 레시피 : {fishID}");
         _recipes[fishID].GetComponent<RecipModel>().CanUnlockConditionsMet();
     }
-    // Data Tower에서 3가지 Action을 만들어서 1번 : 들어오거나 나가는 경우, 2번 : 갯수가 0이 된경우, 3번 : 갯수가 0이 아닌경우. 4번 : 도감용 첫 획득인 경우.
 }

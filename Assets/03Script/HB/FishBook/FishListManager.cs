@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class FishListManager : MonoBehaviour
 {
     [Header("FishData 연결")]
@@ -15,8 +14,7 @@ public class FishListManager : MonoBehaviour
     public TextMeshProUGUI fishNumText;     // FishNum TMP 연결
     public TextMeshProUGUI fishNameText;    // FishName TMP 연결
     public TextMeshProUGUI fishRateText;    // FishRate TMP 연결
-    
-
+   
     [Header("Details 텍스트 오브젝트 연결")]
     public TextMeshProUGUI descriptionText;     // Details TMP 연결
 
@@ -65,13 +63,17 @@ public class FishListManager : MonoBehaviour
         if(currentFish == null) return;
 
         bool isCaught = currentFish.isCaught;
+        bool isKor = true;
 
-        // 현재 언어가 한국어인가
-        bool isKor = DataTower.instance.languageSetting == Language.KOR;
+        if (DataTower.instance != null)
+        {
+            // 현재 언어가 한국어인가
+            isKor = DataTower.instance.languageSetting == Language.KOR;    
+        }
 
         string displayName = isKor ? currentFish.korName : currentFish.engName;
         string displayDescription = isKor ? currentFish.korDescription : currentFish.engDescription;
-        
+       
         // 삼항 연산자 잡았으면 물고기 정보 띄우고 아니면 ???
         SafeLink(fishNumText, currentFish.fishID);
         SafeLink(fishNameText, isCaught ? displayName : "???");
@@ -97,7 +99,6 @@ public class FishListManager : MonoBehaviour
         }
     }
 
-    
     public void ChangeFishData(FishData newData)
     {
         Debug.Log("버튼 눌림");

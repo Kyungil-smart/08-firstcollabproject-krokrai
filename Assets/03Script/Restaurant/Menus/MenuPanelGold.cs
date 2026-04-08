@@ -34,6 +34,6 @@ public class MenuPanelGold : MonoBehaviour
 
     public void SetGold(ulong gold)
     {
-        _gold.text = $"보유 금액 : {DataTower.instance.money} gold";
+        _gold.text = DataTower.instance.languageSetting == Language.KOR ? $"보유 금액 : {DataTower.instance.money} gold" : $"Money : {DataTower.instance.money} gold";
     }
 }

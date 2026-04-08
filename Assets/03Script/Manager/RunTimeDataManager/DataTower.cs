@@ -321,8 +321,8 @@ public class DataTower : MonoBehaviour
 
 
 
-            fishingTime = 30;
-            maxFishingTime = 1800;
+            fishingTime = 3600;
+            maxFishingTime = 3600;
         }
         else
         {
@@ -395,6 +395,7 @@ public class DataTower : MonoBehaviour
     /// </summary>
     public void takeFish(FishData fish)
     {
+        Debug.Log($"들어온 물고기 정보 : {fish.fishID}");
         _inventorySystem.Insert(fish.fishID); // Item SO 변경 후 작업 @@@@@@@@@@@@@@@@@@@@@@@@@@
         if (!fishDatas[fish.fishID].isCaught) // 딕셔너리에 있는 지 확인 및 있지 않다면 높은 확률로 새로운 물고기
         {
@@ -402,7 +403,6 @@ public class DataTower : MonoBehaviour
 
             OnFisingNewFish?.Invoke(fish.fishID);
         }
-
         CatchFishCounter(in fish);
     }
     #endregion

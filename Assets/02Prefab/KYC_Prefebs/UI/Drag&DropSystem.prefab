@@ -151,7 +151,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.5, y: 0.55, z: 0}
-  m_LocalScale: {x: 3, y: 3.4, z: 1}
+  m_LocalScale: {x: 3.1, y: 3.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8238557264488398845}
@@ -358,7 +358,7 @@ Transform:
   m_GameObject: {fileID: 6755137557146255848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.39, y: -3.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -441,6 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2173084667009310155}
   - component: {fileID: 2797830800023506621}
+  - component: {fileID: 401327794071997260}
   m_Layer: 0
   m_Name: Drag&DropSystem
   m_TagString: Untagged
@@ -478,6 +479,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee10b20d2a3374f43bb966578fb28a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragNDropManager
+--- !u!114 &401327794071997260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953461273183887083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b87688de60a29489c00878aac9f593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleCollider
+  _colliders:
+  - {fileID: 1863491842700342311}
+  - {fileID: 5127251091106516029}
 --- !u!1 &7119213824750783475
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +550,7 @@ Transform:
   m_GameObject: {fileID: 7689472535534559650}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -663,8 +679,8 @@ Transform:
   m_GameObject: {fileID: 8964720576812946468}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.00537, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 1, z: 1}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalScale: {x: 0.04, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4710943172166955289}
@@ -714,8 +730,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 610626535
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -786,7 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1fded210f9389841a993140f01a2777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WidgetSizeHandle
-  _safetyInterval: 0.001
+  _targetObj: {fileID: 6755137557146255848}
   isMove: 0
 --- !u!114 &4353865418181950865
 MonoBehaviour:

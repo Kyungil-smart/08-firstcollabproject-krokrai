@@ -49,6 +49,20 @@ MonoBehaviour:
   _bgmSource: {fileID: 7705980722272608094}
   _sfxSource: {fileID: 1481679783502864067}
   _mixer: {fileID: 24100000, guid: 5394ae6c5324b034191a928e479d0aee, type: 2}
+  _bgmFishhook: {fileID: 8300000, guid: 55e299e3d3c221242863d66d2ce3c4de, type: 3}
+  _bgmRestaurant: {fileID: 8300000, guid: d071d6a84d2afea488169a4485da7407, type: 3}
+  _sfxCat1: {fileID: 8300000, guid: f7f438a519c53524cbb0476d66a04aef, type: 3}
+  _sfxCat2: {fileID: 8300000, guid: a60c2178285f82544bdf2279168612d8, type: 3}
+  _sfxCat3: {fileID: 8300000, guid: 5ccb8a8976886364685c996fae58aae7, type: 3}
+  _sfxCheck: {fileID: 8300000, guid: 74aa7ffd09233c64d8bd754175ac28e2, type: 3}
+  _sfxClick: {fileID: 8300000, guid: a2bb1a75b35f33240830d0986b31ce56, type: 3}
+  _sfxFishing: {fileID: 8300000, guid: 50c68788f54307c4c911fba60a8a7494, type: 3}
+  _sfxLock: {fileID: 8300000, guid: 7601eb7fdd348b54794a3b422eb0a710, type: 3}
+  _sfxPayMoney: {fileID: 8300000, guid: f881aaed1095a614283faf1a839ef91c, type: 3}
+  _sfxRecipe: {fileID: 8300000, guid: eaed29ec75550d14fa314cddb0298418, type: 3}
+  _sfxSellCoin: {fileID: 8300000, guid: 377c95aca0b11534db0ad3fefc196a35, type: 3}
+  _sfxUnlock: {fileID: 8300000, guid: d0d6e8a54e7123646ad894bfa61b5ab1, type: 3}
+  _sfxWater: {fileID: 8300000, guid: 0f00364391e5b184f8243a22ae75a65b, type: 3}
 --- !u!82 &7705980722272608094
 AudioSource:
   m_ObjectHideFlags: 0

@@ -19,12 +19,13 @@ public class UpgradeSelectPresenter : MonoBehaviour
     private FishingUpgradeManager _fUpgrade;
     private FishingUpgradeDataReader _fDataReader;
     
-    //ToDo:Dining업그레이드 완료되면 하단 수정
     private DiningUpgradeManager _dUpgrade;
     private DiningUpgradeDataReader _dDataReader;
     
     private TranslationDataReader _tDataReader;
     private WaitForEndOfFrame _waitForEndOfFrame = new ();
+    
+    private bool _isTransDataLoaded;
 
     private void Awake()
     {
@@ -48,6 +49,8 @@ public class UpgradeSelectPresenter : MonoBehaviour
         _dUpgrade = FindFirstObjectByType<DiningUpgradeManager>();
         _dDataReader = FindFirstObjectByType<DiningUpgradeDataReader>();
         _tDataReader = FindFirstObjectByType<TranslationDataReader>();
+        _isTransDataLoaded = false;
+        _tDataReader.OnDataLoaded += TransDataReaderReady;
     }
 
     private void RunSettings()
@@ -61,6 +64,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
                 SetViewRodLevel();
                 SetViewShipLevel();
                 _fUpgrade.CheckCanUpgrades();
+                _fUpgrade.CheckReqGolds();
                 break;
             
             case EMainUpgradeType.Dining:
@@ -77,8 +81,14 @@ public class UpgradeSelectPresenter : MonoBehaviour
                 SetViewBonusFood02Level();
                 SetViewUnlockCatObjectLevel();
                 _dUpgrade.CheckCanUpgrades();
+                _dUpgrade.CheckCosts();
                 break;
         }
+    }
+
+    private void TransDataReaderReady()
+    {
+        _isTransDataLoaded = true;
     }
 
     #region 이벤트 구독/해제
@@ -126,6 +136,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
                             break;
                     }
                 }
+                _upgradeUIView.isFReady = true;
                 break;
             
             // EDiningUpgradeType 인덱스 번호로 정렬
@@ -205,6 +216,7 @@ public class UpgradeSelectPresenter : MonoBehaviour
                             break;
                     }
                 }
+                _upgradeUIView.isDReady = true;
                 break;
             default:
                 break;
@@ -344,6 +356,11 @@ public class UpgradeSelectPresenter : MonoBehaviour
     private IEnumerator LoadingOnEnableRoutine()
     {
         while (DataTower.instance == null)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
+        while (!_isTransDataLoaded)
         {
             yield return _waitForEndOfFrame;
         }
