@@ -12,6 +12,7 @@ public class InventoryTextController : MonoBehaviour
     [SerializeField] TextMeshProUGUI _byCaughtText;
     [SerializeField] TextMeshProUGUI _byNameText;
     [SerializeField] TextMeshProUGUI _byRairtyText;
+    [SerializeField] TextMeshProUGUI _byEncyclopediaText;
 
     [Header("TranslationData / AutoSetting / For Debug")]
     [SerializeField] TranslationData _id_Money;
@@ -20,6 +21,7 @@ public class InventoryTextController : MonoBehaviour
     [SerializeField] TranslationData _id_Acquisition;
     [SerializeField] TranslationData _id_Name;
     [SerializeField] TranslationData _id_Rarity;
+    [SerializeField] TranslationData _id_Encyclopedia;
 
     private InventorySystem _inventorySystem;
     private TranslationDataReader _dataReader;
@@ -96,6 +98,7 @@ public class InventoryTextController : MonoBehaviour
         _id_Acquisition = _dataReader.GetTranslationData("Acquisition");
         _id_Name = _dataReader.GetTranslationData("Name");
         _id_Rarity = _dataReader.GetTranslationData("Rarity");
+        _id_Encyclopedia = _dataReader.GetTranslationData("Encyclopedia");
         
         TranslationText(DataTower.instance.languageSetting);
     }
@@ -110,6 +113,7 @@ public class InventoryTextController : MonoBehaviour
                 _byCaughtText.text = _id_Acquisition.En;
                 _byNameText.text = _id_Name.En;
                 _byRairtyText.text = _id_Rarity.En;
+                _byEncyclopediaText.text = _id_Encyclopedia.En;
                 SplitFishCountText(language, out _fishCountFrontText, out _fishCountBackText);
                 SplitMoneyText(language, out _moneyFrontText, out _moneyBackText);
                 SetCountText();
@@ -121,6 +125,7 @@ public class InventoryTextController : MonoBehaviour
                 _byCaughtText.text = _id_Acquisition.Kor;
                 _byNameText.text = _id_Name.Kor;
                 _byRairtyText.text = _id_Rarity.Kor;
+                _byEncyclopediaText.text = _id_Encyclopedia.Kor;
                 SplitFishCountText(language, out _fishCountFrontText, out _fishCountBackText);
                 SplitMoneyText(language, out _moneyFrontText, out _moneyBackText);
                 SetCountText();
@@ -131,18 +136,17 @@ public class InventoryTextController : MonoBehaviour
 
     private void SplitFishCountText(Language language, out string front, out string back)
     {
-        string[] temp;
         switch (language)
         {
             case Language.ENG:
-                temp = _id_Fish_Count.En.Split("{0}");
+                string[] temp = _id_Fish_Count.En.Split("{0}");
                 front = temp[0];
                 back = temp[1];
                 break;
             case Language.KOR:
-                temp = _id_Order.Kor.Split("{0}");
-                front = temp[0];
-                back = temp[1];
+                string[] temp1 = _id_Fish_Count.Kor.Split("{0}");
+                front = temp1[0];
+                back = temp1[1];
                 break;
             default:
                 front = "";

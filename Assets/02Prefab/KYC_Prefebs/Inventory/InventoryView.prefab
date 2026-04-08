@@ -903,12 +903,14 @@ MonoBehaviour:
   _byCaughtText: {fileID: 5760483327231386477}
   _byNameText: {fileID: 9085420954092952757}
   _byRairtyText: {fileID: 4651990491539152551}
+  _byEncyclopediaText: {fileID: 7061608736958656919}
   _id_Money: {fileID: 0}
   _id_Fish_Count: {fileID: 0}
   _id_Order: {fileID: 0}
   _id_Acquisition: {fileID: 0}
   _id_Name: {fileID: 0}
   _id_Rarity: {fileID: 0}
+  _id_Encyclopedia: {fileID: 0}
 --- !u!114 &7596334559807710933
 MonoBehaviour:
   m_ObjectHideFlags: 0
