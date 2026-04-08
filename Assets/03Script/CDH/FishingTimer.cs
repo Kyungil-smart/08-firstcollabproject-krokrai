@@ -47,7 +47,7 @@ public class FishingTimer : MonoBehaviour
                 yield return new WaitUntil(() => !CheckingFull());
             }
 
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSeconds(1f);
             fishingTime--;
 
             UpdateTimerUI();
