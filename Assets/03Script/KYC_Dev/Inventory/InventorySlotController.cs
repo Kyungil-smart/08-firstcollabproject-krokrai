@@ -13,17 +13,11 @@ public class InventorySlotController : MonoBehaviour
     /// 적용되는 아이템 SO
     /// </summary>
     public FishData ItemInfo;
-    private Image _image;
     
     [SerializeField]private AddressableImageLoader _imageLoader;
     [SerializeField] private Image _fishImage;
     
     public event Action<FishData> OnItemChanged;
-
-    private void Awake()
-    {
-        _image = GetComponent<Image>();
-    }
 
     /// <summary>
     /// 인벤토리 슬롯이 보유중인 SO를 지정

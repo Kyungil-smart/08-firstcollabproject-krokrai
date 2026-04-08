@@ -45,17 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3892385b5c557469dbd46eacb4f384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiningUpgradeManager
-  MasterLevel: 0
-  MaxCustomerLimitLevel: 0
-  MaxSpawnLimit01Level: 0
-  MaxSpawnLimit02Level: 0
-  WeightLevel: 0
-  BonusTipsMultiLevel: 0
-  BonusDishPrice01Level: 0
-  BonusDishPrice02Level: 0
-  BonusFood01Level: 0
-  BonusFood02Level: 0
-  UnlockCatObjectLevel: 0
+  _container: {fileID: 11400000, guid: 2c6d8d75524212e4dad6a44bffca586b, type: 2}
 --- !u!1001 &809817568061101470
 PrefabInstance:
   m_ObjectHideFlags: 0

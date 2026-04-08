@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,18 +11,44 @@ public class TranslationDataReader : MonoBehaviour
     [SerializeField] private FishingUpgradeTranslationDataLinker[] _fTDataLinkers;
     [SerializeField] private DiningUpgradeTranslationDataLinker[] _dTDataLinkers;
     
+    [SerializeField] private DataContainer _translationContainer;
+    [SerializeField] private DataContainer _fLinkerContainer;
+    [SerializeField] private DataContainer _dLinkerContainer;
+    
     private Dictionary<string, TranslationData> _translationDictionary = new();
     private Dictionary<EFishingUpgradeType, FishingUpgradeTranslationDataLinker> _fTDataLinkerDictionary = new ();
     private Dictionary<EDiningUpgradeType, DiningUpgradeTranslationDataLinker> _dTDataLinkerDictionary = new ();
     
+    public event Action OnDataLoaded;
+    
+    private WaitForEndOfFrame _waitForEndOfFrame = new ();
 
     private void Awake()
     {
+        StartCoroutine(SetDictionaryRoutine());
+    }
+
+    private IEnumerator SetDictionaryRoutine()
+    {
+        while (!_translationContainer.isDataLoaded)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
+        while (!_fLinkerContainer.isDataLoaded)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
+        while (!_dLinkerContainer.isDataLoaded)
+        {
+            yield return _waitForEndOfFrame;
+        }
+        
         foreach (TranslationData data in _translationDatas)
         {
             _translationDictionary.TryAdd(data.Id, data);
         }
-
         foreach (FishingUpgradeTranslationDataLinker linker in _fTDataLinkers)
         {
             _fTDataLinkerDictionary.TryAdd(linker.FishingUpgradeType, linker);
@@ -31,6 +58,8 @@ public class TranslationDataReader : MonoBehaviour
         {
             _dTDataLinkerDictionary.TryAdd(linker.DiningUpgradeType, linker);
         }
+        OnDataLoaded?.Invoke();
+        Debug.Log("번역데이터 준비");
     }
 
     /// <summary>

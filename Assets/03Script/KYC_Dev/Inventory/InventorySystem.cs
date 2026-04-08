@@ -87,6 +87,7 @@ public class InventorySystem : MonoBehaviour
         
         OnInventoryChanged?.Invoke();
         OnInventoryCountChanged?.Invoke(InventoryCount);
+        Debug.Log($"{fishID} inserted");
     }
 
     /// <summary>

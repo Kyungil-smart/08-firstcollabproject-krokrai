@@ -45,11 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f95244d17f144247b4329fb03143027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishingUpgradeManager
-  Temp_Gold: 0
-  FishingGrade: 0
-  BaitLevel: 0
-  RodLevel: 0
-  ShipLevel: 0
+  _container: {fileID: 11400000, guid: a8c6f96ad3c93ab489b248f019d8764a, type: 2}
 --- !u!1001 &6106334211749341807
 PrefabInstance:
   m_ObjectHideFlags: 0
