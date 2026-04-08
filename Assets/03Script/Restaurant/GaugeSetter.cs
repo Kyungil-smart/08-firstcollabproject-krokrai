@@ -57,6 +57,7 @@ public class GaugeSetter : MonoBehaviour
     /// <param name="isEatDuration">식사 중이면 true</param>
     public void SetState(bool isEatDuration, bool isVisible)
     {
+        Debug.Log("게이지 시작");
         gameObject.SetActive(isVisible);
         _fillImage.color = isEatDuration ? _gaugeRedColor : _gaugeBlueColor;
     }

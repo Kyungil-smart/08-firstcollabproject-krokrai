@@ -6486,6 +6486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 451878223}
+  - component: {fileID: 451878224}
   m_Layer: 5
   m_Name: Gauge
   m_TagString: Untagged
@@ -6517,6 +6518,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &451878224
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451878222}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &460261539
 GameObject:
   m_ObjectHideFlags: 0
@@ -9164,7 +9177,7 @@ MonoBehaviour:
   _audioManager: {fileID: 904263605}
   _cat: {fileID: 1425742864}
   _loadCanvas: {fileID: 1915507870}
-  _gaugeCanvas: {fileID: 0}
+  _gaugeCanvas: {fileID: 451878224}
 --- !u!4 &576575302
 Transform:
   m_ObjectHideFlags: 0
@@ -9675,6 +9688,7 @@ MonoBehaviour:
   _unlockedPopup: {fileID: 1180990159}
   _unlockedPopupScript: {fileID: 1180990160}
   _audioManager: {fileID: 904263605}
+  _recipeManager: {fileID: 1427008582}
 --- !u!114 &595351283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16560,6 +16574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RestaurantManager
   _menuCtrl: {fileID: 1561496767}
+  _container: {fileID: 11400000, guid: 1f17a03410bb2f040b5b446060a40727, type: 2}
   _customerData:
   - {fileID: 11400000, guid: 01fcf549028a3774d9e67691acc26fc7, type: 2}
   - {fileID: 11400000, guid: b5f3a9bb67f4db14f8f55ab901809dae, type: 2}
@@ -18979,7 +18994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1647490980707778713, guid: cf7a944669968c244b06ec0d149c71cb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4466617494490421319, guid: cf7a944669968c244b06ec0d149c71cb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29043,6 +29058,7 @@ MonoBehaviour:
   _exitText: {fileID: 1291328424}
   _cancelText: {fileID: 1328078765}
   _confirmText: {fileID: 1315639864}
+  _reader: {fileID: 0}
 --- !u!114 &1814005096
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class CustomerController : MonoBehaviour
 
     public void SetVisual(bool b) // 여기에 낚시로 넘어가는 경우 Invoke 해줄 오브젝트 넣어 주기 및 체인 걸어주기.
     {
-        if (!gameObject.activeSelf) return;
+        //if (!gameObject.activeSelf) return;
         _isVisualContect = b;
         if (_isVisualContect)
         {
