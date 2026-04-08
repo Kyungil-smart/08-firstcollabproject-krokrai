@@ -58,6 +58,14 @@ public class RestaurantManager : MonoBehaviour
     int _currentWeightLevel;
     int _temp_Numbers;
 
+    private void Awake()
+    {
+        for (byte i = 0; i < _gaugeSetter.Length; i++)
+        {
+            _gaugeSetter[i].GaugeOff();
+        }
+    }
+
     private void OnEnable()
     {
         _menuCtrl.OnDish += HaveDish;

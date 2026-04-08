@@ -12,6 +12,7 @@ public class OpenMenu : MonoBehaviour
     [SerializeField] AudioManager _audioManager;
     [SerializeField] GameObject _cat;
     [SerializeField] CanvasGroup _loadCanvas;
+    [SerializeField] CanvasGroup _gaugeCanvas;
 
     public event Action<bool> OnChangeSceneToRestaurant;
 
@@ -20,19 +21,10 @@ public class OpenMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        //StartCoroutine(Waiter());
         _restaurantScreen.SetActive(false);
         _loadCanvas.alpha = 0;
         _loadCanvas.interactable = false;
         _loadCanvas.blocksRaycasts = false;
-    }
-
-    IEnumerator Waiter()
-    {
-        yield return new WaitForSecondsRealtime(1);
-        _active = false;
-        _menu.SetActive(false);
-        _loadCanvas.alpha = 1;
     }
 
     public void OnFishScene()
@@ -61,18 +53,26 @@ public class OpenMenu : MonoBehaviour
     {
         _audioManager.PlaySfxClick();
         _active = !_active;
+        
         if (_active)
         {
             _loadCanvas.alpha = 1;
             _loadCanvas.interactable = true;
             _loadCanvas.blocksRaycasts = true;
+            _gaugeCanvas.alpha = 1;
+            _gaugeCanvas.interactable = true;
+            _gaugeCanvas.blocksRaycasts = true;
         }
         else
         {
             _loadCanvas.alpha = 0;
             _loadCanvas.interactable = false;
             _loadCanvas.blocksRaycasts = false;
+            _gaugeCanvas.alpha = 0;
+            _gaugeCanvas.interactable = false;
+            _gaugeCanvas.blocksRaycasts = false;
         }
+        
         _masterBtn.interactable = !_active;
         //_menu.SetActive(_active);
     }

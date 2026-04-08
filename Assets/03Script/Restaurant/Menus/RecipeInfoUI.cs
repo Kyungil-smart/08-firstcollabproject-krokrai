@@ -45,6 +45,8 @@ public class RecipeInfoUI : MonoBehaviour
     /// </summary>
     public void SelectedRecipe(in RecipeContainer rcp, in GameObject outline  ,in bool canMake, in bool isUnlock, in bool canUnlock)
     {
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
         if (rcp == null)
             return;
         _currentObj?.SetActive(false);
@@ -95,6 +97,7 @@ public class RecipeInfoUI : MonoBehaviour
 
     public void RecipeInfo(in bool isUnlock)
     {
+        _currentHasFish = 0;
         if (_rcp == null)
             return;
         _panels[0].SetActive(true);

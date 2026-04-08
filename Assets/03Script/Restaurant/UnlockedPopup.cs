@@ -39,7 +39,8 @@ public class UnlockedPopup : MonoBehaviour
         _datas[1] = _reader.GetTranslationData("Restaurant_Recipe_Unlock_2");
         _datas[2] = _reader.GetTranslationData("OK");
         _rcp = recipe;
-        _fishImageLoader.SetImage(recipe.recipe_ID);
+
+        _fishImageLoader.SetImage(_rcp.dish_Sprite);
 
         _audioManager.PlaySfxRecipe();
 
