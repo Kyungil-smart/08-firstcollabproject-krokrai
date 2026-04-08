@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,22 +11,37 @@ public class OpenMenu : MonoBehaviour
     [SerializeField] Button _masterBtn;
     [SerializeField] AudioManager _audioManager;
     [SerializeField] GameObject _cat;
+    [SerializeField] CanvasGroup _loadCanvas;
 
     public event Action<bool> OnChangeSceneToRestaurant;
 
     bool _active = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
+        //StartCoroutine(Waiter());
+        _restaurantScreen.SetActive(false);
+        _loadCanvas.alpha = 0;
+        _loadCanvas.interactable = false;
+        _loadCanvas.blocksRaycasts = false;
+    }
+
+    IEnumerator Waiter()
+    {
+        yield return new WaitForSecondsRealtime(1);
         _active = false;
         _menu.SetActive(false);
+        _loadCanvas.alpha = 1;
     }
 
     public void OnFishScene()
     {
         _fish.SetActive(true);
-        _menu.SetActive(false);
+        _loadCanvas.alpha = 0;
+        _loadCanvas.interactable = false;
+        _loadCanvas.blocksRaycasts = false;
+        //_menu.SetActive(false);
         _audioManager.PlayBgmFishhook();
         _restaurantScreen.SetActive(false);
         OnChangeSceneToRestaurant?.Invoke(false);
@@ -45,7 +61,19 @@ public class OpenMenu : MonoBehaviour
     {
         _audioManager.PlaySfxClick();
         _active = !_active;
+        if (_active)
+        {
+            _loadCanvas.alpha = 1;
+            _loadCanvas.interactable = true;
+            _loadCanvas.blocksRaycasts = true;
+        }
+        else
+        {
+            _loadCanvas.alpha = 0;
+            _loadCanvas.interactable = false;
+            _loadCanvas.blocksRaycasts = false;
+        }
         _masterBtn.interactable = !_active;
-        _menu.SetActive(_active);
+        //_menu.SetActive(_active);
     }
 }

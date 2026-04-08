@@ -616,7 +616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &26843758
 Transform:
   m_ObjectHideFlags: 0
@@ -4419,7 +4419,7 @@ RectTransform:
   m_Father: {fileID: 1560619698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4476,7 +4476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &297540708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5040,7 +5040,7 @@ RectTransform:
   m_Father: {fileID: 212522915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8875,6 +8875,7 @@ MonoBehaviour:
   _masterBtn: {fileID: 2122434094}
   _audioManager: {fileID: 904263605}
   _cat: {fileID: 1425742864}
+  _loadCanvas: {fileID: 1915507870}
 --- !u!4 &576575302
 Transform:
   m_ObjectHideFlags: 0
@@ -9378,7 +9379,6 @@ MonoBehaviour:
   - {fileID: 1687780254}
   - {fileID: 1044418074}
   - {fileID: 1542394210}
-  _UnlockImg: []
   _btn: {fileID: 1129459932}
   _menuctrl: {fileID: 1561496767}
   _inventorySystem: {fileID: 1962032254}
@@ -15729,7 +15729,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19be9373151d75a47a81055fac7c2c5f, type: 2}
   - {fileID: 11400000, guid: ee680ccfe4f4100458a4cf870d04118c, type: 2}
   _fixedValue: {fileID: 11400000, guid: 6301e9a650f04b446a270797b2be7dd3, type: 2}
-  _diningUpgradeDataReader: {fileID: 0}
+  _diningUpgradeDataReader: {fileID: 2082954565}
   _gaugeSetter:
   - {fileID: 1538463147}
   - {fileID: 303262942}
@@ -15753,7 +15753,7 @@ MonoBehaviour:
   - {fileID: 7108339969198208228, guid: 36b25daf4afaa3945a76b5995ba42008, type: 3}
   - {fileID: 7108339969198208228, guid: 1d482b19d019c4846885c6b2a4bac9c1, type: 3}
   - {fileID: 7108339969198208228, guid: f6e4c44744c17ce449de3c053dca27ba, type: 3}
-  _audioManager: {fileID: 0}
+  _audioManager: {fileID: 904263605}
   _customerPrefab: {fileID: 3275731141906476971, guid: 0423b4ec8c3d568489bbac0895e991a3, type: 3}
   _customers: {fileID: 1405849477}
   _spawnPointRight: {fileID: 646557763}
@@ -16928,7 +16928,7 @@ RectTransform:
   m_Father: {fileID: 463316480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -17485,7 +17485,7 @@ RectTransform:
   m_Father: {fileID: 928749083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18204,7 +18204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1180990160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18221,11 +18221,11 @@ MonoBehaviour:
   _fishName: {fileID: 1395951123}
   _discription: {fileID: 728783424}
   _confirmButton: {fileID: 558872932}
-  _fishImage: {fileID: 1913734583}
   _reader: {fileID: 2093162344}
   _recipeUI: {fileID: 595351282}
   _recipeManager: {fileID: 1427008582}
   _audioManager: {fileID: 904263605}
+  _fishImageLoader: {fileID: 1913734586}
 --- !u!224 &1180990161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20621,6 +20621,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8180182467567736835, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 904263605}
     - target: {fileID: 8375840007309565515, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -23173,7 +23177,7 @@ RectTransform:
   m_Father: {fileID: 530737704}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -24257,6 +24261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1587955629}
   - component: {fileID: 1587955632}
+  - component: {fileID: 1587955633}
   - component: {fileID: 1587955631}
   - component: {fileID: 1587955630}
   m_Layer: 5
@@ -24329,10 +24334,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1587955633}
+        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
+        m_MethodName: OnExitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -24379,6 +24384,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587955628}
   m_CullTransparentMesh: 1
+--- !u!114 &1587955633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587955628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2bbf27704cfa34ba9018e7e68c7eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExitButton
 --- !u!1 &1597603513
 GameObject:
   m_ObjectHideFlags: 0
@@ -28408,6 +28425,7 @@ GameObject:
   - component: {fileID: 1913734585}
   - component: {fileID: 1913734584}
   - component: {fileID: 1913734583}
+  - component: {fileID: 1913734586}
   m_Layer: 5
   m_Name: Fish Image
   m_TagString: Untagged
@@ -28472,6 +28490,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 65}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1913734586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913734582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8276c49e8cbcf104ca513921ecb45c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AddressableImageLoader
 --- !u!1 &1915507865
 GameObject:
   m_ObjectHideFlags: 0
@@ -28484,6 +28514,7 @@ GameObject:
   - component: {fileID: 1915507868}
   - component: {fileID: 1915507867}
   - component: {fileID: 1915507866}
+  - component: {fileID: 1915507870}
   m_Layer: 5
   m_Name: Menus
   m_TagString: Untagged
@@ -28574,6 +28605,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1915507870
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915507865}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1918162379
 GameObject:
   m_ObjectHideFlags: 0
@@ -30517,6 +30560,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079771210}
   m_CullTransparentMesh: 1
+--- !u!114 &2082954565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3584354715574290119, guid: d7bc4c2283815314da7d54aaf167be9a, type: 3}
+  m_PrefabInstance: {fileID: 1947862297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a6057b8216de942b9fa964f7cef75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DiningUpgradeDataReader
 --- !u!1 &2092980445
 GameObject:
   m_ObjectHideFlags: 0
@@ -31539,15 +31593,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1cd1f1cee26a98e498b863fb3887ac33, type: 3}
   - {fileID: 21300000, guid: e85074e976977d345bd5356ccc809618, type: 3}
   - {fileID: 21300000, guid: bc1c556e4bb439c438ead79f79cea7c4, type: 3}
-  raritySprites:
-  - {fileID: 21300000, guid: b4dd7b4f3ece7954aa4395255a8c277a, type: 3}
-  - {fileID: 21300000, guid: 72a86ebfedf95b54c81c13d42fae7227, type: 3}
-  - {fileID: 21300000, guid: c6020080f05283d4db962afbbd170439, type: 3}
-  - {fileID: 21300000, guid: 888df341227980546b11b7d3ed14c42e, type: 3}
-  - {fileID: 21300000, guid: 2c385c21792c7f2459728f0010973374, type: 3}
-  - {fileID: 21300000, guid: fafe40270d6fb8744985041b579ed527, type: 3}
-  - {fileID: 21300000, guid: 8f0b4e9ff7004e3408c0ead954d4e244, type: 3}
-  - {fileID: 21300000, guid: 93bb0d27223391044b1f8f4b894d66e1, type: 3}
 --- !u!4 &563590308826341179
 Transform:
   m_ObjectHideFlags: 0
@@ -32945,6 +32990,7 @@ GameObject:
   - component: {fileID: 925759513027093200}
   - component: {fileID: 584695983548311591}
   - component: {fileID: 4425711195557617220}
+  - component: {fileID: 4749264324380025227}
   m_Layer: 5
   m_Name: Power_Button
   m_TagString: Untagged
@@ -33015,10 +33061,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 4749264324380025227}
+        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
+        m_MethodName: OnExitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -33130,6 +33176,18 @@ RectTransform:
   m_AnchoredPosition: {x: 277, y: -27.6}
   m_SizeDelta: {x: 55, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4749264324380025227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367989719073311455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d2bbf27704cfa34ba9018e7e68c7eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExitButton
 --- !u!114 &4782685903708189785
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using NUnit.Framework.Constraints;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,28 +10,36 @@ public class UnlockedPopup : MonoBehaviour
     [SerializeField] TextMeshProUGUI _fishName;
     [SerializeField] TextMeshProUGUI _discription;
     [SerializeField] TextMeshProUGUI _confirmButton;
-    [SerializeField] Image _fishImage;
     [SerializeField] TranslationDataReader _reader;
     [SerializeField] RecipeInfoUI _recipeUI;
     [SerializeField] RecipManager _recipeManager;
     [SerializeField] AudioManager _audioManager;
-    
+    [SerializeField] AddressableImageLoader _fishImageLoader;
+
     TranslationData[] _datas;
     RecipeContainer _rcp;
 
-    private void Start()
+    private void Awake()
     {
+        StartCoroutine(Waiter());
         _datas = new TranslationData[3];
-        _datas[0] = _reader.GetTranslationData("Restaurant_Recipe_Unlock");
-        _datas[1] = _reader.GetTranslationData("Restaurant_Recipe_Unlock_2");
-        _datas[2] = _reader.GetTranslationData("OK");
+    }
+
+    IEnumerator Waiter()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        Debug.Log(_reader);
         gameObject.SetActive(false);
+        yield break;
     }
 
     public void PopUp(RecipeContainer recipe)
     {
+        _datas[0] = _reader.GetTranslationData("Restaurant_Recipe_Unlock");
+        _datas[1] = _reader.GetTranslationData("Restaurant_Recipe_Unlock_2");
+        _datas[2] = _reader.GetTranslationData("OK");
         _rcp = recipe;
-        //_fishImage.sprite = 
+        _fishImageLoader.SetImage(recipe.recipe_ID);
 
         _audioManager.PlaySfxRecipe();
 
