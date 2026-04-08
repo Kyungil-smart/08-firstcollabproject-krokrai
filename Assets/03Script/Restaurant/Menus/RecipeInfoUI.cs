@@ -9,7 +9,6 @@ public class RecipeInfoUI : MonoBehaviour
     [SerializeField] AddressableImageLoader[] _imageLoaders;
     [SerializeField] GameObject[] _panels; // 1 : 요리, 2. 해금
     [SerializeField] TextMeshProUGUI[] _tmpUGUI; // 1 : 메뉴 이름 2: 판매액, 3번 생산수, 4번 음식 설명, 5번 물고기 이름, 6번 물고기 소지 / 소모, 7번 버튼
-    [SerializeField] Image[] _UnlockImg;
     [SerializeField] Button _btn;
     [SerializeField] MenuCtrl _menuctrl;
     [SerializeField] InventorySystem _inventorySystem;
@@ -46,6 +45,8 @@ public class RecipeInfoUI : MonoBehaviour
     /// </summary>
     public void SelectedRecipe(in RecipeContainer rcp, in GameObject outline  ,in bool canMake, in bool isUnlock, in bool canUnlock)
     {
+        if (rcp == null)
+            return;
         _currentObj?.SetActive(false);
         _currentObj = outline;
         _currentObj.SetActive(true);
@@ -55,6 +56,7 @@ public class RecipeInfoUI : MonoBehaviour
         _rcp = rcp;
         _currentCanMake = canMake;
 
+        
         _imageLoaders[0].SetImage(rcp.dish_Sprite,isUnlock);
 
         _tmpUGUI[0].text = lng == Language.KOR ? _rcp.recipe_KName : _rcp.recipe_EName;
@@ -93,6 +95,8 @@ public class RecipeInfoUI : MonoBehaviour
 
     public void RecipeInfo(in bool isUnlock)
     {
+        if (_rcp == null)
+            return;
         _panels[0].SetActive(true);
         _panels[1].SetActive(false);
 
@@ -100,8 +104,8 @@ public class RecipeInfoUI : MonoBehaviour
             _btn.interactable = true;
         else
             _btn.interactable = false;
-
-        _imageLoaders[1].SetImage(_rcp.ingredient, isUnlock);
+        
+            _imageLoaders[1].SetImage(_rcp.ingredient, isUnlock);
 
         for (byte i = 0; i < DataTower.instance.Items.Count; i++)
         {

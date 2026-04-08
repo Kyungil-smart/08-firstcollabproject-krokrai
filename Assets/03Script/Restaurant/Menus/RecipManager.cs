@@ -37,10 +37,7 @@ public class RecipManager : MonoBehaviour
 
     IEnumerator AddAction()
     {
-        while(DataTower.instance == null)
-        {
-            yield return new WaitForSeconds(0.05f);
-        }
+        yield return new WaitForSeconds(0.2f);
         DataTower.instance.OnFisingNewFish += FirstFishingFish;
         yield break;
     }
@@ -57,12 +54,13 @@ public class RecipManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
 
+        Debug.Log("Read to Write Recipe");
+
         if ( _dataCon.objs[0] is not RecipeContainer )
         {
             Debug.LogError($"{gameObject.name}에 저장된 DataContainer가 RecipeContainer가 들어있지 않는 컨테이너입니다.");
             yield break;
         }
-
 
         _recipes = new Dictionary<string, GameObject>(_dataCon.objs.Length);
         for (int i = 0; i < _dataCon.objs.Length; i++)
