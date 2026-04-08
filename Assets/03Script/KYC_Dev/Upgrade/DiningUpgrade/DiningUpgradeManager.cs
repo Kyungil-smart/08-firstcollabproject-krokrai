@@ -837,6 +837,17 @@ public class DiningUpgradeManager : MonoBehaviour
         _dataReader.GetBonusFood01CostData(DataTower.instance.BonusFood01Level, out _bonusFood01LevelCost);
         _dataReader.GetBonusFood02CostData(DataTower.instance.BonusFood02Level, out _bonusFood02LevelCost);
         _dataReader.GetUnlockCatObjectCostData(DataTower.instance.UnlockCatObjectLevel,out _unlockCatObjectLevelCost);
+        CheckEnoughGoldMasterLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldMaxCustomerLimitLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldMaxSpawnLimit01LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldMaxSpawnLimit02LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldWeightLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusTipsMultiLevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusDishPrice01LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusDishPrice02LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusFood01LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldBonusFood02LevelUpgrade(DataTower.instance.money);
+        CheckEnoughGoldUnlockCatObjectLevelUpgrade(DataTower.instance.money);
     }
 
     #endregion
