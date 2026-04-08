@@ -355,24 +355,18 @@ public class UpgradeSelectPresenter : MonoBehaviour
 
     private IEnumerator LoadingOnEnableRoutine()
     {
-        Debug.Log("코루틴 시작 P");
         while (DataTower.instance == null)
         {
-            Debug.Log("데이터 타워 대기 P");
             yield return _waitForEndOfFrame;
-            Debug.Log("데이터 타워 로드 P");
         }
         
         while (!_isTransDataLoaded)
         {
-            Debug.Log("번역 데이터 대기 P");
             yield return _waitForEndOfFrame;
-            Debug.Log("번역 데이터 로드 P");
         }
-        Debug.Log("데이터 연결 대기 완료 P");
+        
         EnableEvents();
         RunSettings();
-        Debug.Log("코루틴 종료 P");
     }
 
     #endregion

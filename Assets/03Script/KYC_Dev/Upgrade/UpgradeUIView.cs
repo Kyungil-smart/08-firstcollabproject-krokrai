@@ -84,26 +84,20 @@ public class UpgradeUIView : MonoBehaviour
     
     private IEnumerator LoadingOnEnableRoutine()
     {
-        Debug.Log("코루틴 시작");
         while (DataTower.instance == null)
         {
-            Debug.Log("데이터 타워 대기");
             yield return _waitForEndOfFrame;
-            Debug.Log("데이터 타워 로드");
         }
         
         while (!_isTransDataLoaded)
         {
-            Debug.Log("번역 데이터 대기");
             yield return _waitForEndOfFrame;
-            Debug.Log("번역 데이터 로드");
         }
-        Debug.Log("데이터 연결 대기 완료");
+        
         EventEnable();
         SetGoldText();
         SetTranslationText();
         StartCoroutine(SlotLoadingWaitRoutine());
-        Debug.Log("코루틴 종료");
     }
 
     #endregion
@@ -168,12 +162,10 @@ public class UpgradeUIView : MonoBehaviour
     private void SetGoldText()
     {
         RenewalGoldText(DataTower.instance.money);
-        Debug.Log(DataTower.instance.money);
     }
     
     private void RenewalGoldText(ulong amount)
     {
-        Debug.Log(amount);
         string temp = amount.TextFormatCurrency();
         _moneyText.text = $"{_moneyFrontText}{temp}{_moneyBackText}";
     }
