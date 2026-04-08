@@ -30,6 +30,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private Vector2 _pressPos;
     private FishData _lastCaughtFish;
     private GameObject _currentFish;
+    private bool _isLoaded = false;
 
     [Header("물고기 연출")]
     public GameObject fishPrefab;
@@ -87,8 +88,8 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             uiManager.UpdateCountText(_currentCount, fishingCount);
         }
 
-        // StartCoroutine(IdleVariationRoutine());
-    }
+        _isLoaded = true;
+}
 
     /*private void Update()
     {
@@ -209,6 +210,12 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     /// </summary>
     private void GoFishing()
     {
+        if (!_isLoaded)
+        {
+            Debug.Log("아직 데이터 로딩 중입니다...");
+            return;
+        }
+
         AnimatorStateInfo aniState = _animator.GetCurrentAnimatorStateInfo(0);
 
         if (aniState.IsName("result"))
