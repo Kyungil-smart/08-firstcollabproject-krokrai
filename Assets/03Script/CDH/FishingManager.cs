@@ -179,7 +179,7 @@ public class FishingManager : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     }
 
     /// <summary>
-    /// 낚시 화면 클릭 시 호출 현재 애니메이션의 상태에 따라 낚시 연출 실행
+    /// 낚시 화면 클릭 시 낚시 연출 실행
     /// </summary>
     public void OnPointerUp(PointerEventData eventData)
     {

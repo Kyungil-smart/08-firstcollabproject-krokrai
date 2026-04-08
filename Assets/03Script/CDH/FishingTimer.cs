@@ -27,7 +27,7 @@ public class FishingTimer : MonoBehaviour
     {
         maxFishingTime = newTime;
 
-            fishingTime = maxFishingTime;
+        fishingTime = maxFishingTime;
         UpdateTimerUI();
     }
 
@@ -56,7 +56,7 @@ public class FishingTimer : MonoBehaviour
     }
 
     /// <summary>
-    /// 남은 시간을 00:00 형태로 UI에 표시
+    ///
     /// </summary>
     private void UpdateTimerUI()
     {
