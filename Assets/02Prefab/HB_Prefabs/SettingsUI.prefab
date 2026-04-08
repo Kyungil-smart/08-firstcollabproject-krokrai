@@ -150,8 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC800\uC7A5 \uCD08\uAE30\uD654"
-  engText: Reset Save
+  translationKey: Reset_Save
 --- !u!1 &246530224352186875
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,8 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uBC30\uACBD\uC74C"
-  engText: BGM
+  translationKey: BGM_Volume
 --- !u!1 &566668112839390394
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,8 +702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC601\uC5B4"
-  engText: English
+  translationKey: English
 --- !u!1 &692751832480946855
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,8 +853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC800\uC7A5\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-  engText: Save Game?
+  translationKey: 
 --- !u!1 &826095071691616601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,8 +1278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uCD5C\uB300"
-  engText: MAX
+  translationKey: 
 --- !u!1 &1006341006181133212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1435,7 @@ GameObject:
   - component: {fileID: 6730015663855539335}
   - component: {fileID: 4380968941059888593}
   - component: {fileID: 3206095481595934590}
+  - component: {fileID: 6800591356703665965}
   m_Layer: 5
   m_Name: YesButton
   m_TagString: Untagged
@@ -1561,6 +1557,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6800591356703665965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122968725118776055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
+  translationKey: Yes
 --- !u!1 &1325693437289153920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,8 +1864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uD658\uACBD\uC18C\uB9AC"
-  engText: SFX
+  translationKey: SFX_Volume
 --- !u!1 &1686607753386660794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,8 +2015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC800\uC7A5"
-  engText: Save
+  translationKey: Save
 --- !u!1 &1688367815531544542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,8 +2310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uAC00\uC774\uB4DC"
-  engText: Guide
+  translationKey: Guide
 --- !u!1 &1817320513931632760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,8 +2497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uB370\uC774\uD130\uB97C \uCD08\uAE30\uD654\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
-  engText: Reset Save Data?
+  translationKey: 
 --- !u!1 &1966227216140536575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2746,6 +2751,7 @@ GameObject:
   - component: {fileID: 8396727369452310116}
   - component: {fileID: 3942147300428245673}
   - component: {fileID: 1970575755761216340}
+  - component: {fileID: 1947896881168026438}
   m_Layer: 5
   m_Name: AskSaveUI
   m_TagString: Untagged
@@ -2813,6 +2819,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1947896881168026438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059766173424286155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
+  translationKey: Save_Check_Message
 --- !u!1 &2264754168049037390
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,7 +3272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10 / 10
+  m_text: 1 / 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 187a692fd2fb1584aa79a237779b4795, type: 2}
   m_sharedMaterial: {fileID: 1828265225738141813, guid: 187a692fd2fb1584aa79a237779b4795, type: 2}
@@ -3383,7 +3402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4260,7 +4279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4289,6 +4308,7 @@ GameObject:
   - component: {fileID: 8972139147655750423}
   - component: {fileID: 3977208357399215294}
   - component: {fileID: 3103823899078528010}
+  - component: {fileID: 8180182467567736835}
   m_Layer: 5
   m_Name: SettingsUI
   m_TagString: Untagged
@@ -4375,6 +4395,19 @@ MonoBehaviour:
   - {fileID: 5920008528673428331}
   - {fileID: 5719238864095785775}
   - {fileID: 2460752120957391286}
+--- !u!114 &8180182467567736835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4070651821172608119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c5a1dd25eddfa43894c327c042a205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MuteController
+  audioManager: {fileID: 0}
 --- !u!1 &4133505820520119172
 GameObject:
   m_ObjectHideFlags: 0
@@ -4525,8 +4558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uD22C\uBA85\uB3C4"
-  engText: Transparency
+  translationKey: Transparency
 --- !u!1 &4193845562774900638
 GameObject:
   m_ObjectHideFlags: 0
@@ -4677,8 +4709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC5B8\uC5B4"
-  engText: Language
+  translationKey: Language
 --- !u!1 &4229624221822641559
 GameObject:
   m_ObjectHideFlags: 0
@@ -4729,6 +4760,7 @@ GameObject:
   - component: {fileID: 6776789899221553361}
   - component: {fileID: 2271413503016916637}
   - component: {fileID: 7541095996608583623}
+  - component: {fileID: 5688130435203083445}
   m_Layer: 5
   m_Name: NoButton
   m_TagString: Untagged
@@ -4862,6 +4894,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5688130435203083445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274216523128183496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
+  translationKey: No
 --- !u!1 &4499425851314483039
 GameObject:
   m_ObjectHideFlags: 0
@@ -5012,8 +5057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uB9C8\uC2A4\uD130"
-  engText: Master
+  translationKey: Master_Volume
 --- !u!1 &4582405881696040880
 GameObject:
   m_ObjectHideFlags: 0
@@ -5164,8 +5208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uD55C\uAD6D\uC5B4"
-  engText: Korean
+  translationKey: Korean
 --- !u!1 &4700127349227407556
 GameObject:
   m_ObjectHideFlags: 0
@@ -5576,7 +5619,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+      - m_Target: {fileID: 8180182467567736835}
+        m_TargetAssemblyTypeName: MuteController, Assembly-CSharp
+        m_MethodName: SetMuteFromToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!114 &6526903292344425001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5589,8 +5644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83427cb083d695c44b4c5add01618ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToggleImageSwap
-  on: {fileID: 21300000, guid: 4657cae44c49e294eacb995a260aa2b7, type: 3}
-  off: {fileID: 21300000, guid: dc914e12a11ae5e4ab78b24922ad00ec, type: 3}
+  on: {fileID: 21300000, guid: dc914e12a11ae5e4ab78b24922ad00ec, type: 3}
+  off: {fileID: 21300000, guid: 4657cae44c49e294eacb995a260aa2b7, type: 3}
   target: {fileID: 4376028620624134528}
 --- !u!1 &5057767095283209002
 GameObject:
@@ -6171,8 +6226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uAC00\uC774\uB4DC \uBC0F \uB370\uC774\uD130"
-  engText: Guide & Save
+  translationKey: Guide_and_Data
 --- !u!1 &5661303687083189734
 GameObject:
   m_ObjectHideFlags: 0
@@ -6359,6 +6413,8 @@ RectTransform:
   - {fileID: 110937358596267443}
   - {fileID: 7553866836738715580}
   - {fileID: 3432487797595860089}
+  - {fileID: 6176152732291697544}
+  - {fileID: 6240466858342924060}
   m_Father: {fileID: 9167119026916405051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6677,8 +6733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC0AC\uC6B4\uB4DC \uC124\uC815"
-  engText: Sound
+  translationKey: Sound_Setting
 --- !u!1 &6246150445796255939
 GameObject:
   m_ObjectHideFlags: 0
@@ -6956,6 +7011,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2032376160054827880}
+        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
+        m_MethodName: SetKorean
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6345200234363781951
 GameObject:
   m_ObjectHideFlags: 0
@@ -7052,7 +7119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7080,6 +7147,7 @@ GameObject:
   - component: {fileID: 7349488969047362741}
   - component: {fileID: 8754619915907383930}
   - component: {fileID: 7483910844983743721}
+  - component: {fileID: 6934019601489434831}
   m_Layer: 5
   m_Name: AskResetUI
   m_TagString: Untagged
@@ -7147,6 +7215,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6934019601489434831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6512906148199302421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
+  translationKey: Reset_Check_Message
 --- !u!1 &6595420289965361925
 GameObject:
   m_ObjectHideFlags: 0
@@ -7280,7 +7361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7667,8 +7748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
-  korText: "\uC77C\uBC18 \uC124\uC815"
-  engText: General
+  translationKey: General_Setting
 --- !u!1 &7858347207426564744
 GameObject:
   m_ObjectHideFlags: 0
@@ -7681,6 +7761,7 @@ GameObject:
   - component: {fileID: 8130951735418425014}
   - component: {fileID: 7273097706865129263}
   - component: {fileID: 3853641077946472835}
+  - component: {fileID: 6282156984260182886}
   m_Layer: 5
   m_Name: YesButton
   m_TagString: Untagged
@@ -7802,6 +7883,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6282156984260182886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7858347207426564744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
+  translationKey: Yes
 --- !u!1 &7885917489532441615
 GameObject:
   m_ObjectHideFlags: 0
@@ -8105,6 +8199,54 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8512795598295037888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6176152732291697544}
+  - component: {fileID: 2032376160054827880}
+  m_Layer: 5
+  m_Name: LanguageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6176152732291697544
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512795598295037888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3117826674519129710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2032376160054827880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512795598295037888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5315748ff8cd94894aaee6e54c1eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LanguageManager
 --- !u!1 &8655137665364795851
 GameObject:
   m_ObjectHideFlags: 0
@@ -8238,6 +8380,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2032376160054827880}
+        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
+        m_MethodName: SetEnglish
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8868474635300830123
 GameObject:
   m_ObjectHideFlags: 0
@@ -8286,6 +8440,7 @@ GameObject:
   - component: {fileID: 5709642230302768404}
   - component: {fileID: 1411136667358089088}
   - component: {fileID: 2392759230475254712}
+  - component: {fileID: 2453772433441702709}
   m_Layer: 5
   m_Name: NoButton
   m_TagString: Untagged
@@ -8419,6 +8574,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2453772433441702709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8966290953468235478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01a75f2705ce2f4c80ad6a5a1774713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextLanguage
+  translationKey: No
 --- !u!1 &9143415298962102257
 GameObject:
   m_ObjectHideFlags: 0
@@ -8494,3 +8662,65 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &3311838185964706890
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3117826674519129710}
+    m_Modifications:
+    - target: {fileID: 4184379959721841321, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_Name
+      value: TranslationDataReader
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 541.5955
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -19.23236
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+--- !u!4 &6240466858342924060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8893646932881220438, guid: a864f3b31fd01924da853f6dad60d564, type: 3}
+  m_PrefabInstance: {fileID: 3311838185964706890}
+  m_PrefabAsset: {fileID: 0}

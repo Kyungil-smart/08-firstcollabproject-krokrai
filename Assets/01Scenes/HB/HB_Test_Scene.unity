@@ -2141,6 +2141,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1832958398}
+    - target: {fileID: 8180182467567736835, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1832958398}
     - target: {fileID: 8390622218979809092, guid: e0fc23897a4efb4488fcc70f27b377a5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 

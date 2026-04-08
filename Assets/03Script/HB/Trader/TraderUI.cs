@@ -35,7 +35,7 @@ public class TraderUI : MonoBehaviour
         filterUI.ForceClose();
         filterLogic.ResetFilter();
 
-        if(DataTower.instance != null)
+        if (DataTower.instance != null)
         {
             DataTower.instance.OnLanguageSettingChanged -= LanguageChanged;
             DataTower.instance.OnLanguageSettingChanged += LanguageChanged;
@@ -64,16 +64,16 @@ public class TraderUI : MonoBehaviour
 
         if (hovering != null)
         {
-            hovering.Setup(fishData, descriptionPanel, nameText, rarityText);   
+            hovering.Setup(fishData, descriptionPanel, nameText, rarityText);  
         }
     }
 
     // 데이터 타워의 이벤트를 구독하고 초기 값 설정
     private void SetupEvents()
     {
-        if(DataTower.instance == null) return;
+        if (DataTower.instance == null) return;
 
-        //중복구독 방지
+        // 중복구독 방지
         DataTower.instance.OnChangedMoney -= economy.UpdateGoldUI;
         DataTower.instance.OnChangedMoney += economy.UpdateGoldUI;
 
@@ -83,7 +83,7 @@ public class TraderUI : MonoBehaviour
     // 데이터 타워와의 이벤트 연결을 끊음
     private void CleanEvents()
     {
-        if(DataTower.instance != null)
+        if (DataTower.instance != null)
         {
             DataTower.instance.OnChangedMoney -= economy.UpdateGoldUI;
         }
@@ -155,7 +155,7 @@ public class TraderUI : MonoBehaviour
     // 모든 데이터와 UI를 동기화해 새로고침
     private void RefreshAll()
     {
-        if(DataTower.instance == null) return;
+        if (DataTower.instance == null) return;
 
         // 가지고 있는 잔액
         economy.UpdateGoldUI(DataTower.instance.money);
